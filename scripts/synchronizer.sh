@@ -68,10 +68,20 @@ copyFile(){
     done   
 }
 
+mergeCherryPick(){
+
+    git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
+    git fetch
+    git checkout -b synch/files
+    git cherry-pick a02927c
+
+}
+
 #fetchAllRepos
 #pullAllRepos
+#statusAllRepos
+
 compareFile cs .devcontainer/util/functions.sh
 
 #copyFile cs .devcontainer/util/functions.sh
-#statusAllRepos
 #compareFile cs docs/snippets/disclaimer.md
