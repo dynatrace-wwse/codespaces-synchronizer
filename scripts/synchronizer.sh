@@ -22,12 +22,17 @@ pullAllRepos(){
     doGitActionInAllRepos "pull"
 }
 
+statusAllRepos(){
+    printInfoSection "Status all Repos"
+    doGitActionInAllRepos "status"
+}
+
 doGitActionInAllRepos(){
-    for repo in "${repos[@]}"; do
+    for repo in "${all_repos[@]}"; do
         printInfo "Git $1 in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
         git $1 
-        cd -
+        cd - >/dev/null
     done
 }
 
@@ -37,20 +42,36 @@ doGitActionInAllRepos(){
 compareFile(){
     local array_name="$1_repos"
     eval "local array=(\"\${$array_name[@]}\")"
-    printInfoSection "Comparing $2 in ${array[@]}"
+    printInfoSection "Comparing $2 from $ROOT_PATH$SYNCH_REPO"
     for repo in "${array[@]}"; do
-        printInfo "comparing $2 in repo $repo "
         
         diff "$ROOT_PATH$SYNCH_REPO/$2" "$ROOT_PATH$repo/$2" > /dev/null
         if [ $? -eq 0 ]; then
-            echo "Files are identical."
+            printInfo "$repo - $2 =="
             else
-            echo "Files are different"
+            printInfo "$repo - $2 !="
             code --diff "$ROOT_PATH$SYNCH_REPO/$2" "$ROOT_PATH$repo/$2" > /dev/null
-            #break
         fi
     done   
 }
 
+# Function to compare files in arrays, 
+# $1[cs or all for iterating in only CS or ALL repos] 
+# $2=filepath 
+copyFile(){
+    local array_name="$1_repos"
+    eval "local array=(\"\${$array_name[@]}\")"
+    printInfoSection "Comparing $2 with ${array[@]}"
+    for repo in "${array[@]}"; do
+        printInfo "copy $2 in repo $repo "
+        cp "$ROOT_PATH$SYNCH_REPO/$2" "$ROOT_PATH$repo/$2"
+    done   
+}
+
+#fetchAllRepos
+#pullAllRepos
 compareFile cs .devcontainer/util/functions.sh
+
+#copyFile cs .devcontainer/util/functions.sh
+#statusAllRepos
 #compareFile cs docs/snippets/disclaimer.md
