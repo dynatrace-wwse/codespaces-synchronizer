@@ -236,7 +236,7 @@ alias vson='vi -c \"set syntax:json\" -'
 alias pg='ps -aux | grep' 
 " >> /"$HOME"/.zshrc
 }
-
+ 
 installRunme() {
   printInfoSection "Installing Runme Version $RUNME_CLI_VERSION"
   mkdir runme_binary
