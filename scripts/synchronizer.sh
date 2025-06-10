@@ -12,26 +12,46 @@ all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-huntin
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting"  "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101")
 
 
-fetchAllRepos(){
-    printInfoSection "Fetching all Repos"
-    doGitActionInAllRepos "fetch"
+fetchAll(){
+    doGitActionInRepos all fetch
 }
 
-pullAllRepos(){
-    printInfoSection "Pulling all Repos"
-    doGitActionInAllRepos "pull"
+pullAll(){
+    doGitActionInRepos all pull
 }
 
-statusAllRepos(){
-    printInfoSection "Status all Repos"
-    doGitActionInAllRepos "status"
+pushAll(){
+    doGitActionInRepos all push
 }
 
-doGitActionInAllRepos(){
+statusAll(){
+    doGitActionInRepos all status
+}
+
+fetch(){
+    doGitActionInRepos cs fetch
+}
+
+pull(){
+    doGitActionInRepos cs pull
+}
+
+push(){
+     doGitActionInRepos cs push
+}
+
+status(){
+    doGitActionInRepos cs status
+}
+
+doGitActionInRepos(){
+    local array_name="$1_repos"
+    eval "local array=(\"\${$array_name[@]}\")"
+    printInfoSection "Git $2 in $1 repos from $ROOT_PATH$SYNCH_REPO"
     for repo in "${all_repos[@]}"; do
-        printInfo "Git $1 in repo $repo "
+        printInfo "Git $2 in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
-        git $1 
+        git $2 
         cd - >/dev/null
     done
 }
@@ -68,20 +88,38 @@ copyFile(){
     done   
 }
 
-mergeCherryPick(){
+cherryPick(){
+    local array_name="$1_repos"
+    eval "local array=(\"\${$array_name[@]}\")"
+    printInfoSection "Merging commit $2 from $ROOT_PATH$SYNCH_REPO"
+    for repo in "${array[@]}"; do
+        cd $ROOT_PATH"$repo" >/dev/null
+        #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
+        git fetch synchronizer
+        #git checkout -b synch
+        git cherry-pick $2
+        if [ $? -eq 0 ]; then
+            printInfo "$repo - $2 ->CherryPick OK"
+            else
+            printInfo "$repo - $2 ->CherryPick NOK"
+        fi
 
-    git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
-    git fetch
-    git checkout -b synch/files
-    git cherry-pick a02927c
-
+        cd - >/dev/null
+    done
 }
 
 #fetchAllRepos
 #pullAllRepos
 #statusAllRepos
 
-compareFile cs .devcontainer/util/functions.sh
+#compareFile cs .devcontainer/util/functions.sh
+
+# Astroshop
+#cherryPick cs 1c1db04
+
+# TrvelAdvisor
+#cherryPick cs a02927c
 
 #copyFile cs .devcontainer/util/functions.sh
 #compareFile cs docs/snippets/disclaimer.md
+# grep -i -E 'error|failed'
