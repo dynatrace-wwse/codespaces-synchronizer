@@ -421,7 +421,7 @@ deployApplicationMonitoring() {
     # Check if the Webhook has been created and is ready
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
 
-    kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
+    kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-apponly.yaml
     #FIXME: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
     waitForAllPods dynatrace
   else
@@ -474,26 +474,35 @@ dynatraceDeployOperator() {
 }
 
 
-
-
 generateDynakube(){
+    # SET API URL
+    API="/api"
+    DT_API_URL=$DT_TENANT$API
+    
+    # Read the actual hostname in case changed during instalation
+    CLUSTERNAME=$(hostname)
+    export CLUSTERNAME
+
     # Generate DynaKubeSkel with API URL
-    sed -e 's~apiUrl: https://ENVIRONMENTID.live.dynatrace.com/api~apiUrl: '"$DT_API_URL"'~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
+    sed -e 's~apiUrl: https://ENVIRONMENTID.live.dynatrace.com/api~apiUrl: '"$DT_API_URL"'~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-skel-head.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
 
     # ClusterName for API
-    sed -i 's~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "CLUSTERNAME"~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "'"$CLUSTERNAME"'"~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-    # Networkzone
-    sed -i 's~networkZone: CLUSTERNAME~networkZone: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-    # HostGroup
-    sed -i 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-    # ActiveGate Group
-    sed -i 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-
-    # Create Dynakube for CloudNative 
-    sed -e 's~MONITORINGMODE:~cloudNativeFullStack:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    sed -i 's~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "CLUSTERNAME"~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "'"$CLUSTERNAME"'"~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    # Replace Networkzone
+    sed -i 's~networkZone: CLUSTERNAME~networkZone: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    # Add ActiveGate config (added first so its applied to both CNFS and AppOnly)
+    cat $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-body-activegate.yaml >> $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
     
-    # Create Dynakube for ApplicationMonitoring
-    sed -e 's~MONITORINGMODE:~applicationMonitoring: {}:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
+    # Set ActiveGate Group 
+    sed -i 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+
+    # Generate CloudNative Body (head + CNFS)
+    cat $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-body-cloudnative.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    # Set CloudNative HostGroup
+    sed -i 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+
+    # Generate AppOnly Body
+    cat $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-body-apponly.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-apponly.yaml
 
 }
 
@@ -502,11 +511,6 @@ deployOperatorViaKubectl(){
   printInfoSection "Deploying Operator via kubectl"
 
   saveReadCredentials
-  API="/api"
-  DT_API_URL=$DT_TENANT$API
-  
-  # Read the actual hostname in case changed during instalation
-  CLUSTERNAME=$(hostname)
 
   kubectl create namespace dynatrace
 
@@ -522,11 +526,6 @@ deployOperatorViaKubectl(){
 deployOperatorViaHelm(){
 
   saveReadCredentials
-  API="/api"
-  DT_API_URL=$DT_TENANT$API
-  
-  # Read the actual hostname in case changed during instalation
-  CLUSTERNAME=$(hostname)
 
   helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator --create-namespace --namespace dynatrace --atomic
 
@@ -534,6 +533,12 @@ deployOperatorViaHelm(){
   kubectl -n dynatrace create secret generic dev-container --from-literal="apiToken=$DT_OPERATOR_TOKEN" --from-literal="dataIngestToken=$DT_INGEST_TOKEN"
 
   generateDynakube
+
+}
+
+undeployOperatorViaHelm(){
+
+  helm uninstall dynatrace-operator --namespace dynatrace
 
 }
 
