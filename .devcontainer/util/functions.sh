@@ -236,7 +236,7 @@ alias vson='vi -c \"set syntax:json\" -'
 alias pg='ps -aux | grep' 
 " >> /"$HOME"/.zshrc
 }
- 
+
 installRunme() {
   printInfoSection "Installing Runme Version $RUNME_CLI_VERSION"
   mkdir runme_binary
@@ -699,8 +699,4 @@ deployGhdocs(){
 deployCronJobs() {
   printInfoSection "Deploying CronJobs for Astroshop for this lab"
   kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/manifests/cronjobs.yaml
-}
-
-verifyCreation(){
-  cat /workspaces/.codespaces/.persistedshare/creation.log | grep -i -E 'error|failed'
 }
