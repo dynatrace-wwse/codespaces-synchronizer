@@ -423,7 +423,7 @@ deployApplicationMonitoring() {
 
     kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-apponly.yaml
     #FIXME: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
-    waitForAllPods dynatrace
+    waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
   fi
