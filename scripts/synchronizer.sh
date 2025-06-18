@@ -112,7 +112,7 @@ cherryPick(){
 #pullAll
 #statusAll
 
-#compareFile cs .devcontainer/util/functions.sh
+compareFile cs .devcontainer/util/functions.sh
 
 # Astroshop
 #cherryPick cs 1c1db04
