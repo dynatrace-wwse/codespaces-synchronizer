@@ -108,9 +108,9 @@ cherryPick(){
     done
 }
 
-#fetchAllRepos
-#pullAllRepos
-#statusAllRepos
+#fetchAll
+#pullAll
+#statusAll
 
 #compareFile cs .devcontainer/util/functions.sh
 
