@@ -50,7 +50,7 @@ postCodespaceTracker(){
      ERROR_COUNT="0"
   fi
   
-  printInfo "Sending bizevent with $ERROR_COUNT errors"
+  printInfo "Sending bizevent with $ERROR_COUNT issues"
 
   curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
   -H "Content-Type: application/json" \
@@ -724,10 +724,10 @@ deployCronJobs() {
 verifyCodespaceCreation(){
   CODESPACE_ERRORS=$(cat /workspaces/.codespaces/.persistedshare/creation.log | grep -i -E 'error|failed')
   if [ -n "$CODESPACE_ERRORS" ]; then
-      printInfo "Errors detected in the creation of the codespace: $CODESPACE_ERRORS" 
+      printInfo "Issues detected in the creation of the codespace: $CODESPACE_ERRORS" 
       export CODESPACE_ERRORS
   else
-      printInfo "No errors detected in the creation of the codespace"
+      printInfo "No issues detected in the creation of the codespace"
   fi
 }
 
