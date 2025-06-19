@@ -43,11 +43,21 @@ postCodespaceTracker(){
   else
     namespace_filter="demo-placeholder"
   fi
+
+  if [ -n "$CODESPACE_ERRORS" ]; then
+     ERROR_COUNT=$(printf "%s" "$CODESPACE_ERRORS" | wc -l) 
+  else 
+     ERROR_COUNT="0"
+  fi
+  
+  printInfo "Sending bizevent with $ERROR_COUNT errors"
+
   curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
   -H "Content-Type: application/json" \
   -d "{
   \"repo\": \"$GITHUB_REPOSITORY\",
   \"demo\": \"$DEMOPLACEHOLDER\",
+  \"codespace.error\": \"$ERROR_COUNT\",
   \"codespace.name\": \"$CODESPACE_NAME\"
   }"
 }
@@ -709,4 +719,20 @@ deployGhdocs(){
 deployCronJobs() {
   printInfoSection "Deploying CronJobs for Astroshop for this lab"
   kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/manifests/cronjobs.yaml
+}
+
+verifyCodespaceCreation(){
+  CODESPACE_ERRORS=$(cat /workspaces/.codespaces/.persistedshare/creation.log | grep -i -E 'error|failed')
+  if [ -n "$CODESPACE_ERRORS" ]; then
+      printInfo "Errors detected in the creation of the codespace: $CODESPACE_ERRORS" 
+      export CODESPACE_ERRORS
+  else
+      printInfo "No errors detected in the creation of the codespace"
+  fi
+}
+
+calculateTime(){
+  DURATION=$SECONDS
+  printInfoSection "Calculating time"
+  printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds until here"
 }
