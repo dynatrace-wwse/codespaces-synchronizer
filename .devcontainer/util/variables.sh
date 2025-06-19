@@ -7,6 +7,9 @@
 
 # VARIABLES DECLARATION
 
+# Seconds definition for the calculation of time
+SECONDS=0
+
 #https://cert-manager.io/docs/release-notes/
 CERTMANAGER_VERSION=1.15.3
 

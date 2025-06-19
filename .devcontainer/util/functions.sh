@@ -50,7 +50,7 @@ postCodespaceTracker(){
      ERROR_COUNT="0"
   fi
   
-  printInfo "Sending bizevent with $ERROR_COUNT issues"
+  printInfo "Sending bizevent with $ERROR_COUNT issues built in $DURATION seconds"
 
   curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
   -H "Content-Type: application/json" \
@@ -58,6 +58,7 @@ postCodespaceTracker(){
   \"repo\": \"$GITHUB_REPOSITORY\",
   \"demo\": \"$DEMOPLACEHOLDER\",
   \"codespace.error\": \"$ERROR_COUNT\",
+  \"codespace.creation\": \"$DURATION\",
   \"codespace.name\": \"$CODESPACE_NAME\"
   }"
 }
@@ -735,4 +736,5 @@ calculateTime(){
   DURATION=$SECONDS
   printInfoSection "Calculating time"
   printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds until here"
+  export DURATION
 }

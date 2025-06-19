@@ -3,8 +3,6 @@
 #loading functions to script
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
-calculateTime
-
 bindFunctionsInShell
 
 setupAliases
@@ -65,9 +63,10 @@ else
   
     printInfo "Sending BizEvent to track usage of $RepositoryName"
     
+    calculateTime
+    
     postCodespaceTracker $RepositoryName
   
     printInfo "Finished creating devcontainer"
 
-    calculateTime
 fi
