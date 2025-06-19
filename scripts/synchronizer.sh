@@ -8,8 +8,8 @@ source ../.devcontainer/util/functions.sh >/dev/null 2>&1
 ROOT_PATH="/Users/sergio.hinojosa/repos/enablement/"
 SYNCH_REPO="codespaces-synchronizer"
 
-all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting"  "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry")
-cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting"  "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101")
+all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting"  "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
+cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting"  "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 
 
 fetchAll(){
@@ -29,11 +29,11 @@ statusAll(){
 }
 
 fetch(){
-    doGitActionInRepos cs fetch
+    doGitActionInRepos cs fetch --all
 }
 
 pull(){
-    doGitActionInRepos cs pull
+    doGitActionInRepos cs pull --all
 }
 
 push(){
@@ -51,7 +51,7 @@ doGitActionInRepos(){
     for repo in "${all_repos[@]}"; do
         printInfo "Git $2 in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
-        git $2 
+        git $2 $3
         cd - >/dev/null
     done
 }
@@ -108,16 +108,56 @@ cherryPick(){
     done
 }
 
+helperFunction(){
+    local array_name="$1_repos"
+    eval "local array=(\"\${$array_name[@]}\")"
+    printInfoSection "Doing something in repo from this as base $ROOT_PATH$SYNCH_REPO"
+    for repo in "${array[@]}"; do
+        cd $ROOT_PATH"$repo" >/dev/null
+        
+        git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
+        git fetch synchronizer
+        cd - >/dev/null
+    done
+}
+
+cherryPickMerge(){
+    local array_name="$1_repos"
+    eval "local array=(\"\${$array_name[@]}\")"
+    printInfoSection "Merging PR $2 from $ROOT_PATH$SYNCH_REPO"
+    for repo in "${array[@]}"; do
+        cd $ROOT_PATH"$repo" >/dev/null
+        #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
+        git fetch synchronizer
+        #git checkout -b synch
+        git cherry-pick -m 1 $2
+        if [ $? -eq 0 ]; then
+            printInfo "$repo - $2 ->CherryPick OK"
+            else
+            printInfo "$repo - $2 ->CherryPick NOK"
+        fi
+
+        cd - >/dev/null
+    done
+}
+
+#fetch
 #fetchAll
 #pullAll
 #statusAll
 
 compareFile cs .devcontainer/util/functions.sh
 
+#helperFunction cs
+
+## -- History of Cherries
+# fix/dynakubes 
+#cherryPickMerge fc755a6
+
 # Astroshop
 #cherryPick cs 1c1db04
 
-# TrvelAdvisor
+# TravelAdvisor
 #cherryPick cs a02927c
 
 #copyFile cs .devcontainer/util/functions.sh
