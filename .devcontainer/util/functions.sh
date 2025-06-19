@@ -405,10 +405,10 @@ deployCloudNative() {
     kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
 
     printInfo "Log capturing will be handled by the Host agent."
-    # We wait for 5 seconds for the pods to be scheduled, otherwise it will mark it as passed since the pods have not been scheduled
+    
+    # we wait for the AG to be scheduled
     waitForPod dynatrace activegate
     
-    #FIXME: Verify dependency of AG and OS being ready.
     waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
@@ -422,7 +422,12 @@ deployApplicationMonitoring() {
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
 
     kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-apponly.yaml
+    
+    # we wait for the AG to be scheduled
+    waitForPod dynatrace activegate
+
     #FIXME: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
+    #FIXME: Get log module "latest" is it possible for prod and sprint? verify
     waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
