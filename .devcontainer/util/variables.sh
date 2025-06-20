@@ -21,20 +21,13 @@ CODESPACE_PSHARE_FOLDER="/workspaces/.codespaces/.persistedshare"
 ENV_FILE="$CODESPACE_VSCODE_FOLDER/.devcontainer/util/.env"
 
 source $ENV_FILE
-echo "SECONDS is $SECONDS"
-if [ "$SECONDS" -gt "$SEKUNDEN" ]; then
-  echo "$num1 is greater than $num2"
-else
-  echo "$num1 is not greater than $num2"
-fi
-
 
 # Seconds definition for the calculation of time
 # Verification of value so we do not override the value when loading the functions in the shell again.
+
+echo "Variable Seconds $SECONDS"
 echo "Variables read error $ERROR_COUNT"
-echo "Variables read seconds $SECONDS"
-
-
+echo "Variable duration $DURATION"
 
 # ColorCoding
 GREEN="\e[32m"

@@ -722,7 +722,7 @@ verifyCodespaceCreation(){
 
   export CODESPACE_ERRORS
   updateEnvVariable ERROR_COUNT
-  updateEnvVariable SEKUNDEN
+  updateEnvVariable DURATION
 }
 
 calculateTime(){
