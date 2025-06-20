@@ -725,11 +725,6 @@ verifyCodespaceCreation(){
  
 }
 
-startTimer(){
-  SECONDS=0
-  export SECONDS
-}
-
 calculateTime(){
   if [ -z "$DURATION" ]; then
     DURATION=$SECONDS

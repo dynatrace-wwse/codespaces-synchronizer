@@ -20,7 +20,12 @@ CODESPACE_PSHARE_FOLDER="/workspaces/.codespaces/.persistedshare"
 # Dynamic Variables between phases
 ENV_FILE="$CODESPACE_VSCODE_FOLDER/.devcontainer/util/.env"
 
-source $ENV_FILE
+if [ -z "${DURATION+x}" ]; then
+  echo "DURATION is not set"
+  source $ENV_FILE
+else
+  echo "DURATION is set $DURATION"
+fi
 
 # Seconds definition for the calculation of time
 # Verification of value so we do not override the value when loading the functions in the shell again.
