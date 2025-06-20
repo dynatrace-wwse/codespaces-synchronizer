@@ -721,7 +721,8 @@ verifyCodespaceCreation(){
   printInfo "$ERROR_COUNT issues detected in the creation of the codespace: $CODESPACE_ERRORS" 
 
   export CODESPACE_ERRORS
-  export ERROR_COUNT
+  updateEnvVariable ERROR_COUNT
+  updateEnvVariable SEKUNDEN
 }
 
 calculateTime(){
@@ -730,4 +731,12 @@ calculateTime(){
   fi
   printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds the post-creation of the cs."
   export DURATION
+}
+
+updateEnvVariable(){
+  local variable="$1"
+  printInfo "update [$variable:${(P)variable}]"
+  sed -i "s|^$variable=.*|$variable=${(P)variable}|" $ENV_FILE
+  export $variable
+  source $ENV_FILE
 }

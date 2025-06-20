@@ -6,24 +6,6 @@
 # ======================================================================
 
 # VARIABLES DECLARATION
-
-# Seconds definition for the calculation of time
-# Verification of value so we do not override the value when loading the functions in the shell again.
-if [ -n "$SECONDS" ]; then
-  SECONDS=$SECONDS
-else
-  SECONDS=0
-fi
-export SECONDS
-
-# Codespace errors from the creation log file
-if [ -n "$ERROR_COUNT" ]; then
-  ERROR_COUNT=$ERROR_COUNT
-else
-  ERROR_COUNT=0
-fi
-export ERROR_COUNT
-
 #https://cert-manager.io/docs/release-notes/
 CERTMANAGER_VERSION=1.15.3
 
@@ -34,6 +16,25 @@ RUNME_CLI_VERSION=3.10.2
 CODESPACE_VSCODE_FOLDER="/workspaces/$RepositoryName"
 # Codespace Persisted share folder
 CODESPACE_PSHARE_FOLDER="/workspaces/.codespaces/.persistedshare"
+
+# Dynamic Variables between phases
+ENV_FILE="$CODESPACE_VSCODE_FOLDER/.devcontainer/util/.env"
+
+source $ENV_FILE
+echo "SECONDS is $SECONDS"
+if [ "$SECONDS" -gt "$SEKUNDEN" ]; then
+  echo "$num1 is greater than $num2"
+else
+  echo "$num1 is not greater than $num2"
+fi
+
+
+# Seconds definition for the calculation of time
+# Verification of value so we do not override the value when loading the functions in the shell again.
+echo "Variables read error $ERROR_COUNT"
+echo "Variables read seconds $SECONDS"
+
+
 
 # ColorCoding
 GREEN="\e[32m"
