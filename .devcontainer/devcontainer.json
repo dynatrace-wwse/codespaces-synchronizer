@@ -58,4 +58,8 @@
 	 }
   }
 	 */
+	,"remoteEnv": {
+    // Initializing time counter 
+		"SECONDS": 0
+  }
 }
