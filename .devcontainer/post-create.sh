@@ -21,8 +21,8 @@ dynatraceEvalReadSaveCredentials
 dynatraceDeployOperator
 
 # You can deploy CNFS or AppOnly
-deployCloudNative
-#deployApplicationMonitoring
+#deployCloudNative
+deployApplicationMonitoring
 
 # In here you deploy the Application you want
 # The TODO App will be deployed as a sample
