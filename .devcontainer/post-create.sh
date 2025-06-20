@@ -1,6 +1,7 @@
 #!/bin/bash
 #loading functions to script
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+startTimer
 
 bindFunctionsInShell
 
