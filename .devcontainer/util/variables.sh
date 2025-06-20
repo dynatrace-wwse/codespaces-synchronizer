@@ -8,7 +8,19 @@
 # VARIABLES DECLARATION
 
 # Seconds definition for the calculation of time
-SECONDS=0
+# Verification of value so we do not override the value when loading the functions in the shell again.
+if [ -n "$SECONDS" ]; then
+  SECONDS=$SECONDS
+else
+  SECONDS=0
+fi
+
+# Codespace errors from the creation log file
+if [ -n "$ERROR_COUNT" ]; then
+  ERROR_COUNT=$ERROR_COUNT
+else
+  ERROR_COUNT=0
+fi
 
 #https://cert-manager.io/docs/release-notes/
 CERTMANAGER_VERSION=1.15.3
@@ -18,6 +30,8 @@ RUNME_CLI_VERSION=3.10.2
 
 # Setting up the variable since its not set when instantiating the vscode folder.
 CODESPACE_VSCODE_FOLDER="/workspaces/$RepositoryName"
+# Codespace Persisted share folder
+CODESPACE_PSHARE_FOLDER="/workspaces/.codespaces/.persistedshare"
 
 # ColorCoding
 GREEN="\e[32m"

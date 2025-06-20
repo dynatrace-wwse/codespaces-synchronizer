@@ -1,7 +1,7 @@
 #!/bin/bash
-
 #loading functions to script
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+SECONDS=0
 
 bindFunctionsInShell
 
@@ -60,12 +60,8 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
 else
 
     verifyCodespaceCreation
-  
-    printInfo "Sending BizEvent to track usage of $RepositoryName"
     
-    calculateTime
-    
-    postCodespaceTracker $RepositoryName
+    postCodespaceTracker
   
     printInfo "Finished creating devcontainer"
 

@@ -37,26 +37,13 @@ printError() {
 }
 
 postCodespaceTracker(){
-  # Set demo name
-  if [[ $# -eq 1 ]]; then
-    DEMOPLACEHOLDER="demo-$1"
-  else
-    namespace_filter="demo-placeholder"
-  fi
-
-  if [ -n "$CODESPACE_ERRORS" ]; then
-     ERROR_COUNT=$(printf "%s" "$CODESPACE_ERRORS" | wc -l) 
-  else 
-     ERROR_COUNT="0"
-  fi
-  
-  printInfo "Sending bizevent with $ERROR_COUNT issues built in $DURATION seconds"
+  printInfo "Sending bizevent for $RepositoryName with $ERROR_COUNT issues built in $DURATION seconds"
 
   curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
   -H "Content-Type: application/json" \
   -d "{
   \"repo\": \"$GITHUB_REPOSITORY\",
-  \"demo\": \"$DEMOPLACEHOLDER\",
+  \"demo\": \"$RepositoryName\",
   \"codespace.error\": \"$ERROR_COUNT\",
   \"codespace.creation\": \"$DURATION\",
   \"codespace.name\": \"$CODESPACE_NAME\"
@@ -723,18 +710,24 @@ deployCronJobs() {
 }
 
 verifyCodespaceCreation(){
-  CODESPACE_ERRORS=$(cat /workspaces/.codespaces/.persistedshare/creation.log | grep -i -E 'error|failed')
+  printInfoSection "Verify Codespace creation"
+  calculateTime
+  CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed|info')
   if [ -n "$CODESPACE_ERRORS" ]; then
-      printInfo "Issues detected in the creation of the codespace: $CODESPACE_ERRORS" 
-      export CODESPACE_ERRORS
+      ERROR_COUNT=$(printf "%s" "$CODESPACE_ERRORS" | wc -l) 
   else
-      printInfo "No issues detected in the creation of the codespace"
+      ERROR_COUNT=0
   fi
+  printInfo "$ERROR_COUNT issues detected in the creation of the codespace: $CODESPACE_ERRORS" 
+
+  export CODESPACE_ERRORS
+  export ERROR_COUNT
 }
 
 calculateTime(){
-  DURATION=$SECONDS
-  printInfoSection "Calculating time"
-  printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds until here"
+  if [ -z "$DURATION" ]; then
+    DURATION=$SECONDS
+  fi
+  printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds the post-creation of the cs."
   export DURATION
 }
