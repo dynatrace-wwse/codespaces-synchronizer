@@ -722,7 +722,12 @@ verifyCodespaceCreation(){
 
   export CODESPACE_ERRORS
   updateEnvVariable ERROR_COUNT
-  updateEnvVariable DURATION
+ 
+}
+
+startTimer(){
+  SECONDS=0
+  export SECONDS
 }
 
 calculateTime(){
@@ -730,13 +735,23 @@ calculateTime(){
     DURATION=$SECONDS
   fi
   printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds the post-creation of the cs."
-  export DURATION
+  updateEnvVariable DURATION
 }
 
 updateEnvVariable(){
   local variable="$1"
-  printInfo "update [$variable:${(P)variable}]"
-  sed -i "s|^$variable=.*|$variable=${(P)variable}|" $ENV_FILE
+  # Checking the process name (zsh/bash)
+  if [[ "$(ps -p $$ -o comm=)" == "zsh" ]]; then
+    printInfo "ZSH"
+    # indirect variable expansion in ZSH
+    printInfo "update [$variable:${(P)variable}]"
+    sed -i "s|^$variable=.*|$variable=${(P)variable}|" $ENV_FILE
+  else
+    printInfo "BASH"
+    # indirect variable expansion in BASH
+    printInfo "update [$variable:${!variable}]"
+    sed -i "s|^$variable=.*|$variable=${!variable}|" $ENV_FILE
+  fi
+  
   export $variable
-  source $ENV_FILE
 }
