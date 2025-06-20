@@ -14,6 +14,7 @@ if [ -n "$SECONDS" ]; then
 else
   SECONDS=0
 fi
+export SECONDS
 
 # Codespace errors from the creation log file
 if [ -n "$ERROR_COUNT" ]; then
@@ -21,6 +22,7 @@ if [ -n "$ERROR_COUNT" ]; then
 else
   ERROR_COUNT=0
 fi
+export ERROR_COUNT
 
 #https://cert-manager.io/docs/release-notes/
 CERTMANAGER_VERSION=1.15.3
