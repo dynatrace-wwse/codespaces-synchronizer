@@ -712,7 +712,7 @@ deployCronJobs() {
 verifyCodespaceCreation(){
   printInfoSection "Verify Codespace creation"
   calculateTime
-  CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed|info')
+  CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed')
   if [ -n "$CODESPACE_ERRORS" ]; then
       ERROR_COUNT=$(printf "%s" "$CODESPACE_ERRORS" | wc -l) 
   else
