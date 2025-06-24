@@ -17,7 +17,7 @@ jobs:
           ls -las ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   test-codespace:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       RepositoryName: "codespaces-synchronizer"
       RepoName: "$GITHUB_REPOSITORY"
