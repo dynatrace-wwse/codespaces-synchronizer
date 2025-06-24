@@ -17,7 +17,7 @@ jobs:
           ls -las ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   test-codespace:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       RepositoryName: "codespaces-synchronizer"
       RepoName: "$GITHUB_REPOSITORY"
@@ -32,14 +32,6 @@ jobs:
             ls -la
             echo "Current directory:"
             pwd
-            echo "Running script if present:"
-            if [ -f main.sh ]; then
-              bash main.sh
-            elif [ -f main.py ]; then
-              python3 main.py
-            else
-              echo "No main.sh or main.py found."
-            fi
   kind-setup:
     runs-on: ubuntu-latest
     steps:
