@@ -15,12 +15,13 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          ls -las ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   test-codespace:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository code
+        uses: actions/checkout@v4
       - name: Test Codespace (devcontainer) build
         uses: devcontainers/ci@v0.3
         with:
