@@ -1,4 +1,3 @@
-
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
@@ -22,19 +21,19 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Test Codespace (devcontainer) build
+      - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
         with:
           runCmd: |
-          echo "Listing files in the repository:"
-          ls -las ${{ github.workspace }}
-          echo "Running a sample command to verify the environment:"
-          pwd
-          echo "Who am I?"
-          whoami
-          echo "Hello, GitHub Actions!"
-          echo "This is a test to ensure the Codespace devcontainer builds correctly."
-          echo "You can add more commands here to test your devcontainer setup."
-          echo "If you see this message, the devcontainer is working as expected."
-          echo "You can also run tests or other commands as needed."
-          echo "Codespace devcontainer built successfully!"
+            echo "Listing files:"
+            ls -la
+            echo "Current directory:"
+            pwd
+            echo "Running script if present:"
+            if [ -f main.sh ]; then
+              bash main.sh
+            elif [ -f main.py ]; then
+              python3 main.py
+            else
+              echo "No main.sh or main.py found."
+            fi
