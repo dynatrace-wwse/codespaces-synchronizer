@@ -1,17 +1,8 @@
 #!/bin/bash
 #loading functions to script
-echo "I am in .."
-pwd
-ls -las
-echo "environment"
-env
-echo "printenv"
-printenv
-echo $RepositoryName
-echo "-----"
-
-source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+export RepositoryName=codespaces-synchronizer
 export SECONDS=0
+source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
 bindFunctionsInShell
 
@@ -19,7 +10,7 @@ setupAliases
 
 createKindCluster
 
-#installK9s
+installK9s
 
 #TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
 #installMkdocs
