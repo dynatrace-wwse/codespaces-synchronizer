@@ -5,6 +5,9 @@ pwd
 ls -las
 echo "environment"
 env
+echo "printenv"
+printenv
+echo $RepositoryName
 echo "-----"
 
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
