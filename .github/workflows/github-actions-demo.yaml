@@ -40,3 +40,16 @@ jobs:
             else
               echo "No main.sh or main.py found."
             fi
+  kind-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up KinD
+        uses: engineerd/setup-kind@v0.5.0
+        with:
+          version: "v0.20.0"
+          # config: kind.config.yaml # Optional: Uncomment to use a config file
+      - name: Run tests
+        run: |
+          kubectl cluster-info
+          kubectl get nodes
