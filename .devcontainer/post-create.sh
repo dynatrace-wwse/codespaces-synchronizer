@@ -1,5 +1,12 @@
 #!/bin/bash
 #loading functions to script
+echo "I am in .."
+pwd
+ls -las
+echo "environment"
+env
+echo "-----"
+
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 export SECONDS=0
 
