@@ -25,4 +25,16 @@ jobs:
       - name: Test Codespace (devcontainer) build
         uses: devcontainers/ci@v0.3
         with:
-          runCmd: echo "Codespace devcontainer built successfully!"
+          runCmd: |
+          echo "Listing files in the repository:"
+          ls -las ${{ github.workspace }}
+          echo "Running a sample command to verify the environment:"
+          pwd
+          echo "Who am I?"
+          whoami
+          echo "Hello, GitHub Actions!"
+          echo "This is a test to ensure the Codespace devcontainer builds correctly."
+          echo "You can add more commands here to test your devcontainer setup."
+          echo "If you see this message, the devcontainer is working as expected."
+          echo "You can also run tests or other commands as needed."
+          echo "Codespace devcontainer built successfully!"
