@@ -10,6 +10,8 @@
 
 # Notes on how to build and compile the container
 
+#sudo hostnamectl set-hostname codespaces-dev
+
 
 # TEST on Ubuntu
 # git clone the repo in Linux server
@@ -18,7 +20,7 @@
 # Fails due the repository environment variable RepositoryName
 # After setting it then post-create works.
 # problem exposing the port 30100 (AWS config?)
-# TODO: Verify ACL from exposing the port 30100
+# Exposing port 30100 (20.04 and port open)
 export RepositoryName="codespaces-synchronizer"
 # build the images?
 
@@ -32,3 +34,11 @@ docker run -it -v "$(pwd):/workspace" -w /workspace my-dev-container
 docker run --log-level=debug -it -v "$(pwd):/workspace" -w /workspace enablement-container
 
 
+## Ubuntu 24.04 LTS
+''' Ubuntu 24.04 LTS 
+needed to install docker, then chgrp of docker since the ls ... showed the group root
+when docker installed, then issue with buildx 
+
+
+
+'''
