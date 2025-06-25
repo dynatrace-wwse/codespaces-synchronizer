@@ -1,7 +1,8 @@
 #!/bin/bash
 #loading functions to script
-source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+export RepositoryName=codespaces-synchronizer
 export SECONDS=0
+source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
 bindFunctionsInShell
 

@@ -4,6 +4,7 @@
 ##  such as exposing the application.
 ##############################################################
 #Load the functions into the shell
+export RepositoryName=codespaces-synchronizer
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
 #TODO: BeforeGoLive comment this so the Mkdocs are not exposed in the container.
