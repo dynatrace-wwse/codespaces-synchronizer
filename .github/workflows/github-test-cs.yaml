@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   test-codespace:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       RepositoryName: "codespaces-synchronizer"
       RepoName: "$GITHUB_REPOSITORY"
