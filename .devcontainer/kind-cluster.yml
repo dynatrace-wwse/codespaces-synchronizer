@@ -12,12 +12,12 @@ networking:
 nodes:
 - role: control-plane
   image: kindest/node:v1.33.1
-  kubeadmConfigPatches:
-  - |
-    kind: InitConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-labels: "ingress-ready=true"
+#  kubeadmConfigPatches:
+#  - |
+#    kind: InitConfiguration
+#    nodeRegistration:
+#      kubeletExtraArgs:
+#        node-labels: "ingress-ready=true"
   extraMounts:
   - hostPath: /
     containerPath: /mnt/root
