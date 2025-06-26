@@ -1,5 +1,11 @@
 #!/bin/bash
 
+''' # Summary of issues to tackle
+[ ] RepositoryName to add to all cs repos
+[ ] RepositoryName to add to all cs repos
+
+
+'''
 
 # Issues on githubactions and on local machine (Ubuntu 20.04 LTS)
 # - RepositoryName not set
