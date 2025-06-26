@@ -28,7 +28,7 @@ installK9s
 # The TODO App will be deployed as a sample
 deployTodoApp
 
-# The Astroshop keeping changes of demo.live needs certmanager
+# The Astroshop keeping changes of demo.live needs certmanagerdocker
 #certmanagerInstall
 #certmanagerEnable
 #deployAstroshop

@@ -7,8 +7,6 @@ ARG YQ_VERSION=v4.44.3
 ARG YQ_BINARY=yq_linux_amd64
 ARG HELM_VERSION=v3.17.0
 
-RUN export DEBIAN_FRONTEND=noninteractive
-
 COPY docker.sh /tmp/scripts/
 RUN chmod +x /tmp/scripts/docker.sh
 
