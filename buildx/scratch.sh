@@ -58,5 +58,13 @@ sudo usermod -aG docker vscode
 # Run docker container locally (mapping all arguments as in the .devcontainer.json configuration)
 export RepositoryName=$(basename "$PWD") && docker run -e RepositoryName=$RepositoryName --init --privileged --network=host -v /var/run/docker.sock:/var/run/docker-host.sock -v $(pwd):/workspaces/$RepositoryName -w /workspaces/$RepositoryName -it msubuntu22 /usr/bin/zsh
 
+# hardcoded for tests
+export RepositoryName=codespaces-synchronizer && docker run -e RepositoryName=$RepositoryName --init --privileged --network=host -v /var/run/docker.sock:/var/run/docker-host.sock -v /home/ubuntu/codespaces-synchronizer:/workspaces/$RepositoryName -w /workspaces/$RepositoryName -it msubuntu22 /usr/bin/zsh
+
+
+
+Image docker-kind-dind can start on ubuntu without issues
+the change was the mapping of the volume.
+Docker installed as per RUN 
 
 '''
