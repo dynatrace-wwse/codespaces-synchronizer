@@ -18,7 +18,7 @@
 			// Set container specific settings
 			"settings": {
 				"terminal.integrated.defaultProfile.linux": "zsh"
-			},			
+			},	
 			"extensions": []
 		}
 	},
