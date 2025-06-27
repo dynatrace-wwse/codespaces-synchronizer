@@ -30,4 +30,10 @@ Try this...
 export KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER=overlayfs
 2. Ensure /var/lib/containerd is writable
 
+--- inside codespaces.
+
+vscode user is created, has no access to docker.
+kind cluster can be accessed (root)
+
+
 EOF
