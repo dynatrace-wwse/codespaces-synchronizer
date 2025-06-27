@@ -25,6 +25,13 @@ Comments on progress
 Kind creation ok
 
 ---- 
+sudo su
+export RepositoryName=codespaces-synchronizer
+source .devcontainer/util/functions.sh
+createKindCluster
+installHelm
+installK9s
+
 
 Try this...
 export KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER=overlayfs
@@ -34,6 +41,9 @@ export KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER=overlayfs
 
 vscode user is created, has no access to docker.
 kind cluster can be accessed (root)
+when deploying oCloudNative apparently the OA and AG cant be pulled, they hang
+should be alsso an issue when doing sudo su that the hostname is not found 
 
+maybe set the Overlay??
 
 EOF
