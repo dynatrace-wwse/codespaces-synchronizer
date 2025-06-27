@@ -4,14 +4,14 @@ docker build -t msubuntu .
 
 export RepositoryName=codespaces-synchronizer
 
-# Works but image download not, check that over internet as next step. --init
+# Works after reboot, most likely the dns of docker due hostname change.
 docker run -e RepositoryName=$RepositoryName --privileged --dns=8.8.8.8 --network=host -v /var/run/docker.sock:/var/run/docker.sock -v /lib/modules:/lib/modules -v /home/ubuntu/codespaces-synchronizer:/workspaces/$RepositoryName -w /workspaces/$RepositoryName -it msubuntu /bin/bash
 
 
 exit
+###-----------------
 
 kind delete cluster
-
 export KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER=overlayfs
 source .devcontainer/util/functions.sh
 createKindCluster
@@ -24,12 +24,10 @@ deployTodoApp
 Comments on progress 
 Kind creation ok
 
-
 ---- 
 
 Try this...
 export KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER=overlayfs
-
 2. Ensure /var/lib/containerd is writable
 
 EOF

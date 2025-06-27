@@ -22,4 +22,4 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && chmod +x /usr/local/bin/kind
 
 # Expose Docker socket
-VOLUME /var/run/docker.sock
+#VOLUME /var/run/docker.sock
