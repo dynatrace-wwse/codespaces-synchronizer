@@ -46,4 +46,11 @@ should be alsso an issue when doing sudo su that the hostname is not found
 
 maybe set the Overlay??
 
+
+
+Ensuring Permisions on HOst dont change...
+#sudo chmod 660 /var/run/docker.sock
+#sudo chown root:docker /var/run/docker.sock
+
+
 EOF

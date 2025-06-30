@@ -34,14 +34,17 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
     && chmod +x /usr/local/bin/kind
 
-# Ensure docker group exists and add vscode user to it
-RUN groupadd -g 1001 docker && usermod -aG docker ${USERNAME}
 
-#chown root:docker /var/run/docker.sock
+# Add hostname of hosts to /etc/hosts for local resolution (if dynamically?)
+#RUN 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # change ownership of the home directory
-RUN chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
+RUN chown -R vscode:vscode /home/vscode
 
+WORKDIR /home/vscode
 
-WORKDIR /home/${USERNAME}
-USER ${USERNAME}
+USER vscode
+
+ENTRYPOINT ["/entrypoint.sh"]
