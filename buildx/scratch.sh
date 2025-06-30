@@ -39,6 +39,23 @@ docker run --log-level=debug -it -v "$(pwd):/workspace" -w /workspace enablement
 needed to install docker, then chgrp of docker since the ls ... showed the group root
 when docker installed, then issue with buildx 
 
+'''
+
+
+
+### RUN Locally without VSCODE
+''' HOW TO RUN LOCALLY ON LINUX without vscode (ACE BOX example)
+## Build image
+# go to repository inside the .devcontainer folder
+docker build -t msubuntu22 .
+
+## Add vscode to docker user group 
+# add user with no login just for mapping to the docker container
+sudo useradd -s /usr/sbin/nologin vscode
+sudo usermod -aG docker vscode
+
+# Run docker container locally (mapping all arguments as in the .devcontainer.json configuration)
+export RepositoryName=$(basename "$PWD") && docker run -e RepositoryName=$RepositoryName --init --privileged --network=host -v /var/run/docker.sock:/var/run/docker-host.sock -v $(pwd):/workspaces/$RepositoryName -w /workspaces/$RepositoryName -it msubuntu22 /usr/bin/zsh
 
 '''
 
