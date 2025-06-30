@@ -3,13 +3,16 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "runArgs": [
-    "--init", "--privileged", "--network=host"
-  ],
-  "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-  ],
+  "runArgs": ["--init", "--privileged", "--network=host"],
+  "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
+
+  // some base images require a specific user name
+	"remoteUser": "vscode",
+  
   "postCreateCommand": "./.devcontainer/post-create.sh",
+
+  "postStartCommand": "./.devcontainer/post-start.sh",
+  
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
@@ -19,8 +22,8 @@
         "ms-kubernetes-tools.vscode-kubernetes-tools"
       ]
     }
-  }
-  ,"remoteEnv": {
+  },
+  "remoteEnv": {
     "RepositoryName": "codespaces-synchronizer"
   }
 }
