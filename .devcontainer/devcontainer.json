@@ -9,7 +9,7 @@
   // some base images require a specific user name
 	"remoteUser": "vscode",
   
-  "postCreateCommand": "./.devcontainer/post-create.sh",
+  "postCreateCommand": "/entrypoint.sh ; ./.devcontainer/post-create.sh",
 
   "postStartCommand": "./.devcontainer/post-start.sh",
   

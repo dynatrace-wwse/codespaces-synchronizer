@@ -29,9 +29,12 @@ sudo su
 export RepositoryName=codespaces-synchronizer
 source .devcontainer/util/functions.sh
 createKindCluster
-installHelm
+
 installK9s
 
+dynatraceDeployOperator
+
+deployCloudNative
 
 Try this...
 export KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER=overlayfs
