@@ -27,7 +27,7 @@ installK9s
 
 # In here you deploy the Application you want
 # The TODO App will be deployed as a sample
-#deployTodoApp
+deployTodoApp
 
 # The Astroshop keeping changes of demo.live needs certmanagerdocker
 #certmanagerInstall
@@ -42,6 +42,8 @@ installK9s
 # and hardcoded to have a name starting with dttest-bash b
 # Then run the e2e test harness
 # Otherwise, send the startup ping
+
+# FIXME: Do this outside of post-create.sh (cleaner)
 if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     # Set default repository for gh CLI
     gh repo set-default "$GITHUB_REPOSITORY"
@@ -60,13 +62,11 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     gh codespace delete --codespace "$CODESPACE_NAME" --force
 else
 
+    #FIXME: Verify in Codespace and in Container...
     #verifyCodespaceCreation
     
     #postCodespaceTracker
   
-    printInfo "Your dev container finished creating"
+    printInfoSection "Your dev container finished creating"
 
 fi
-
-echo "Elapsed time: $SECONDS seconds and params($@)"
-exec "$@" 
