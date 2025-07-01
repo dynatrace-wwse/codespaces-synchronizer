@@ -14,7 +14,6 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           runCmd: |
-            echo "Listing files:"
-            ls -la
-            echo "Current directory:"
-            pwd
+            echo " Curling the todo app running in the Codespace container"
+            curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
+            
