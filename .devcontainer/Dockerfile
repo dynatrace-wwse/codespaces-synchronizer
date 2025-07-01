@@ -1,36 +1,27 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:bookworm as kind
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ARG YQ_VERSION=v4.44.3
-ARG YQ_BINARY=yq_linux_amd64
 ARG HELM_VERSION=v3.17.0
 
-RUN export DEBIAN_FRONTEND=noninteractive
-
-COPY docker.sh /tmp/scripts/
-RUN chmod +x /tmp/scripts/docker.sh
-
-# update the container
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install zsh ca-certificates gnupg jq gh -y && \
-    apt-get autoremove -y && \
-    apt-get clean -y
-
-# Install Python
-RUN apt install python3 python3-pip -y
-
-# Install NodeJS
-RUN apt install nodejs -y 
-
-# Install yq
-RUN wget https://github.com/mikefarah/yq/releases/download/$YQ_VERSION/$YQ_BINARY -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
+# Install Docker CLI (not daemon)
+RUN apt update && apt install -y \
+    docker.io \
+    curl \
+    iptables \
+    socat \
+    ebtables \
+    ethtool \
+    conntrack \
+    sudo \
+    gh \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install kubectl
-RUN curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
-    && chmod +x /usr/local/bin/kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+    && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
+    && rm kubectl
 
 # Install Helm
 RUN curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz \
@@ -44,13 +35,14 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
     && chmod +x /usr/local/bin/kind
 
-RUN /tmp/scripts/docker.sh
-
 # change ownership of the home directory
-RUN chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
+RUN chown -R vscode:vscode /home/vscode
 
-WORKDIR /home/${USERNAME}
-USER ${USERNAME}
+WORKDIR /home/vscode
 
-ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+USER vscode
+
+# Entrypoint is on the mounted volume using the framework, post-create.sh
+ENTRYPOINT ["./.devcontainer/entrypoint.sh"]
+
 CMD [ "sleep", "infinity" ]
