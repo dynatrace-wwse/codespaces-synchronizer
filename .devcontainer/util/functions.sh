@@ -298,10 +298,23 @@ installRunme() {
 }
 
 createKindCluster() {
-  
   printInfoSection "Installing Kubernetes Cluster (Kind)"
+  # verify that Kind cluster does not exist
+  if kind get clusters | grep -q "kind"; then
+    printWarn "Kind cluster 'kind' already exists. Deleting it first."
+    deleteKindCluster
+  fi
   # Create k8s cluster
+  printInfo "Creating Kind cluster"
   kind create cluster --config "$CODESPACE_VSCODE_FOLDER/.devcontainer/kind-cluster.yml" --wait 5m
+  printInfo "Kind cluster created successfully, reachabe under:"
+  kubectl cluster-info --context kind-kind
+}
+
+deleteKindCluster() {
+  printInfoSection "Deleting Kubernetes Cluster (Kind)"
+  kind delete cluster --name kind
+  printInfo "Kind cluster deleted successfully."
 }
 
 certmanagerInstall() {
