@@ -21,9 +21,9 @@ echo "Entrypoint loaded with args: $@"
 # Function is defined in functions.sh
 entrypoint(){
   printInfoSection "Making sure user permissions, host mapping and docker.sock are mapped correctly"
-  if [ "$$" -eq 1 ]; then
+  if [ true ]; then
     USER=$(whoami)
-    printInfo "PID is 1, running as $USER inside the container"
+    printInfo "PID is $$, running as $USER inside the container"
   
     printInfo "Adding containers Hosts to etc/hosts/ for network resolution and sharing"
     # Add hostname to docker container's /etc/hosts
