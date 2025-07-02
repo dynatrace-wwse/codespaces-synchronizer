@@ -6,6 +6,8 @@
   "runArgs": ["--init", "--privileged", "--network=host"],
   "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
 
+  "overrideCommand": false,
+
   // some base images require a specific user name
 	"remoteUser": "vscode",
   
@@ -14,10 +16,14 @@
   "postStartCommand": "./.devcontainer/post-start.sh",
   
   "features": {
-   // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    //"ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "customizations": {
     "vscode": {
+      // Set container specific settings
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			},
       "extensions": [
      //   "ms-kubernetes-tools.vscode-kubernetes-tools"
       ]
