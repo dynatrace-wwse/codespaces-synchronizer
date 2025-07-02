@@ -5,8 +5,8 @@
   },
   "runArgs": ["--init", "--privileged", "--network=host"],
   "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
-
-  "overrideCommand": false,
+  // Entrypoint and CMD are overwritten by VSCode
+  "overrideCommand": true,
 
   // some base images require a specific user name
 	"remoteUser": "vscode",
