@@ -34,6 +34,10 @@ RUN curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz \
 RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/kind/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
     && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
     && chmod +x /usr/local/bin/kind
+    
+
+COPY entrypoint.sh /tmp/
+RUN chmod +x /tmp/entrypoint.sh
 
 # change ownership of the home directory
 RUN chown -R vscode:vscode /home/vscode
@@ -43,6 +47,6 @@ WORKDIR /home/vscode
 USER vscode
 
 # Entrypoint is on the mounted volume using the framework, post-create.sh
-ENTRYPOINT ["./.devcontainer/entrypoint.sh"]
+ENTRYPOINT ["/tmp/entrypoint.sh"]
 
 CMD [ "sleep", "infinity" ]
