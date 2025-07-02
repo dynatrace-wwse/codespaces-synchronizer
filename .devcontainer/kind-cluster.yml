@@ -13,7 +13,9 @@ name: kind
 networking:
   # WARNING: It is _strongly_ recommended that you keep this the default
   # (127.0.0.1) for security reasons. However it is possible to change this.
-  apiServerAddress: "127.0.0.1"
+  # Since is a training cluster, we open the internal API server to the world.
+  # This is not recommended for production clusters. 
+  apiServerAddress: "0.0.0.0"
   # By default the API server listens on a random open port.
   # You may choose a specific port but probably don't need to in most cases.
   # Using a random port makes it easier to spin up multiple clusters.
