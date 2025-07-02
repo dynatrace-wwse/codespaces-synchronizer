@@ -7,8 +7,8 @@ This directory is a helper for building and starting the .devcontainer locally i
 ## Files
 ### .env file
 create one. is ommited in .gitignore to avoid token leaks in git.
-Just copy and paste the contents in a file named .env in this directory, all variables will be read and will be passed on as environment variables to the container.
-
+Just copy and paste the contents in a file named .env in this directory '.devcontainer/runlocal/.env'.
+All variables will be read and will be passed on dynamically as environment variables to the container.
 
 -----Sample Contents -----
 # Mapping of the Secrets defined in the .devcontainer.json file
@@ -41,4 +41,4 @@ From:
 
 to:
 
-"postCreateCommand": "source ./.devcontainer/runlocal/.env && ./.devcontainer/post-create.sh",
+"postCreateCommand": ". ./.devcontainer/runlocal/.env && ./.devcontainer/post-create.sh",

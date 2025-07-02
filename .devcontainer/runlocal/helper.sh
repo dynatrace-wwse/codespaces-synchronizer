@@ -12,8 +12,10 @@ getRepositoryName() {
 
 getDockerEnvsFromEnvFile() {
   if [[ ! -f "$ENV_FILE" ]]; then
-    echo "Error: .env file not found at $ENV_FILE"
-    return 1
+    echo "Error: .env file not found at $ENV_FILE, before running locally read \
+the '.devcontainer/runlocal/README' file and make sure you have all the secrets \
+needed for this devcontainer to run successfully inside the .env file "
+    exit 1
   fi
 
   while IFS='=' read -r key value; do
