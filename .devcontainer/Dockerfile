@@ -36,8 +36,8 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && chmod +x /usr/local/bin/kind
     
 
-COPY entrypoint.sh /tmp/
-RUN chmod +x /tmp/entrypoint.sh
+COPY entrypoint.sh /home/vscode
+RUN chmod +x /home/vscode/entrypoint.sh
 
 # change ownership of the home directory
 RUN chown -R vscode:vscode /home/vscode
@@ -47,6 +47,6 @@ WORKDIR /home/vscode
 USER vscode
 
 # Entrypoint is on the mounted volume using the framework, post-create.sh
-ENTRYPOINT ["/tmp/entrypoint.sh"]
+ENTRYPOINT ["/home/vscode/entrypoint.sh"]
 
 CMD [ "sleep", "infinity" ]
