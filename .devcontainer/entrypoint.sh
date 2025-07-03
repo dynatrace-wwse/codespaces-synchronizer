@@ -28,10 +28,8 @@ printInfoSection() {
   echo -e "${GREEN}[$LOGNAME| ${BLUE}INFO${CYAN} |$(timestamp) ${LILA}|$thinline"
 }
 
-echo "Entrypoint loaded with args: $@"
-# Function is defined in functions.sh
 entrypoint(){
-  printInfoSection "Making sure user permissions, host mapping and docker.sock are mapped correctly"
+    printInfoSection "Making sure user permissions, host mapping and docker.sock are mapped correctly"
     USER=$(whoami)
     printInfo "PID is $$, running as $USER inside the container"
   
@@ -80,4 +78,5 @@ entrypoint(){
     fi
 }
 
+printInfo "Entering entrypoint with args: $@"
 entrypoint $@
