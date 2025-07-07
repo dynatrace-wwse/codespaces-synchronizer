@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
+# Change to root only when running locally on MAC, otherwise leave it to vscode 
 ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
 ARG HELM_VERSION=v3.17.0
 
 # Install Docker CLI (not daemon)
@@ -36,17 +35,20 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && chmod +x /usr/local/bin/kind
     
 
-COPY entrypoint.sh /home/vscode
-RUN chmod +x /home/vscode/entrypoint.sh
+COPY entrypoint.sh /
 
-# change ownership of the home directory
-RUN chown -R vscode:vscode /home/vscode
+RUN chmod +x /entrypoint.sh
 
-WORKDIR /home/vscode
+# In case the user is root, easy workaround when running locally on MAC so root can access the docker.socket of the hosts, otherwise user should be vscode.
+# Change ownership carefully and use only locally. Container should run with --privileged
+RUN if [ "$USERNAME" != "root" ]; then \
+      chown -R $USERNAME:$USERNAME /home/$USERNAME; \
+      WORKDIR /home/$USERNAME; \
+    fi
 
-USER vscode
+USER $USERNAME
 
 # Entrypoint is on the mounted volume using the framework, post-create.sh
-ENTRYPOINT ["/home/vscode/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD [ "sleep", "infinity" ]
