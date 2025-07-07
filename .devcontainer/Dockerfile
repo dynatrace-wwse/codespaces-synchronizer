@@ -43,7 +43,6 @@ RUN chmod +x /entrypoint.sh
 # Change ownership carefully and use only locally. Container should run with --privileged
 RUN if [ "$USERNAME" != "root" ]; then \
       chown -R $USERNAME:$USERNAME /home/$USERNAME; \
-      WORKDIR /home/$USERNAME; \
     fi
 
 USER $USERNAME
