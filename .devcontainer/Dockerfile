@@ -3,6 +3,9 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 # Change to root only when running locally on MAC, otherwise leave it to vscode 
 ARG USERNAME=vscode
 ARG HELM_VERSION=v3.17.0
+# Multiarchitecture
+ARG ARCH
+RUN echo "Building for architecture: ${ARCH}"
 
 # Install Docker CLI (not daemon)
 RUN apt update && apt install -y \
