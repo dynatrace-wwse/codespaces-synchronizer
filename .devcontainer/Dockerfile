@@ -3,10 +3,10 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 # Change to root only when running locally on MAC, otherwise leave it to vscode 
 ARG USERNAME=vscode
 ARG HELM_VERSION=v3.17.0
-# Multiarchitecture
-ARG ARCH=$(uname -m)
+# Multiarchitecture, plattform is passed on when building the image.
+ARG ARCH
 
-RUN echo "Building for architecture: ${ARCH}"
+RUN echo "Building for architecture: '$ARCH'"
 
 # Install Docker CLI (not daemon)
 RUN apt update && apt install -y \
@@ -21,21 +21,22 @@ RUN apt update && apt install -y \
     gh \
     && rm -rf /var/lib/apt/lists/*
 
-# Install kubectl
-RUN curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+# Install kubectl (x86_64/amd64, aarch64/arm64)
+RUN curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/$ARCH/kubectl" \
     && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
     && rm kubectl
 
 # Install Helm
-RUN curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz \
-    && tar -zxvf helm-$HELM_VERSION-linux-amd64.tar.gz \
-    && sudo mv linux-amd64/helm /usr/local/bin/helm \
+RUN if  [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "amd64" ]; then \
+    curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-$ARCH.tar.gz \
+    && tar -zxvf helm-$HELM_VERSION-linux-$ARCH.tar.gz \
+    && sudo mv linux-$ARCH/helm /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
-    && rm -rf helm-$HELM_VERSION-linux-amd64.tar.gz linux-amd64 
+    && rm -rf helm-$HELM_VERSION-linux-$ARCH.tar.gz linux-$ARCH 
 
 # Install kind
 RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/kind/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
-    && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
+    && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-$ARCH \
     && chmod +x /usr/local/bin/kind
     
 

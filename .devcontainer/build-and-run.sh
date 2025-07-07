@@ -7,6 +7,16 @@ ENV_FILE=runlocal/.env
 
 IMAGENAME="msubuntu"
 
+ARCHITECTURE=$(uname -m)
+# Setting the ARG ARCH amd64 or arm64 so the correct binaries can be downloaded.
+if  [ "$ARCHITECTURE" == "x86_64" ] || [ "$ARCHITECTURE" == "amd64" ]; then
+    ARCH="amd64"
+elif [ "$ARCHITECTURE" == "aarch64" ] || [ "$ARCHITECTURE" == "arm64" ]; then   
+    ARCH="arm64"
+else 
+    echo "Unknown architecture $ARCHITECTURE"
+fi
+
 # Commands to be executed in the container after it is created (as in VSCode devcontainer.json)
 CMD="./.devcontainer/post-create.sh; ./.devcontainer/post-start.sh; zsh"
 
@@ -17,7 +27,7 @@ getRepositoryName
 getDockerEnvsFromEnvFile
 
 # Build the image
-docker build -t $IMAGENAME .
+docker build --build-arg ARCH=$ARCH -t $IMAGENAME .
 
 echo "running $RepositoryName in docker container"
 
