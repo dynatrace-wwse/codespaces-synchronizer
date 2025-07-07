@@ -27,8 +27,7 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/sta
     && rm kubectl
 
 # Install Helm
-RUN if  [ "$ARCH" == "x86_64" ] || [ "$ARCH" == "amd64" ]; then \
-    curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-$ARCH.tar.gz \
+RUN curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-$ARCH.tar.gz \
     && tar -zxvf helm-$HELM_VERSION-linux-$ARCH.tar.gz \
     && sudo mv linux-$ARCH/helm /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
