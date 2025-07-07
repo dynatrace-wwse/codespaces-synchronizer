@@ -27,7 +27,7 @@ deployCloudNative
 
 # In here you deploy the Application you want
 # The TODO App will be deployed as a sample
-#deployTodoApp
+deployTodoApp
 
 # The Astroshop keeping changes of demo.live needs certmanagerdocker
 #certmanagerInstall
