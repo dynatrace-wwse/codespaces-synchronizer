@@ -4,7 +4,8 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 ARG USERNAME=vscode
 ARG HELM_VERSION=v3.17.0
 # Multiarchitecture
-ARG ARCH
+ARG ARCH=$(uname -m)
+
 RUN echo "Building for architecture: ${ARCH}"
 
 # Install Docker CLI (not daemon)
