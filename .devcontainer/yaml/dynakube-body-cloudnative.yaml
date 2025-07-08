@@ -17,6 +17,8 @@
       # For more information on node selectors, see https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/
       #
       # nodeSelector: {}
+      #nodeSelector: 
+      # kubernetes.io/arch: "arm64"
 
       # Optional: Sets the priority class assigned to the OneAgent Pods. No class is set by default.
       # For more information on priority classes, see https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
@@ -90,6 +92,7 @@
       # Defaults to the latest OneAgent image on the tenant's registry
       #
       # image:
+      image: "dynatrace/dynatrace-oneagent:1.309.79.20250621-120716"
 
       # Optional: If specified, indicates the OneAgent version to use
       # Defaults to "latest"
