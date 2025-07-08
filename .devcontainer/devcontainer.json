@@ -3,7 +3,8 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args":
-    { "ARCH":"amd64" }
+    // change to arm64 when running VSCode locally, default amd64
+    { "ARCH":"arm64" }
   },
   // When running locally we pass the 'secrets' as env variables via runArgs "--env-file",".devcontainer/runlocal/.env"
   "runArgs": ["--init", "--privileged", "--network=host"],
