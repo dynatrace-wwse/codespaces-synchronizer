@@ -1,5 +1,5 @@
 {
-  "name": "Kind Dev Environment",
+  "name": "Dynatrace Enablement Container",
   "build": {
     "dockerfile": "Dockerfile",
     "args":

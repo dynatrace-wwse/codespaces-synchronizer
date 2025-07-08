@@ -5,7 +5,7 @@
 source runlocal/helper.sh
 ENV_FILE=runlocal/.env
 
-IMAGENAME="msubuntu"
+IMAGENAME="dt-enablement"
 
 ARCHITECTURE=$(uname -m)
 # Setting the ARG ARCH amd64 or arm64 so the correct binaries can be downloaded.
@@ -27,7 +27,7 @@ getRepositoryName
 getDockerEnvsFromEnvFile
 
 # Build the image
-docker build --build-arg ARCH=$ARCH -t $IMAGENAME .
+docker build --build-arg ARCH=$ARCH --platform linux/$ARCH -t $IMAGENAME .
 
 echo "running $RepositoryName in docker container"
 
@@ -35,6 +35,7 @@ echo "running $RepositoryName in docker container"
 DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
 
 docker run $DOCKER_ENVS \
+    --name $IMAGENAME \
     --privileged \
     --dns=8.8.8.8 \
     --network=host \
