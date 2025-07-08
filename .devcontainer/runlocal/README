@@ -30,15 +30,16 @@ DT_INGEST_TOKEN=dt0c01.XXXZZZZAAAA.XXXZZZZAAAA
 helper script for calculating the repository name which is needed for the framework to work inside the container and reading the key and values defined in the .env file.
 
 
-
 ## Running inside a devcontainer locally using VisualStudio Code with Secrets
-If you have VisualStudio Code with this repository open, it'll ask if you want to open it inside a devcontainer. It'll build the image and load VSCode inside the container. Github Codespaces manages to pass on the secrets to the container, so if we are to run locally we need to pass the secrets ourselves. For this we just need to add an argument to the .devcontainer json file.
-The Secrets should be defined in the .env file in this directory. Create it as explained above. 
+If you have VisualStudio Code with this repository open, it'll ask if you want to open it inside a devcontainer. It'll build the image and load VSCode inside the container. Github Codespaces manages to pass on the secrets to the container, so if we are to run locally we need to pass the secrets ourselves as environment variables via the .devcontainer.json definition. We read the environment variables from '.devcontainer/runlocal/.env' which is the same file when running in a plain docker container.
+
+Modify the parameter 'runArgs' from the devcontainer.json
 
 From:
-
-"postCreateCommand": "./.devcontainer/post-create.sh",
+"runArgs": ["--init", "--privileged", "--network=host"],
 
 to:
+"runArgs": ["--init", "--privileged", "--network=host","--env-file",".devcontainer/runlocal/.env"],
 
-"postCreateCommand": ". ./.devcontainer/runlocal/.env && ./.devcontainer/post-create.sh",
+If you don't create the file VSCode will throw an error and won't be able to load locally.
+
