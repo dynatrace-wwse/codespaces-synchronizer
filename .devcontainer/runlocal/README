@@ -1,0 +1,45 @@
+# What this is all about
+This directory is a helper for building and starting the .devcontainer locally in two modes:
+- with a remote connection using VisualStudio Code
+- as a plain Docker Container without VisualStudio Code or Github Codespaces
+
+
+## Files
+### .env file
+create one. is ommited in .gitignore to avoid token leaks in git.
+Just copy and paste the contents in a file named .env in this directory '.devcontainer/runlocal/.env'.
+All variables will be read and will be passed on dynamically as environment variables to the container.
+
+-----Sample Contents -----
+# Mapping of the Secrets defined in the .devcontainer.json file
+# Dynatrace Tenant
+DT_TENANT=https://abc123.live.dynatrace.com 
+#Description: eg. abc123 for live -> https://abc123.live.dynatrace.com or sprint -> https://abc123.sprint.dynatracelabs.com no apps in the URL
+
+# Dynatrace Operator Token
+DT_OPERATOR_TOKEN=dt0c01.XXXZZZZAAAA.XXXZZZZAAAA
+#it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Create ActiveGate tokens' 'Read entities' 'Read settings' 'Write settings' 'Access probrem and event feed, metrics and topology' 'PaaS Integration - installer download
+
+#Dynatrace Ingest Token
+DT_INGEST_TOKEN=dt0c01.XXXZZZZAAAA.XXXZZZZAAAA
+# it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Ingest logs' 'Ingest metrics' 'Ingest OpenTelemetry traces'
+
+-------
+
+### helper.sh
+helper script for calculating the repository name which is needed for the framework to work inside the container and reading the key and values defined in the .env file.
+
+
+## Running inside a devcontainer locally using VisualStudio Code with Secrets
+If you have VisualStudio Code with this repository open, it'll ask if you want to open it inside a devcontainer. It'll build the image and load VSCode inside the container. Github Codespaces manages to pass on the secrets to the container, so if we are to run locally we need to pass the secrets ourselves as environment variables via the .devcontainer.json definition. We read the environment variables from '.devcontainer/runlocal/.env' which is the same file when running in a plain docker container.
+
+Modify the parameter 'runArgs' from the devcontainer.json
+
+From:
+"runArgs": ["--init", "--privileged", "--network=host"],
+
+to:
+"runArgs": ["--init", "--privileged", "--network=host","--env-file",".devcontainer/runlocal/.env"],
+
+If you don't create the file VSCode will throw an error and won't be able to load locally.
+

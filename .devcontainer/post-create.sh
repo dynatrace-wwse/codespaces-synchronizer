@@ -1,7 +1,8 @@
 #!/bin/bash
 #loading functions to script
-source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 export SECONDS=0
+source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+
 
 bindFunctionsInShell
 
@@ -9,7 +10,7 @@ setupAliases
 
 createKindCluster
 
-#installK9s
+installK9s
 
 #TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
 #installMkdocs
@@ -26,9 +27,9 @@ createKindCluster
 
 # In here you deploy the Application you want
 # The TODO App will be deployed as a sample
-#deployTodoApp
+deployTodoApp
 
-# The Astroshop keeping changes of demo.live needs certmanager
+# The Astroshop keeping changes of demo.live needs certmanagerdocker
 #certmanagerInstall
 #certmanagerEnable
 #deployAstroshop
@@ -38,9 +39,11 @@ createKindCluster
 
 # e2e testing
 # If the codespace is created (eg. via a Dynatrace workflow)
-# and hardcoded to have a name starting with dttest-
+# and hardcoded to have a name starting with dttest-bash b
 # Then run the e2e test harness
 # Otherwise, send the startup ping
+
+# FIXME: Do this outside of post-create.sh (cleaner)
 if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     # Set default repository for gh CLI
     gh repo set-default "$GITHUB_REPOSITORY"
@@ -59,10 +62,11 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     gh codespace delete --codespace "$CODESPACE_NAME" --force
 else
 
-    verifyCodespaceCreation
+    #FIXME: Verify in Codespace and in Container...
+    #verifyCodespaceCreation
     
-    postCodespaceTracker
+    #postCodespaceTracker
   
-    printInfo "Finished creating devcontainer"
+    printInfoSection "Your dev container finished creating"
 
 fi
