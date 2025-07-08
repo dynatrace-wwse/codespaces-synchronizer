@@ -23,7 +23,8 @@
     # Defaults to the latest ActiveGate image on the tenant's registry
     # Example: "ENVIRONMENTID.live.dynatrace.com/linux/activegate:latest"
     #
-    # image: ""
+    # image: "dynatrace/dynatrace-activegate:1.317.26.20250703-113727"
+    image: "dynatrace/dynatrace-activegate:1.317.26.20250703-113727"
 
     # Optional: Sets the activation group for ActiveGate instances
     #
