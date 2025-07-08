@@ -1,7 +1,9 @@
 {
   "name": "Kind Dev Environment",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "args":
+    { "ARCH":"amd64" }
   },
   "runArgs": ["--init", "--privileged", "--network=host"],
   "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],

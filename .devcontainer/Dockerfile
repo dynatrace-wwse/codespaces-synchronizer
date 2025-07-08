@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 ARG USERNAME=vscode
 ARG HELM_VERSION=v3.17.0
 # Multiarchitecture, plattform is passed on when building the image.
-ARG ARCH
+ARG ARCH=$ARCH
 
 RUN echo "Building for architecture: '$ARCH'"
 
