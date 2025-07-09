@@ -12,27 +12,35 @@
   // Entrypoint and CMD are overwritten by VSCode
   "overrideCommand": false,
 
-  // some base images require a specific user name
+  // some base images require a specific user name.
 	"remoteUser": "vscode",
   
   "postCreateCommand": "./.devcontainer/post-create.sh",
 
   "postStartCommand": "./.devcontainer/post-start.sh",
   
-  "features": {
-    //"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
+  "features": {},
   "customizations": {
     "vscode": {
       // Set container specific settings
 			"settings": {
 				"terminal.integrated.defaultProfile.linux": "zsh"
 			},
-      "extensions": [
-     //   "ms-kubernetes-tools.vscode-kubernetes-tools"
-      ]
+      "extensions": [ ]
     }
   },
+  	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		30100
+	],
+	// add labels
+	"portsAttributes": {
+		"30100": { "label": "Application Web UI" }
+	},
+  // minimal CPU when running DT components and apps.
+	"hostRequirements": {
+		"cpus": 4
+	},
   "remoteEnv": {
     "RepositoryName": "codespaces-synchronizer"
   },
