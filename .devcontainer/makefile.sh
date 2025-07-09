@@ -27,22 +27,42 @@ getRepositoryName
 getDockerEnvsFromEnvFile
 
 
-buildLocallyNocache(){
+buildNoCache(){
     # Build the image with no cache
     echo "Building the image $IMAGENAME for $ARCH..."
     docker build --no-cache --build-arg ARCH=$ARCH --platform linux/$ARCH -t $IMAGENAME .
     echo "Building completed."   
 }
 
-buildLocally(){
+build(){
     # Build the image
     echo "Building the image $IMAGENAME for $ARCH..."
     docker build --build-arg ARCH=$ARCH --platform linux/$ARCH -t $IMAGENAME .
     echo "Building completed."
 }
 
+runForProfessors(){
+    # Same as run but with exposure of port 8000 for Labguides
 
-runLocally(){
+    # Add repository name to the environment variables for the container
+    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
+
+    docker run $DOCKER_ENVS \
+        --name $IMAGENAME \
+        --privileged \
+        --dns=8.8.8.8 \
+        --network=host \
+        -p 8000:8000 \
+        -p 30100:30100 \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /lib/modules:/lib/modules \
+        -v $(dirname "$PWD"):/workspaces/$RepositoryName \
+        -w /workspaces/$RepositoryName \
+        -it $IMAGENAME \
+        /usr/bin/zsh -c "$CMD"
+}
+
+run(){
     # Add repository name to the environment variables for the container
     DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
 
@@ -60,7 +80,7 @@ runLocally(){
         /usr/bin/zsh -c "$CMD"
 }
 
-startLocally(){
+start(){
     status=$(docker inspect -f '{{.State.Status}}' "$IMAGENAME")
     #echo "STATUS $status"
     if [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
@@ -69,7 +89,7 @@ startLocally(){
         # Add repository name to the environment variables for the container
         docker rm $IMAGENAME
         echo "Starting a new container"
-        runLocally 
+        run 
     elif  [ "$status" = "running" ]; then 
         echo "Container $IMAGENAME is running, attaching new shell to it"
         docker exec -it $IMAGENAME zsh 
@@ -79,8 +99,8 @@ startLocally(){
             echo "Image exists locally, running it."
         else
             echo "Image does not exist locally. Building it first"
-            buildLocally
+            build
         fi
-        runLocally
+        run
     fi
 }

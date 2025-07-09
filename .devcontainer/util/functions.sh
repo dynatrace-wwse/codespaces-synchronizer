@@ -260,6 +260,10 @@ installK9s() {
 bindFunctionsInShell() {
   printInfoSection "Binding functions.sh and adding a Greeting in the .zshrc for user $USER "
   echo "
+#Making sure the Locale is set properly
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Loading all this functions in CLI
 source $CODESPACE_VSCODE_FOLDER/.devcontainer/util/functions.sh
 

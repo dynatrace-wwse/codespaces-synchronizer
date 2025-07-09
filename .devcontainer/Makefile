@@ -6,21 +6,21 @@
 # if the container is running it will attach a new shell to it.
 start:
 	@bash -c ' \
-	source ./build-and-run.sh; \
-	startLocally  \
+	source ./makefile.sh; \
+	start  \
 	echo "Done"; '
 
 # Target for building the image
 build-nocache: 
 	@bash -c ' \
-	source ./build-and-run.sh; \
-	buildLocallyNocache; \
+	source ./makefile.sh; \
+	buildNoCache; \
 	echo "Done"; '
 
 # Target for building the image
 build: 
 	@bash -c ' \
-	source ./build-and-run.sh; \
-	buildLocally; \
+	source ./makefile.sh; \
+	build; \
 	echo "Done"; '
 	
