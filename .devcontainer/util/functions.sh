@@ -309,7 +309,7 @@ stopKindCluster(){
 startKindCluster(){
   printInfoSection "Starting Kubernetes Cluster (kind-control-plane)"
   KINDIMAGE="kind-control-plane"
-  KIND_STATUS=$(docker inspect -f '{{.State.Status}}' $KINDIMAGE)
+  KIND_STATUS=$(docker inspect -f '{{.State.Status}}' $KINDIMAGE 2>/dev/null)
   if [ "$KIND_STATUS" = "exited" ] || [ "$KIND_STATUS" = "dead" ]; then
     printInfo "There is a stopped $KINDIMAGE, starting it..."
     docker start $KINDIMAGE
