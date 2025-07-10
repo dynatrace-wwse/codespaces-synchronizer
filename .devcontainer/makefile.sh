@@ -36,7 +36,7 @@ buildNoCache(){
 
 
 buildx(){
-    docker buildx build --platform linux/amd64,linux/arm64 --build-arg ARCH=amd64,ARCH=arm64 -t dt-enablement:dual .
+    docker buildx build --no-cache --platform linux/amd64,linux/arm64 --build-arg ARCH=amd64 -t dt-enablement:latest --push .
 }
 
 buildxx(){

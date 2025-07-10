@@ -7,13 +7,15 @@ ARG HELM_VERSION=v3.17.0
 ARG ARCH=$ARCH
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
+ARG TARGETARCH
 
-RUN echo "Host is running on $BUILDPLATFORM and the binaries will be downloaded for '$ARCH', building for $TARGETPLATFORM"
+RUN echo "Host is running on $BUILDPLATFORM and the binaries will be downloaded for '$ARCH' and '$TARGETARCH', building for $TARGETPLATFORM"
 
 # Install Docker CLI (not daemon)
 RUN apt update && apt install -y \
     docker.io \
     curl \
+    ca-certificates \
     iptables \
     socat \
     ebtables \
@@ -24,20 +26,20 @@ RUN apt update && apt install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install kubectl (x86_64/amd64, aarch64/arm64)
-RUN curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/$ARCH/kubectl" \
+RUN curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/$TARGETARCH/kubectl" \
     && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
     && rm kubectl
 
 # Install Helm
-RUN curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-$ARCH.tar.gz \
-    && tar -zxvf helm-$HELM_VERSION-linux-$ARCH.tar.gz \
-    && sudo mv linux-$ARCH/helm /usr/local/bin/helm \
+RUN curl -LO https://get.helm.sh/helm-$HELM_VERSION-linux-$TARGETARCH.tar.gz \
+    && tar -zxvf helm-$HELM_VERSION-linux-$TARGETARCH.tar.gz \
+    && mv linux-$TARGETARCH/helm /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
-    && rm -rf helm-$HELM_VERSION-linux-$ARCH.tar.gz linux-$ARCH 
+    && rm -rf helm-$HELM_VERSION-linux-$TARGETARCH.tar.gz linux-$TARGETARCH
 
 # Install kind
 RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/kind/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
-    && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-$ARCH \
+    && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-$TARGETARCH \
     && chmod +x /usr/local/bin/kind
     
 
