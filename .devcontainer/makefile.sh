@@ -81,10 +81,8 @@ run(){
 
 start(){
     status=$(docker inspect -f '{{.State.Status}}' "$IMAGENAME")
-    #echo "STATUS $status"
     if [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
         echo "Container is stopped removing container."
-        #TODO: fix when no image is there
         # Add repository name to the environment variables for the container
         docker rm $IMAGENAME
         echo "Starting a new container"
@@ -97,8 +95,7 @@ start(){
         if docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$IMAGENAME$"; then
             echo "Image exists locally, running it."
         else
-            echo "Image does not exist locally. Building it first"
-            build
+            echo "Image does not exist locally. Building it first, if you want to build your own, do 'make build'"
         fi
         run
     fi
