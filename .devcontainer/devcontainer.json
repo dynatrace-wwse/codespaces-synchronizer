@@ -1,10 +1,8 @@
 {
   "name": "Dynatrace Enablement Container",
+  "image":"shinojosa/dt-enablement:v1.0",
   "build": {
-    "dockerfile": "Dockerfile",
-    "args":
-    // change to arm64 when running VSCode locally, default amd64
-    { "ARCH":"amd64" }
+    "dockerfile": "Dockerfile"
   },
   // When running locally we pass the 'secrets' as env variables via runArgs "--env-file",".devcontainer/runlocal/.env"
   "runArgs": ["--init", "--privileged", "--network=host"],
