@@ -329,6 +329,9 @@ startKindCluster(){
   printInfo "other useful functions: stopKindCluster createKindCluster deleteKindCluster"
   printInfo "attachKindCluster "
   printInfo "-----"
+  printInfo "Setting the current context to 'kube-system' instead of 'default' you can change it by typing"
+  printInfo "kubectl config set-context --current --namespace=<namespace-name>"
+  kubectl config set-context --current --namespace=kube-system
 }
 
 attachKindCluster(){
@@ -864,3 +867,34 @@ updateEnvVariable(){
   
   export $variable
 }
+
+finalizePostCreation(){
+  # e2e testing
+  # If the codespace is created (eg. via a Dynatrace workflow)
+  # and hardcoded to have a name starting with dttest-bash b
+  # Then run the e2e test harness
+  # Otherwise, send the startup ping
+  if [[ "$CODESPACE_NAME" == dttest-* ]]; then
+      # Set default repository for gh CLI
+      gh repo set-default "$GITHUB_REPOSITORY"
+
+      # Set up a label, used if / when the e2e test fails
+      # This may already be set, so catch error and always return true
+      gh label create "e2e test failed" --force || true
+
+      # Install required Python packages
+      pip install -r "/workspaces/$REPOSITORY_NAME/.devcontainer/testing/requirements.txt" --break-system-packages
+
+      # Run the test harness script
+      python "/workspaces/$REPOSITORY_NAME/.devcontainer/testing/testharness.py"
+
+      # Testing finished. Destroy the codespace
+      gh codespace delete --codespace "$CODESPACE_NAME" --force
+  else
+      #FIXME: Verify in Codespace and in Container...
+      verifyCodespaceCreation
+      
+      #postCodespaceTracker
+  fi
+}
+
