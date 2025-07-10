@@ -8,7 +8,7 @@ bindFunctionsInShell
 
 setupAliases
 
-createKindCluster
+startKindCluster
 
 installK9s
 

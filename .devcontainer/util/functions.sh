@@ -260,6 +260,10 @@ installK9s() {
 bindFunctionsInShell() {
   printInfoSection "Binding functions.sh and adding a Greeting in the .zshrc for user $USER "
   echo "
+#Making sure the Locale is set properly
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Loading all this functions in CLI
 source $CODESPACE_VSCODE_FOLDER/.devcontainer/util/functions.sh
 
@@ -297,17 +301,56 @@ installRunme() {
   rm -rf runme_binary
 }
 
-createKindCluster() {
-  printInfoSection "Installing Kubernetes Cluster (Kind)"
-  # verify that Kind cluster does not exist
-  if kind get clusters | grep -q "kind"; then
-    printWarn "Kind cluster 'kind' already exists. Deleting it first."
-    deleteKindCluster
+stopKindCluster(){
+  printInfoSection "Stopping Kubernetes Cluster (kind-control-plane)"
+  docker stop kind-control-plane 
+}
+
+startKindCluster(){
+  printInfoSection "Starting Kubernetes Cluster (kind-control-plane)"
+  KINDIMAGE="kind-control-plane"
+  KIND_STATUS=$(docker inspect -f '{{.State.Status}}' $KINDIMAGE)
+  if [ "$KIND_STATUS" = "exited" ] || [ "$KIND_STATUS" = "dead" ]; then
+    printInfo "There is a stopped $KINDIMAGE, starting it..."
+    docker start $KINDIMAGE
+    attachKindCluster
+  elif  [ "$KIND_STATUS" = "running" ]; then
+    printInfo "A $KINDIMAGE is already running, attaching to it..."
+    attachKindCluster
+  else
+    printInfo "No $KINDIMAGE was found, creating a new one..."
+    createKindCluster
   fi
+  printInfo "Kind reachabe under:"
+  kubectl cluster-info --context kind-kind
+  printInfo "-----"
+  printInfo "The following functions are available for you to maximize your K8s experience:"
+  printInfo "startKindCluster - will start, create or attach to a running Cluster"
+  printInfo "other useful functions: stopKindCluster createKindCluster deleteKindCluster"
+  printInfo "attachKindCluster "
+  printInfo "-----"
+}
+
+attachKindCluster(){
+  printInfoSection "Attaching to running Kubernetes Cluster (kind-control-plane)"
+  local KUBEDIR="$HOME/.kube"
+  if [ -d $KUBEDIR ]; then
+    printWarn "Kuberconfig $KUBEDIR exists, overriding Kubernetes conection"
+  else
+    printInfo "Kubeconfig $KUBEDIR does not exist, creating a new one"
+    mkdir -p $HOME/.kube
+  fi
+  kind get kubeconfig > $KUBEDIR/config && printInfo "Connection created" || printWarn "Issue creating connection"
+}
+
+
+createKindCluster() {
+  printInfoSection "Creating Kubernetes Cluster (kind-control-plane)"
   # Create k8s cluster
   printInfo "Creating Kind cluster"
-  kind create cluster --config "$CODESPACE_VSCODE_FOLDER/.devcontainer/kind-cluster.yml" --wait 5m
-  printInfo "Kind cluster created successfully, reachabe under:"
+  kind create cluster --config "$CODESPACE_VSCODE_FOLDER/.devcontainer/kind-cluster.yml" --wait 5m &&\
+    printInfo "Kind cluster created successfully, reachabe under:" ||\
+    printWarn "Kind cluster could not be created"
   kubectl cluster-info --context kind-kind
 }
 
@@ -658,7 +701,7 @@ deployTodoApp(){
   kubectl create ns todoapp
 
   # Create deployment of todoApp
-  kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.0
+  kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.1
 
   # Expose deployment of todoApp with a Service
   kubectl -n todoapp expose deployment todoapp --type=NodePort --name=todoapp --port=8080 --target-port=8080
