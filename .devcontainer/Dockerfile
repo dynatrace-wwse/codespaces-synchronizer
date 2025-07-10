@@ -5,8 +5,10 @@ ARG USERNAME=vscode
 ARG HELM_VERSION=v3.17.0
 # Multiarchitecture, plattform is passed on when building the image.
 ARG ARCH=$ARCH
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
 
-RUN echo "Building for architecture: '$ARCH'"
+RUN echo "Host is running on $BUILDPLATFORM and the binaries will be downloaded for '$ARCH', building for $TARGETPLATFORM"
 
 # Install Docker CLI (not daemon)
 RUN apt update && apt install -y \

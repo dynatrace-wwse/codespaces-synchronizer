@@ -51,3 +51,14 @@ to:
 
 If you don't create the file VSCode will throw an error and won't be able to load locally.
 
+
+
+## Building for multiple architectures in one shot
+
+Make sure you have buildx installed
+sudo apt install docker-buildx
+
+
+# Enable it
+docker buildx create --use
+# zen_goodall

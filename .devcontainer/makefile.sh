@@ -34,6 +34,23 @@ buildNoCache(){
     echo "Building completed."   
 }
 
+
+buildx(){
+    docker buildx build --platform linux/amd64,linux/arm64 --build-arg ARCH=amd64,ARCH=arm64 -t dt-enablement:dual .
+}
+
+buildxx(){
+    # Build the image for AMD
+    ARCH=amd64
+    echo "Building the image $IMAGENAME for $ARCH..."
+    docker build --platform linux/amd64 --build-arg ARCH=amd64 -t $IMAGENAME:v0-amd64.
+    ARCH=arm64
+    docker build --platform linux/arm64 --build-arg ARCH=amd64 -t $IMAGENAME:v0-arm64 .
+    echo "Building the image $IMAGENAME for $ARCH..."
+    #docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGENAME:dual .
+    echo "Build X completed."
+}
+
 build(){
     # Build the image
     echo "Building the image $IMAGENAME for $ARCH..."

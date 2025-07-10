@@ -23,4 +23,11 @@ build:
 	source ./makefile.sh; \
 	build; \
 	echo "Done"; '
+
+buildx:
+	@bash -c ' \
+	source ./makefile.sh; \
+	buildx; \
+	echo "Done"; '
+	
 	
