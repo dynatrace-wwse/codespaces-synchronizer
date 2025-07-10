@@ -5,17 +5,12 @@
 source runlocal/helper.sh
 ENV_FILE=runlocal/.env
 
+NAMESPACE="shinojosa"
 IMAGENAME="dt-enablement"
+REPOSITORY=$NAMESPACE/$IMAGENAME
+TAG="v1.0"
 
-ARCHITECTURE=$(uname -m)
-# Setting the ARG ARCH amd64 or arm64 so the correct binaries can be downloaded.
-if  [ "$ARCHITECTURE" == "x86_64" ] || [ "$ARCHITECTURE" == "amd64" ]; then
-    ARCH="amd64"
-elif [ "$ARCHITECTURE" == "aarch64" ] || [ "$ARCHITECTURE" == "arm64" ]; then   
-    ARCH="arm64"
-else 
-    echo "Unknown architecture $ARCHITECTURE"
-fi
+REPOTAG=$REPOSITORY:$TAG
 
 # Commands to be executed in the container after it is created (as in VSCode devcontainer.json)
 CMD="./.devcontainer/post-create.sh; ./.devcontainer/post-start.sh; zsh ;"
@@ -29,32 +24,19 @@ getDockerEnvsFromEnvFile
 
 buildNoCache(){
     # Build the image with no cache
-    echo "Building the image $IMAGENAME for $ARCH..."
-    docker build --no-cache --build-arg ARCH=$ARCH --platform linux/$ARCH -t $IMAGENAME .
+    docker build --no-cache -t $REPOTAG .
     echo "Building completed."   
 }
 
 
 buildx(){
-    docker buildx build --no-cache --platform linux/amd64,linux/arm64 --build-arg ARCH=amd64 -t dt-enablement:latest --push .
-}
-
-buildxx(){
-    # Build the image for AMD
-    ARCH=amd64
-    echo "Building the image $IMAGENAME for $ARCH..."
-    docker build --platform linux/amd64 --build-arg ARCH=amd64 -t $IMAGENAME:v0-amd64.
-    ARCH=arm64
-    docker build --platform linux/arm64 --build-arg ARCH=amd64 -t $IMAGENAME:v0-arm64 .
-    echo "Building the image $IMAGENAME for $ARCH..."
-    #docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGENAME:dual .
-    echo "Build X completed."
+    docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t $REPOTAG --push .
 }
 
 build(){
     # Build the image
-    echo "Building the image $IMAGENAME for $ARCH..."
-    docker build --build-arg ARCH=$ARCH --platform linux/$ARCH -t $IMAGENAME .
+    echo "Building the image $REPOTAG ..."
+    docker build -t $REPOTAG .
     echo "Building completed."
 }
 
@@ -75,7 +57,7 @@ runForProfessors(){
         -v /lib/modules:/lib/modules \
         -v $(dirname "$PWD"):/workspaces/$RepositoryName \
         -w /workspaces/$RepositoryName \
-        -it $IMAGENAME \
+        -it $REPOTAG \
         /usr/bin/zsh -c "$CMD"
 }
 
@@ -93,7 +75,7 @@ run(){
         -v /lib/modules:/lib/modules \
         -v $(dirname "$PWD"):/workspaces/$RepositoryName \
         -w /workspaces/$RepositoryName \
-        -it $IMAGENAME \
+        -it $REPOTAG \
         /usr/bin/zsh -c "$CMD"
 }
 

@@ -59,11 +59,14 @@ If you don't create the file VSCode will throw an error and won't be able to loa
 
 
 
-# Building for AMD64 and ARM64 with buildx
+# Building for AMD64 and ARM64 with buildx 
 ## Building for multiple architectures in one shot
-You need to be running on a Linux HOST. We recommend to use UbuntuLTS 22 or 24 running on AMD or ARM. 
+You need to be running on a Linux HOST on ARM. We recommend to use UbuntuLTS 22 or 24 running on AMD or ARM. 
+The image cab be built for AMD and for ARM on each host but crossbuilding works at the moment only from ARM -> AMD since when downloading the HELM libraries vial CURL an SSL error is thrown. Since crosscompiling is a step that is done only for pushing the final image to a registry, this should not be improved.
 
-# Install BUildx
+Good to know, when crosscompiling be sure to run on a ARM64 architecture and not AARCH64 (as MAC) since the TARGETARCH variable is used in the dockerfile to dowload the needed binaries, if the URL does not match the build might fail. 
+
+# Install Buildx
 First make sure you have buildx installed.
 ```sh
 sudo apt install docker-buildx
@@ -75,10 +78,40 @@ docker buildx create --use --name multiarch-builder
 ```
 it will give generate a multiarchitecture builder
 
+## Login to the Registry
+Before crosscompiling you need to login to the registry for the namespace so the repository:tag can be pushed. We are using Dockerhub at the moment. So we do
+```sh
+docker login
+```
+so we can push the images with the specific manifest. more information can be found here about crosscompiling 
+https://docs.docker.com/build/building/multi-platform/
+
 
 ## Now you can crosscompile
 ```sh
 make buildx
-# or
+# if make is not installed then run 
 source ./makefile.sh && buildx 
 ```
+
+
+
+
+
+
+
+
+
+# CHEATSHEET
+
+
+Copy Kind cluster config if already running
+
+
+docker run -v ~/.kube:/root/.kube -v ~/.config:/root/.config -it your-image
+
+
+
+docker exec -it kind-control-plane sh -c 'kubectl config view --raw'
+
+kubectl config view --raw > dockerconfig 
