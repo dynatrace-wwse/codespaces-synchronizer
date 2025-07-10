@@ -891,10 +891,13 @@ finalizePostCreation(){
       # Testing finished. Destroy the codespace
       gh codespace delete --codespace "$CODESPACE_NAME" --force
   else
-      #FIXME: Verify in Codespace and in Container...
-      verifyCodespaceCreation
-      
-      #postCodespaceTracker
+      if [[ $CODESPACES == true ]]; then
+        verifyCodespaceCreation
+        postCodespaceTracker
+      else
+        printInfo "Container was not created in a codespace. Verification of proper creation TBD"
+        #FIXME: Verify Container creation and add in payload container type (codespace/vscode local/container) 
+        # add also Host architecture to the payload
+      fi
   fi
 }
-
