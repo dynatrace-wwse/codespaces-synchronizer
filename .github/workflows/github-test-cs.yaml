@@ -16,7 +16,13 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           runCmd: |
-            echo " Curling the todo app running in the Codespace container"
+            echo "Curling the todo app running in the Codespace container"
+            showOpenPorts
+            echo "curling localhost"
+            curl http://localhost:30100
+            echo "curling hostname"
+            curl http://$(hostname):30100
+            echo "now doing grep"
             curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
       
 
