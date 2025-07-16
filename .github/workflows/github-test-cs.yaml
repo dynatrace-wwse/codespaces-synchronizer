@@ -23,16 +23,17 @@ jobs:
           runCmd: |
             echo "Getting stronger..." ; pwd
             source .devcontainer/util/functions.sh && showOpenPorts
-            echo "this is the path" ; pwd
+            echo "this is the path: $(pwd)"
+            echo "this is the tenant $DT_TENANT" 
             echo "I AM" ; whoami
             echo "Docker ps" ; docker ps
             echo "env" ; env
             echo "RepositoryName" ; echo $RepositoryName
             echo "kubectl?" ; kubectl config view
             echo "Curling the todo app running in the Codespace container"
-            echo "curling localhost"
-            curl http://localhost:30100
+            echo "curling 127.0.0.1"
+            curl -v http://127.0.0.1:30100
             echo "curling hostname"
-            curl http://$(hostname):30100
+            curl -v http://$(hostname):30100
             echo "now doing grep"
-            curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
+            curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
