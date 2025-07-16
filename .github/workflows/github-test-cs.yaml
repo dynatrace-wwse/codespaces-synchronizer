@@ -24,7 +24,7 @@ jobs:
             echo "Getting stronger..." ; pwd
             source .devcontainer/util/functions.sh && showOpenPorts
             echo "this is the path: $(pwd)"
-            echo "this is the tenant $DT_TENANT" 
+            echo "this is the tenant ${DT_TENANT}" 
             echo "I AM" ; whoami
             echo "Docker ps" ; docker ps
             echo "env" ; env
