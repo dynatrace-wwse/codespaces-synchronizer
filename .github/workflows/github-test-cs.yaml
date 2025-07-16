@@ -15,24 +15,19 @@ jobs:
       - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
         with:
-          imageName: shinojosa/dt-enablement:v1.0
+          imageName: shinojosa/dt-enablement
           runCmd: |
+            echo "this is the path" ; pwd
+            echo "I AM" ; whoami
+            echo "Docker ps" ; docker ps
+            echo "env" ; env
+            echo "RepositoryName" ; echo $RepositoryName
+            echo "kubectl?" ; kubectl config view
+            echo "new bash?" ; bash
+            echo "new zsh?" ; zsh
+
             echo "Curling the todo app running in the Codespace container"
             showOpenPorts
-            echo "curling localhost"
-            curl http://localhost:30100
-            echo "curling hostname"
-            curl http://$(hostname):30100
-            echo "now doing grep"
-            curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
-      - name: Build and run devcontainer using Makefile
-        uses: devcontainers/ci@v0.3
-        with:
-          imageName: shinojosa/dt-enablement:v1.0
-          runCmd: |
-            pwd
-            cd .devcontainer 
-            make start
             echo "curling localhost"
             curl http://localhost:30100
             echo "curling hostname"
