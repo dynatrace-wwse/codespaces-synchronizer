@@ -10,10 +10,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Use secret
+        run: echo "Tenant ${{ secrets.DT_TENANT }} with Tokens (Operator:${{ secrets.DT_OPERATOR_TOKEN }} Ingest:${{ secrets.DT_INGEST_TOKEN }} )"
       - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
         with:
           runCmd: |
             echo " Curling the todo app running in the Codespace container"
             curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
+      
+
             
