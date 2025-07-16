@@ -23,9 +23,6 @@ jobs:
             echo "env" ; env
             echo "RepositoryName" ; echo $RepositoryName
             echo "kubectl?" ; kubectl config view
-            echo "new bash?" ; bash
-            echo "new zsh?" ; zsh
-
             echo "Curling the todo app running in the Codespace container"
             showOpenPorts
             echo "curling localhost"
