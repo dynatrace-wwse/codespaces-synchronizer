@@ -24,6 +24,17 @@ jobs:
             curl http://$(hostname):30100
             echo "now doing grep"
             curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
-      
-
-            
+      - name: Build and run devcontainer using Makefile
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: shinojosa/dt-enablement:v1.0
+          runCmd: |
+            pwd
+            cd .devcontainer 
+            make start
+            echo "curling localhost"
+            curl http://localhost:30100
+            echo "curling hostname"
+            curl http://$(hostname):30100
+            echo "now doing grep"
+            curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
