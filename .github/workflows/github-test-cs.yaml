@@ -15,6 +15,7 @@ jobs:
       - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
         with:
+          imageName: shinojosa/dt-enablement:v1.0
           runCmd: |
             echo "Curling the todo app running in the Codespace container"
             showOpenPorts
