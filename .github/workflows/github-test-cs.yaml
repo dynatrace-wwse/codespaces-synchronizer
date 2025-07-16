@@ -14,10 +14,6 @@ jobs:
         run: echo "Tenant ${{ secrets.DT_TENANT }} with Tokens (Operator:${{ secrets.DT_OPERATOR_TOKEN }} Ingest:${{ secrets.DT_INGEST_TOKEN }} )"
       - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
-        env:
-          DT_TENANT: ${{ secrets.DT_TENANT }}
-          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
-          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
         with:
           imageName: shinojosa/dt-enablement
           runCmd: |
@@ -39,4 +35,8 @@ jobs:
             echo "curling hostname"
             curl -v http://$(hostname):30100
             echo "now doing grep"
-            curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
+            curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
+        env:
+          DT_TENANT: ${{ secrets.DT_TENANT }}
+          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
+          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
