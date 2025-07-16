@@ -14,9 +14,15 @@ jobs:
         run: echo "Tenant ${{ secrets.DT_TENANT }} with Tokens (Operator:${{ secrets.DT_OPERATOR_TOKEN }} Ingest:${{ secrets.DT_INGEST_TOKEN }} )"
       - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
+        env:
+          DT_TENANT: ${{ secrets.DT_TENANT }}
+          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
+          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
         with:
           imageName: shinojosa/dt-enablement
           runCmd: |
+            echo "Getting stronger..." ; pwd
+            source .devcontainer/util/functions.sh && showOpenPorts
             echo "this is the path" ; pwd
             echo "I AM" ; whoami
             echo "Docker ps" ; docker ps
@@ -24,14 +30,9 @@ jobs:
             echo "RepositoryName" ; echo $RepositoryName
             echo "kubectl?" ; kubectl config view
             echo "Curling the todo app running in the Codespace container"
-            showOpenPorts
             echo "curling localhost"
             curl http://localhost:30100
             echo "curling hostname"
             curl http://$(hostname):30100
             echo "now doing grep"
             curl http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running" 
-        env:
-          DT_TENANT: ${{ secrets.DT_TENANT }}
-          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
-          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
