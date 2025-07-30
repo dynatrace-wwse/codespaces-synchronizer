@@ -21,7 +21,7 @@ jobs:
             DT_INGEST_TOKEN=$DT_INGEST_TOKEN
             EOF
             echo "This is the env file" ; cat runlocal/.env
-            make start
+            make test
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
             echo "------ this is the tenant ${DT_TENANT} ------" 
             echo "------ I AM ------" ; whoami
