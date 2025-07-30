@@ -14,7 +14,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Test Codespace (devcontainer) build and run commands  
         run: |
-            cd .devcontainer ; make start
+            cd .devcontainer 
+            cat <<EOF >> runlocal/.env
+            DT_TENANT=$DT_TENANT
+            DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
+            DT_INGEST_TOKEN=$DT_INGEST_TOKEN
+            EOF
+            echo "This is the env file" ; cat runlocal/.env
+            make start
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
             echo "------ this is the tenant ${DT_TENANT} ------" 
             echo "------ I AM ------" ; whoami
