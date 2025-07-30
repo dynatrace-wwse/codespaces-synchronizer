@@ -19,6 +19,7 @@ jobs:
         with:
           runCmd: |
             #chmod -R 755 .
+            echo "$DT_TENANT"
             cd .devcontainer 
             cat <<EOF >> runlocal/.env
             DT_TENANT=$DT_TENANT
