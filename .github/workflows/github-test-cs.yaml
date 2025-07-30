@@ -19,12 +19,12 @@ jobs:
         with:
           runCmd: |
             #chmod -R 755 .
-            #cd .devcontainer 
-            #cat <<EOF >> runlocal/.env
-            #DT_TENANT=$DT_TENANT
-            #DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
-            #DT_INGEST_TOKEN=$DT_INGEST_TOKEN
-            #EOF
+            cd .devcontainer 
+            cat <<EOF >> runlocal/.env
+            DT_TENANT=$DT_TENANT
+            DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
+            DT_INGEST_TOKEN=$DT_INGEST_TOKEN
+            EOF
             #echo "This is the env file" ; cat runlocal/.env
             #make test
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
@@ -33,4 +33,9 @@ jobs:
             echo "------   Docker ps.   ------- " ; docker ps
             echo "env" ; env
             curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
+        env:
+          RepositoryName: "codespaces-synchronizer"
+          DT_TENANT: ${{ secrets.DT_TENANT }}
+          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
+          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
         
