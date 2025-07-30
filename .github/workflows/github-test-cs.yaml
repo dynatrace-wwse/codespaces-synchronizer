@@ -15,10 +15,10 @@ jobs:
       - name: Test Codespace (devcontainer) build and run multiple commands
         uses: devcontainers/ci@v0.3
         env:
-          DT_TENANT: ${{ secrets.DtTenant }}
+          DT_TENANT: ${{ secrets.DT_TENANT }}
           TENANT: ${{ secrets.DtTenant }}
-          DT_OPERATOR_TOKEN: ${{ secrets.DtOperatorToken }}
-          DT_INGEST_TOKEN: ${{ secrets.DtIngestToken }}
+          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
+          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
         with:
           imageName: shinojosa/dt-enablement
           runCmd: |
