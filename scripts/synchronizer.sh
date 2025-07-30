@@ -5,7 +5,7 @@
 source ../.devcontainer/util/variables.sh >/dev/null 2>&1
 source ../.devcontainer/util/functions.sh >/dev/null 2>&1
 
-ROOT_PATH="/Users/sergio.hinojosa/repos/enablement/"
+ROOT_PATH="/home/ubuntu/enablement/"
 SYNCH_REPO="codespaces-synchronizer"
 
 all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
@@ -176,18 +176,27 @@ cherryPickMerge() {
 #doInRepos cs ls -las
 #fetch
 #doInRepos cs git pull --all 
-#doInRepos cs git status
 
-#doInRepos cs cherryPickMerge 8bc2279
+doInRepos cs git status
+
+#doInRepos cs cherryPickMerge 553c7fb
+
 #fetchAll
 #pullAll
 #statusAll
 
 # compareFile cs .devcontainer/util/functions.sh
 
-helperFunction cs
+
+#fetchAll
+#pullAll
+#helperFunction cs
 
 ## -- History of Cherries
+
+# Merge branch 'framework/main'
+# cherryPickMerge 553c7fb
+
 # rfe/verifycodespace
 # cherryPickMerge 8bc2279
 
