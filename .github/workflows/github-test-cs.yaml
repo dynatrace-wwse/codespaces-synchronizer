@@ -8,7 +8,6 @@ jobs:
       RepositoryName: "codespaces-synchronizer"
       RepoName: "$GITHUB_REPOSITORY"
       DT_TENANT: ${{ secrets.DT_TENANT }}
-      TENANT: ${{ secrets.DtTenant }}
       DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
       DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
     steps:
@@ -17,6 +16,12 @@ jobs:
       - name: Use secret
         run: echo "Tenant ${{ secrets.DT_TENANT }} with Tokens (Operator:${{ secrets.DT_OPERATOR_TOKEN }} Ingest:${{ secrets.DT_INGEST_TOKEN }} )"
       - name: Test Codespace (devcontainer) build and run multiple commands
+        env:
+          RepositoryName: "codespaces-synchronizer"
+          RepoName: "$GITHUB_REPOSITORY"
+          DT_TENANT: ${{ secrets.DT_TENANT }}
+          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
+          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
         uses: devcontainers/ci@v0.3
         with:
           imageName: shinojosa/dt-enablement
