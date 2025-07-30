@@ -17,23 +17,7 @@ jobs:
       - name: Test Codespace (devcontainer) build and run commands
         uses: devcontainers/ci@v0.3
         with:
-          runCmd: |
-            #chmod -R 755 .
-            echo "$DT_TENANT"
-            cd .devcontainer 
-            cat <<EOF >> runlocal/.env
-            DT_TENANT=$DT_TENANT
-            DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
-            DT_INGEST_TOKEN=$DT_INGEST_TOKEN
-            EOF
-            #echo "This is the env file" ; cat runlocal/.env
-            #make test
-            echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
-            echo "------ this is the tenant ${DT_TENANT} ------" 
-            echo "------ I AM ------" ; whoami
-            echo "------   Docker ps.   ------- " ; docker ps
-            echo "env" ; env
-            curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
+          runCmd: ./scripts/test.sh
         env:
           RepositoryName: "codespaces-synchronizer"
           DT_TENANT: ${{ secrets.DT_TENANT }}
