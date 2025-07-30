@@ -12,11 +12,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Test Codespace (devcontainer) build and run multiple commands
-        uses: devcontainers/ci@v0.3
-        with:
-          imageName: shinojosa/dt-enablement
-          runCmd: |
+      - name: Test Codespace (devcontainer) build and run commands  
+        run: |
+            echo "DT_TENANT = $DT_TENANT "
             echo "------ Getting stronger... ------" ; pwd
             source .devcontainer/util/functions.sh && showOpenPorts
             echo "------ this is the path: $(pwd) ------"
