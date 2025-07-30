@@ -16,7 +16,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Test Codespace (devcontainer) build and run commands  
         run: |
-            chmod -R 755 .
+            sudo chown -R $USER:$USER .
+            chmod -R +rwx .
             cd .devcontainer 
             cat <<EOF >> runlocal/.env
             DT_TENANT=$DT_TENANT
