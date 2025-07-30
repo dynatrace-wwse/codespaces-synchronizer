@@ -15,7 +15,7 @@ jobs:
       - name: Test Codespace (devcontainer) build and run commands  
         run: |
             echo "DT_TENANT = $DT_TENANT "
-            echo "------ Getting stronger... ------" ; pwd
+            echo "------ Getting stronger... ------" ; pwd ; ls -las ; ls /workspaces ;
             source .devcontainer/util/functions.sh && showOpenPorts
             echo "------ this is the path: $(pwd) ------"
             echo "------ this is the tenant ${DT_TENANT} ------" 
