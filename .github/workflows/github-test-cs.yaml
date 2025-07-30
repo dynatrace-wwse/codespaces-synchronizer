@@ -24,7 +24,7 @@ jobs:
             echo "env" ; env
             echo "RepositoryName" ; echo $RepositoryName
             #echo "kubectl get all -A" ; kubectl get all -A
-            echo "Curling the todo app running in the Codespace container"
+            echo "Curling the todo app running in the Codespace container"; docker ps
             docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
             containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
             echo "------ containername $containername ------"
