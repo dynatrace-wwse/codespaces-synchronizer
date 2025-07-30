@@ -93,7 +93,7 @@ runNoTTY(){
         -v /lib/modules:/lib/modules \
         -v $(dirname "$PWD"):/workspaces/$RepositoryName \
         -w /workspaces/$RepositoryName \
-        -T $REPOTAG \
+        $REPOTAG \
         /usr/bin/zsh -c "$CMD"
 }
 
