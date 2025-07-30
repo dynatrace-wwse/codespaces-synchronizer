@@ -16,8 +16,8 @@ jobs:
         run: |
             echo "DT_TENANT = $DT_TENANT "
             echo "------ Getting stronger... ------" ; pwd ; ls -las ; ls /workspaces ;
-            source .devcontainer/util/functions.sh && showOpenPorts
-            echo "------ this is the path: $(pwd) ------"
+            #source .devcontainer/util/functions.sh && showOpenPorts
+            #echo "------ this is the path: $(pwd) ------"
             echo "------ this is the tenant ${DT_TENANT} ------" 
             echo "------ I AM ------" ; whoami
             echo "------   Docker ps.   ------- " ; docker ps
@@ -32,7 +32,7 @@ jobs:
             docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
             echo "------ env inside container ------"
             docker exec -it $containername sh -c "env"
-            echo "waitForAllReadyPods dynatrace" ; waitForAllReadyPods dynatrace
+            #echo "waitForAllReadyPods dynatrace" ; waitForAllReadyPods dynatrace
             echo "curling hostname"
             curl -v http://$(hostname):30100
             echo "now doing grep"
