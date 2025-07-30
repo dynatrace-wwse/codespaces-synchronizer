@@ -16,7 +16,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Test Codespace (devcontainer) build and run commands
         uses: devcontainers/ci@v0.3
-        run: |
+        with:
+          runCmd: |
             #chmod -R 755 .
             #cd .devcontainer 
             #cat <<EOF >> runlocal/.env
