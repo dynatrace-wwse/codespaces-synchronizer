@@ -5,7 +5,7 @@ permissions:
 on: [push]
 jobs:
   test-codespace:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       RepositoryName: "codespaces-synchronizer"
       DT_TENANT: ${{ secrets.DT_TENANT }}
