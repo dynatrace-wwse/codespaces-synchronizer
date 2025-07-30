@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       RepositoryName: "codespaces-synchronizer"
-      RepoName: "$GITHUB_REPOSITORY"
       DT_TENANT: ${{ secrets.DT_TENANT }}
       DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
       DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
+      RepoName: "$GITHUB_REPOSITORY"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -18,10 +18,10 @@ jobs:
       - name: Test Codespace (devcontainer) build and run multiple commands
         env:
           RepositoryName: "codespaces-synchronizer"
-          RepoName: "$GITHUB_REPOSITORY"
           DT_TENANT: ${{ secrets.DT_TENANT }}
           DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
           DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
+          RepoName: "$GITHUB_REPOSITORY"
         uses: devcontainers/ci@v0.3
         with:
           imageName: shinojosa/dt-enablement
