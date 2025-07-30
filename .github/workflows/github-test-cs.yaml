@@ -15,26 +15,10 @@ jobs:
       - name: Test Codespace (devcontainer) build and run commands  
         run: |
             echo "DT_TENANT = $DT_TENANT "
-            echo "------ Getting stronger... ------" ; pwd ; ls -las ; ls / ;
-            #source .devcontainer/util/functions.sh && showOpenPorts
-            #echo "------ this is the path: $(pwd) ------"
+            echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
             echo "------ this is the tenant ${DT_TENANT} ------" 
             echo "------ I AM ------" ; whoami
             echo "------   Docker ps.   ------- " ; docker ps
             echo "env" ; env
-            echo "RepositoryName" ; echo $RepositoryName
-            #echo "kubectl get all -A" ; kubectl get all -A
-            echo "Curling the todo app running in the Codespace container"; docker ps
-            docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
-            containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
-            echo "------ containername $containername ------"
-            echo "------ curl 30100 inside container ------"
-            docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
-            echo "------ env inside container ------"
-            docker exec -it $containername sh -c "env"
-            #echo "waitForAllReadyPods dynatrace" ; waitForAllReadyPods dynatrace
-            echo "curling hostname"
-            curl -v http://$(hostname):30100
-            echo "now doing grep"
             curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
         
