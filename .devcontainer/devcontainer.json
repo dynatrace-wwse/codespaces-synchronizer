@@ -46,9 +46,9 @@
   ,
   "remoteEnv": {
     "RepositoryName": "codespaces-synchronizer",
-    "DT_TENANT":"DT_TENANT",
-    "DT_OPERATOR_TOKEN":"DT_OPERATOR_TOKEN",
-    "DT_INGEST_TOKEN":"DT_INGEST_TOKEN"
+    "DT_TENANT":"$DT_TENANT",
+    "DT_OPERATOR_TOKEN":"$DT_OPERATOR_TOKEN",
+    "DT_INGEST_TOKEN":"$DT_INGEST_TOKEN"
   }
   /*
   // Add recommended secrets 
