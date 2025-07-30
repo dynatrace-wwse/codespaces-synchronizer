@@ -96,22 +96,144 @@ source ./makefile.sh && buildx
 
 
 
-
-
-
-
-
-
 # CHEATSHEET
-
 
 Copy Kind cluster config if already running
 
-
 docker run -v ~/.kube:/root/.kube -v ~/.config:/root/.config -it your-image
-
 
 
 docker exec -it kind-control-plane sh -c 'kubectl config view --raw'
 
 kubectl config view --raw > dockerconfig 
+
+## Multipass cmds
+
+```bash
+# show instances 
+multipass list
+
+# Describe instances
+multipass info
+
+```
+
+# Setting up Multipass for local development
+
+
+
+## Download Multipass
+
+https://canonical.com/multipass
+
+Recommended size for top experience
+8 Cores 32 Gig Mem, 30 Gig space
+
+```bash
+
+multipass launch --name enablement --disk 30G --cpus 8 --memory 32G --mount /path/on/host:/path/in/instance
+
+multipass launch --name enablement --disk 30G --cpus 8 --memory 32G --mount  /Users/sergio.hinojosa/repos/enablement:/home/ubuntu/enablement
+```
+
+You can edit a instance like add memory, cpu or disk via the GUI
+
+Mount a directory. I recommend to download all the enablement git repos in a directory called `codespaces` or `enablement` and mount this directly into the VM, this way you have direct access to the files in the Linux VM.
+
+multipass mount <local path> <instance name>
+
+multipass mount /Users/sergio.hinojosa/repos/enablement /home/ubuntu/enablement
+
+Warning: Opening a terminal from the Host with VSCode is not allowed to connect to 'multipass shell' > need to add the host to ssh.
+
+
+
+```bash
+# Shell list the config
+multipass info
+
+Name:           enablement
+State:          Running
+Snapshots:      0
+IPv4:           192.168.64.9
+Release:        Ubuntu 24.04.2 LTS
+Image hash:     bbecbb88100e (Ubuntu 24.04 LTS)
+CPU(s):         8
+Load:           0.00 0.04 0.02
+Disk usage:     2.0GiB out of 29.0GiB
+Memory usage:   569.8MiB out of 31.3GiB
+Mounts:         /Users/sergio.hinojosa/repos/enablement => /home/ubuntu/enablement
+                    UID map: 502:default
+                    GID map: 20:default
+                /Users/sergio.hinojosa                  => Home
+                    UID map: 502:default
+
+# Shell into the VM
+multipass shell enablement
+```
+
+### Install Docker
+```bash
+# Update registry
+sudo apt update
+
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common lsb-release
+
+
+# Install docker
+sudo apt  install docker.io
+# Add user to docker group
+sudo usermod -aG docker $USER
+# Start session for user 
+newgrp docker
+
+# install Make
+sudo apt install make
+
+```
+
+
+
+
+
+
+
+You can do ssh ubuntu@192.168.64.9 but first you need to add the key to the ssh configuration.
+
+The Key is added in sudo ssh -i "/var/root/Library/Application Support/multipassd/ssh-keys/id_rsa" ubuntu@192.168.64.2
+
+```bash
+sudo ssh -i "/var/root/Library/Application Support/multipassd/ssh-keys/id_rsa" ubuntu@192.168.64.9
+```
+
+/var/root/Library/Application Support/multipassd/ssh-keys/id_rsa
+
+## Set up the SSH and Hostname for ease of use. 
+
+
+```bash
+multipass shell enablement
+```
+
+multipass exec <instance-name> -- mkdir -p ~/.ssh
+
+
+
+## Enable Local Network for Visual Studio Code on Mac
+
+If in a terminal inside Visual Studio Code you try the following commands and you get an error that "no route can be made to host"
+```bash
+ping 192.168.64.9
+
+ping enablement
+
+ssh enablement
+```
+
+.. but on the native terminal you can access the VM, then it is because connection to local netwotk with VS Code is disabled. You'll need to enable it.
+If you are running on a MAC, You might have noticed that the terminal on VSCode does not have access to the local network. To enable this, go to Settings > Privacy & Security > Local Network and enable it for VIsual Studio Code. Once you have done that you'll be able to ping and ssh your multipass instance.
+
+
+
+
