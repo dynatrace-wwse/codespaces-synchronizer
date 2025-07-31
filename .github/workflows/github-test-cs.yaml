@@ -17,6 +17,7 @@ jobs:
       - name: Test Codespace (devcontainer) build and run commands  
         run: |
             sudo su
+            echo "who am i I " ; whoami
             sudo chown -R $USER:$USER .
             chmod -R +rwx .
             cd .devcontainer 
