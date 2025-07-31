@@ -25,6 +25,10 @@ if [ -e "$ENV_FILE" ]; then
   source $ENV_FILE
 else
   # create .env file and add variables
+  ls -las
+  echo "path: " ; pwd
+  ls -ld
+  df -h 
   echo -e "DURATION=0\nERROR_COUNT=0" > $ENV_FILE
   source $ENV_FILE
 fi
