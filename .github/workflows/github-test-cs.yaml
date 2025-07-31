@@ -20,6 +20,8 @@ jobs:
             echo "who am i I " ; whoami
             sudo chown -R $USER:$USER .
             chmod -R +rwx .
+            pwd
+            ls -ld
             cd .devcontainer 
             cat <<EOF >> runlocal/.env
             DT_TENANT=$DT_TENANT

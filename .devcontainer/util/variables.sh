@@ -29,6 +29,7 @@ else
   echo "path: " ; pwd
   ls -ld
   df -h 
+  env 
   echo -e "DURATION=0\nERROR_COUNT=0" > $ENV_FILE
   source $ENV_FILE
 fi
