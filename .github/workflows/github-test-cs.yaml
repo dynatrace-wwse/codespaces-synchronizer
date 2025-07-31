@@ -22,7 +22,7 @@ jobs:
           DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
           DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
         with:
-          imageName: "shinojosa/dt-enablement:v1.1"
+          imageName: "shinojosa/dt-enablement"
           runCmd: |
             echo "Tenant is $DT_TENANT"
             #chmod -R 755 .
