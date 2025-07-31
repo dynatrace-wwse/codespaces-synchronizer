@@ -15,13 +15,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Test Codespace (devcontainer) build and run commands
+        uses: devcontainers/ci@v0.3
         env:
           RepositoryName: "codespaces-synchronizer"
           DT_TENANT: ${{ secrets.DT_TENANT }}
           DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
           DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
-        uses: 
-          imageName: shinojosa/dt-enablement:v1.1
+        with:
+          imageName: "shinojosa/dt-enablement:v1.1"
           runCmd: |
             echo "Tenant is $DT_TENANT"
             #chmod -R 755 .
