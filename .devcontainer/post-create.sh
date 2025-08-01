@@ -15,9 +15,6 @@ installK9s
 
 #installMkdocs
 
-# Dynatrace Credentials are read and saved as a configmap for ease of use
-dynatraceEvalReadSaveCredentials
-
 # Dynatrace Operator can be deployed automatically
 dynatraceDeployOperator
 
