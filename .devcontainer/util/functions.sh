@@ -802,6 +802,8 @@ deployTodoApp(){
   # Define the NodePort to expose the app from the Cluster
   kubectl patch service todoapp --namespace=todoapp --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
 
+  waitForAllReadyPods todoapp
+
   printInfoSection "TodoApp is available via NodePort=30100"
 }
 

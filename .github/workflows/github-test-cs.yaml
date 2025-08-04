@@ -23,7 +23,6 @@ jobs:
             DT_INGEST_TOKEN=$DT_INGEST_TOKEN
             EOF
             sed -i '/"runArgs": \["--init", "--privileged", "--network=host"\]/c\  "runArgs": ["--init", "--privileged", "--network=host", "--env-file",".devcontainer/runlocal/.env"]' devcontainer.json
-            echo "This is the devcontainer.json config for reading local variables"; cat devcontainer.json
       - name: Test Codespace (devcontainer) build and run commands
         uses: devcontainers/ci@v0.3
         with:

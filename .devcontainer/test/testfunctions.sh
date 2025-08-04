@@ -1,26 +1,27 @@
 #!/bin/bash
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
-testDynatrace(){
+testDynatraceOperator(){
 
-    printInfoSection "Testing dynatrace deployment"
-    kubectl get all -n dynatrace 
-    exit 0
+    printInfoSection "Testing Dynatrace Operator Deployment"
+    printWarn "TBD"
 }
 
-testDynatraceFailed(){
+testDynatraceCloudNative(){
 
-    printInfoSection "Testing dynatrace deployment"
-    kubectl get all -n dynatrace 
-    exit 1
+    printInfoSection "Testing Dynatrace CloudNative FullStack deployment"
+    printWarn "TBD"
 }
-
 
 testDeployedApp(){
-    printInfoSection "Testing Deployed app in PORT $1"
-    kubectl get all -n dynatrace 
+    PORT=30100
+    URL="http://localhost:$PORT"
+    printInfoSection "Testing Deployed app running in $URL"
 
-    curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
-    printError "failed exiting with 1"
-    exit 1
+    if curl --silent --fail "$URL" > /dev/null; then
+        printInfo "✅ App is running on port $PORT"
+    else
+        printError "❌ App is NOT running on port $PORT"
+        exit 1
+    fi
 }
