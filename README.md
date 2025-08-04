@@ -1,3 +1,4 @@
+![Build status](https://github.com/dynatrace-wwse/codespaces-synchronizer/actions/workflows/github-test-cs.yaml/badge.svg?branch=ghactions/main)
 # Enablement Codespaces Template 
 
 This is a template so you as a professor can create fun and interesting enablements in no time.
