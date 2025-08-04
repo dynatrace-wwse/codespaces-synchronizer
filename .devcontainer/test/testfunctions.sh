@@ -4,12 +4,15 @@ source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 testDynatraceOperator(){
 
     printInfoSection "Testing Dynatrace Operator Deployment"
+    kubectl get all -n dynatrace
     printWarn "TBD"
 }
 
 testDynatraceCloudNative(){
 
     printInfoSection "Testing Dynatrace CloudNative FullStack deployment"
+    kubectl get all -n dynatrace
+    kubectl get dynakube -n dynatrace
     printWarn "TBD"
 }
 
