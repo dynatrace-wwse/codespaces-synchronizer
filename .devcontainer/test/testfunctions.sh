@@ -19,16 +19,8 @@ assertDeployedApp(){
     PORT=$1
     URL="http://localhost:$PORT"
     printInfoSection "Testing Deployed app running in $URL"
-    
-    kubectl get all -n todoapp
 
     printInfo "Asserting app is running as NodePort in kind-control-plane in port $PORT" 
-
-    docker exec kind-control-plane sh -c "kubectl get all -A"
-    
-    docker exec kind-control-plane sh -c "hostname"
-
-    docker exec kind-control-plane sh -c "curl -v http://localhost:30100"
 
     if docker exec kind-control-plane sh -c "curl --silent --fail http://127.0.0.1:$PORT" > /dev/null; then
         printInfo "✅ App is running on port $PORT"

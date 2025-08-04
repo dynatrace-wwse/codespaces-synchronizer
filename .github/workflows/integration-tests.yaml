@@ -1,4 +1,4 @@
-name: Enablement Framework Integration Tests
+name: Enablement Framework CI Tests
 run-name: ${{ github.event.head_commit.message }} - Core tests
 permissions:
   contents: write
@@ -11,7 +11,7 @@ on:
     branches:
       - main
 jobs:
-  integration-test-running-as-vscode-extension-locally-on-ubuntu-server:
+  ci-test-vscode-extension-locally-on-ubuntu-server:
     runs-on: ubuntu-24.04
     env:
       RepositoryName: "codespaces-synchronizer"
