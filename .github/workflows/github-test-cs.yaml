@@ -45,11 +45,11 @@ jobs:
             containername=${containername//\"/}
             echo "------ containername $containername ------"
             echo "------ curl 30100 inside container ------"
-            docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
+            docker exec $containername sh -c "curl -v http://127.0.0.1:30100"
             echo "------ env inside container ------"
-            docker exec -it $containername sh -c "env"
+            docker exec $containername sh -c "env"
             echo "------ kubectl inside container ------"
-            docker exec -it $containername sh -c "kubectl get all -A"
+            docker exec $containername sh -c "kubectl get all -A"
             echo "------ kubectl outside container ------" ; kubectl get all -A
       - name: After creation of VSCode stuff
         run: |
@@ -62,10 +62,10 @@ jobs:
             containername=${containername//\"/}
             echo "------ containername $containername ------"
             echo "------ curl 30100 inside container ------"
-            docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
+            docker exec $containername sh -c "curl -v http://127.0.0.1:30100"
             echo "------ env inside container ------"
-            docker exec -it $containername sh -c "env"
+            docker exec $containername sh -c "env"
             echo "------ kubectl inside container ------"
-            docker exec -it $containername sh -c "kubectl get all -A"
+            docker exec $containername sh -c "kubectl get all -A"
             echo "------ waitForPods inside container ------"
-            docker exec -it $containername sh -c "waitForAllReadyPods dynatrace"
+            docker exec $containername sh -c "waitForAllReadyPods dynatrace"
