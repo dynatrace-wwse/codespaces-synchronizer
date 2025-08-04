@@ -6,6 +6,8 @@ printInfoSection "Running integration tests for the framework"
 
 waitForAllReadyPods todoapp
 
+testDeployedApp 30100
+
 printInfo "test Dynatrace Deployment"
 
 testDynatrace
