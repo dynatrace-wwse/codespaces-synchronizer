@@ -42,6 +42,7 @@ jobs:
             echo "Curling the todo app running in the Codespace container"; docker ps
             docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
             containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
+            containername=${containername//\"/}
             echo "------ containername $containername ------"
             echo "------ curl 30100 inside container ------"
             docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
@@ -50,7 +51,7 @@ jobs:
             echo "------ kubectl inside container ------"
             docker exec -it $containername sh -c "kubectl get all -A"
             echo "------ kubectl outside container ------" ; kubectl get all -A
-      - name: After creation of VSCOde stuff
+      - name: After creation of VSCode stuff
         run: |
             echo "whats happening?"
             whoami
@@ -58,6 +59,7 @@ jobs:
             echo "Curling the todo app running in the Codespace container"; docker ps
             docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
             containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
+            containername=${containername//\"/}
             echo "------ containername $containername ------"
             echo "------ curl 30100 inside container ------"
             docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
