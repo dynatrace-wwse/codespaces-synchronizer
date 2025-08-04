@@ -9,7 +9,6 @@ assertDynatraceOperator(){
 }
 
 assertDynatraceCloudNative(){
-
     printInfoSection "Testing Dynatrace CloudNative FullStack deployment"
     kubectl get all -n dynatrace
     kubectl get dynakube -n dynatrace
@@ -23,37 +22,21 @@ assertDeployedApp(){
     
     kubectl get all -n todoapp
 
-    echo "localhost"
-    curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
-    
-    echo "127.0.0.1"
-    curl -v http://127.0.0.1:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
-    echo "hostname"
-    hostname=$(hostname)
-    curl -v http://$hostname:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
-
-    docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
-    
-    containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
-    
-    containername=${containername//\"/}
-
-    docker exec $containername zsh -c "curl -v http://127.0.0.1:30100"
-    
-    if curl --silent --fail "$URL" > /dev/null; then
+    printInfo "Asserting app is running as NodePort in kind-control-plane in port $PORT" 
+    if docker exec kind-control-plane sh -c "curl --silent --fail http://127.0.0.1:$PORT" > /dev/null; then
         printInfo "✅ App is running on port $PORT"
     else
         printError "❌ App is NOT running on port $PORT"
-        #TODO: Remove this
-        #exit 1
+        exit 1
     fi
 }
 
-assertDeploymentRunning(){
-
-    echo ""
+getVscodeContainername(){
+    docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
+    containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
+    containername=${containername//\"/}
+    echo "$containername"
 }
-
 
 assertRunningPod(){
 
@@ -74,16 +57,14 @@ assertRunningPod(){
   pods_running=$(eval "$CMD")
   
   if [[ "$pods_running" != '0' ]]; then
-      printInfo "\"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\"."    
+      printInfo "✅ \"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\"."    
   else 
-      printError "\"$pods_running\" pods are NOT running on \"$namespace_filter\" with name \"$pod_filter\" "
+      printError "❌ \"$pods_running\" pods are NOT running on \"$namespace_filter\" with name \"$pod_filter\" "
       exit 1
   fi
 }
 
 assertDynakube(){
     printInfoSection "Verifying Dynakube is deployed and running"
-
-
 
 }
