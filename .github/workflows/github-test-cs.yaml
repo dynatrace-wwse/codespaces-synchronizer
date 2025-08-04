@@ -28,6 +28,9 @@ jobs:
         uses: devcontainers/ci@v0.3
         push: never
         with:
+          imageName: shinojosa/dt-enablement
+          cacheFrom: shinojosa/dt-enablement
+          push: never
           runCmd: |
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
             echo "------ this is the tenant ${DT_TENANT} ------" 
