@@ -1,5 +1,4 @@
 #!/bin/bash
-# This file contains the functions for installing Kubernetes-Play.
 # Each function contains a boolean flag so the installations
 # can be highly customized.
 # Original file located https://github.com/dynatrace-wwse/kubernetes-playground/blob/main/cluster-setup/functions.sh

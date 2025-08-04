@@ -120,9 +120,10 @@ start(){
 }
 
 test(){
-
+    # Tests to be run inside VSCode docker container.
     echo "Attach and "
     
     echo "Now running with no TTY"
-    runNoTTY
+    source util/functions.sh
+    printInfo "what?"
 }
