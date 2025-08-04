@@ -26,6 +26,7 @@ jobs:
             echo "This is the devcontainer.json config for reading local variables"; cat devcontainer.json
       - name: Test Codespace (devcontainer) build and run commands
         uses: devcontainers/ci@v0.3
+        push: never
         with:
           runCmd: |
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
