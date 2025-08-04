@@ -121,8 +121,8 @@ start(){
 
 test(){
 
-    echo "Building the image"
-    build
+    echo "Attach and "
+    
     echo "Now running with no TTY"
     runNoTTY
 }
