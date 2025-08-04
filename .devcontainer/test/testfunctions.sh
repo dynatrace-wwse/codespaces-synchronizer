@@ -32,7 +32,14 @@ assertDeployedApp(){
     hostname=$(hostname)
     curl -v http://$hostname:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
 
+    docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
+    
+    containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
+    
+    containername=${containername//\"/}
 
+    docker exec $containername zsh -c "curl -v http://127.0.0.1:30100"
+    
     if curl --silent --fail "$URL" > /dev/null; then
         printInfo "✅ App is running on port $PORT"
     else
