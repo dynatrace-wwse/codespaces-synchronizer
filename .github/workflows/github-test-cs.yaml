@@ -14,19 +14,21 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Test Codespace (devcontainer) build and run commands
-        uses: devcontainers/ci@v0.3
-        with:
-          runCmd: |
-            #chmod -R 755 .
+      - name: Add .env file for running locally with VS Code extension
+        run: |
             cd .devcontainer 
             cat <<EOF >> runlocal/.env
             DT_TENANT=$DT_TENANT
             DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
             DT_INGEST_TOKEN=$DT_INGEST_TOKEN
             EOF
-            #echo "This is the env file" ; cat runlocal/.env
-            #make test
+            echo "This is the env file" ; cat runlocal/.env
+            sed -i '/"runArgs": \["--init", "--privileged", "--network=host"\]/c\    "runArgs": ["--init", "--privileged", "--network=host", "--env-file",".devcontainer/runlocal/.env"]' devcontainer.json
+            echo "This is the devcontainer.json config"; cat devcontainer.json
+      - name: Test Codespace (devcontainer) build and run commands
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: |
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
             echo "------ this is the tenant ${DT_TENANT} ------" 
             echo "------ I AM ------" ; whoami
