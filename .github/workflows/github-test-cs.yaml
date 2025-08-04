@@ -61,11 +61,11 @@ jobs:
             containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
             containername=${containername//\"/}
             echo "------ containername $containername ------"
-            echo "------ curl 30100 inside container ------"
-            docker exec $containername sh -c "curl -v http://127.0.0.1:30100"
             echo "------ env inside container ------"
             docker exec $containername sh -c "env"
             echo "------ kubectl inside container ------"
             docker exec $containername sh -c "kubectl get all -A"
             echo "------ waitForPods inside container ------"
             docker exec $containername sh -c "waitForAllReadyPods dynatrace"
+            echo "------ curl 30100 inside container ------"
+            docker exec $containername sh -c "curl -v http://localhost:30100"
