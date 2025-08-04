@@ -146,6 +146,11 @@ waitForPod() {
     printWarn "Retry: ${RETRY}/${RETRY_MAX} - No pods are running on  \"$namespace_filter\" with name \"$pod_filter\". Wait 10s for $pod_filter PoDs to be scheduled..."
     sleep 10
   done
+  
+  if [[ $RETRY == $RETRY_MAX ]]; then
+    printError "No pods are running on  \"$namespace_filter\" with name \"$pod_filter\". Check their events. Exiting installation..."
+    exit 1
+  fi
 }
 
 # shellcheck disable=SC2120
@@ -458,12 +463,13 @@ validateSaveCredentials() {
 
 verifyParseSecret(){
   # Function to verify and parse Dynatrace Tenants and tokens so they can be used more comfortably.
-  # as first argument the tenant or token is passed, as second argument a boolean is passed for printing the logic
+  # as first argument the tenant or token is passed, as second argument a boolean is passed for printing the logic. When print_log == true, then log is printed out but the 
+  # variable is not echoed out, this way is not printed in the log. If print_log =0 false, then the variable is echoed out so the value can be catched as return vaue and stored.
   local secret="$1"
 
   local print_log="$2"
   if [ -z "$print_log" ]; then
-    # As default no log is printed out.
+    # As default no log is printed out. 
     print_log=false
   fi
 
@@ -498,11 +504,15 @@ verifyParseSecret(){
         secret=$(echo "$secret" | sed 's/\.com.*$/\.com/')
       fi
       printInfo "Tenant URL valid for API requests: $secret" $print_log
-      echo "$secret"
+      if [ "${print_log}" = "false" ]; then
+        echo "$secret"
+      fi
       return 0
     elif  [[ "$secret" == dt0c01.*  && ${#secret} -gt 60 ]];  then
       printInfo "Valid Dynatrace Token format. Starts with dt0c01.XXX and has the minimum lenght." $print_log
-      echo "$secret"
+      if [ "${print_log}" = "false" ]; then
+        echo "$secret"
+      fi
       return 0
     else
       printError "Invalid secret, this is not a valid dynatrace tenant nor dynatrace token, please verify this: $secret" $print_log
@@ -514,6 +524,12 @@ verifyParseSecret(){
 
 dynatraceEvalReadSaveCredentials() {
   printInfoSection "Dynatrace evaluating and reading/saving secrets. Defined order 1.-arguments, 2.- environment variables, finally load from configmap"
+  if [ "${DT_EVAL_SECRETS}" = "true" ]; then 
+    printInfo "Dynatrace secrets have been evaluated already in the session. If you want to override them unset DT_EVAL_SECRETS and call this function again."
+    printInfo "For printing out the secrets call the function 'printSecrets' "
+    return 0
+  fi
+
   local found=1
 
   if [[ $# -eq 3 ]]; then
@@ -554,22 +570,30 @@ dynatraceEvalReadSaveCredentials() {
   fi
 
   if [[ $found -eq 0 ]]; then
+
+    export DT_TENANT=$DT_TENANT
+    export DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
+    export DT_INGEST_TOKEN=$DT_INGEST_TOKEN
+    export DT_INGEST_TOKEN=$DT_INGEST_TOKEN
+    export DT_OTEL_ENDPOINT=$DT_OTEL_ENDPOINT
+    export DT_EVAL_SECRETS=true
+    printSecrets
+  else 
+    printError "No Dynatrace secrets have been found in the environment and are needed for Dynatrace components."
+    unset DT_EVAL_SECRETS
+    exit 1
+  fi
+
+  return $found
+}
+
+printSecrets(){
     # Print all known vars
     printInfo "Dynatrace Tenant: $DT_TENANT"
     printInfo "Dynatrace API & PaaS Token: ${DT_OPERATOR_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Ingest Token: ${DT_INGEST_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Otel API Token: ${DT_INGEST_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Otel Endpoint: $DT_OTEL_ENDPOINT"
-    export DT_TENANT=$DT_TENANT
-    export DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
-    export DT_INGEST_TOKEN=$DT_INGEST_TOKEN
-    export DT_INGEST_TOKEN=$DT_INGEST_TOKEN
-    export DT_OTEL_ENDPOINT=$DT_OTEL_ENDPOINT
-  else 
-    printError "No Dynatrace secrets have been found in the environment and are needed for Dynatrace components."
-  fi
-
-  return $found
 }
 
 deployCloudNative() {
