@@ -1,7 +1,7 @@
 #!/bin/bash
 source /workspaces/$RepositoryName/.devcontainer/test/testfunctions.sh
 
-printInfoSection "Running integration Tests for the Enablement FrameworkSSS"
+printInfoSection "Running integration Tests for the Enablement Framework"
 
 #assertDynatraceOperator
 
