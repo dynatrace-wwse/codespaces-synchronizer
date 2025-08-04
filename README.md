@@ -1,4 +1,4 @@
-![Integration tests](https://github.com/dynatrace-wwse/codespaces-synchronizer/actions/workflows/github-test-cs.yaml/badge.svg?branch=ghactions/main)
+![Integration tests](https://github.com/dynatrace-wwse/codespaces-synchronizer/actions/workflows/integration-tests.yaml/badge.svg?branch=ghactions/main)
 
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/codespaces-synchronizer?color=blueviolet)](https://github.com/dynatrace-wwse/codespaces-synchronizer/releases)
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/codespaces-synchronizer/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/codespaces-synchronizer/graphs/commit-activity)

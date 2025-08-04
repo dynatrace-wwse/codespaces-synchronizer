@@ -40,7 +40,7 @@ getVscodeContainername(){
 
 assertRunningPod(){
 
-  printInfoSection "Asserting running pods in namespace $1 with name $2"
+  printInfoSection "Asserting running pods in namespace '$1' that contain the name '$2'"
   # Function to filter by Namespace and POD string, default is ALL namespaces
   # If 2 parameters then the first is Namespace the second is Pod-String
   # If 1 parameters then Namespace == all-namespaces the first is Pod-String
@@ -59,7 +59,8 @@ assertRunningPod(){
   if [[ "$pods_running" != '0' ]]; then
       printInfo "✅ \"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\"."    
   else 
-      printError "❌ \"$pods_running\" pods are NOT running on \"$namespace_filter\" with name \"$pod_filter\" "
+      printError "❌ \"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\". "
+      kubectl get pods $namespace_filter
       exit 1
   fi
 }
