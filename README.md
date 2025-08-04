@@ -1,4 +1,13 @@
-![Build status](https://github.com/dynatrace-wwse/codespaces-synchronizer/actions/workflows/github-test-cs.yaml/badge.svg?branch=ghactions/main)
+![Integration tests](https://github.com/dynatrace-wwse/codespaces-synchronizer/actions/workflows/github-test-cs.yaml/badge.svg?branch=ghactions/main)
+
+[![Version](https://img.shields.io/github/v/release/open-telemetry/opentelemetry-demo?color=blueviolet)](https://github.com/open-telemetry/opentelemetry-demo/releases)
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/codespaces-synchronizer/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/codespaces-synchronizer/graphs/commit-activity)
+[![Downloads](https://img.shields.io/docker/pulls/shinojosa/dt-enablement)](https://hub.docker.com/r/shinojosa/dt-enablement)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=red)](https://github.com/dynatrace-wwse/codespaces-synchronizer/blob/main/LICENSE)
+
+
+
+
 # Enablement Codespaces Template 
 
 This is a template so you as a professor can create fun and interesting enablements in no time.
