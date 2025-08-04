@@ -31,13 +31,15 @@ jobs:
           cacheFrom: shinojosa/dt-enablement
           push: never
           runCmd: |
+            source .devcontainer/util/functions.sh
+            echo "waiting for the Todo App"; 
+            waitForAllReadyPods todoapp
             echo "------ some cmds... ------" ; pwd ; ls -las ; ls / ;
-            echo "------ this is the tenant ${DT_TENANT} ------" 
+            echo "------ this is the tenant $DT_TENANT ------" 
             echo "------ I AM ------" ; whoami
             echo "------   Docker ps.   ------- " ; docker ps
             echo "env" ; env
-            echo "waiting for TODOAoppp"; 
-            waitForAllReadyPods todoapp
+            echo "curling the TodoApp"
             curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
             echo "Curling the todo app running in the Codespace container"; docker ps
             docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
