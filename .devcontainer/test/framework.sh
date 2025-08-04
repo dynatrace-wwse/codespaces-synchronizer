@@ -1,11 +1,19 @@
 #!/bin/bash
 source /workspaces/$RepositoryName/.devcontainer/test/testfunctions.sh
 
-printInfoSection "Running integration Tests for the Enablement Framework"
+printInfoSection "Running integration Tests for the Enablement FrameworkSSS"
 
-testDynatraceOperator
+#assertDynatraceOperator
 
-testDynatraceCloudNative
+#assertDynatraceCloudNative
 
-testDeployedApp 30100
+assertDeployedApp 30100
+
+assertRunningPod todoapp todoapp
+
+assertRunningPod dynatrace activegate
+
+assertRunningPod dynatrace operator
+
+assertRunningPod dynatrace operator
 
