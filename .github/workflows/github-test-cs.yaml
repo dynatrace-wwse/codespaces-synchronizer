@@ -22,9 +22,8 @@ jobs:
             DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
             DT_INGEST_TOKEN=$DT_INGEST_TOKEN
             EOF
-            echo "This is the env file" ; cat runlocal/.env
-            sed -i '/"runArgs": \["--init", "--privileged", "--network=host"\]/c\    "runArgs": ["--init", "--privileged", "--network=host", "--env-file",".devcontainer/runlocal/.env"]' devcontainer.json
-            echo "This is the devcontainer.json config"; cat devcontainer.json
+            sed -i '/"runArgs": \["--init", "--privileged", "--network=host"\]/c\  "runArgs": ["--init", "--privileged", "--network=host", "--env-file",".devcontainer/runlocal/.env"]' devcontainer.json
+            echo "This is the devcontainer.json config for reading local variables"; cat devcontainer.json
       - name: Test Codespace (devcontainer) build and run commands
         uses: devcontainers/ci@v0.3
         with:
@@ -35,9 +34,15 @@ jobs:
             echo "------   Docker ps.   ------- " ; docker ps
             echo "env" ; env
             curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
-        env:
-          RepositoryName: "codespaces-synchronizer"
-          DT_TENANT: ${{ secrets.DT_TENANT }}
-          DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
-          DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
+            echo "Curling the todo app running in the Codespace container"; docker ps
+            docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names'
+            containername=$(docker ps --format '{{json .}}' | jq -s '.[] | select(.Image | contains("vsc")) | .Names')
+            echo "------ containername $containername ------"
+            echo "------ curl 30100 inside container ------"
+            docker exec -it $containername sh -c "curl -v http://127.0.0.1:30100"
+            echo "------ env inside container ------"
+            docker exec -it $containername sh -c "env"
+            echo "------ kubectl inside container ------"
+            docker exec -it $containername sh -c "kubectl get all -A"
+            echo "------ kubectl outside container ------" ; kubectl get all -A
         
