@@ -13,6 +13,8 @@ on:
 jobs:
   ci-test-vscode-extension-locally-on-ubuntu-server:
     runs-on: ubuntu-24.04
+    # No CI Test should run longer than 10 minutes.
+    timeout-minutes: 10
     env:
       RepositoryName: "codespaces-synchronizer"
       DT_TENANT: ${{ secrets.DT_TENANT }}
