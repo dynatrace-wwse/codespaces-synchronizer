@@ -16,23 +16,25 @@ assertDynatraceCloudNative(){
 }
 
 assertRunningApp(){
-    # The 1st agument is the port.
-    if [ -z "$1"]; then
-      PORT=30100
-    else
-      PORT=$1
-    fi
-    URL="http://localhost:$PORT"
-    printInfoSection "Testing Deployed app running in $URL"
+  # The 1st agument is the port.
+  if [ -z "$1" ]; then
+    PORT=30100
+  else
+    PORT=$1
+  fi
+    
+  URL="http://localhost:$PORT"
+  printInfoSection "Testing Deployed app running in $URL"
 
-    printInfo "Asserting app is running as NodePort in kind-control-plane in port $URL"
+  printInfo "Asserting app is running as NodePort in kind-control-plane in port $URL"
 
-    if docker exec kind-control-plane sh -c "curl --silent --fail $URL" > /dev/null; then
-        printInfo "✅ App is running on $URL"
-    else
-        printError "❌ App is NOT running on $URL"
-        exit 1
-    fi
+  if docker exec kind-control-plane sh -c "curl --silent --fail $URL" > /dev/null; then
+    printInfo "✅ App is running on $URL"
+  else
+    printError "❌ App is NOT running on $URL"
+    docker exec kind-control-plane sh -c "curl -v $URL" 
+    exit 1
+  fi
 }
 
 getVscodeContainername(){
