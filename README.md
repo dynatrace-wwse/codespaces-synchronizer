@@ -75,7 +75,7 @@
   </tr>
   <tr>
     <td><a href="https://github.com/dynatrace-wwse/enablement-dql-301" target="_blank">DQL 301</a></td>
-    <td>[DQL 301](https://github.com/dynatrace-wwse/enablement-dql-301)</td>
+    <td>Dynatrace Query Language - advanced concepts hands-on training</td>
     <td>
 
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-dql-301/actions/workflows/integration-tests.yaml/badge.svg) </br>
