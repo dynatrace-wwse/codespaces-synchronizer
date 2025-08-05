@@ -20,12 +20,13 @@ assertDeployedApp(){
     URL="http://localhost:$PORT"
     printInfoSection "Testing Deployed app running in $URL"
 
-    printInfo "Asserting app is running as NodePort in kind-control-plane in port $PORT" 
+    printInfo "Asserting app is running as NodePort in kind-control-plane in port $URL" 
+    docker exec kind-control-plane sh -c "curl -v $URL"
 
-    if docker exec kind-control-plane sh -c "curl --silent --fail http://127.0.0.1:$PORT" > /dev/null; then
-        printInfo "✅ App is running on port $PORT"
+    if docker exec kind-control-plane sh -c "curl --silent --fail $URL" > /dev/null; then
+        printInfo "✅ App is running on $URL"
     else
-        printError "❌ App is NOT running on port $PORT"
+        printError "❌ App is NOT running on $URL"
         exit 1
     fi
 }
