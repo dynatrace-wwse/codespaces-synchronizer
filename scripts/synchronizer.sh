@@ -122,10 +122,12 @@ helperFunction() {
         #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
         #git fetch synchronizer
         #git checkout main
-        #git fetch --all
-        #git pull --all
-        #git checkout synch/553c7fb
         git status
+        git checkout main
+        git fetch --all
+        git pull --all
+        #git checkout synch/553c7fb
+    
         #echo "grep log for $repo --> git log --all | grep 553c7fb"
         #git log --all | grep 553c7fb
         #echo "-------"
@@ -193,7 +195,7 @@ cherryPickMerge() {
 #doInRepos cs git log | grep 553c7fb
 
 #doInRepos cs cherryPickMerge be10c91
-helperFunction cs
+#helperFunction cs
 #fetchAll
 #pullAll
 #statusAll
@@ -206,6 +208,9 @@ helperFunction cs
 #helperFunction cs
 
 ## -- History of Cherries
+# Merge branch 'ghactions/main'
+cherryPickMerge 89a77e9
+
 # Merge branch 'fix/mkdocs'
 # cherryPickMerge be10c91
 
