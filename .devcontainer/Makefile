@@ -30,4 +30,8 @@ buildx:
 	buildx; \
 	echo "Done"; '
 	
-	
+test:
+	@bash -c ' \
+	source ./makefile.sh; \
+	test  \
+	echo "Done"; '
