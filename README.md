@@ -1,10 +1,11 @@
-# Enablement Codespaces Synchronizer 
- 
+# Enablement Codespaces Synchronizer
+
  This repository is the core repository for developing the framework and push changes to the enablement repositories.
 
 CI Status of the repositories
 
 [Docker Image shinojosa/dt-enablement (AMD/ARM)](https://hub.docker.com/r/shinojosa/dt-enablement)[![Downloads](https://img.shields.io/docker/pulls/shinojosa/dt-enablement)](https://hub.docker.com/r/shinojosa/dt-enablement)</br>
+
 <table border="1" size=small>
   <tr>
     <th>Repository</th>
@@ -12,9 +13,7 @@ CI Status of the repositories
     <th>🚦 CI Status</th>
   </tr>
   <tr>
-    <td> 
-    <a href="https://github.com/dynatrace-wwse/codespaces-synchronizer" target="_blank">Codespaces Synchronizer</a> 
-  </td>
+    <td><a href="https://github.com/dynatrace-wwse/codespaces-synchronizer" target="_blank">Codespaces Synchronizer</a></td>
     <td>Main CI Repo</td>
     <td>
 
@@ -100,15 +99,12 @@ CI Status of the repositories
 </td>
   </tr>
 
-
 </table>
-
 
 <p align="center">
 <img src="docs/img/synchronizer.png" alt="Alt text" width="500"/>
 </p>
 
+Ready to learn how to create an enablement using codespaces?
 
-Ready to learn how to create an enablement using codespaces? 
 ## [👨‍🏫 Learn how to create enablements in Codespaces!](https://dynatrace-wwse.github.io/enablement-codespaces-template)
-
