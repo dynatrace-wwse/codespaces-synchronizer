@@ -104,7 +104,7 @@
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-kubernetes-opentelemetry?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/releases) </br>
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-kubernetes-opentelemetry/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/blob/main/LICENSE)</br>
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-kubernetes-opentelemetry/)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Down-red)](https://dynatrace-wwse.github.io/enablement-kubernetes-opentelemetry/)</br>
   </td>
 </tr>
 <tr><td><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability" target="_blank">Business Observability</a></td>
