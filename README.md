@@ -13,9 +13,7 @@ CI Status of the repositories
   </tr>
   <tr>
     <td> 
-
-    [Codespaces Synchronizer](https://github.com/dynatrace-wwse/codespaces-synchronizer) 
-    
+    <a href="https://github.com/dynatrace-wwse/codespaces-synchronizer" target="_blank">Codespaces Synchronizer</a> 
   </td>
     <td>Main CI Repo</td>
     <td>
@@ -28,12 +26,8 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td>
-    
-    [Codespaces Template](https://github.com/dynatrace-wwse/codespaces-template)
-    
-  </td>
-    <td>Repository for creating enablements</td>
+    <td><a href="hhttps://github.com/dynatrace-wwse/codespaces-template" target="_blank">Codespaces Template</a></td>
+    <td>Template Repository for creating enablements</td>
     <td>
 
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-codespaces-template/actions/workflows/integration-tests.yaml/badge.svg) </br>
@@ -44,7 +38,7 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td>[Live Debugger Tutorial](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting)</td>
+    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting" target="_blank">Live Debugger Tutorial</a></td>
     <td> Live Debugger Tutorial - Bug Hunting the Todo App 📋 </td>
     <td>
 
@@ -56,7 +50,7 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td>[Gen AI Tutorial](https://github.com/dynatrace-wwse/enablement-gen-ai-llm-observability)</td>
+    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-gen-ai-llm-observability" target="_blank">Gen AI Tutorial</a></td>
     <td> Gen AI & LLM Observability </td>
     <td>
 
@@ -68,7 +62,7 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td>[Business Observability](https://github.com/dynatrace-wwse/enablement-business-observability)</td>
+    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-business-observability" target="_blank">Business Observability</a></td>
     <td> Business Observability </td>
     <td>
 
@@ -81,8 +75,8 @@ CI Status of the repositories
   </tr>
 
   <tr>
+    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-dql-301" target="_blank">DQL 301</a></td>
     <td>[DQL 301](https://github.com/dynatrace-wwse/enablement-dql-301)</td>
-    <td> Dynatrace Query Language - advanced concepts hands-on training </td>
     <td>
 
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-dql-301/actions/workflows/integration-tests.yaml/badge.svg) </br>
@@ -94,7 +88,7 @@ CI Status of the repositories
   </tr>
   
   <tr>
-    <td> [Log Ingest 101](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101) </td>
+    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101" target="_blank">Log Ingest 101</a></td>
     <td> Dynatrace Log Ingest Hands On training </td>
     <td>
 
