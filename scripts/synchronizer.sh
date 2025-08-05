@@ -194,7 +194,7 @@ cherryPickMerge() {
 
 #doInRepos cs git log | grep 553c7fb
 
-#doInRepos cs cherryPickMerge be10c91
+doInRepos cs cherryPickMerge 89a77e9
 #helperFunction cs
 #fetchAll
 #pullAll
@@ -209,7 +209,7 @@ cherryPickMerge() {
 
 ## -- History of Cherries
 # Merge branch 'ghactions/main'
-cherryPickMerge 89a77e9
+#cherryPickMerge 89a77e9
 
 # Merge branch 'fix/mkdocs'
 # cherryPickMerge be10c91
