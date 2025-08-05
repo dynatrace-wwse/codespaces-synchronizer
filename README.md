@@ -25,13 +25,11 @@ CI Status of the repositories
     </td>
   </tr>
   <tr>
-    <td><a href="hhttps://github.com/dynatrace-wwse/codespaces-template" target="_blank">Codespaces Template</a></td>
+    <td><a href="https://github.com/dynatrace-wwse/codespaces-template" target="_blank">Codespaces Template</a></td>
     <td>Template Repository for creating enablements</td>
     <td>
 
-<!-- 
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-codespaces-template/actions/workflows/integration-tests.yaml/badge.svg) </br>
--->
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-codespaces-template?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-codespaces-template/releases) </br>
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-codespaces-template/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-codespaces-template/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-codespaces-template/blob/main/LICENSE)</br>
@@ -39,15 +37,12 @@ CI Status of the repositories
     </td>
   </tr>
   <tr>
-    <td> 
-      <a href="hhttps://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting" target="_blank">Live Debugger Tutorial</a> 
-    </td>
+    <td><a href="https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting" target="_blank">Live Debugger Tutorial</a></td>
     <td> Live Debugger Tutorial - Bug Hunting the Todo App 📋 </td>
     <td>
 
-<!-- 
+
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/actions/workflows/integration-tests.yaml/badge.svg) </br>
--->
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-live-debugger-bug-hunting?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/releases) </br>
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-live-debugger-bug-hunting/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/blob/main/LICENSE)</br>
@@ -55,9 +50,7 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td> 
-      <a href="hhttps://github.com/dynatrace-wwse/enablement-gen-ai-llm-observability" target="_blank">Gen AI Tutorial</a>
-    </td>
+    <td><a href="https://github.com/dynatrace-wwse/enablement-gen-ai-llm-observability" target="_blank">Gen AI Tutorial</a></td>
     <td> Gen AI & LLM Observability </td>
     <td>
 
@@ -69,9 +62,7 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td> 
-      <a href="hhttps://github.com/dynatrace-wwse/enablement-business-observability" target="_blank">Business Observability</a>
-    </td>
+    <td> <a href="https://github.com/dynatrace-wwse/enablement-business-observability" target="_blank">Business Observability</a></td>
     <td> Business Observability </td>
     <td>
 
@@ -94,9 +85,7 @@ CI Status of the repositories
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-dql-301/)</br>
 </td>
   </tr>
-  
-  <tr>
-    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101" target="_blank">Log Ingest 101</a></td>
+  <tr><td><a href="https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101" target="_blank">Log Ingest 101</a></td>
     <td> Dynatrace Log Ingest Hands On training </td>
     <td>
 
