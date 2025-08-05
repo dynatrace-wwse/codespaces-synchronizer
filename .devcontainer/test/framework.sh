@@ -3,7 +3,7 @@ source /workspaces/$RepositoryName/.devcontainer/test/testfunctions.sh
 
 printInfoSection "Running integration Tests for the Enablement Framework"
 
-assertDeployedApp 30100
+assertRunningApp 30100
 
 assertRunningPod todoapp todoapp
 

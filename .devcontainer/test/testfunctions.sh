@@ -15,13 +15,17 @@ assertDynatraceCloudNative(){
     printWarn "TBD"
 }
 
-assertDeployedApp(){
-    PORT=$1
+assertRunningApp(){
+    # The 1st agument is the port.
+    if [ -z "$1"]; then
+      PORT=30100
+    else
+      PORT=$1
+    fi
     URL="http://localhost:$PORT"
     printInfoSection "Testing Deployed app running in $URL"
 
-    printInfo "Asserting app is running as NodePort in kind-control-plane in port $URL" 
-    docker exec kind-control-plane sh -c "curl -v $URL"
+    printInfo "Asserting app is running as NodePort in kind-control-plane in port $URL"
 
     if docker exec kind-control-plane sh -c "curl --silent --fail $URL" > /dev/null; then
         printInfo "✅ App is running on $URL"

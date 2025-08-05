@@ -990,3 +990,6 @@ finalizePostCreation(){
       fi
   fi
 }
+
+# Custom functions for each repo can be added in my_functions.sh
+source /workspaces/$RepositoryName/.devcontainer/util/my_functions.sh
