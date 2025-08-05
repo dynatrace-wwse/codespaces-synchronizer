@@ -213,6 +213,46 @@ waitForAllReadyPods() {
   fi
 }
 
+waitAppCanHandleRequests(){
+  # Function to filter by Namespace, default is ALL
+  if [[ $# -eq 1 ]]; then
+    PORT="$1"
+  else
+    PORT="30100"
+  fi
+  
+  RC="500"
+
+  URL=http://localhost:$PORT
+  RETRY=0
+  RETRY_MAX=5
+  # Get all pods, count and invert the search for not running nor completed. Status is for deleting the last line of the output
+  CMD="curl --silent $URL > /dev/null"
+  printInfo "Verifying that the app can handle HTTP requests on $URL"
+  while [[ $RETRY -lt $RETRY_MAX ]]; do
+    RESPONSE=$(eval "$CMD")
+    RC=$?
+    #Common RC from cURL
+    #0: Success
+    #6: Could not resolve host
+    #7: Failed to connect to host
+    #28: Operation timeout
+    #35: SSL connect error
+    #56:Failure with receiving network data
+    if [[ "$RC" -eq 0 ]]; then
+      printInfo "App is running on $URL"
+      break
+    fi
+    RETRY=$(($RETRY + 1))
+    printWarn "Retry: ${RETRY}/${RETRY_MAX} - App can't handle HTTP requests on $URL. [cURL RC:$RC] Waiting 10s..."
+    sleep 10
+  done
+
+  if [[ $RETRY == $RETRY_MAX ]]; then
+    printError "App is still not able to handle requests. Please check the events"
+  fi
+}
+
 installHelm() {
   # https://helm.sh/docs/intro/install/#from-script
   printInfoSection " Installing Helm"
@@ -803,6 +843,8 @@ deployTodoApp(){
   kubectl patch service todoapp --namespace=todoapp --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
 
   waitForAllReadyPods todoapp
+
+  waitAppCanHandleRequests 30100
 
   printInfoSection "TodoApp is available via NodePort=30100"
 }
