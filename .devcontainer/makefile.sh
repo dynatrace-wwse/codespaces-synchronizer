@@ -79,6 +79,24 @@ run(){
         /usr/bin/zsh -c "$CMD"
 }
 
+runNoTTY(){
+    # Add repository name to the environment variables for the container
+    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
+
+    docker run $DOCKER_ENVS \
+        --name $IMAGENAME \
+        --privileged \
+        --dns=8.8.8.8 \
+        --network=host \
+        -p 30100:30100 \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /lib/modules:/lib/modules \
+        -v $(dirname "$PWD"):/workspaces/$RepositoryName \
+        -w /workspaces/$RepositoryName \
+        $REPOTAG \
+        /usr/bin/zsh -c "$CMD"
+}
+
 start(){
     status=$(docker inspect -f '{{.State.Status}}' "$IMAGENAME")
     if [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
@@ -99,4 +117,13 @@ start(){
         fi
         run
     fi
+}
+
+test(){
+    # Tests to be run inside VSCode docker container.
+    echo "Attach and "
+    
+    echo "Now running with no TTY"
+    source util/functions.sh
+    printInfo "what?"
 }
