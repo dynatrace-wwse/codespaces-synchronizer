@@ -83,9 +83,9 @@
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-dql-301/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-dql-301/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-dql-301/blob/main/LICENSE)</br>
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-dql-301/)</br>
-</td>
-  </tr>
-  <tr><td><a href="https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101" target="_blank">Log Ingest 101</a></td>
+  </td>
+</tr>
+<tr><td><a href="https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101" target="_blank">Log Ingest 101</a></td>
     <td> Dynatrace Log Ingest Hands On training </td>
     <td>
 
@@ -94,6 +94,28 @@
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-dynatrace-log-ingest-101/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101/blob/main/LICENSE)</br>
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-dynatrace-log-ingest-101/)</br>
+  </td>
+</tr>
+<tr><td><a href="https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry" target="_blank">Kubernetes Opentelelemtry</a></td>
+    <td> Dynatrace Kubernetes Opentelemetry Training</td>
+    <td>
+
+![Integration tests](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/actions/workflows/integration-tests.yaml/badge.svg) </br>
+[![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-kubernetes-opentelemetry?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/releases) </br>
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-kubernetes-opentelemetry/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/graphs/commit-activity)</br>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/blob/main/LICENSE)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-kubernetes-opentelemetry/)</br>
+  </td>
+</tr>
+<tr><td><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability" target="_blank">Business Observability</a></td>
+    <td> Business Observability Training</td>
+    <td>
+
+![Integration tests](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/actions/workflows/integration-tests.yaml/badge.svg) </br>
+[![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-browser-dem-biz-observability?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/releases) </br>
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-browser-dem-biz-observability/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/graphs/commit-activity)</br>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/LICENSE)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-browser-dem-biz-observability/)</br>
   </td>
 </tr>
 </table>
