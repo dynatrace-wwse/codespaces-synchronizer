@@ -5,8 +5,12 @@
 source ../.devcontainer/util/variables.sh >/dev/null 2>&1
 source ../.devcontainer/util/functions.sh >/dev/null 2>&1
 
-ROOT_PATH="/home/ubuntu/enablement/"
+
+
+ROOT_PATH="$(dirname $(dirname "$PWD"))/"
 SYNCH_REPO="codespaces-synchronizer"
+
+echo "Using the following path '$ROOT_PATH' as root path"
 
 all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
@@ -112,14 +116,19 @@ helperFunction() {
     eval "local array=(\"\${$array_name[@]}\")"
     printInfoSection "Doing something in repo from this as base $ROOT_PATH$SYNCH_REPO"
     for repo in "${array[@]}"; do
+        printInfo "in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
         #ls -las
         #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
         #git fetch synchronizer
-        git checkout main
-        echo "grep log for $repo"
-        git log | grep codespaceverify
-        echo "-------"
+        #git checkout main
+        #git fetch --all
+        #git pull --all
+        #git checkout synch/553c7fb
+        git status
+        #echo "grep log for $repo --> git log --all | grep 553c7fb"
+        #git log --all | grep 553c7fb
+        #echo "-------"
 
         cd - >/dev/null
     done
@@ -177,10 +186,14 @@ cherryPickMerge() {
 #fetch
 #doInRepos cs git pull --all 
 
-doInRepos cs git status
+#doInRepos cs git pull --all
 
-#doInRepos cs cherryPickMerge 553c7fb
+#doInRepos cs git checkout main
 
+#doInRepos cs git log | grep 553c7fb
+
+#doInRepos cs cherryPickMerge be10c91
+helperFunction cs
 #fetchAll
 #pullAll
 #statusAll
@@ -193,6 +206,8 @@ doInRepos cs git status
 #helperFunction cs
 
 ## -- History of Cherries
+# Merge branch 'fix/mkdocs'
+# cherryPickMerge be10c91
 
 # Merge branch 'framework/main'
 # cherryPickMerge 553c7fb
