@@ -32,16 +32,6 @@ assertRunningApp(){
     printInfo "✅ App is running on $URL"
   else
     printError "❌ App is NOT running on $URL"
-    # Print out the logs of the todoApp
-    kubectl logs -n todoapp -l app=todoapp --all-containers=true
-    docker exec kind-control-plane sh -c "curl -v $URL" 
-    # Print out the logs of the todoApp
-    kubectl logs -n todoapp -l app=todoapp --all-containers=true
-    printError "sleeping 5 then curl? "
-    sleep 5
-    docker exec kind-control-plane sh -c "curl -v $URL" 
-    printError "now on host"
-    curl -v $URL
     exit 1
   fi
 }

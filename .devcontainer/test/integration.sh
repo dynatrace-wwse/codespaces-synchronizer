@@ -11,7 +11,4 @@ assertRunningPod dynatrace oneagent
 
 assertRunningPod todoapp todoapp
 
-# Print out the logs of the todoApp
-kubectl logs -n todoapp -l app=todoapp --all-containers=true
-
 assertRunningApp 30100
