@@ -25,7 +25,7 @@
     </td>
   </tr>
   <tr>
-    <td><a href="https://github.com/dynatrace-wwse/codespaces-template" target="_blank">Codespaces Template</a></td>
+    <td><a href="https://github.com/dynatrace-wwse/enablement-codespaces-template" target="_blank">Enablement Codespaces Template</a></td>
     <td>Template Repository for creating enablements</td>
     <td>
 
