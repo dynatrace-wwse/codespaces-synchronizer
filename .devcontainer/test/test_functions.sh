@@ -23,7 +23,7 @@ assertRunningApp(){
     PORT=$1
   fi
     
-  URL="http://localhost:$PORT"
+  URL="http://127.0.0.1:$PORT"
   printInfoSection "Testing Deployed app running in $URL"
 
   printInfo "Asserting app is running as NodePort in kind-control-plane in port $URL"
@@ -32,7 +32,11 @@ assertRunningApp(){
     printInfo "✅ App is running on $URL"
   else
     printError "❌ App is NOT running on $URL"
+    # Print out the logs of the todoApp
+    kubectl logs -n todoapp -l app=todoapp --all-containers=true
     docker exec kind-control-plane sh -c "curl -v $URL" 
+    # Print out the logs of the todoApp
+    kubectl logs -n todoapp -l app=todoapp --all-containers=true
     printError "sleeping 5 then curl? "
     sleep 5
     docker exec kind-control-plane sh -c "curl -v $URL" 
