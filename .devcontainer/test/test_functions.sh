@@ -33,6 +33,9 @@ assertRunningApp(){
   else
     printError "❌ App is NOT running on $URL"
     docker exec kind-control-plane sh -c "curl -v $URL" 
+    printError "sleeping 5 then curl?"
+    sleep 5
+    docker exec kind-control-plane sh -c "curl -v $URL" 
     exit 1
   fi
 }
