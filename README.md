@@ -39,7 +39,9 @@ CI Status of the repositories
     </td>
   </tr>
   <tr>
-    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting" target="_blank">Live Debugger Tutorial</a></td>
+    <td> 
+      <a href="hhttps://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting" target="_blank">Live Debugger Tutorial</a> 
+    </td>
     <td> Live Debugger Tutorial - Bug Hunting the Todo App 📋 </td>
     <td>
 
@@ -53,7 +55,9 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-gen-ai-llm-observability" target="_blank">Gen AI Tutorial</a></td>
+    <td> 
+      <a href="hhttps://github.com/dynatrace-wwse/enablement-gen-ai-llm-observability" target="_blank">Gen AI Tutorial</a>
+    </td>
     <td> Gen AI & LLM Observability </td>
     <td>
 
@@ -65,7 +69,9 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-business-observability" target="_blank">Business Observability</a></td>
+    <td> 
+      <a href="hhttps://github.com/dynatrace-wwse/enablement-business-observability" target="_blank">Business Observability</a>
+    </td>
     <td> Business Observability </td>
     <td>
 
@@ -76,7 +82,6 @@ CI Status of the repositories
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-business-observability/)</br>
 </td>
   </tr>
-
   <tr>
     <td><a href="hhttps://github.com/dynatrace-wwse/enablement-dql-301" target="_blank">DQL 301</a></td>
     <td>[DQL 301](https://github.com/dynatrace-wwse/enablement-dql-301)</td>
