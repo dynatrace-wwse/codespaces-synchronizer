@@ -16,7 +16,7 @@
 CI Status of the repositories
 
 [Docker Image shinojosa/dt-enablement (AMD/ARM)](https://hub.docker.com/r/shinojosa/dt-enablement)[![Downloads](https://img.shields.io/docker/pulls/shinojosa/dt-enablement)](https://hub.docker.com/r/shinojosa/dt-enablement)</br>
-<table border="1" size=1>
+<table border="1" size=small>
   <tr>
     <th>Repository</th>
     <th>Description</th>
@@ -70,6 +70,46 @@ CI Status of the repositories
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-gen-ai-llm-observability/)</br>
 </td>
   </tr>
+  <tr>
+    <td>[Business Observability](https://github.com/dynatrace-wwse/enablement-business-observability)</td>
+    <td> Business Observability </td>
+    <td>
+
+![Integration tests](https://github.com/dynatrace-wwse/enablement-business-observability/actions/workflows/integration-tests.yaml/badge.svg) </br>
+[![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-business-observability?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-business-observability/releases) </br>
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-business-observability/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-business-observability/graphs/commit-activity)</br>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-business-observability/blob/main/LICENSE)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-business-observability/)</br>
+</td>
+  </tr>
+
+  <tr>
+    <td>[DQL 301](https://github.com/dynatrace-wwse/enablement-dql-301)</td>
+    <td> Dynatrace Query Language - advanced concepts hands-on training </td>
+    <td>
+
+![Integration tests](https://github.com/dynatrace-wwse/enablement-dql-301/actions/workflows/integration-tests.yaml/badge.svg) </br>
+[![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-dql-301?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-dql-301/releases) </br>
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-dql-301/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-dql-301/graphs/commit-activity)</br>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-dql-301/blob/main/LICENSE)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-dql-301/)</br>
+</td>
+  </tr>
+  
+  <tr>
+    <td> [Log Ingest 101](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101) </td>
+    <td> Dynatrace Log Ingest Hands On training </td>
+    <td>
+
+![Integration tests](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101/actions/workflows/integration-tests.yaml/badge.svg) </br>
+[![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-dynatrace-log-ingest-101?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101/releases) </br>
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-dynatrace-log-ingest-101/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101/graphs/commit-activity)</br>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-dynatrace-log-ingest-101/blob/main/LICENSE)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-dynatrace-log-ingest-101/)</br>
+</td>
+  </tr>
+
+
 </table>
 
 
