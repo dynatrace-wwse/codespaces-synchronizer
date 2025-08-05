@@ -44,4 +44,4 @@ jobs:
           cacheFrom: shinojosa/dt-enablement
           push: never
           runCmd: |
-            zsh .devcontainer/test/framework.sh
+            zsh .devcontainer/test/integration.sh

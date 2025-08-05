@@ -1,5 +1,5 @@
 #!/bin/bash
-source /workspaces/$RepositoryName/.devcontainer/test/testfunctions.sh
+source /workspaces/$RepositoryName/.devcontainer/test/test_functions.sh
 
 printInfoSection "Running integration Tests for the Enablement Framework"
 
