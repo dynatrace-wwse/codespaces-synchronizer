@@ -21,7 +21,7 @@
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/codespaces-synchronizer?color=blueviolet)](https://github.com/dynatrace-wwse/codespaces-synchronizer/releases) </br>
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/codespaces-synchronizer/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/codespaces-synchronizer/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/codespaces-synchronizer/blob/main/LICENSE)</br>
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Down-red)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)</br>
     </td>
   </tr>
   <tr>
