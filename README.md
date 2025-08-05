@@ -74,7 +74,7 @@ CI Status of the repositories
 </td>
   </tr>
   <tr>
-    <td><a href="hhttps://github.com/dynatrace-wwse/enablement-dql-301" target="_blank">DQL 301</a></td>
+    <td><a href="https://github.com/dynatrace-wwse/enablement-dql-301" target="_blank">DQL 301</a></td>
     <td>[DQL 301](https://github.com/dynatrace-wwse/enablement-dql-301)</td>
     <td>
 
