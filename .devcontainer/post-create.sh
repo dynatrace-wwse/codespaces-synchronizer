@@ -1,14 +1,14 @@
 #!/bin/bash
 #loading functions to script
 export SECONDS=0
-source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
-
+source .devcontainer/util/source-framework.sh
 
 bindFunctionsInShell
 
 setupAliases
 
 startKindCluster
+
 installK9s
 
 #TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
@@ -19,10 +19,10 @@ installK9s
 dynatraceEvalReadSaveCredentials
 
 # Dynatrace Operator can be deployed automatically
-dynatraceDeployOperator
+#dynatraceDeployOperator
 
 # You can deploy CNFS or AppOnly
-deployCloudNative
+#deployCloudNative
 #deployApplicationMonitoring
 
 # In here you deploy the Application you want

@@ -21,7 +21,6 @@ getRepositoryName
 # Loads variables k=v from the .env file into DOCKER_ENVS such as DT_TENANT, so they can be added as environment variables to the Docker container.
 getDockerEnvsFromEnvFile
 
-
 buildNoCache(){
     # Build the image with no cache
     docker build --no-cache -t $REPOTAG .
@@ -43,8 +42,7 @@ build(){
 runForProfessors(){
     # Same as run but with exposure of port 8000 for Labguides
 
-    # Add repository name to the environment variables for the container
-    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
+   
 
     docker run $DOCKER_ENVS \
         --name $IMAGENAME \
@@ -63,7 +61,7 @@ runForProfessors(){
 
 run(){
     # Add repository name to the environment variables for the container
-    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
+    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName -e REPO_PATH=/workspaces/$RepositoryName"
 
     docker run $DOCKER_ENVS \
         --name $IMAGENAME \
@@ -81,7 +79,7 @@ run(){
 
 runNoTTY(){
     # Add repository name to the environment variables for the container
-    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName"
+    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName -e REPO_PATH=/workspaces/$RepositoryName"
 
     docker run $DOCKER_ENVS \
         --name $IMAGENAME \
