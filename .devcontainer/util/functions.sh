@@ -8,8 +8,6 @@
 #  A set of util functions for logging, validating and                 #
 #  executing commands.                                                 #
 # ======================================================================
-echo "REPO_PATH: $REPO_PATH"
-echo "RepositoryName: $RepositoryName"
 
 # VARIABLES DECLARATION
 source "$REPO_PATH/.devcontainer/util/variables.sh"
