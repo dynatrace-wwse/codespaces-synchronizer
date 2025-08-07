@@ -1,7 +1,7 @@
 #!/bin/bash
 #loading functions to script
 export SECONDS=0
-source .devcontainer/util/source-framework.sh
+source .devcontainer/util/source_framework.sh
 
 bindFunctionsInShell
 
@@ -19,10 +19,10 @@ installK9s
 dynatraceEvalReadSaveCredentials
 
 # Dynatrace Operator can be deployed automatically
-#dynatraceDeployOperator
+dynatraceDeployOperator
 
 # You can deploy CNFS or AppOnly
-#deployCloudNative
+deployCloudNative
 #deployApplicationMonitoring
 
 # In here you deploy the Application you want
