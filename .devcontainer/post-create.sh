@@ -1,14 +1,14 @@
 #!/bin/bash
 #loading functions to script
 export SECONDS=0
-source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
-
+source .devcontainer/util/source_framework.sh
 
 bindFunctionsInShell
 
 setupAliases
 
 startKindCluster
+
 installK9s
 
 #TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
