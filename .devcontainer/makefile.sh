@@ -92,7 +92,8 @@ start(){
 
 integration(){
     echo "Executing Integration-Tests -"
-    CMD+=" ./.devcontainer/test/integration.sh"
+    CMD_TEST=" ./.devcontainer/test/integration.sh"
+    CMD+="$CMD_TEST"
     
     status=$(docker inspect -f '{{.State.Status}}' "$IMAGENAME")
     if [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
@@ -102,8 +103,9 @@ integration(){
         echo "Starting a new container"
         run 
     elif  [ "$status" = "running" ]; then 
-        echo "Container $IMAGENAME is running, running the tests inside the running container..."
-        docker exec -t $IMAGENAME "$CMD_TEST"
+        # FIXME: Better to load test functions in framework or call the script from a function in the framework in an extra shell. 
+        echo "Container $IMAGENAME is running, running the tests inside the running container (WIP)..."
+        docker exec -t $IMAGENAME "zsh"
     else
         echo "Image $IMAGENAME is not found."
         if docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$IMAGENAME$"; then
