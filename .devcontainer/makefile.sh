@@ -15,7 +15,7 @@ REPOTAG=$REPOSITORY:$TAG
 # Commands to be executed in the container after it is created (as in VSCode devcontainer.json)
 CMD="./.devcontainer/post-create.sh; ./.devcontainer/post-start.sh; zsh ;"
 
-# Calculates the RepositoryName from the base path, needed for loading the framework inside the container.
+# Calculates the RepositoryName from the base path needed for setting the directory so the framework can load inside the container.
 getRepositoryName
 
 # Loads variables k=v from the .env file into DOCKER_ENVS such as DT_TENANT, so they can be added as environment variables to the Docker container.
@@ -41,9 +41,6 @@ build(){
 
 runForProfessors(){
     # Same as run but with exposure of port 8000 for Labguides
-
-   
-
     docker run $DOCKER_ENVS \
         --name $IMAGENAME \
         --privileged \
@@ -60,9 +57,6 @@ runForProfessors(){
 }
 
 run(){
-    # Add repository name to the environment variables for the container
-    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName -e REPO_PATH=/workspaces/$RepositoryName"
-
     docker run $DOCKER_ENVS \
         --name $IMAGENAME \
         --privileged \
@@ -74,13 +68,10 @@ run(){
         -v $(dirname "$PWD"):/workspaces/$RepositoryName \
         -w /workspaces/$RepositoryName \
         -it $REPOTAG \
-        /usr/bin/zsh -c "$CMD"
+        /usr/bin/zsh -c "pwd; ls -las; $CMD"
 }
 
 runNoTTY(){
-    # Add repository name to the environment variables for the container
-    DOCKER_ENVS+=" -e RepositoryName=$RepositoryName -e REPO_PATH=/workspaces/$RepositoryName"
-
     docker run $DOCKER_ENVS \
         --name $IMAGENAME \
         --privileged \
@@ -118,7 +109,6 @@ start(){
 }
 
 test(){
-
     echo "Building the image"
     build
     echo "Now running with no TTY"
