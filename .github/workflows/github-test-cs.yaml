@@ -7,7 +7,6 @@ jobs:
   test-codespace:
     runs-on: ubuntu-22.04
     env:
-      RepositoryName: "codespaces-synchronizer"
       DT_TENANT: ${{ secrets.DT_TENANT }}
       DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
       DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}
@@ -34,7 +33,6 @@ jobs:
             echo "env" ; env
             curl -v http://localhost:30100 | grep -q "todo" && echo "TODO App Running" || echo "TODO App Not Running"
         env:
-          RepositoryName: "codespaces-synchronizer"
           DT_TENANT: ${{ secrets.DT_TENANT }}
           DT_OPERATOR_TOKEN: ${{ secrets.DT_OPERATOR_TOKEN }}
           DT_INGEST_TOKEN: ${{ secrets.DT_INGEST_TOKEN }}

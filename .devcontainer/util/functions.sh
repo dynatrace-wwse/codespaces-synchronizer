@@ -8,6 +8,11 @@
 #  A set of util functions for logging, validating and                 #
 #  executing commands.                                                 #
 # ======================================================================
+# THis is needed when opening a terminal and the variable is not set
+if [ -z "$REPO_PATH" ]; then
+  export REPO_PATH="$(pwd)"
+  export RepositoryName=$(basename "$REPO_PATH")
+fi
 
 # VARIABLES DECLARATION
 source "$REPO_PATH/.devcontainer/util/variables.sh"
