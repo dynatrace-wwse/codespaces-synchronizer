@@ -817,7 +817,6 @@ deployAITravelAdvisorApp(){
   kubectl -n ai-travel-advisor wait --for=condition=Ready pod --all --timeout=10m
   printInfo "Weaviate is ready"
 
-
   # Start AI Travel Advisor
   printInfo "Deploying AI App => AI Travel Advisor"
   kubectl apply -f $REPO_PATH/app/k8s/ai-travel-advisor.yaml
@@ -829,6 +828,9 @@ deployAITravelAdvisorApp(){
 
   # Define the NodePort to expose the app from the Cluster
   kubectl patch service ai-travel-advisor --namespace=ai-travel-advisor --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
+
+  waitAppCanHandleRequests 30100
+
   printInfo "AI Travel Advisor is available via NodePort=30100"
 
 }
@@ -1036,6 +1038,12 @@ finalizePostCreation(){
         # add also Host architecture to the payload
       fi
   fi
+}
+
+
+runIntegrationTests(){
+  #this function will trigger the integration Tests for this repo.
+  bash "$REPO_PATH/.devcontainer/test/integration.sh"
 }
 
 # Custom functions for each repo can be added in my_functions.sh
