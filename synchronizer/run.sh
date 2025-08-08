@@ -1,7 +1,6 @@
 #!/bin/bash
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
-
-source synch_functions.sh
+source synchronizer/synch_functions.sh
 
 printInfo "testing synch"
 

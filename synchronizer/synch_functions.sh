@@ -1,19 +1,14 @@
 #!/bin/bash
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 
+source .devcontainer/util/source_framework.sh
 
-ROOT_PATH="$(dirname $(dirname "$PWD"))/"
-SYNCH_REPO="codespaces-synchronizer"
+ROOT_PATH="$(dirname "$PWD")/"
+SYNCH_REPO=$RepositoryName
 
+printInfo "Using as ROOT_PATH: $ROOT_PATH"
+printInfo "This is synchronization repo: $SYNCH_REPO"
 
-echo "this is root: $ROOT_PATH"
-echo "this is synch repo: $SYNCH_REPO"
-
-# Import functions locally, send errors to dev/null since the path is different as in CS.
-source ../.devcontainer/util/variables.sh 
-source ../.devcontainer/util/functions.sh
-
-echo "Using the following path '$ROOT_PATH' as root path"
 
 all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
