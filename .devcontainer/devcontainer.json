@@ -43,10 +43,6 @@
 	"hostRequirements": {
 		"cpus": 2
 	}
-  ,
-  "remoteEnv": {
-    "RepositoryName": "codespaces-synchronizer"
-  }
   /*
   // Add recommended secrets 
   */
