@@ -954,11 +954,6 @@ deployGhdocs(){
   mkdocs gh-deploy
 }
 
-deployCronJobs() {
-  printInfoSection "Deploying CronJobs for Astroshop for this lab"
-  kubectl apply -f $REPO_PATH/.devcontainer/manifests/cronjobs.yaml
-}
-
 verifyCodespaceCreation(){
   printInfoSection "Verify Codespace creation"
   calculateTime
