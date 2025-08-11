@@ -1,18 +1,14 @@
+
+[![dt-badge](https://img.shields.io/badge/dt_enablement_amd/arm-available-green?logo=dynatrace)](https://hub.docker.com/r/shinojosa/dt-enablement)  [![Downloads](https://img.shields.io/docker/pulls/shinojosa/dt-enablement?logo=docker)](https://hub.docker.com/r/shinojosa/dt-enablement) ![Integration tests](https://github.com/dynatrace-wwse/codespaces-synchronizer/actions/workflows/integration-tests.yaml/badge.svg) [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/codespaces-synchronizer?color=blueviolet)](https://github.com/dynatrace-wwse/codespaces-synchronizer/releases) [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/codespaces-synchronizer/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/codespaces-synchronizer/graphs/commit-activity) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/codespaces-synchronizer/blob/main/LICENSE) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-green)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)
+
 # Enablement Codespaces Synchronizer
 
  This repository is the core repository for developing the framework and push changes to the enablement repositories.
 
 
-[![Node](https://img.shields.io/npm/v/npm.svg?logo=dynatrace)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)
-
-
 🚦 CI Status of the repositories
-https://styleguide.dynatrace.com/img/favicon.ico
+</br>
 
-https://img.shields.io/badge/dt_enablement-v1.1_arm/amd-green?logo=dynatrace
-
-
-[https://img.shields.io/badge/dt_enablement-v1.1_arm/amd-green?logo=dynatrace](https://hub.docker.com/r/shinojosa/dt-enablement)[![Downloads](https://img.shields.io/docker/pulls/shinojosa/dt-enablement)](https://hub.docker.com/r/shinojosa/dt-enablement)</br>
 
 <table border="1" size=small>
   <tr>
