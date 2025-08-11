@@ -935,6 +935,8 @@ deployAstroshop(){
 
   waitForAllPods astroshop
 
+  waitAppCanHandleRequests 30100
+
   printInfo "Astroshop deployed succesfully"
 }
 
