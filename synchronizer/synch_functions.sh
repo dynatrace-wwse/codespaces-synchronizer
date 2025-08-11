@@ -77,11 +77,21 @@ compareFile() {
 }
 
 
+# Function to copy all files from one repository to another. A branch will be created and 
+# the diff will show the difference between files so no functionality gets lost.
 copyFramework(){
 
+    repo=$(basename $(pwd))
 
+    git pull --all
+    git checkout main
+    git checkout -b copycore/v0.1
 
+    cp "$ROOT_PATH$SYNCH_REPO/.gitignore" "$ROOT_PATH$repo/.gitignore"
+    cp -R "$ROOT_PATH$SYNCH_REPO/.devcontainer/" "$ROOT_PATH$repo/.devcontainer/"
+    cp -R "$ROOT_PATH$SYNCH_REPO/.github/" "$ROOT_PATH$repo/.github/"
     
+
 }
 
 # Function to compare files in arrays,
