@@ -16,7 +16,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 
-
+https://github.com/romkatv/powerlevel10k#instant-prompt
 # Below here maybe jsut copy structure a
 # nd files after configuration takes place
 # -----
@@ -27,3 +27,5 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 source ~/.zshrc
 # Configure
 p10k configure
+
+~/.p10k.zsh?
