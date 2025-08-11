@@ -77,11 +77,23 @@ compareFile() {
 }
 
 
+# Function to copy all files from one repository to another. A branch will be created and 
+# the diff will show the difference between files so no functionality gets lost.
 copyFramework(){
+    repo=$(basename $(pwd))
+    branch="copycore/V0.1"
 
+    printInfoSection "Copying core files to repository $repo into branch $branch"
 
+    git pull --all
+    git checkout main
+    git checkout -b $branch
 
+    cp "$ROOT_PATH$SYNCH_REPO/.gitignore" "$ROOT_PATH$repo/.gitignore"
+    cp -R "$ROOT_PATH$SYNCH_REPO/.devcontainer/" "$ROOT_PATH$repo/.devcontainer/"
+    cp -R "$ROOT_PATH$SYNCH_REPO/.github/" "$ROOT_PATH$repo/.github/"
     
+
 }
 
 # Function to compare files in arrays,
@@ -125,11 +137,10 @@ helperFunction() {
         printInfo "in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
         
-        #git status
-        
-        git reset --hard HEAD
+        #git reset --hard HEAD
         git checkout main 
-        git branch -D synch/47b1d0f 
+        git pull 
+        git status
 
         cd - >/dev/null
     done
@@ -197,12 +208,12 @@ cherryPickMerge() {
 doPushandPR(){
     repo=$(basename $(pwd))
 
-    printInfo "Pushing synch/$CHERRYPICK_ID for $repo"
-    git push origin synch/$CHERRYPICK_ID
+    printInfo "Pushing $BRANCH for $repo"
+    git push origin $BRANCH
     
     printInfo "creating PR for dynatrace-wwse/$repo"
     gh repo set-default dynatrace-wwse/$repo
-    gh pr create --base main --head synch/$CHERRYPICK_ID --title "$TITLE" --body "$BODY"
+    gh pr create --base main --head $BRANCH --title "$TITLE" --body "$BODY"
     #TODO: A Pr will be created with an URL, next step is to Merge the PR automatically if the check is ok.
 }
 
