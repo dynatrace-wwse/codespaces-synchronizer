@@ -1,7 +1,11 @@
 #!/bin/bash
-# Each function contains a boolean flag so the installations
-# can be highly customized.
-# Original file located https://github.com/dynatrace-wwse/kubernetes-playground/blob/main/cluster-setup/functions.sh
+# Functions file of the codespaces framework. Functions are loaded into the shell so the user can easily call them in a dynamic fashion.
+# This file contains all core functions used for deploying applications, tools or dynatrace components. 
+# Brief descrition of files:
+#  - functions.sh - core functions
+#  - greeting.sh -zsh/bash greeting (similar to MOTD)
+#  - source_framework.sh helper file to load the framework from different places (Codespaces, VSCode Extention, plain Docker container)
+#  - variables.sh - variable definitions
 
 # ======================================================================
 #          ------- Util Functions -------                              #
