@@ -81,13 +81,12 @@ compareFile() {
 # the diff will show the difference between files so no functionality gets lost.
 copyFramework(){
     repo=$(basename $(pwd))
-    branch="copycore/V0.1"
 
-    printInfoSection "Copying core files to repository $repo into branch $branch"
+    printInfoSection "Copying core files to repository $repo into branch $BRANCH"
 
-    git pull --all
     git checkout main
-    git checkout -b $branch
+    git pull origin main
+    git checkout -b $BRANCH
 
     cp "$ROOT_PATH$SYNCH_REPO/.gitignore" "$ROOT_PATH$repo/.gitignore"
     cp -R "$ROOT_PATH$SYNCH_REPO/.devcontainer/" "$ROOT_PATH$repo/.devcontainer/"
@@ -138,9 +137,12 @@ helperFunction() {
         cd $ROOT_PATH"$repo" >/dev/null
         
         #git reset --hard HEAD
-        git checkout main 
-        git pull 
+        #git branch -D $BRANCH
+        git add .devcontainer/apps
+        #git checkout main 
+        #git pull 
         git status
+        #rm -rf .devcontainer/apps
 
         cd - >/dev/null
     done
