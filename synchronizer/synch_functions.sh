@@ -1,16 +1,14 @@
 #!/bin/bash
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 
-# Import functions locally, send errors to dev/null since the path is different as in CS.
-source ../.devcontainer/util/variables.sh >/dev/null 2>&1
-source ../.devcontainer/util/functions.sh >/dev/null 2>&1
+source .devcontainer/util/source_framework.sh
 
+ROOT_PATH="$(dirname "$PWD")/"
+SYNCH_REPO=$RepositoryName
 
+printInfo "Using as ROOT_PATH: $ROOT_PATH"
+printInfo "This is synchronization repo: $SYNCH_REPO"
 
-ROOT_PATH="$(dirname $(dirname "$PWD"))/"
-SYNCH_REPO="codespaces-synchronizer"
-
-echo "Using the following path '$ROOT_PATH' as root path"
 
 all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
@@ -78,6 +76,14 @@ compareFile() {
     done
 }
 
+
+copyFramework(){
+
+
+
+    
+}
+
 # Function to compare files in arrays,
 # $1[cs or all for iterating in only CS or ALL repos]
 # $2=filepath
@@ -118,21 +124,12 @@ helperFunction() {
     for repo in "${array[@]}"; do
         printInfo "in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
-        #ls -las
-        #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
-        #git fetch synchronizer
-        #git checkout main
-        #git cherry-pick --abort
+        
         #git status
-        #git cherry-pick --abort
-        git checkout main
-        git fetch --all
-        git pull --all
-        #git checkout synch/553c7fb
-    
-        #echo "grep log for $repo --> git log --all | grep 553c7fb"
-        #git log --all | grep 553c7fb
-        #echo "-------"
+        
+        git reset --hard HEAD
+        git checkout main 
+        git branch -D synch/47b1d0f 
 
         cd - >/dev/null
     done
@@ -160,6 +157,18 @@ doInRepos() {
 
 
 cherryPickMerge() {
+    
+    repo=$(basename $(pwd))
+
+    printInfoSection "Doing CherryPick Merge for $repo with Cherry: $CHERRYPICK_ID"
+    printInfo "PR '$TITLE'. '$BODY'"
+
+    # go to main and create branch from there
+    git checkout main
+
+    # get latest changes
+    git pull 
+
     # Add synchronizer as remote repo
     git remote | grep -q '^synchronizer$'
     if [ $? -eq 0 ]; then
@@ -171,60 +180,37 @@ cherryPickMerge() {
     # fetch synchronizer
     git fetch synchronizer
 
-    # go to main and create branch from there
-    git checkout main
-
     # create branch with merge id
-    git checkout -b "synch/$1"
+    git checkout -b "synch/$CHERRYPICK_ID"
 
-    git cherry-pick -m 1 $1
+    git cherry-pick -m 1 $CHERRYPICK_ID
     if [ $? -eq 0 ]; then
-        printInfo "$repo - $1 ->CherryPick OK"
+        printInfo "$repo - $CHERRYPICK_ID ->CherryPick OK"
+
+        doPushandPR
     else
         printInfo "$repo - $1 ->CherryPick NOK"
     fi
 
 }
 
-doInRepos cs cherryPickMerge 8417e91
-# git checkout main
-# git checkout -b synch/8417e91
-# git cherry-pick 8417e91
+doPushandPR(){
+    repo=$(basename $(pwd))
 
-#helperFunction cs
-#fetchAll
-#pullAll
-#statusAll
+    printInfo "Pushing synch/$CHERRYPICK_ID for $repo"
+    git push origin synch/$CHERRYPICK_ID
+    
+    printInfo "creating PR for dynatrace-wwse/$repo"
+    gh repo set-default dynatrace-wwse/$repo
+    gh pr create --base main --head synch/$CHERRYPICK_ID --title "$TITLE" --body "$BODY"
+    #TODO: A Pr will be created with an URL, next step is to Merge the PR automatically if the check is ok.
+}
 
-# compareFile cs .devcontainer/util/functions.sh
-
-
-#fetchAll
-#pullAll
-#helperFunction cs
-
-## -- History of Cherries
-# Merge branch 'ghactions/nohist'
-#cherryPickMerge 8417e91
-
-# Merge branch 'fix/mkdocs'
-# cherryPickMerge be10c91
-
-# Merge branch 'framework/main'
-# cherryPickMerge 553c7fb
-
-# rfe/verifycodespace
-# cherryPickMerge 8bc2279
-
-# fix/dynakubes
-#cherryPickMerge fc755a6
-
-# Astroshop
-#cherryPick cs 1c1db04
-
-# TravelAdvisor
-#cherryPick cs a02927c
-
-#copyFile cs .devcontainer/util/functions.sh
-#compareFile cs docs/snippets/disclaimer.md
-# grep -i -E 'error|failed'
+mergePr(){
+    repo=$(basename $(pwd))
+    printInfo "Merging synch/$CHERRYPICK_ID for $repo"
+    git pull origin main
+    git checkout main
+    git merge synch/$CHERRYPICK_ID
+    git push -u origin main
+}
