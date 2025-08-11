@@ -76,6 +76,14 @@ compareFile() {
     done
 }
 
+
+copyFramework(){
+
+
+
+    
+}
+
 # Function to compare files in arrays,
 # $1[cs or all for iterating in only CS or ALL repos]
 # $2=filepath
@@ -116,21 +124,12 @@ helperFunction() {
     for repo in "${array[@]}"; do
         printInfo "in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
-        #ls -las
-        #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
-        #git fetch synchronizer
-        #git checkout main
-        #git cherry-pick --abort
+        
         #git status
-        #git cherry-pick --abort
-        git checkout main
-        git fetch --all
-        git pull --all
-        #git checkout synch/553c7fb
-    
-        #echo "grep log for $repo --> git log --all | grep 553c7fb"
-        #git log --all | grep 553c7fb
-        #echo "-------"
+        
+        git reset --hard HEAD
+        git checkout main 
+        git branch -D synch/47b1d0f 
 
         cd - >/dev/null
     done
@@ -158,6 +157,18 @@ doInRepos() {
 
 
 cherryPickMerge() {
+    
+    repo=$(basename $(pwd))
+
+    printInfoSection "Doing CherryPick Merge for $repo with Cherry: $CHERRYPICK_ID"
+    printInfo "PR '$TITLE'. '$BODY'"
+
+    # go to main and create branch from there
+    git checkout main
+
+    # get latest changes
+    git pull 
+
     # Add synchronizer as remote repo
     git remote | grep -q '^synchronizer$'
     if [ $? -eq 0 ]; then
@@ -169,18 +180,37 @@ cherryPickMerge() {
     # fetch synchronizer
     git fetch synchronizer
 
-    # go to main and create branch from there
-    git checkout main
-
     # create branch with merge id
-    git checkout -b "synch/$1"
+    git checkout -b "synch/$CHERRYPICK_ID"
 
-    git cherry-pick -m 1 $1
+    git cherry-pick -m 1 $CHERRYPICK_ID
     if [ $? -eq 0 ]; then
-        printInfo "$repo - $1 ->CherryPick OK"
+        printInfo "$repo - $CHERRYPICK_ID ->CherryPick OK"
+
+        doPushandPR
     else
         printInfo "$repo - $1 ->CherryPick NOK"
     fi
 
 }
 
+doPushandPR(){
+    repo=$(basename $(pwd))
+
+    printInfo "Pushing synch/$CHERRYPICK_ID for $repo"
+    git push origin synch/$CHERRYPICK_ID
+    
+    printInfo "creating PR for dynatrace-wwse/$repo"
+    gh repo set-default dynatrace-wwse/$repo
+    gh pr create --base main --head synch/$CHERRYPICK_ID --title "$TITLE" --body "$BODY"
+    #TODO: A Pr will be created with an URL, next step is to Merge the PR automatically if the check is ok.
+}
+
+mergePr(){
+    repo=$(basename $(pwd))
+    printInfo "Merging synch/$CHERRYPICK_ID for $repo"
+    git pull origin main
+    git checkout main
+    git merge synch/$CHERRYPICK_ID
+    git push -u origin main
+}

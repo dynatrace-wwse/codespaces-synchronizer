@@ -2,18 +2,20 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-printInfo "testing synch"
+export TITLE="Generic Repo path"
+export BODY="Enhancing framework functionality by having a generic path"
+export CHERRYPICK_ID="47b1d0f"
 
-#doInRepos cs cherryPickMerge 8417e91
-# git checkout main
-# git checkout -b synch/8417e91
-# git cherry-pick 8417e91
+printInfo "Testing Synch"
+
+#doInRepos cs mergePr
+doInRepos cs git status
+
+#doInRepos cs doPushandPR
 
 #helperFunction cs
-#fetchAll
-#pullAll
-#statusAll
 
+#doInRepos cs git status
 # compareFile cs .devcontainer/util/functions.sh
 
 
@@ -22,6 +24,10 @@ printInfo "testing synch"
 #helperFunction cs
 
 ## -- History of Cherries
+
+# Merge branch 'fix/path'
+#cherryPickMerge 47b1d0f
+
 # Merge branch 'ghactions/nohist'
 #cherryPickMerge 8417e91
 
