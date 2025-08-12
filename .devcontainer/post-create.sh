@@ -5,7 +5,7 @@ source .devcontainer/util/source_framework.sh
 
 setUpTerminal
 
-#startKindCluster
+startKindCluster
 
 installK9s
 
@@ -13,17 +13,17 @@ installK9s
 #installMkdocs
 
 # Dynatrace Operator can be deployed automatically
-#dynatraceDeployOperator
+dynatraceDeployOperator
 
 # You can deploy CNFS or AppOnly
-#deployCloudNative
+deployCloudNative
 #deployApplicationMonitoring
 
 # In here you deploy the Application you want
 # The TODO App will be deployed as a sample
 #deployTodoApp
 
-# The Astroshop keeping changes of demo.live needs certmanagerdocker
+# The Astroshop keeping changes of demo.live needs certmanager
 #certmanagerInstall
 #certmanagerEnable
 #deployAstroshop
