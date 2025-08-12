@@ -328,13 +328,13 @@ setUpTerminal(){
   printInfoSection "Sourcing the DT-Enablement framework functions to the terminal, adding aliases, a Dynatrace greeting and installing power10k into .zshrc for user $USER "
 
   printInfoSection "Installing power10k into .zshrc for user $USER "
-
-  cp -r $REPO_PATH/.devcontainer/p10k/powerlevel10k $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-
+  
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  
   cp $REPO_PATH/.devcontainer/p10k/.p10k.zsh $HOME/.p10k.zsh
-
+  
   cp $REPO_PATH/.devcontainer/p10k/.zshrc $HOME/.zshrc
-
+  
   bindFunctionsInShell
 
   setupAliases

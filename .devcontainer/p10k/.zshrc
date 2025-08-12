@@ -18,7 +18,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
+# Setting this variable when ZSH_THEME="devcontainers"
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -109,7 +109,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#source ~/powerlevel10k/powerlevel10k.zsh-theme
+DISABLE_AUTO_UPDATE=true
+DISABLE_UPDATE_PROMPT=true
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
@@ -119,3 +122,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+
+
