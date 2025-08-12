@@ -329,11 +329,11 @@ setUpTerminal(){
 
   printInfoSection "Installing power10k into .zshrc for user $USER "
 
-  cp $REPO_PATH/.devcontainer/p10k/powerlevel10k $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+  cp -r $REPO_PATH/.devcontainer/p10k/powerlevel10k $HOME/.oh-my-zsh/custom/themes/powerlevel10k
 
   cp $REPO_PATH/.devcontainer/p10k/.p10k.zsh $HOME/.p10k.zsh
 
-  cp $REPO_PATH/.zshrc $HOME/.zshrc
+  cp $REPO_PATH/.devcontainer/p10k/.zshrc $HOME/.zshrc
 
   bindFunctionsInShell
 
