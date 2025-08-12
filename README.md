@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/codespaces-synchronizer/blob/main/LICENSE)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-green)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)
 
----
+___
 
 This repository is the core repository for developing the framework and push changes to the enablement repositories.
 
