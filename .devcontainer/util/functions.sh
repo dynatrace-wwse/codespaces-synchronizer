@@ -359,6 +359,9 @@ source $REPO_PATH/.devcontainer/util/functions.sh
 
 #print greeting everytime a Terminal is opened
 printGreeting
+
+#supress p10k instant prompt
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 " >> /"$HOME"/.zshrc
 
 }
