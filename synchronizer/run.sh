@@ -2,19 +2,21 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Core Framework functionality - Rrefactor apps"
-export BODY="Adding all apps in a folder, refactor different enablements. Change coming from codespaces-synchronizer."
+export TITLE="Enhancing CLI experience with Power10k"
+export BODY="Adding power10k to the ZSH of the devcontainer. Two profiles, one for web another for native"
 export CHERRYPICK_ID="47b1d0f"
+
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="copycore/refactorapps"
+export BRANCH="copycore/power10k"
 
-printInfo "Testing Synch"
+printInfoSection "Running Codepaces-Synchronizer"
 
+
+doInRepos cs doPushandPR
 
 #doInRepos cs copyFramework
 
 
-doInRepos cs doPushandPR
 #doInRepos cs mergePr
 #doInRepos cs git status
 

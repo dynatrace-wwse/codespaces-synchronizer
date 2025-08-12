@@ -92,7 +92,6 @@ copyFramework(){
     cp -R "$ROOT_PATH$SYNCH_REPO/.devcontainer/" "$ROOT_PATH$repo/.devcontainer/"
     cp -R "$ROOT_PATH$SYNCH_REPO/.github/" "$ROOT_PATH$repo/.github/"
     
-
 }
 
 # Function to compare files in arrays,
@@ -215,8 +214,11 @@ doPushandPR(){
     
     printInfo "creating PR for dynatrace-wwse/$repo"
     gh repo set-default dynatrace-wwse/$repo
+    
     gh pr create --base main --head $BRANCH --title "$TITLE" --body "$BODY"
-    #TODO: A Pr will be created with an URL, next step is to Merge the PR automatically if the check is ok.
+
+    printWarn "A PR will be created with an URL, next step is to Merge the PR automatically if the check is ok."
+
 }
 
 mergePr(){
