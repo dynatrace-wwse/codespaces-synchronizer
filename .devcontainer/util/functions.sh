@@ -323,8 +323,26 @@ installK9s() {
   curl -sS https://webinstall.dev/k9s | bash
 }
 
+
+setUpTerminal(){
+  printInfoSection "Sourcing the DT-Enablement framework functions to the terminal, adding aliases, a Dynatrace greeting and installing power10k into .zshrc for user $USER "
+
+  printInfoSection "Installing power10k into .zshrc for user $USER "
+
+  cp $REPO_PATH/.devcontainer/p10k/powerlevel10k $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+
+  cp $REPO_PATH/.devcontainer/p10k/.p10k.zsh $HOME/.p10k.zsh
+
+  cp $REPO_PATH/.zshrc $HOME/.zshrc
+
+  bindFunctionsInShell
+
+  setupAliases
+}
+
+
 bindFunctionsInShell() {
-  printInfoSection "Binding functions.sh and adding a Greeting in the .zshrc for user $USER "
+  printInfo "Binding functions.sh and adding a Greeting in the .zshrc for user $USER "
   echo "
 #Making sure the Locale is set properly
 export LANG=en_US.UTF-8
@@ -340,7 +358,7 @@ printGreeting
 }
 
 setupAliases() {
-  printInfoSection "Adding Bash and Kubectl Pro CLI aliases to the end of the .zshrc for user $USER "
+  printInfo "Adding Bash and Kubectl Pro CLI aliases to the end of the .zshrc for user $USER "
   echo "
 # Alias for ease of use of the CLI
 alias las='ls -las' 
