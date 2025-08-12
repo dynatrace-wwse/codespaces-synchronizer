@@ -331,7 +331,13 @@ setUpTerminal(){
   
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
   
-  cp $REPO_PATH/.devcontainer/p10k/.p10k.zsh $HOME/.p10k.zsh
+  if [[ $CODESPACES == true ]]; then
+    printInfoSection "Power10k configuration is limited on web. If you open the devcontainer on an IDE type 'p10k configure' to reconfigure it."
+    cp $REPO_PATH/.devcontainer/p10k/.p10k.zsh.web $HOME/.p10k.zsh
+  else 
+    printInfoSection "Power10k configuration with many icons added."
+    cp $REPO_PATH/.devcontainer/p10k/.p10k.zsh $HOME/.p10k.zsh
+  fi
   
   cp $REPO_PATH/.devcontainer/p10k/.zshrc $HOME/.zshrc
   
