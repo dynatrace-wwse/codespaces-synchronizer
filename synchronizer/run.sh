@@ -15,9 +15,9 @@ export EXCLUDE_CUSTOMFILES=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
-#helperFunction cs
+helperFunction cs
 
-doInRepos cs doPushandPR
+#doInRepos cs doPushandPR
 
 #doInRepos cs copyFramework
 

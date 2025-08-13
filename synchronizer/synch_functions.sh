@@ -158,10 +158,10 @@ helperFunction() {
         #git clean -f
         #git branch -D $BRANCH
 
-        git checkout main
-        git pull origin main
-        git checkout -b monitoring/main
-    
+        #git checkout main
+        #git pull origin main
+        #git checkout -b monitoring/main
+        git status
         #
         #git branch -D $BRANCH
         #git pull 
