@@ -113,7 +113,7 @@ entrypoint(){
 postCodespaceTracker(){
   printInfo "Sending bizevent for $RepositoryName with $ERROR_COUNT issues built in $DURATION seconds"
 
-  curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
+  curl -X POST $ENDPOINT_CODESPACES_TRACKER \
   -H "Content-Type: application/json" \
   -d "{
   \"repo\": \"$GITHUB_REPOSITORY\",

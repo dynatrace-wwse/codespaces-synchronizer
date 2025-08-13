@@ -6,6 +6,8 @@
 # ======================================================================
 
 # VARIABLES DECLARATION
+ENDPOINT_CODESPACES_TRACKER=https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker
+
 #https://cert-manager.io/docs/release-notes/
 CERTMANAGER_VERSION=1.15.3
 
