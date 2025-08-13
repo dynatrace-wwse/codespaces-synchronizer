@@ -2,15 +2,20 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Enhancing CLI experience with Power10k"
-export BODY="Adding power10k to the ZSH of the devcontainer. Two profiles, one for web another for native"
+export TITLE="Framework before release v1.0.0"
+export BODY="copyFramework from codespaces-synch enhanced with rsync"
 export CHERRYPICK_ID="47b1d0f"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="copycore/power10k"
+export BRANCH="copycore/v1"
+
+# Flags for copyFramework
+export EXCLUDE_MKDOC=true
+export EXCLUDE_CUSTOMFILES=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
+#helperFunction cs
 
 doInRepos cs doPushandPR
 

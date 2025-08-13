@@ -83,15 +83,34 @@ copyFramework(){
     repo=$(basename $(pwd))
 
     printInfoSection "Copying core files to repository $repo into branch $BRANCH"
+    printInfoSection "Copying core files from $ROOT_PATH$SYNCH_REPO to $ROOT_PATH$repo"
 
     git checkout main
     git pull origin main
     git checkout -b $BRANCH
 
-    cp "$ROOT_PATH$SYNCH_REPO/.gitignore" "$ROOT_PATH$repo/.gitignore"
-    cp -R "$ROOT_PATH$SYNCH_REPO/.devcontainer/" "$ROOT_PATH$repo/.devcontainer/"
-    cp -R "$ROOT_PATH$SYNCH_REPO/.github/" "$ROOT_PATH$repo/.github/"
-    
+    # Exclude core files from the synchronizer
+    EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='README.md')
+
+    if [ "$EXCLUDE_MKDOC" = true ]; then
+        printInfo "excluding mkdoc"
+        EXCLUDES+=(--exclude='docs/' --exclude='mkdocs.yaml')
+    fi
+    if [ "$EXCLUDE_CUSTOMFILES" = true ]; then
+        printInfo "excluding custom files"
+        EXCLUDES+=(
+    --exclude='.devcontainer/devcontainer.json'
+    --exclude='.devcontainer/post-*.sh'
+    --exclude='.devcontainer/util/my_functions.sh'
+    --exclude='.devcontainer/test/integration.sh'
+        )
+    fi
+
+    SOURCE="$ROOT_PATH$SYNCH_REPO/"
+    DEST="$ROOT_PATH$repo/"
+
+    rsync -av "${EXCLUDES[@]}" "$SOURCE" "$DEST"
+
 }
 
 # Function to compare files in arrays,
@@ -136,13 +155,21 @@ helperFunction() {
         cd $ROOT_PATH"$repo" >/dev/null
         
         #git reset --hard HEAD
+        #git clean -f
         #git branch -D $BRANCH
-        git add .devcontainer/apps
-        #git checkout main 
-        #git pull 
-        git status
-        #rm -rf .devcontainer/apps
 
+        git checkout main
+        git pull origin main
+        git checkout -b monitoring/main
+    
+        #
+        #git branch -D $BRANCH
+        #git pull 
+        
+        #rm -rf .devcontainer/astroshop
+        #git checkout -b $BRANCH
+        #rm -rf .devcontainer/apps
+        
         cd - >/dev/null
     done
 }
