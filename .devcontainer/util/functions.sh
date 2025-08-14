@@ -111,16 +111,21 @@ entrypoint(){
 }
 
 postCodespaceTracker(){
+  
   printInfo "Sending bizevent for $RepositoryName with $ERROR_COUNT issues built in $DURATION seconds"
 
   curl -X POST $ENDPOINT_CODESPACES_TRACKER \
   -H "Content-Type: application/json" \
+  -H "Authorization: $CODESPACES_TRACKER_TOKEN" \
   -d "{
-  \"repo\": \"$GITHUB_REPOSITORY\",
-  \"demo\": \"$RepositoryName\",
-  \"codespace.error\": \"$ERROR_COUNT\",
+  \"repository\": \"$GITHUB_REPOSITORY\",
+  \"repository.name\": \"$RepositoryName\",
+  \"codespace.errors\": \"$ERROR_COUNT\",
   \"codespace.creation\": \"$DURATION\",
-  \"codespace.name\": \"$CODESPACE_NAME\"
+  \"codespace.type\": \"$INSTANTIATION_TYPE\",
+  \"codespace.arch\": \"$ARCH\",
+  \"codespace.name\": \"$CODESPACE_NAME\",
+  \"tenant\": \"$DT_TENANT\"
   }"
 }
 

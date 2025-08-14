@@ -6,7 +6,8 @@
 # ======================================================================
 
 # VARIABLES DECLARATION
-ENDPOINT_CODESPACES_TRACKER=https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker
+ENDPOINT_CODESPACES_TRACKER=https://codespaces-tracker.whydevslovedynatrace.com/api/receive
+CODESPACES_TRACKER_TOKEN_STRING="ilovedynatrace"
 
 #https://cert-manager.io/docs/release-notes/
 CERTMANAGER_VERSION=1.15.3
@@ -22,6 +23,22 @@ CODESPACE_PSHARE_FOLDER="/workspaces/.codespaces/.persistedshare"
 # Dynamic Variables between phases
 ENV_FILE="$REPO_PATH/.devcontainer/util/.env"
 
+# Calculating GH Repository
+if [ -e "$GITHUB_REPOSITORY" ]; then
+  GITHUB_REPOSITORY=$(git remote get-url origin)
+  export GITHUB_REPOSITORY=$GITHUB_REPOSITORY
+fi
+
+# Calculating instantiation type
+if [[ $CODESPACES == true ]]; then
+  INSTANTIATION_TYPE="github-codespaces"
+elif [[ $REMOTE_CONTAINERS == true ]]; then
+  INSTANTIATION_TYPE="remote-container"
+else 
+  INSTANTIATION_TYPE="local-docker-container"
+fi
+export INSTANTIATION_TYPE=$INSTANTIATION_TYPE
+
 if [ -e "$ENV_FILE" ]; then
   # file exists
   source $ENV_FILE
@@ -30,6 +47,13 @@ else
   echo -e "DURATION=0\nERROR_COUNT=0" > $ENV_FILE
   source $ENV_FILE
 fi
+
+# Calculating architecture
+ARCH=$(arch)
+export ARCH=$ARCH
+
+CODESPACES_TRACKER_TOKEN=$(echo -n $CODESPACES_TRACKER_TOKEN_STRING | base64)
+export CODESPACES_TRACKER_TOKEN=$CODESPACES_TRACKER_TOKEN
 
 # ColorCoding
 GREEN="\e[32m"
