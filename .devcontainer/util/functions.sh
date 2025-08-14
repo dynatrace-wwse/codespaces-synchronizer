@@ -998,7 +998,15 @@ deployGhdocs(){
 verifyCodespaceCreation(){
   printInfoSection "Verify Codespace creation"
   calculateTime
-  CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed')
+  if [[ $CODESPACES == true ]]; then
+    CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed')
+  else
+    printWarn "Container was not created in a codespace. Verification of proper creation TBD"
+    #FIXME: Verify Container creation and add in payload container type (codespace/vscode local/container) 
+    # add also Host architecture to the payload
+    #FIXME: Verify instantiation of Github Actions
+  fi
+
   if [ -n "$CODESPACE_ERRORS" ]; then
       ERROR_COUNT=$(printf "%s" "$CODESPACE_ERRORS" | wc -l) 
   else
@@ -1065,14 +1073,9 @@ finalizePostCreation(){
       # Testing finished. Destroy the codespace
       gh codespace delete --codespace "$CODESPACE_NAME" --force
   else
-      if [[ $CODESPACES == true ]]; then
-        verifyCodespaceCreation
-        postCodespaceTracker
-      else
-        printInfo "Container was not created in a codespace. Verification of proper creation TBD"
-        #FIXME: Verify Container creation and add in payload container type (codespace/vscode local/container) 
-        # add also Host architecture to the payload
-      fi
+      
+      verifyCodespaceCreation
+      postCodespaceTracker
   fi
 }
 
