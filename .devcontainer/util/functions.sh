@@ -334,6 +334,9 @@ setUpTerminal(){
 
   printInfoSection "Installing power10k into .zshrc for user $USER "
   
+  #TODO: Verify if ohmyZsh is there so we can add this functionality to any server by loading the functions
+  # source .devcontainer/util/source_framework.sh && setUpTerminal
+  # or at least add ohmyzsh, power10k and no greeting
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
   
   if [[ $CODESPACES == true ]]; then
