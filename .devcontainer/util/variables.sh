@@ -34,6 +34,8 @@ if [[ $CODESPACES == true ]]; then
   INSTANTIATION_TYPE="github-codespaces"
 elif [[ $REMOTE_CONTAINERS == true ]]; then
   INSTANTIATION_TYPE="remote-container"
+elif [[ -n $GITHUB_WORKFLOW ]]; then
+  INSTANTIATION_TYPE="github-workflow-$GITHUB_WORKFLOW"
 else 
   INSTANTIATION_TYPE="local-docker-container"
 fi

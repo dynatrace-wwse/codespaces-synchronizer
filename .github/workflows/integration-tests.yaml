@@ -1,4 +1,4 @@
-name: Integration Tests
+name: integration-tests
 run-name: ${{ github.event.head_commit.message }} - Core tests
 permissions:
   contents: write
