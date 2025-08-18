@@ -113,7 +113,7 @@ entrypoint(){
 postCodespaceTracker(){
   
   printInfo "Sending bizevent for $RepositoryName with $ERROR_COUNT issues built in $DURATION seconds"
-  
+
   curl -X POST $ENDPOINT_CODESPACES_TRACKER \
   -H "Content-Type: application/json" \
   -H "Authorization: $CODESPACES_TRACKER_TOKEN" \
@@ -1002,9 +1002,12 @@ verifyCodespaceCreation(){
     CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed')
   else
     printWarn "Container was not created in a codespace. Verification of proper creation TBD"
-    #FIXME: Verify Container creation and add in payload container type (codespace/vscode local/container) 
-    # add also Host architecture to the payload
-    #FIXME: Verify instantiation of Github Actions
+    ## GH Actions
+    #FIXME: Verify GH Actions? not really... 
+    ## VSCode 
+    #FIXME: Verify instantiation of VSCode
+    ## Local container
+    #docker logs  dt-enablement | sed -r "s/\x1b\[[0-9;]*[a-zA-Z]//g" > dt-enablement.log
   fi
 
   if [ -n "$CODESPACE_ERRORS" ]; then
