@@ -3,11 +3,11 @@
 source synchronizer/synch_functions.sh
 
 export TITLE="Framework before release v1.0.0"
-export BODY="copyFramework from codespaces-synch enhanced with rsync"
+export BODY="Enhance codespace tracker information."
 export CHERRYPICK_ID="47b1d0f"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="copycore/v1"
+export BRANCH="copycore/tracker"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -15,9 +15,9 @@ export EXCLUDE_CUSTOMFILES=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
-helperFunction cs
+#helperFunction cs
 
-#doInRepos cs doPushandPR
+doInRepos cs doPushandPR
 
 #doInRepos cs copyFramework
 

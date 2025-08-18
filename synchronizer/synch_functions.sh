@@ -154,21 +154,21 @@ helperFunction() {
         printInfo "in repo $repo "
         cd $ROOT_PATH"$repo" >/dev/null
         
+        ## Resetting
         #git reset --hard HEAD
         #git clean -f
         #git branch -D $BRANCH
 
+        ## Cleaning for main
         #git checkout main
         #git pull origin main
         #git checkout -b monitoring/main
-        git status
+        #git status
         #
-        #git branch -D $BRANCH
-        #git pull 
-        
-        #rm -rf .devcontainer/astroshop
-        #git checkout -b $BRANCH
-        #rm -rf .devcontainer/apps
+        ##Add and commit
+        git add .
+        git commit -s -m "$BODY"
+
         
         cd - >/dev/null
     done
