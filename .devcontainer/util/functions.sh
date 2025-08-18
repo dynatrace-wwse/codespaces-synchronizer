@@ -113,7 +113,7 @@ entrypoint(){
 postCodespaceTracker(){
   
   printInfo "Sending bizevent for $RepositoryName with $ERROR_COUNT issues built in $DURATION seconds"
-  env 
+  
   curl -X POST $ENDPOINT_CODESPACES_TRACKER \
   -H "Content-Type: application/json" \
   -H "Authorization: $CODESPACES_TRACKER_TOKEN" \
