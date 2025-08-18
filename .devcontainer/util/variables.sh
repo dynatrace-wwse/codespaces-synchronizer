@@ -24,7 +24,7 @@ CODESPACE_PSHARE_FOLDER="/workspaces/.codespaces/.persistedshare"
 ENV_FILE="$REPO_PATH/.devcontainer/util/.env"
 
 # Calculating GH Repository
-if [ -e "$GITHUB_REPOSITORY" ]; then
+if [ -z "$GITHUB_REPOSITORY" ]; then
   GITHUB_REPOSITORY=$(git remote get-url origin)
   export GITHUB_REPOSITORY=$GITHUB_REPOSITORY
 fi
