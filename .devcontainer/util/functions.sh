@@ -995,16 +995,34 @@ deployGhdocs(){
   mkdocs gh-deploy
 }
 
+getRunningDockerContainernameByImagePattern(){
+  pattern=$1
+
+  containername=$(docker ps --filter "status=running" --format "{{.Names}} {{.Image}}" | grep $pattern | awk '{print $1}')
+
+  echo $containername
+
+}
+
 verifyCodespaceCreation(){
   printInfoSection "Verify Codespace creation"
   calculateTime
-  if [[ $CODESPACES == true ]]; then
+  if [[ $INSTANTIATION_TYPE == "github-codespaces" ]]; then
     CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed')
-  else
-    printWarn "Container was not created in a codespace. Verification of proper creation TBD"
-    #FIXME: Verify Container creation and add in payload container type (codespace/vscode local/container) 
-    # add also Host architecture to the payload
-    #FIXME: Verify instantiation of Github Actions
+  elif [[ $INSTANTIATION_TYPE == "remote-container" ]] || [[ $INSTANTIATION_TYPE == "github-workflow" ]]; then
+    #FIXME: Verify instantiation of Github Actions & VS Code Remote containers
+    containername=$(getRunningDockerContainernameByImagePattern "vsc")
+    
+    CODESPACE_ERRORS=$(docker logs $containername | grep -i -E 'error|failed')
+    # Print logs of VSCode and cat grep them.
+    printWarn "Container was created in a remote container, either VS Code or Github Actions. Verification of proper creation TBD"
+  elif [[ $INSTANTIATION_TYPE == "local-docker-container" ]]; then
+    containername=$(getRunningDockerContainernameByImagePattern "dt-enablement")
+    CODESPACE_ERRORS=$(docker logs $containername | grep -i -E 'error|failed')
+    # above method works only calling it the first time. Otherwise the erros will be multiplied. We could clean them like below:
+    #awk '/Verify Codespace creation/ {exit} {print}' /tmp/dt-enablement.log > /tmp/dt-enablement-create.log
+  else 
+    printWarn "Container creation unknown."
   fi
 
   if [ -n "$CODESPACE_ERRORS" ]; then
