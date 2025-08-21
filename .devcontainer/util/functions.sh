@@ -780,19 +780,28 @@ generateDynakube(){
     sed -e 's~apiUrl: https://ENVIRONMENTID.live.dynatrace.com/api~apiUrl: '"$DT_API_URL"'~' $REPO_PATH/.devcontainer/yaml/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
 
     # ClusterName for API
-    sed -i 's~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "CLUSTERNAME"~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "'"$CLUSTERNAME"'"~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    sed 's~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "CLUSTERNAME"~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "'"$CLUSTERNAME"'"~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp 
+
+    mv $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml 
+    
     # Replace Networkzone
-    sed -i 's~networkZone: CLUSTERNAME~networkZone: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    sed 's~networkZone: CLUSTERNAME~networkZone: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp 
+    
+    mv $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml 
+    
+
     # Add ActiveGate config (added first so its applied to both CNFS and AppOnly)
     cat $REPO_PATH/.devcontainer/yaml/dynakube-body-activegate.yaml >> $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
     
     # Set ActiveGate Group 
-    sed -i 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    sed 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp
+    mv $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml 
 
     # Generate CloudNative Body (head + CNFS)
     cat $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml $REPO_PATH/.devcontainer/yaml/dynakube-body-cloudnative.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
     # Set CloudNative HostGroup
-    sed -i 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    sed 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml >  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml.tmp
+    mv  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
 
     # Generate AppOnly Body
     cat $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml $REPO_PATH/.devcontainer/yaml/dynakube-body-apponly.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-apponly.yaml
@@ -1057,12 +1066,14 @@ updateEnvVariable(){
     #printInfo "ZSH"
     #printInfo "update [$variable:${(P)variable}]"
     # indirect variable expansion in ZSH
-    sed -i "s|^$variable=.*|$variable=${(P)variable}|" $ENV_FILE
+    sed "s|^$variable=.*|$variable=${(P)variable}|" $ENV_FILE > $ENV_FILE.tmp
+    mv $ENV_FILE.tmp $ENV_FILE
   else
     #printInfo "BASH"
     #printInfo "update [$variable:${!variable}]"
     # indirect variable expansion in BASH
-    sed -i "s|^$variable=.*|$variable=${!variable}|" $ENV_FILE
+    sed "s|^$variable=.*|$variable=${!variable}|" $ENV_FILE  > $ENV_FILE.tmp
+    mv $ENV_FILE.tmp $ENV_FILE
   fi
   
   export $variable
