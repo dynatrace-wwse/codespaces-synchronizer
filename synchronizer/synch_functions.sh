@@ -85,9 +85,10 @@ copyFramework(){
     printInfoSection "Copying core files to repository $repo into branch $BRANCH"
     printInfoSection "Copying core files from $ROOT_PATH$SYNCH_REPO to $ROOT_PATH$repo"
 
-    git checkout main
-    git pull origin main
-    git checkout -b $BRANCH
+    #git checkout main
+    #git pull origin main
+    #git checkout -b $BRANCH
+    git pull origin $BRANCH
 
     # Exclude core files from the synchronizer
     EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='README.md')
@@ -168,6 +169,7 @@ helperFunction() {
         ##Add and commit
         git add .
         git commit -s -m "$BODY"
+        git push origin $BRANCH
 
         
         cd - >/dev/null
