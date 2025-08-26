@@ -90,6 +90,7 @@
       # Defaults to the latest OneAgent image on the tenant's registry
       #
       # image:
+      image: public.ecr.aws/dynatrace/dynatrace-oneagent:1.317.63.20250811-141521
 
       # Optional: If specified, indicates the OneAgent version to use
       # Defaults to "latest"
