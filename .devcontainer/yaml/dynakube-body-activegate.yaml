@@ -24,7 +24,6 @@
     # Example: "ENVIRONMENTID.live.dynatrace.com/linux/activegate:latest"
     #
     # image: ""
-    image: public.ecr.aws/dynatrace/dynatrace-activegate:1.317.48.20250821-210124
 
     # Optional: Sets the activation group for ActiveGate instances
     #

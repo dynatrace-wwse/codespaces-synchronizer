@@ -768,6 +768,7 @@ dynatraceDeployOperator() {
 
 
 generateDynakube(){
+    #FIXME: This code needs to be refactored. Generate a cleaner Dynakube for both architectures. 
     # SET API URL
     API="/api"
     DT_API_URL=$DT_TENANT$API
@@ -775,6 +776,23 @@ generateDynakube(){
     # Read the actual hostname in case changed during instalation
     CLUSTERNAME=$(hostname)
     export CLUSTERNAME
+
+    arch=$(uname -m)
+    ARM=false
+
+    if [[ "$arch" == "x86_64" ]]; then
+      printInfo "Codespace is running in AMD (x86_64), Dynakube image is set as default to pull the latest from the tenant $DT_TENANT"
+    elif [[ "$arch" == *"arm"* || "$arch" == *"aarch64"* ]]; then
+      printInfo "Codespace is running in ARM architecture ($arch), Dynakube image will be set in Dynakube for AG and OneAgent."
+      printInfo "ActiveGate image: $AG_IMAGE"
+      printInfo "OneAgent image: $OA_IMAGE"
+      ARM=true
+    else
+      printInfo "Codespace is running on an unkown architecture ($arch), Dynakube image will be set in Dynakube for AG and OneAgent."
+      printInfo "ActiveGate image: $AG_IMAGE"
+      printInfo "OneAgent image: $OA_IMAGE"
+      ARM=true
+    fi
 
     # Generate DynaKubeSkel with API URL
     sed -e 's~apiUrl: https://ENVIRONMENTID.live.dynatrace.com/api~apiUrl: '"$DT_API_URL"'~' $REPO_PATH/.devcontainer/yaml/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
@@ -789,7 +807,6 @@ generateDynakube(){
     
     mv $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml 
     
-
     # Add ActiveGate config (added first so its applied to both CNFS and AppOnly)
     cat $REPO_PATH/.devcontainer/yaml/dynakube-body-activegate.yaml >> $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml
     
@@ -797,12 +814,22 @@ generateDynakube(){
     sed 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp
     mv $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml 
 
+    if [[ $ARM == true  ]]; then
+      sed 's~# image: ""~image: "'$AG_IMAGE'"~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp
+      mv $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml 
+    fi
+
     # Generate CloudNative Body (head + CNFS)
     cat $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml $REPO_PATH/.devcontainer/yaml/dynakube-body-cloudnative.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    
     # Set CloudNative HostGroup
     sed 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml >  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml.tmp
     mv  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
 
+    if [[ $ARM == true  ]]; then
+      sed 's~# image: ""~image: "'$OA_IMAGE'"~g'  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml >  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml.tmp
+      mv  $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml.tmp $REPO_PATH/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    fi
     # Generate AppOnly Body
     cat $REPO_PATH/.devcontainer/yaml/gen/dynakube-skel-head.yaml $REPO_PATH/.devcontainer/yaml/dynakube-body-apponly.yaml > $REPO_PATH/.devcontainer/yaml/gen/dynakube-apponly.yaml
 
@@ -814,7 +841,7 @@ deployOperatorViaKubectl(){
 
   kubectl create namespace dynatrace
 
-  kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.5.1/kubernetes-csi.yaml
+  kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.6.1/kubernetes-csi.yaml
 
   # Save Dynatrace Secret
   kubectl -n dynatrace create secret generic dev-container --from-literal="apiToken=$DT_OPERATOR_TOKEN" --from-literal="dataIngestToken=$DT_INGEST_TOKEN"
