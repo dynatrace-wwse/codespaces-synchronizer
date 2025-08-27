@@ -2,8 +2,8 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Framework before release v1.0.0"
-export BODY="Enhance codespace tracker information."
+export TITLE="Enhance Framework before release v1.0.0"
+export BODY="Enhance codespace tracker information. fix sed -i issue on mounted volumes, Add ARM automatic deployment of DT OA and AG, Add shields, Add RUM, Update RUNME "
 export CHERRYPICK_ID="47b1d0f"
 
 #export BRANCH=synch/$CHERRYPICK_ID
@@ -15,7 +15,38 @@ export EXCLUDE_CUSTOMFILES=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
-helperFunction cs
+
+custom(){
+    # Custom function to be able to run commands in all CS repos.
+    repo=$(basename $(pwd))
+    printInfoSection "Running custom action in repo $repo"
+    ## Resetting
+    printInfo "Listing the PRs"
+
+    #copyFramework
+    
+    #git reset --hard HEAD
+    #git clean -f
+    #git branch -D $BRANCH
+
+    ## Cleaning for main
+    #git checkout main
+    #git pull origin main
+    #git checkout -b monitoring/main
+    #git pull --all
+    #git status
+    #git add .
+    #git commit -s -m "Bump RUNME to 3.13.2"
+    #git push origin $BRANCH
+    #gh pr list
+    # We list the PRs and only the one from the PR branch we get the ID
+}
+
+
+#doInRepos cs verifyPrMerge
+
+#doInRepos cs custom
+#doInRepos cs custom
 
 #doInRepos cs doPushandPR
 

@@ -12,50 +12,10 @@ printInfo "This is synchronization repo: $SYNCH_REPO"
 
 all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
+#cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability" "bug-busters")
+#cs_repos=("bug-busters")
 
-fetchAll() {
-    doGitActionInRepos all fetch
-}
 
-pullAll() {
-    doGitActionInRepos all pull
-}
-
-pushAll() {
-    doGitActionInRepos all push
-}
-
-statusAll() {
-    doGitActionInRepos all status
-}
-
-fetch() {
-    doGitActionInRepos cs fetch --all
-}
-
-pull() {
-    doGitActionInRepos cs pull --all
-}
-
-push() {
-    doGitActionInRepos cs push
-}
-
-status() {
-    doGitActionInRepos cs status
-}
-
-doGitActionInRepos() {
-    local array_name="$1_repos"
-    eval "local array=(\"\${$array_name[@]}\")"
-    printInfoSection "Git $2 in $1 repos from $ROOT_PATH$SYNCH_REPO"
-    for repo in "${all_repos[@]}"; do
-        printInfo "Git $2 in repo $repo "
-        cd $ROOT_PATH"$repo" >/dev/null
-        git $2 $3
-        cd - >/dev/null
-    done
-}
 
 # Function to compare files in arrays,
 # $1[cs or all for iterating in only CS or ALL repos]
@@ -88,7 +48,7 @@ copyFramework(){
     #git checkout main
     #git pull origin main
     #git checkout -b $BRANCH
-    git pull origin $BRANCH
+    #git pull origin $BRANCH
 
     # Exclude core files from the synchronizer
     EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='README.md')
@@ -242,13 +202,32 @@ doPushandPR(){
     git push origin $BRANCH
     
     printInfo "creating PR for dynatrace-wwse/$repo"
+
     gh repo set-default dynatrace-wwse/$repo
     
     gh pr create --base main --head $BRANCH --title "$TITLE" --body "$BODY"
 
     printWarn "A PR will be created with an URL, next step is to Merge the PR automatically if the check is ok."
-
 }
+
+verifyPrMerge(){
+    repo=$(basename $(pwd))
+    printInfoSection "verifying PR for branch $BRANCH, merging and deleting branch if ok for repo $repo"
+
+    PR=$(GH_PAGER=cat gh pr list | grep $BRANCH)
+    printInfo "$PR"
+    
+    PR_ID=$(echo $PR | awk '{print $1}') 
+    CHECKS_PASS=$(gh pr checks $PR_ID --json state | jq 'all(.[]; .state == "SUCCESS")')
+
+    if [[ $CHECKS_PASS ]]; then
+        printInfo "All checks have passed: $CHECKS_PASS"
+        gh pr merge $PR_ID --merge --delete-branch
+    else
+        printError "Checks failed $CHECKS_PASS"
+    fi
+}
+
 
 mergePr(){
     repo=$(basename $(pwd))
