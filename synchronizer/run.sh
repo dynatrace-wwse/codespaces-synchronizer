@@ -2,12 +2,23 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Enhance Framework before release v1.0.0"
-export BODY="Enhance codespace tracker information. fix sed -i issue on mounted volumes, Add ARM automatic deployment of DT OA and AG, Add shields, Add RUM, Update RUNME "
+export TITLE="Copying core framework before release v1.0.1"
+export BODY="Enhance codespace tracker information.
+- Add core framework
+- Add RUM 
+- Fix sed -i issue on mounted volumes 
+- Add ARM automatic deployment of DT OA and AG
+- Add shields
+- Update RUNME
+- Bump Dynakube "
+
 export CHERRYPICK_ID="47b1d0f"
 
+export TAG="v1.0.1"
+export RELEASE="$TAG"
+
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="copycore/tracker"
+export BRANCH="copycore/v101"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -20,13 +31,20 @@ custom(){
     # Custom function to be able to run commands in all CS repos.
     repo=$(basename $(pwd))
     printInfoSection "Running custom action in repo $repo"
-    ## Resetting
-    printInfo "Listing the PRs"
-
-    #copyFramework
     
+    # git checkout main
+
+    # git pull origin main
+    #git status
+
     #git reset --hard HEAD
-    #git clean -f
+    #git checkout main
+    #git clean -fd
+    git status
+    git remote -v
+    # git pull --all
+    # git checkout $BRANCH
+
     #git branch -D $BRANCH
 
     ## Cleaning for main
@@ -37,15 +55,25 @@ custom(){
     #git status
     #git add .
     #git commit -s -m "Bump RUNME to 3.13.2"
-    #git push origin $BRANCH
-    #gh pr list
-    # We list the PRs and only the one from the PR branch we get the ID
+    #git push origin
+
 }
 
 
-#doInRepos cs verifyPrMerge
+doInRepos migrate tagAndCreateRelease
+
+#doInRepos migrate verifyPrMerge
+
+#doInRepos migrate doPushandPR
+
+#doInRepos migrate copyFramework
+
+#doInRepos migrate custom
 
 #doInRepos cs custom
+
+#doInRepos cs verifyPrMerge
+
 #doInRepos cs custom
 
 #doInRepos cs doPushandPR
