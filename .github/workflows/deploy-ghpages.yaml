@@ -1,5 +1,5 @@
 name: Deploy Mkdocs to Gituhb Pages
-run-name: ${{ github.event.head_commit.message }} - deploy GHPages
+run-name: ${{ github.event.head_commit.message }}  - deploy GHPages
 permissions:
   contents: write
 on:
