@@ -13,10 +13,10 @@ jobs:
     # No CI Test should run longer than 10 minutes.
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository code
+      uses: actions/checkout@v4
     - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - run: pip install mkdocs ghp-import
-    - run: mkdocs build
-    - run: ghp-import -n -p -f ./site
+    - run: pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
+    - run: mkdocs gh-deploy
