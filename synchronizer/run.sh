@@ -2,12 +2,23 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Enhance Framework before release v1.0.0"
-export BODY="Enhance codespace tracker information. fix sed -i issue on mounted volumes, Add ARM automatic deployment of DT OA and AG, Add shields, Add RUM, Update RUNME "
+export TITLE="Copying core framework before release v1.0.1"
+export BODY="Enhance codespace tracker information.
+- Add core framework
+- Add RUM 
+- Fix sed -i issue on mounted volumes 
+- Add ARM automatic deployment of DT OA and AG
+- Add shields
+- Update RUNME
+- Bump Dynakube "
+
 export CHERRYPICK_ID="47b1d0f"
 
+export TAG="v1.0.1"
+export RELEASE="$TAG"
+
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="copycore/tracker"
+export BRANCH="cleanup/housekeeping"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -18,17 +29,25 @@ printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){
     # Custom function to be able to run commands in all CS repos.
-    repo=$(basename $(pwd))
-    printInfoSection "Running custom action in repo $repo"
-    ## Resetting
-    printInfo "Listing the PRs"
-
-    #copyFramework
+    #repo=$(basename $(pwd))
+    #printInfoSection "Running custom action in repo $repo"
     
-    #git reset --hard HEAD
-    #git clean -f
-    #git branch -D $BRANCH
+    # Show last release
+    #L=$(gh release list --limit 1)
+    #printInfo "$L"
 
+
+    #git reset --hard HEAD
+    #git checkout main
+    #git clean -fd
+    #git pull origin main
+    #git status
+    #git checkout $BRANCH
+    git status
+    #git remote -v
+    # git pull --all
+
+    #git branch -D $BRANCH
     ## Cleaning for main
     #git checkout main
     #git pull origin main
@@ -37,15 +56,46 @@ custom(){
     #git status
     #git add .
     #git commit -s -m "Bump RUNME to 3.13.2"
-    #git push origin $BRANCH
-    #gh pr list
-    # We list the PRs and only the one from the PR branch we get the ID
+    #git push origin
+
 }
 
+gh api \
+  --method PUT \
+  /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
+  --input - <<EOF
+{
+  "required_status_checks": {
+    "strict": true,
+    "contexts": [
+      "codespaces-integration-test-with-dynatrace-deployment"
+    ]
+  },
+  "enforce_admins": true,
+  "allow_deletions": false,
+  "required_pull_request_reviews": null,
+  "restrictions": null
+}
+EOF
+
+
+
+#doInRepos all custom
+
+#doInRepos migrate tagAndCreateRelease
+
+#doInRepos migrate verifyPrMerge
+
+#doInRepos migrate doPushandPR
+
+#doInRepos migrate copyFramework
+
+#doInRepos migrate custom
+
+#doInRepos cs custom
 
 #doInRepos cs verifyPrMerge
 
-#doInRepos cs custom
 #doInRepos cs custom
 
 #doInRepos cs doPushandPR

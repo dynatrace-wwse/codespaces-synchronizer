@@ -10,10 +10,10 @@ printInfo "Using as ROOT_PATH: $ROOT_PATH"
 printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
-all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability")
+all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
-#cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability" "bug-busters")
-#cs_repos=("bug-busters")
+fix_repos=("bug-busters")
+migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
 
 
 
@@ -48,10 +48,9 @@ copyFramework(){
     #git checkout main
     #git pull origin main
     #git checkout -b $BRANCH
-    #git pull origin $BRANCH
-
+    
     # Exclude core files from the synchronizer
-    EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='README.md')
+    EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='./README.md')
 
     if [ "$EXCLUDE_MKDOC" = true ]; then
         printInfo "excluding mkdoc"
@@ -228,6 +227,15 @@ verifyPrMerge(){
     fi
 }
 
+tagAndCreateRelease(){
+    repo=$(basename $(pwd))
+    printInfoSection "Creating a tag $TAG and release $RELEASE for repo $repo"
+    git checkout main
+    git pull origin main
+    git tag -a $TAG -m "Release version $RELEASE"
+    git push origin $TAG
+    gh release create $TAG -t "$RELEASE" -n "$BODY"
+}
 
 mergePr(){
     repo=$(basename $(pwd))
@@ -236,4 +244,28 @@ mergePr(){
     git checkout main
     git merge synch/$CHERRYPICK_ID
     git push -u origin main
+}
+
+protectMainBranch(){
+    repo=$(basename $(pwd))
+    printInfo "Protecting branch main for $repo"
+    
+    gh api \
+    --method PUT \
+    /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
+    --input - <<EOF
+    {
+    "required_status_checks": {
+        "strict": true,
+        "contexts": [
+        "codespaces-integration-test-with-dynatrace-deployment"
+        ]
+    },
+    "enforce_admins": true,
+    "allow_deletions": false,
+    "required_pull_request_reviews": null,
+    "restrictions": null
+    }
+EOF
+
 }
