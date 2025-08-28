@@ -87,9 +87,9 @@ gh api \
   --input - <<EOF
 {
   "required_status_checks": {
-    "strict": false,
+    "strict": true,
     "contexts": [
-      "integration-test / ci-test-vscode-extension-locally-on-ubuntu-server"
+      "codespaces-integration-test-with-dynatrace-deployment"
     ]
   },
   "enforce_admins": true,

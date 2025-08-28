@@ -13,7 +13,7 @@ on:
     branches:
       - main
 jobs:
-  ci-test-vscode-extension-locally-on-ubuntu-server:
+  codespaces-integration-test-with-dynatrace-deployment:
     runs-on: ubuntu-24.04
     # No CI Test should run longer than 10 minutes.
     timeout-minutes: 10
