@@ -18,7 +18,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="copycore/v101"
+export BRANCH="cleanup/housekeeping"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -29,24 +29,25 @@ printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){
     # Custom function to be able to run commands in all CS repos.
-    repo=$(basename $(pwd))
-    printInfoSection "Running custom action in repo $repo"
+    #repo=$(basename $(pwd))
+    #printInfoSection "Running custom action in repo $repo"
     
-    # git checkout main
+    # Show last release
+    #L=$(gh release list --limit 1)
+    #printInfo "$L"
 
-    # git pull origin main
-    #git status
 
     #git reset --hard HEAD
     #git checkout main
     #git clean -fd
+    #git pull origin main
+    #git status
+    #git checkout $BRANCH
     git status
-    git remote -v
+    #git remote -v
     # git pull --all
-    # git checkout $BRANCH
 
     #git branch -D $BRANCH
-
     ## Cleaning for main
     #git checkout main
     #git pull origin main
@@ -60,7 +61,51 @@ custom(){
 }
 
 
-doInRepos migrate tagAndCreateRelease
+
+
+# gh api \
+#   --method PUT \
+#   /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
+#   --input - <<EOF
+# {
+#   "required_pull_request_reviews": {
+#     "dismiss_stale_reviews": false,
+#     "require_code_owner_reviews": false
+#   },
+#   "enforce_admins": true,
+#   "allow_deletions": false,
+#   "allow_force_pushes": false,
+#   "required_status_checks": null,
+#   "restrictions": null
+# }
+# EOF
+echo "sending GH requrest"
+
+gh api \
+  --method PUT \
+  /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
+  --input - <<EOF
+{
+  "required_status_checks": {
+    "strict": false,
+    "contexts": [
+      "integration-test / ci-test-vscode-extension-locally-on-ubuntu-server"
+    ]
+  },
+  "enforce_admins": true,
+  "allow_deletions": false,
+  "required_pull_request_reviews": null,
+  "restrictions": null
+}
+EOF
+
+
+
+
+
+#doInRepos all custom
+
+#doInRepos migrate tagAndCreateRelease
 
 #doInRepos migrate verifyPrMerge
 
