@@ -60,27 +60,6 @@ custom(){
 
 }
 
-
-
-
-# gh api \
-#   --method PUT \
-#   /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
-#   --input - <<EOF
-# {
-#   "required_pull_request_reviews": {
-#     "dismiss_stale_reviews": false,
-#     "require_code_owner_reviews": false
-#   },
-#   "enforce_admins": true,
-#   "allow_deletions": false,
-#   "allow_force_pushes": false,
-#   "required_status_checks": null,
-#   "restrictions": null
-# }
-# EOF
-echo "sending GH requrest"
-
 gh api \
   --method PUT \
   /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
@@ -98,8 +77,6 @@ gh api \
   "restrictions": null
 }
 EOF
-
-
 
 
 

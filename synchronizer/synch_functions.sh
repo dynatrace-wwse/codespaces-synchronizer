@@ -245,3 +245,27 @@ mergePr(){
     git merge synch/$CHERRYPICK_ID
     git push -u origin main
 }
+
+protectMainBranch(){
+    repo=$(basename $(pwd))
+    printInfo "Protecting branch main for $repo"
+    
+    gh api \
+    --method PUT \
+    /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
+    --input - <<EOF
+    {
+    "required_status_checks": {
+        "strict": true,
+        "contexts": [
+        "codespaces-integration-test-with-dynatrace-deployment"
+        ]
+    },
+    "enforce_admins": true,
+    "allow_deletions": false,
+    "required_pull_request_reviews": null,
+    "restrictions": null
+    }
+EOF
+
+}
