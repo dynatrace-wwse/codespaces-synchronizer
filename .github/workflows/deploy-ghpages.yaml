@@ -5,8 +5,8 @@ permissions:
 on:
   push:
     branches:
-      - docs/*
       - main
+      - docs/*
 jobs:
   deploy:
     runs-on: ubuntu-24.04
@@ -23,11 +23,6 @@ jobs:
         source .devcontainer/util/source_framework.sh
         installMkdocs
         git fetch origin gh-pages:gh-pages
-        #git fetch origin gh-pages
-        #git checkout gh-pages || git checkout -b gh-pages
-        #git pull origin gh-pages
         mkdocs build
         mkdocs gh-deploy
-        #deployGhdocs
-        # pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
-        # mkdocs gh-deploy --force
+        

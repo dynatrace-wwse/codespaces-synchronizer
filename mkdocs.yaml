@@ -1,5 +1,5 @@
 # TODO: change site_name and repo_url to match your repo
-site_name: "Dynatrace Enablement Lab: Codespaces template"
+site_name: "Dynatrace Enablement Lab: Codespaces Synchronizer"
 repo_name: "View Code on GitHub"
 repo_url: "https://github.com/dynatrace-wwse/codespaces-synchronizer"
 nav:
