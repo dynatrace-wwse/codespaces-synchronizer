@@ -1,14 +1,13 @@
-name: Deploy Mkdocs to Gituhb Pages
-run-name: ${{ github.event.head_commit.message }}  - deploy GHPages
+name: deploy mkdocs to github pages
+run-name: ${{ github.event.head_commit.message }}  - deploy github pages
 permissions:
   contents: write
 on:
   push:
     branches:
       - main
-      - docs/*
 jobs:
-  deploy:
+  deploy-github-pages:
     runs-on: ubuntu-24.04
     # No CI Test should run longer than 10 minutes.
     timeout-minutes: 10
