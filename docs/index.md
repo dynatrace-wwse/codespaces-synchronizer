@@ -15,6 +15,7 @@ In this tutorial we'll learn:
 - exposing ports
 - tipp & tricks
 - troubleshooting
+- and more...
 
 <p align="center">
   <img src="img/dt_professors.png" alt="Professors" width="200">
