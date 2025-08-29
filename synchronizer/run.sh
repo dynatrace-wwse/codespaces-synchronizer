@@ -2,15 +2,13 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Copying core framework before release v1.0.1"
-export BODY="Enhance codespace tracker information.
-- Add core framework
-- Add RUM 
-- Fix sed -i issue on mounted volumes 
-- Add ARM automatic deployment of DT OA and AG
-- Add shields
-- Update RUNME
-- Bump Dynakube "
+export TITLE="Housekeeping, cleaning code, branches, enhance workflows after release v1.0.1"
+export BODY="Housekeeping, cleaning code, remove merged branches, enhance workflows after release v1.0.1:
+- Removing unnecesary files
+- Adding more ports for local docker 
+- print warning when running on ARM and deploying DT components since they are not latest
+- main branch is protected, integration test needed for merging
+- ghpages get updated on every merge on main "
 
 export CHERRYPICK_ID="47b1d0f"
 
@@ -18,7 +16,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="cleanup/housekeeping"
+export BRANCH="rfe/housekeeping"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -28,24 +26,37 @@ printInfoSection "Running Codepaces-Synchronizer"
 
 
 custom(){
-    # Custom function to be able to run commands in all CS repos.
-    #repo=$(basename $(pwd))
-    #printInfoSection "Running custom action in repo $repo"
+    # Custom function to be able to run commgands in all CS repos.
+    repo=$(basename $(pwd))
+    printInfoSection "Housekeeping - $repo"
     
     # Show last release
     #L=$(gh release list --limit 1)
     #printInfo "$L"
 
+    #rm .devcontainer/runlocal/README
+    #rm .devcontainer/runlocal/power10k.sh
+    #rm -rf .devcontainer/astroshop
 
     #git reset --hard HEAD
     #git checkout main
+    #git pull origin main
+    #git status
     #git clean -fd
     #git pull origin main
     #git status
-    #git checkout $BRANCH
-    git status
-    #git remote -v
-    # git pull --all
+    #git checkout -b $BRANCH
+    git add .
+    git commit -s -m "$TITLE"
+    #git restore README.md
+    #git status
+    #git checkout main
+    #git pull origin main
+    #git pull --all
+    #git status
+    #git remote remove synchronizer
+    #git fetch --all
+    #echo "$(git branch -a)"
 
     #git branch -D $BRANCH
     ## Cleaning for main
@@ -53,34 +64,18 @@ custom(){
     #git pull origin main
     #git checkout -b monitoring/main
     #git pull --all
-    #git status
     #git add .
-    #git commit -s -m "Bump RUNME to 3.13.2"
+    #git status
     #git push origin
-
 }
 
-gh api \
-  --method PUT \
-  /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
-  --input - <<EOF
-{
-  "required_status_checks": {
-    "strict": true,
-    "contexts": [
-      "codespaces-integration-test-with-dynatrace-deployment"
-    ]
-  },
-  "enforce_admins": true,
-  "allow_deletions": false,
-  "required_pull_request_reviews": null,
-  "restrictions": null
-}
-EOF
 
+doInRepos all custom
+doInRepos all doPushandPR
 
-
-#doInRepos all custom
+#doInRepos all copyFramework
+#doInRepos all deleteBranches
+#doInRepos all copyFramework
 
 #doInRepos migrate tagAndCreateRelease
 
