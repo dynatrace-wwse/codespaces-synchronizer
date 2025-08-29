@@ -10,7 +10,7 @@ printInfo "Using as ROOT_PATH: $ROOT_PATH"
 printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
-test_repos=("codespaces-synchronizer")
+this_repos=("codespaces-synchronizer")
 all_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
@@ -141,10 +141,10 @@ doInRepos() {
     eval "local array=(\"\${$array_name[@]}\")"
     # Pass the function name as an argument
     func_name=$2
-    printInfoSection "Iterating in array ($1) with function($2) with argument $3 tied to $ROOT_PATH$SYNCH_REPO"
+    #printInfoSection "Iterating in array ($1) with function($2) with argument $3 tied to $ROOT_PATH$SYNCH_REPO"
     
     for repo in "${array[@]}"; do
-        printInfo "for $repo do $2  - $@ "
+        #printInfo "for $repo do $2  - $@ "
         # go to repo
         cd $ROOT_PATH"$repo" >/dev/null
 
@@ -219,8 +219,8 @@ verifyPrMerge(){
     
     PR_ID=$(echo $PR | awk '{print $1}') 
     CHECKS_PASS=$(gh pr checks $PR_ID --json state | jq 'all(.[]; .state == "SUCCESS")')
-
-    if [[ $CHECKS_PASS ]]; then
+    printInfo "Checks: $CHECKS_PASS"
+    if [[ $CHECKS_PASS == true ]]; then
         printInfo "All checks have passed: $CHECKS_PASS"
         gh pr merge $PR_ID --merge --delete-branch
     else
@@ -291,4 +291,10 @@ deleteBranches(){
     # Delete Remote Branches
     git branch -r --merged origin/main | grep -vE 'origin/main|origin/master' | sed 's/origin\///' | xargs -n 1 -I {} git push origin --delete {}
 
+}
+
+
+generateMarkdowntable(){
+    repo=$(basename $(pwd))
+    echo "[$repo](https://https://github.com/dynatrace-wwse/$repo) |  description $repo | [![Integration tests](https://github.com/dynatrace-wwse/$repo/actions/workflows/integration-tests.yaml/badge.svg)](https://github.com/dynatrace-wwse/$repo/actions) [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/$repo?color=blueviolet)](https://github.com/dynatrace-wwse/$repo/releases)  [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/$repo/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/$repo/graphs/commit-activity) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/$repo/blob/main/LICENSE) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/$repo/) " 
 }

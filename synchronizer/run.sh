@@ -70,8 +70,10 @@ custom(){
 }
 
 
-doInRepos all custom
-doInRepos all doPushandPR
+doInRepos this doPushandPR
+doInRepos all generateMarkdowntable
+#doInRepos all custom
+#doInRepos all doPushandPR
 
 #doInRepos all copyFramework
 #doInRepos all deleteBranches
