@@ -11,7 +11,7 @@ printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
 test_repos=("codespaces-synchronizer")
-all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
+all_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
 migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
@@ -51,7 +51,7 @@ copyFramework(){
     #git checkout -b $BRANCH
     
     # Exclude core files from the synchronizer
-    EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='./README.md')
+    EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='/README.md')
 
     if [ "$EXCLUDE_MKDOC" = true ]; then
         printInfo "excluding mkdoc"
