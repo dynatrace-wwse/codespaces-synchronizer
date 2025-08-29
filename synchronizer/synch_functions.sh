@@ -219,8 +219,8 @@ verifyPrMerge(){
     
     PR_ID=$(echo $PR | awk '{print $1}') 
     CHECKS_PASS=$(gh pr checks $PR_ID --json state | jq 'all(.[]; .state == "SUCCESS")')
-
-    if [[ $CHECKS_PASS ]]; then
+    printInfo "Checks: $CHECKS_PASS"
+    if [[ $CHECKS_PASS == true ]]; then
         printInfo "All checks have passed: $CHECKS_PASS"
         gh pr merge $PR_ID --merge --delete-branch
     else

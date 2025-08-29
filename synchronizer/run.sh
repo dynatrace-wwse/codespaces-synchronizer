@@ -70,8 +70,9 @@ custom(){
 }
 
 
-doInRepos all custom
-doInRepos all doPushandPR
+doInRepos all verifyPrMerge
+#doInRepos all custom
+#doInRepos all doPushandPR
 
 #doInRepos all copyFramework
 #doInRepos all deleteBranches
