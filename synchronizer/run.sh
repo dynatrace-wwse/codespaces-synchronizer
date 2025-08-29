@@ -28,9 +28,9 @@ printInfoSection "Running Codepaces-Synchronizer"
 
 
 custom(){
-    # Custom function to be able to run commands in all CS repos.
-    #repo=$(basename $(pwd))
-    #printInfoSection "Running custom action in repo $repo"
+    # Custom function to be able to run commgands in all CS repos.
+    repo=$(basename $(pwd))
+    printInfoSection "All branches - $repo"
     
     # Show last release
     #L=$(gh release list --limit 1)
@@ -43,9 +43,13 @@ custom(){
     #git pull origin main
     #git status
     #git checkout $BRANCH
-    git status
-    #git remote -v
-    # git pull --all
+    #git checkout main
+    #git pull origin main
+    #git pull --all
+    #git status
+    git remote remove synchronizer
+    #git fetch --all
+    echo "$(git branch -a)"
 
     #git branch -D $BRANCH
     ## Cleaning for main
@@ -57,30 +61,11 @@ custom(){
     #git add .
     #git commit -s -m "Bump RUNME to 3.13.2"
     #git push origin
-
 }
 
-gh api \
-  --method PUT \
-  /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
-  --input - <<EOF
-{
-  "required_status_checks": {
-    "strict": true,
-    "contexts": [
-      "codespaces-integration-test-with-dynatrace-deployment"
-    ]
-  },
-  "enforce_admins": true,
-  "allow_deletions": false,
-  "required_pull_request_reviews": null,
-  "restrictions": null
-}
-EOF
 
-
-
-#doInRepos all custom
+doInRepos all custom
+#doInRepos all deleteBranches
 
 #doInRepos migrate tagAndCreateRelease
 

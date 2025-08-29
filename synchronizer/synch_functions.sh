@@ -10,6 +10,7 @@ printInfo "Using as ROOT_PATH: $ROOT_PATH"
 printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
+test_repos=("codespaces-synchronizer")
 all_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
@@ -250,22 +251,44 @@ protectMainBranch(){
     repo=$(basename $(pwd))
     printInfo "Protecting branch main for $repo"
     
-    gh api \
-    --method PUT \
-    /repos/dynatrace-wwse/codespaces-synchronizer/branches/main/protection \
-    --input - <<EOF
-    {
-    "required_status_checks": {
-        "strict": true,
-        "contexts": [
-        "codespaces-integration-test-with-dynatrace-deployment"
-        ]
-    },
-    "enforce_admins": true,
-    "allow_deletions": false,
-    "required_pull_request_reviews": null,
-    "restrictions": null
-    }
+result=$(gh api --method PUT /repos/dynatrace-wwse/$repo/branches/main/protection \
+  --input - <<EOF
+{
+  "required_status_checks": {
+    "strict": true,
+    "contexts": [
+      "codespaces-integration-test-with-dynatrace-deployment"
+    ]
+  },
+  "enforce_admins": true,
+  "allow_deletions": false,
+  "required_pull_request_reviews": null,
+  "restrictions": null
+}
 EOF
+)
+echo "Status:$?"
+echo $result
+}
+
+
+deleteBranches(){
+    repo=$(basename $(pwd))
+    printInfo "Deleting unmerged branches $repo"
+
+    #List merged branches
+    printInfo "Merged Branches \n $(git branch --merged)"
+
+    # delete merged branches
+    git branch --merged | grep -vE '^\*|main|master' | xargs -n 1 git branch -d
+
+    # Fetch latest remote info
+    printInfo "Latest remote info \n$(git fetch -p)"
+
+    # List merged branches
+    printInfo "Merged Branches remote \n $(git branch -r --merged origin/main)"
+
+    # Delete Remote Branches
+    git branch -r --merged origin/main | grep -vE 'origin/main|origin/master' | sed 's/origin\///' | xargs -n 1 -I {} git push origin --delete {}
 
 }
