@@ -32,7 +32,7 @@ This repository is the core repository for developing the framework and push cha
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/codespaces-synchronizer?color=blueviolet)](https://github.com/dynatrace-wwse/codespaces-synchronizer/releases) </br>
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/codespaces-synchronizer/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/codespaces-synchronizer/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/codespaces-synchronizer/blob/main/LICENSE)</br>
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Down-red)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/codespaces-synchronizer/)</br>
     </td>
   </tr>
   <tr>
@@ -110,7 +110,6 @@ This repository is the core repository for developing the framework and push cha
     <td><a href="https://github.com/dynatrace-wwse/enablement-dql-301" target="_blank">DQL 301</a></td>
     <td>Dynatrace Query Language - advanced concepts hands-on training</td>
     <td>
-    ⚠️ core needs to be migrated
 
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-dql-301/actions/workflows/integration-tests.yaml/badge.svg) </br>
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-dql-301?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-dql-301/releases) </br>
@@ -122,13 +121,24 @@ This repository is the core repository for developing the framework and push cha
 <tr><td><a href="https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry" target="_blank">Kubernetes Opentelelemtry</a></td>
     <td> Dynatrace Kubernetes Opentelemetry Training</td>
     <td>
-⚠️ core needs to be migrated
 
 ![Integration tests](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/actions/workflows/integration-tests.yaml/badge.svg) </br>
 [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-kubernetes-opentelemetry?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/releases) </br>
 [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-kubernetes-opentelemetry/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/graphs/commit-activity)</br>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-kubernetes-opentelemetry/blob/main/LICENSE)</br>
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Down-red)](https://dynatrace-wwse.github.io/enablement-kubernetes-opentelemetry/)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-kubernetes-opentelemetry/)</br>
+
+  </td>
+</tr>
+<tr><td><a href="https://github.com/dynatrace-wwse/enablement-workflow-essentials" target="_blank">Workflow essentials </a></td>
+    <td> Dynatrace automation engine workflow essentials hands on lab</td>
+    <td>
+
+![Integration tests](https://github.com/dynatrace-wwse/enablement-workflow-essentials/actions/workflows/integration-tests.yaml/badge.svg) </br>
+[![Version](https://img.shields.io/github/v/release/dynatrace-wwse/enablement-workflow-essentials?color=blueviolet)](https://github.com/dynatrace-wwse/enablement-workflow-essentials/releases) </br>
+[![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/enablement-workflow-essentials/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/enablement-workflow-essentials/graphs/commit-activity)</br>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/enablement-workflow-essentials/blob/main/LICENSE)</br>
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/enablement-workflow-essentials/)</br>
 
   </td>
 </tr>
