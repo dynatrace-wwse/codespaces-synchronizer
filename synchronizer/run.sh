@@ -70,7 +70,7 @@ custom(){
 }
 
 
-doInRepos all verifyPrMerge
+doInRepos all generateMarkdowntable
 #doInRepos all custom
 #doInRepos all doPushandPR
 
