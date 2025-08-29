@@ -70,6 +70,7 @@ custom(){
 }
 
 
+doInRepos this doPushandPR
 doInRepos all generateMarkdowntable
 #doInRepos all custom
 #doInRepos all doPushandPR

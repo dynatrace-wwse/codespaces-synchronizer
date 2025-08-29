@@ -10,7 +10,7 @@ printInfo "Using as ROOT_PATH: $ROOT_PATH"
 printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
-test_repos=("codespaces-synchronizer")
+this_repos=("codespaces-synchronizer")
 all_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
