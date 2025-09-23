@@ -16,7 +16,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/housekeeping"
+export BRANCH="rfe/docs"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -25,10 +25,10 @@ export EXCLUDE_CUSTOMFILES=true
 printInfoSection "Running Codepaces-Synchronizer"
 
 
-custom(){
-    # Custom function to be able to run commgands in all CS repos.
-    repo=$(basename $(pwd))
-    printInfoSection "Housekeeping - $repo"
+custom(){  
+    
+    #TODO
+    #deleted:    .github/workflows/github-test-cs.yaml.back
     
     # Show last release
     #L=$(gh release list --limit 1)
@@ -46,14 +46,14 @@ custom(){
     #git pull origin main
     #git status
     #git checkout -b $BRANCH
-    git add .
-    git commit -s -m "$TITLE"
+    #git add .
+    #git commit -s -m "$TITLE"
     #git restore README.md
     #git status
     #git checkout main
     #git pull origin main
     #git pull --all
-    #git status
+    
     #git remote remove synchronizer
     #git fetch --all
     #echo "$(git branch -a)"
@@ -69,9 +69,10 @@ custom(){
     #git push origin
 }
 
+doInRepos all custom
 
-doInRepos this doPushandPR
-doInRepos all generateMarkdowntable
+
+#doInRepos all generateMarkdowntable
 #doInRepos all custom
 #doInRepos all doPushandPR
 
