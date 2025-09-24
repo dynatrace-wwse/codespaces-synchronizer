@@ -394,10 +394,18 @@ alias pg='ps -aux | grep'
 }
 
 installRunme() {
-  printInfoSection "Installing Runme Version $RUNME_CLI_VERSION"
   mkdir runme_binary
-  wget -O runme_binary/runme_linux_x86_64.tar.gz https://download.stateful.com/runme/${RUNME_CLI_VERSION}/runme_linux_x86_64.tar.gz
-  tar -xvf runme_binary/runme_linux_x86_64.tar.gz --directory runme_binary
+  if [[ "$ARCH" == "x86_64" ]]; then
+    printInfoSection "Installing Runme Version $RUNME_CLI_VERSION for AMD/x86"
+    wget -O runme_binary/runme_linux_x86_64.tar.gz https://download.stateful.com/runme/${RUNME_CLI_VERSION}/runme_linux_x86_64.tar.gz
+    tar -xvf runme_binary/runme_linux_x86_64.tar.gz --directory runme_binary
+  elif [[ "$ARCH" == *"arm"* || "$ARCH" == *"aarch64"* ]]; then
+    printInfoSection "Installing Runme Version $RUNME_CLI_VERSION for ARM"
+    wget -O runme_binary/runme_linux_arm64.tar.gz https://download.stateful.com/runme/${RUNME_CLI_VERSION}/runme_linux_arm64.tar.gz
+    tar -xvf runme_binary/runme_linux_arm64.tar.gz --directory runme_binary
+  else 
+    printWarn "Runme cant be installed, Architecture unknown"
+  fi
   sudo mv runme_binary/runme /usr/local/bin
   rm -rf runme_binary
 }
@@ -777,18 +785,17 @@ generateDynakube(){
     CLUSTERNAME=$(hostname)
     export CLUSTERNAME
 
-    arch=$(uname -m)
     ARM=false
 
-    if [[ "$arch" == "x86_64" ]]; then
+    if [[ "$ARCH" == "x86_64" ]]; then
       printInfo "Codespace is running in AMD (x86_64), Dynakube image is set as default to pull the latest from the tenant $DT_TENANT"
-    elif [[ "$arch" == *"arm"* || "$arch" == *"aarch64"* ]]; then
-      printWarn "Codespace is running in ARM architecture ($arch), Dynakube image will be set in Dynakube for AG and OneAgent."
+    elif [[ "$ARCH" == *"arm"* || "$ARCH" == *"aarch64"* ]]; then
+      printWarn "Codespace is running in ARM architecture ($ARCH), Dynakube image will be set in Dynakube for AG and OneAgent."
       printWarn "ActiveGate image: $AG_IMAGE"
       printWarn "OneAgent image: $OA_IMAGE"
       ARM=true
     else
-      printInfo "Codespace is running on an unkown architecture ($arch), Dynakube image will be set in Dynakube for AG and OneAgent."
+      printInfo "Codespace is running on an unkown architecture ($ARCH), Dynakube image will be set in Dynakube for AG and OneAgent."
       printInfo "ActiveGate image: $AG_IMAGE"
       printInfo "OneAgent image: $OA_IMAGE"
       ARM=true
@@ -955,8 +962,9 @@ installMkdocs(){
 
 
 exposeMkdocs(){
-  printInfo "Exposing Mkdocs in your dev.container"
-  nohup mkdocs serve -a 0.0.0.0:8000 > /dev/null 2>&1 &
+  printInfo "Exposing Mkdocs in your dev.container in port 8000 & running in the background, type 'jobs' to show the process."
+  nohup mkdocs serve --dev-addr=0.0.0.0:8000 --watch-theme --dirtyreload --livereload > /dev/null 2>&1 &
+
 }
 
 
