@@ -27,8 +27,11 @@ printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){  
     
-    #TODO
+    #TODOs
     #deleted:    .github/workflows/github-test-cs.yaml.back
+    # How to work with TODOs
+    # Run locally
+    # Copy functions.sh file from Template repo
     
     # Show last release
     #L=$(gh release list --limit 1)
