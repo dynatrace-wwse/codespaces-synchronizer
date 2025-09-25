@@ -20,7 +20,7 @@ export BRANCH="rfe/docs"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
-export EXCLUDE_CUSTOMFILES=true
+export EXCLUDE_CUSTOMFILES=false
 
 printInfoSection "Running Codepaces-Synchronizer"
 
@@ -38,6 +38,8 @@ custom(){
     # [ ] - Copy kind.yaml 
     # [ ] - Verify ports also on json devcontainer 
 
+    repo=$(basename $(pwd))
+    printInfoSection "Custom function for repository $repo into branch $BRANCH"
 
     git status
     ls .github/workflows/github-test-cs.yaml.back
@@ -50,37 +52,11 @@ custom(){
     #rm -rf .devcontainer/astroshop
 
     #git reset --hard HEAD
-    #git checkout main
-    #git pull origin main
-    #git status
-    #git clean -fd
-    #git pull origin main
-    #git status
-    #git checkout -b $BRANCH
-    #git add .
-    #git commit -s -m "$TITLE"
-    #git restore README.md
-    #git status
-    #git checkout main
-    #git pull origin main
-    #git pull --all
-    
-    #git remote remove synchronizer
-    #git fetch --all
-    #echo "$(git branch -a)"
-
-    #git branch -D $BRANCH
-    ## Cleaning for main
-    #git checkout main
-    #git pull origin main
-    #git checkout -b monitoring/main
-    #git pull --all
-    #git add .
-    #git status
-    #git push origin
 }
 
-doInRepos refactor custom
+#doInRepos refactor custom
+
+doInRepos import copyFramework
 
 
 #doInRepos all generateMarkdowntable

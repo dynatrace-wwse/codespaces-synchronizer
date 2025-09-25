@@ -16,7 +16,7 @@ cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting
 fix_repos=("bug-busters")
 migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
 refactor_repos=("codespaces-synchronizer" "enablement-codespaces-template" "workshop-dynatrace-log-analytics")
-
+import_repos=("workshop-dynatrace-log-analytics")
 
 # Function to compare files in arrays,
 # $1[cs or all for iterating in only CS or ALL repos]
@@ -67,8 +67,15 @@ copyFramework(){
         )
     fi
 
-    SOURCE="$ROOT_PATH$SYNCH_REPO/"
-    DEST="$ROOT_PATH$repo/"
+    # For copying
+    #SOURCE="$ROOT_PATH$SYNCH_REPO/"
+    #DEST="$ROOT_PATH$repo/"
+    # For importing changes we invert
+    DEST="$ROOT_PATH$SYNCH_REPO/"
+    SOURCE="$ROOT_PATH$repo/"
+
+
+    echo "rsync -av EXCLUDES \"$SOURCE\" \"$DEST\""
 
     rsync -av "${EXCLUDES[@]}" "$SOURCE" "$DEST"
 
