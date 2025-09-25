@@ -9,10 +9,7 @@ startKindCluster
 
 installK9s
 
-#TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
-#installMkdocs
-
-# Dynatrace Operator can be deployed automatically
+# Dynatrace Operator is deployed automatically, secrets are read from the env.
 dynatraceDeployOperator
 
 # You can deploy CNFS or AppOnly
@@ -24,16 +21,12 @@ deployCloudNative
 deployTodoApp
 
 # The Astroshop keeping changes of demo.live needs certmanager
-#certmanagerInstall
-#certmanagerEnable
-#deployAstroshop
 
 # If you want to deploy your own App, just create a function in the functions.sh file and call it here.
 # deployMyCustomApp
 
-# If the Codespace was created via Workflow end2end test will be done, otherwise
+# This step is needed, do not remove it
 # it'll verify if there are error in the logs and will show them in the greeting as well a monitoring 
-# notification will be sent on the instantiation details
 finalizePostCreation
 
 printInfoSection "Your dev container finished creating"

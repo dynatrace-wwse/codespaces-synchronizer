@@ -24,15 +24,23 @@ export EXCLUDE_CUSTOMFILES=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
-
 custom(){  
     
-    #TODOs
-    #deleted:    .github/workflows/github-test-cs.yaml.back
-    # How to work with TODOs
-    # Run locally
-    # Copy functions.sh file from Template repo
-    
+    #TODO for this PR
+    # [] - delete    .github/workflows/github-test-cs.yaml.back
+    # [y] - Copy functions.sh file from Template repo - Done
+    # [ ] - Migrate my_functions.sh from https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics
+    # [ ] - Log analytics, verify repo, add ports, kind, etc...
+    # [ ] - change badge to all repos to point to the documentation of synchronizer
+    # [ ] - Add this to all repos with the file --8<-- "snippets/dt-enablement.md"
+    # [ ] - Copy test_functions.sh to all repos (no source)
+    # [ ] - Copy integration.sh and add repo and remove loading
+    # [ ] - Copy kind.yaml 
+    # [ ] - Verify ports also on json devcontainer 
+
+
+    git status
+    ls .github/workflows/github-test-cs.yaml.back
     # Show last release
     #L=$(gh release list --limit 1)
     #printInfo "$L"
@@ -72,7 +80,7 @@ custom(){
     #git push origin
 }
 
-doInRepos all custom
+doInRepos refactor custom
 
 
 #doInRepos all generateMarkdowntable
