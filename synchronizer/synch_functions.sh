@@ -68,14 +68,11 @@ copyFramework(){
     fi
 
     # For copying
-    #SOURCE="$ROOT_PATH$SYNCH_REPO/"
-    #DEST="$ROOT_PATH$repo/"
+    SOURCE="$ROOT_PATH$SYNCH_REPO/"
+    DEST="$ROOT_PATH$repo/"
     # For importing changes we invert
-    DEST="$ROOT_PATH$SYNCH_REPO/"
-    SOURCE="$ROOT_PATH$repo/"
-
-
-    echo "rsync -av EXCLUDES \"$SOURCE\" \"$DEST\""
+    #DEST="$ROOT_PATH$SYNCH_REPO/"
+    #SOURCE="$ROOT_PATH$repo/"
 
     rsync -av "${EXCLUDES[@]}" "$SOURCE" "$DEST"
 
