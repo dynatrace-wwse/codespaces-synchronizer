@@ -812,7 +812,6 @@ deployOperatorViaKubectl(){
 }
 
 deployOperatorViaHelm(){
-
   helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator --create-namespace --namespace dynatrace --atomic
 
   # Save Dynatrace Secret
@@ -823,19 +822,15 @@ deployOperatorViaHelm(){
 }
 
 undeployOperatorViaHelm(){
-
   helm uninstall dynatrace-operator --namespace dynatrace
-
 }
 
 
 installMkdocs(){
   printInfoSection "Installing Mkdocs"
-  printInfo "Installing Runme v $RUNME_CLI_VERSION"
   installRunme
-  printInfo "Installing MKdocs"
+  printInfo "Installing MKdocs requirements"
   pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
-  printInfo "Exposing MKdocs 0.0.0.0:8000"
   exposeMkdocs
 }
 
