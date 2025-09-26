@@ -21,8 +21,9 @@ jobs:
     - name: Install Runme, MKDocs and deploy
       run: | 
         source .devcontainer/util/source_framework.sh
-        installMkdocs
-        git fetch origin gh-pages:gh-pages
-        mkdocs build
-        mkdocs gh-deploy
+        printInfo "test"
+        #installMkdocs
+        #git fetch origin gh-pages:gh-pages
+        #mkdocs build
+        #mkdocs gh-deploy
         
