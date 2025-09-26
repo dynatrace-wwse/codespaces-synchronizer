@@ -20,10 +20,11 @@ jobs:
         python-version: '3.x'
     - name: Install Runme, MKDocs and deploy
       run: | 
-        source .devcontainer/util/source_framework.sh
-        printInfo "test"
+        #source .devcontainer/util/source_framework.sh
+        pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
+        
         #installMkdocs
-        #git fetch origin gh-pages:gh-pages
-        #mkdocs build
-        #mkdocs gh-deploy
+        git fetch origin gh-pages:gh-pages
+        mkdocs build
+        mkdocs gh-deploy
         
