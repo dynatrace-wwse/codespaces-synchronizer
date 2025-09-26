@@ -2,7 +2,21 @@
 
 --8<-- "snippets/disclaimer.md"
 
-## What's this tutorial all about
+<p align="center">
+  <img src="img/framework_banner.png" alt="DT Enablement Framework">
+</p>
+
+## The Goal of the Framework
+
+
+!!! tip "The goal of this effort"
+    **Reduce complexity, remove friction and increase adoption of the Dynatrace Platform**
+
+    The Dynatrace Enablement Framework is a structured set of tooling and best practices designed to streamline how we deliver, maintain, and scale solutions across the Dynatrace Platform. Its core purpose is to increase platform adoption by ensuring consistent training delivery, comprehensive solution coverage, and operational efficiency.Trainings within the framework are built as GitHub Codespaces—they’re publicly accessible, run seamlessly across environments, and adhere to a defined set of standards to ensure quality, repeatability, and alignment across teams.
+
+
+
+## What this tutorial is all about
 In this tutorial we'll learn:
 
 - how this codespace is being built
@@ -17,9 +31,7 @@ In this tutorial we'll learn:
 - troubleshooting
 - and more...
 
-<p align="center">
-  <img src="img/dt_professors.png" alt="Professors" width="200">
-</p>
+
 
 
 !!! tip "What will we do"

@@ -11,12 +11,13 @@ printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
 this_repos=("codespaces-synchronizer")
-all_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" )
+all_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "bug-busters" "workshop-dynatrace-log-analytics")
+synch_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics")
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
 migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
-
-
+refactor_repos=("codespaces-synchronizer" "enablement-codespaces-template" "workshop-dynatrace-log-analytics")
+import_repos=("workshop-dynatrace-log-analytics")
 
 # Function to compare files in arrays,
 # $1[cs or all for iterating in only CS or ALL repos]
@@ -45,10 +46,6 @@ copyFramework(){
 
     printInfoSection "Copying core files to repository $repo into branch $BRANCH"
     printInfoSection "Copying core files from $ROOT_PATH$SYNCH_REPO to $ROOT_PATH$repo"
-
-    #git checkout main
-    #git pull origin main
-    #git checkout -b $BRANCH
     
     # Exclude core files from the synchronizer
     EXCLUDES=(--exclude='.git' --exclude='synchronizer/' --exclude='/README.md')
@@ -67,8 +64,12 @@ copyFramework(){
         )
     fi
 
+    # For copying
     SOURCE="$ROOT_PATH$SYNCH_REPO/"
     DEST="$ROOT_PATH$repo/"
+    # For importing changes we invert
+    #DEST="$ROOT_PATH$SYNCH_REPO/"
+    #SOURCE="$ROOT_PATH$repo/"
 
     rsync -av "${EXCLUDES[@]}" "$SOURCE" "$DEST"
 
@@ -221,10 +222,10 @@ verifyPrMerge(){
     CHECKS_PASS=$(gh pr checks $PR_ID --json state | jq 'all(.[]; .state == "SUCCESS")')
     printInfo "Checks: $CHECKS_PASS"
     if [[ $CHECKS_PASS == true ]]; then
-        printInfo "All checks have passed: $CHECKS_PASS"
+        printInfo " ✅ All checks have passed: $CHECKS_PASS"
         gh pr merge $PR_ID --merge --delete-branch
     else
-        printError "Checks failed $CHECKS_PASS"
+        printError "❌ Checks failed $CHECKS_PASS"
     fi
 }
 
