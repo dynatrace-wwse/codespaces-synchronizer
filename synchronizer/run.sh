@@ -2,13 +2,13 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Housekeeping, cleaning code, branches, enhance workflows after release v1.0.1"
-export BODY="Housekeeping, cleaning code, remove merged branches, enhance workflows after release v1.0.1:
-- Removing unnecesary files
-- Adding more ports for local docker 
-- print warning when running on ARM and deploying DT components since they are not latest
-- main branch is protected, integration test needed for merging
-- ghpages get updated on every merge on main "
+export TITLE="Add applications repository, housekeeping, enhanced greeting after v1.0.1"
+export BODY="Add applications repository, housekeeping, enhanced greeting after v1.0.1
+- Adding applications repository
+- NodePort allocation is dynamic
+- helper function deployApp to deploy/undeploy apps 
+- enhanced greeting, dynamically show information
+- tests functions loaded in framework "
 
 export CHERRYPICK_ID="47b1d0f"
 
@@ -16,7 +16,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/docs"
+export BRANCH="rfe/apps"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -29,20 +29,35 @@ custom(){
     #TODO for this PR
     # [] - delete    .github/workflows/github-test-cs.yaml.back
     # [y] - Copy functions.sh file from Template repo - Done
-    # [ ] - Migrate my_functions.sh from https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics
-    # [ ] - Log analytics, verify repo, add ports, kind, etc...
-    # [ ] - change badge to all repos to point to the documentation of synchronizer
+    # [y] - Migrate my_functions.sh from https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics
+    # [y] - Log analytics, verify repo, add ports, kind, etc...
+    # [y] - Copy test_functions.sh to all repos (no source)
+    # [y] - Copy integration.sh and add repo and remove loading
+    # [y] - Copy kind.yaml 
+    # [y] - Verify ports also on json devcontainer 
     # [ ] - Add this to all repos with the file --8<-- "snippets/dt-enablement.md"
-    # [ ] - Copy test_functions.sh to all repos (no source)
-    # [ ] - Copy integration.sh and add repo and remove loading
-    # [ ] - Copy kind.yaml 
-    # [ ] - Verify ports also on json devcontainer 
+    # [y] - change badge to all repos to point to the documentation of synchronizer
 
     repo=$(basename $(pwd))
-    printInfoSection "Custom function for repository $repo into branch $BRANCH"
+    printInfo "Custom function for repository $repo "
 
-    git status
-    ls .github/workflows/github-test-cs.yaml.back
+    #git checkout -b $BRANCH
+    #git status
+
+    #rm .github/workflows/github-test-cs.yaml.back
+    #SOURCE="$ROOT_PATH$SYNCH_REPO/"
+    #DEST="$ROOT_PATH$repo/"
+    # For importing changes we invert
+    #DEST="$ROOT_PATH$SYNCH_REPO/"
+    #SOURCE="$ROOT_PATH$repo/"
+    #FILE="docs/snippets/dt-enablement.md"
+    #cp "$SOURCE$FILE" "$DEST$FILE"
+    #git add .
+    #git status
+
+    git commit -s -m "adding enablement info for pointing to documentation"
+    git push origin $BRANCH 
+
     # Show last release
     #L=$(gh release list --limit 1)
     #printInfo "$L"
@@ -56,7 +71,9 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos import copyFramework
+#doInRepos synch doPushandPR
+doInRepos synch verifyPrMerge
+#doInRepos synch custom
 
 
 #doInRepos all generateMarkdowntable
