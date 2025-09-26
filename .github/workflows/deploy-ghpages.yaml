@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-      - rfe/docs
 jobs:
   deploy-github-pages:
     runs-on: ubuntu-24.04
@@ -18,12 +17,9 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Install Runme, MKDocs and deploy
+    - name: MKDocs - install requirements, build, gh-deploy
       run: | 
-        #source .devcontainer/util/source_framework.sh
         pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
-        
-        #installMkdocs
         git fetch origin gh-pages:gh-pages
         mkdocs build
         mkdocs gh-deploy
