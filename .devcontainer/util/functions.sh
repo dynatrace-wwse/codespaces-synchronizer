@@ -429,6 +429,10 @@ certmanagerInstall() {
   waitForAllPods cert-manager
 }
 
+certmanagerDelete(){
+  kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v$CERTMANAGER_VERSION/cert-manager.yaml
+}
+
 generateRandomEmail() {
   echo "email-$RANDOM-$RANDOM@dynatrace.ai"
 }
@@ -1180,7 +1184,7 @@ deployApp(){
   case "$input" in
     1 | a | ai-travel-advisor)
       if [[ $delete ]]; then
-        printInfoSection "Undeploying astroshop..."
+        printInfoSection "Undeploying ai-travel-advisor..."
         kubectl delete ns ai-travel-advisor --force
       else
         deployAITravelAdvisorApp
@@ -1191,6 +1195,7 @@ deployApp(){
       if [[ $delete ]]; then
         printInfoSection "Undeploying astroshop..."
         kubectl delete ns astroshop --force
+        certmanagerDelete
       else
         deployAstroshop
       fi
@@ -1242,8 +1247,8 @@ deployApp(){
 }
 
 showDeployAppUsage(){
-  printInfoSection "Un/Deploy an Application to your Kubernetes Cluster      "
-  printInfo "                 Application repository                                     "
+  printInfoSection "   Un/Deploy an Application to your Kubernetes Cluster      "
+  printInfo "                ${PACKAGE} Application repository  ${PACKAGE}                               "
   printInfo "                                                                            "
   printInfo "For deploying one of the following apps, type the number, character or name "
   printInfo "associated e.g. for astroshop type deployApp '2', 'b' or 'astroshop'        "
