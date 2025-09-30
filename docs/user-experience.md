@@ -6,7 +6,7 @@
 	![greeting](img/greeting.png){ align=center ; width="800";} 
 
 
-To maximize adoption and enhance the Dynatrace public image—particularly among DevOps stakeholders—repositories leveraging the enablement framework should adhere to the following best practices.
+To maximize adoption and maintain the Dynatrace public image—particularly among DevOps stakeholders—repositories leveraging the enablement framework should adhere to the following best practices.
 
 - Present all materials and interfaces in a professional and consistent manner.
 - Ensure the project is governed by a clear and recognized open source license.
