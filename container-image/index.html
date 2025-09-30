@@ -354,7 +354,7 @@
           <li class="md-nav__item">
   <a href="#base-image" class="md-nav__link">
     <span class="md-ellipsis">
-      Base Image:
+      🖼️ Base Image:
     </span>
   </a>
   
@@ -363,7 +363,7 @@
           <li class="md-nav__item">
   <a href="#cross-platform-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Cross-Platform Support:
+      💻 Cross-Platform Support:
     </span>
   </a>
   
@@ -372,7 +372,7 @@
           <li class="md-nav__item">
   <a href="#local-and-cloud-execution" class="md-nav__link">
     <span class="md-ellipsis">
-      Local and Cloud Execution:
+      ☁️ Local and Cloud Execution:
     </span>
   </a>
   
@@ -393,9 +393,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#included-tooling" class="md-nav__link">
+  <a href="#tooling" class="md-nav__link">
     <span class="md-ellipsis">
-      Included Tooling:
+      Tooling
     </span>
   </a>
   
@@ -746,7 +746,7 @@
           <li class="md-nav__item">
   <a href="#base-image" class="md-nav__link">
     <span class="md-ellipsis">
-      Base Image:
+      🖼️ Base Image:
     </span>
   </a>
   
@@ -755,7 +755,7 @@
           <li class="md-nav__item">
   <a href="#cross-platform-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Cross-Platform Support:
+      💻 Cross-Platform Support:
     </span>
   </a>
   
@@ -764,7 +764,7 @@
           <li class="md-nav__item">
   <a href="#local-and-cloud-execution" class="md-nav__link">
     <span class="md-ellipsis">
-      Local and Cloud Execution:
+      ☁️ Local and Cloud Execution:
     </span>
   </a>
   
@@ -785,9 +785,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#included-tooling" class="md-nav__link">
+  <a href="#tooling" class="md-nav__link">
     <span class="md-ellipsis">
-      Included Tooling:
+      Tooling
     </span>
   </a>
   
@@ -934,26 +934,31 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>The Dynatrace Enablement Framework uses a custom Docker image as the foundation for all training and demo environments. This image is designed for maximum compatibility, flexibility, and ease of use across different platforms and deployment scenarios.</p>
 <hr />
 <h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">#</a></h2>
-<h3 id="base-image">Base Image:<a class="headerlink" href="#base-image" title="Permanent link">#</a></h3>
+<h3 id="base-image">🖼️ Base Image:<a class="headerlink" href="#base-image" title="Permanent link">#</a></h3>
 <p>The framework uses <code>mcr.microsoft.com/devcontainers/base:ubuntu</code> as its base image, ensuring seamless compatibility with GitHub Codespaces and Visual Studio Code Dev Containers.</p>
-<h3 id="cross-platform-support">Cross-Platform Support:<a class="headerlink" href="#cross-platform-support" title="Permanent link">#</a></h3>
+<h3 id="cross-platform-support">💻 Cross-Platform Support:<a class="headerlink" href="#cross-platform-support" title="Permanent link">#</a></h3>
 <p>The image is built to run on both AMD and ARM architectures, eliminating vendor lock-in and enabling use on a wide range of hardware.</p>
-<h3 id="local-and-cloud-execution">Local and Cloud Execution:<a class="headerlink" href="#local-and-cloud-execution" title="Permanent link">#</a></h3>
+<h3 id="local-and-cloud-execution">☁️ Local and Cloud Execution:<a class="headerlink" href="#local-and-cloud-execution" title="Permanent link">#</a></h3>
 <ul>
 <li>Can be run in GitHub Codespaces for cloud-based development.</li>
 <li>Supports local execution on Windows, Linux, and macOS via Multipass, providing a consistent development environment regardless of the host OS.</li>
 </ul>
 <h2 id="dynatrace-integration">Dynatrace Integration:<a class="headerlink" href="#dynatrace-integration" title="Permanent link">#</a></h2>
 <p>Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments work seamlessly with this deployment. All necessary components such as the CSI Driver, Webhook, ActiveGate, and OneAgents can be deployed in this image ensuring seamless monitoring and observability of the running applications.</p>
-<h2 id="included-tooling">Included Tooling:<a class="headerlink" href="#included-tooling" title="Permanent link">#</a></h2>
-<p>The image comes with a comprehensive set of tools required for modern DevOps and cloud-native development, including:
-    - Helm
-    - Kubectl
-    - Kind
-    - Docker
-    - Node.js
-    - K9s
-    - Python</p>
+<h2 id="tooling">Tooling<a class="headerlink" href="#tooling" title="Permanent link">#</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">🛠️ Included tooling </p>
+<p>The image comes with a comprehensive set of tools required for modern DevOps and cloud-native development, including:</p>
+<ul>
+<li><a href="https://helm.sh">Helm</a></li>
+<li><a href="https://kubernetes.io/docs/reference/kubectl/">Kubectl</a></li>
+<li><a href="https://kind.sigs.k8s.io/">Kind</a></li>
+<li><a href="https://www.docker.com/">Docker</a></li>
+<li><a href="https://nodejs.org/">NodeJs</a></li>
+<li><a href="https://k9scli.io/">K9s</a></li>
+<li><a href="https://www.python.org/">Python</a></li>
+</ul>
+</div>
 <h2 id="docker-in-socket-strategy">Docker-in-Socket Strategy<a class="headerlink" href="#docker-in-socket-strategy" title="Permanent link">#</a></h2>
 <p>The Dynatrace Enablement Framework uses a <strong>Docker-in-Socket</strong> strategy to enable container management from within the development container. This approach allows the container to communicate directly with the Docker daemon running on the host machine by mounting the Docker socket (<code>/var/run/docker.sock</code>) into the container.</p>
 <h3 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">#</a></h3>
