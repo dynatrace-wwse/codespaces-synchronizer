@@ -8,28 +8,32 @@ The Dynatrace Enablement Framework uses a custom Docker image as the foundation 
 
 ## Key Features
 
-### Base Image:
+### 🖼️ Base Image:
   The framework uses `mcr.microsoft.com/devcontainers/base:ubuntu` as its base image, ensuring seamless compatibility with GitHub Codespaces and Visual Studio Code Dev Containers.
 
-### Cross-Platform Support:
+### 💻 Cross-Platform Support:
   The image is built to run on both AMD and ARM architectures, eliminating vendor lock-in and enabling use on a wide range of hardware.
 
-### Local and Cloud Execution:  
+### ☁️ Local and Cloud Execution:  
   - Can be run in GitHub Codespaces for cloud-based development.
   - Supports local execution on Windows, Linux, and macOS via Multipass, providing a consistent development environment regardless of the host OS.
 
 ## Dynatrace Integration:
   Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments work seamlessly with this deployment. All necessary components such as the CSI Driver, Webhook, ActiveGate, and OneAgents can be deployed in this image ensuring seamless monitoring and observability of the running applications.
 
-## Included Tooling:
-  The image comes with a comprehensive set of tools required for modern DevOps and cloud-native development, including:
-    - Helm
-    - Kubectl
-    - Kind
-    - Docker
-    - Node.js
-    - K9s
-    - Python
+## Tooling
+
+!!! tip "🛠️ Included tooling "
+    The image comes with a comprehensive set of tools required for modern DevOps and cloud-native development, including:
+
+    - [Helm](https://helm.sh)
+    - [Kubectl](https://kubernetes.io/docs/reference/kubectl/)
+    - [Kind](https://kind.sigs.k8s.io/)
+    - [Docker](https://www.docker.com/)
+    - [NodeJs](https://nodejs.org/)
+    - [K9s](https://k9scli.io/)
+    - [Python](https://www.python.org/)
+
 
 
 ## Docker-in-Socket Strategy
