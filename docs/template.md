@@ -1,9 +1,13 @@
 
 # 4. Codespaces Template
 
+
+![professors](img/dt_professors.png){ align=right ; width="200"}  
 The [Enablement Codespaces Template](https://github.com/dynatrace-wwse/enablement-codespaces-template) is a ready-to-use GitHub repository designed to help you create, customize, and deliver hands-on enablements using GitHub Codespaces. It provides a robust starting point for professors, trainers, and solution architects to build interactive learning environments with minimal setup.
 
+
 ---
+
 
 ## 🚀 What is the Codespaces Template?
 
