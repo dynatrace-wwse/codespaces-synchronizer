@@ -16,7 +16,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/apps"
+export BRANCH="rfe/corewithjoshoriginal"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -41,8 +41,6 @@ custom(){
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
 
-    #git checkout -b $BRANCH
-    #git status
 
     #rm .github/workflows/github-test-cs.yaml.back
     #SOURCE="$ROOT_PATH$SYNCH_REPO/"
@@ -54,9 +52,12 @@ custom(){
     #cp "$SOURCE$FILE" "$DEST$FILE"
     #git add .
     #git status
-
-    git commit -s -m "adding enablement info for pointing to documentation"
-    git push origin $BRANCH 
+    git checkout main
+    git pull origin main
+    git status
+    #git commit -s -m "Fixing workflow of automatic deployment of GH pages when merging on main"
+    #doPushandPR
+    #git push origin $BRANCH 
 
     # Show last release
     #L=$(gh release list --limit 1)
@@ -71,9 +72,11 @@ custom(){
 
 #doInRepos refactor custom
 
-#doInRepos synch doPushandPR
-doInRepos synch verifyPrMerge
-#doInRepos synch custom
+doInRepos all custom
+
+#doInRepos fix tagAndCreateRelease
+#doInRepos fix copyFramework
+#doInRepos synch copyFramework 
 
 
 #doInRepos all generateMarkdowntable
