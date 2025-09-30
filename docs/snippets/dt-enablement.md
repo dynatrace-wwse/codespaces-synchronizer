@@ -5,4 +5,4 @@
       - is crosscompiled for AMD and ARM architectures
       - follows a set of standards and best practices for enhancing the user experience
     
-    Want to learn more about it? We invite you to read [this documentation](https://dynatrace-wwse.github.io/codespaces-synchronizer)
+    Want to learn more about it? We invite you to read [this documentation](https://dynatrace-wwse.github.io/codespaces-framework)

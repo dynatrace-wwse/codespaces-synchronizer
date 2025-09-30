@@ -27,16 +27,8 @@ printInfoSection "Running Codepaces-Synchronizer"
 custom(){  
     
     #TODO for this PR
-    # [] - delete    .github/workflows/github-test-cs.yaml.back
-    # [y] - Copy functions.sh file from Template repo - Done
-    # [y] - Migrate my_functions.sh from https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics
-    # [y] - Log analytics, verify repo, add ports, kind, etc...
-    # [y] - Copy test_functions.sh to all repos (no source)
-    # [y] - Copy integration.sh and add repo and remove loading
-    # [y] - Copy kind.yaml 
-    # [y] - Verify ports also on json devcontainer 
-    # [ ] - Add this to all repos with the file --8<-- "snippets/dt-enablement.md"
-    # [y] - change badge to all repos to point to the documentation of synchronizer
+    # [ ] - Update to all repos with the file --8<-- "snippets/dt-enablement.md"
+    # [ ] - change badge to all repos to point to the documentation of synchronizer
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
