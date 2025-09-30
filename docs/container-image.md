@@ -18,7 +18,7 @@ The Dynatrace Enablement Framework uses a custom Docker image as the foundation 
   - Can be run in GitHub Codespaces for cloud-based development.
   - Supports local execution on Windows, Linux, and macOS via Multipass, providing a consistent development environment regardless of the host OS.
 
-## Dynatrace Integration:
+## <img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Integration:
   Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments work seamlessly with this deployment. All necessary components such as the CSI Driver, Webhook, ActiveGate, and OneAgents can be deployed in this image ensuring seamless monitoring and observability of the running applications.
 
 ## Tooling

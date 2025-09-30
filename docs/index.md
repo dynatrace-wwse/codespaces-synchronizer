@@ -22,11 +22,11 @@
     The Dynatrace Enablement Framework is a structured set of tooling and best practices designed to streamline how we deliver, maintain, and scale solutions across the Dynatrace Platform. Its core purpose is to increase platform adoption by ensuring consistent training delivery, comprehensive solution coverage, and operational efficiency.Trainings within the framework are built as GitHub Codespaces—they’re publicly accessible, run seamlessly across environments, and adhere to a defined set of standards to ensure quality, repeatability, and alignment across teams.
 
 
-## Dynatrace Enablement Framework in a Nutshell
+## <img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Enablement Framework in a Nutshell
 
 The Dynatrace Enablement Framework streamlines the delivery of demos and hands-on trainings for the Dynatrace Platform. It provides a unified set of tools, templates, and best practices to ensure trainings are easy to create, run anywhere, and maintain over time.
 
-### Key Features
+### ✅ Key Features
 
 - **GitHub-Hosted & Versioned**  
   All trainings are managed in GitHub repositories, ensuring traceability and collaboration.
@@ -35,7 +35,7 @@ The Dynatrace Enablement Framework streamlines the delivery of demos and hands-o
   Each repo includes its own MkDocs-powered documentation, published via GitHub Pages.
 
 - **Universal Base Image**  
-  A Docker image supports AMD/ARM architectures, GitHub Codespaces, VS Code Dev Containers, and local execution in Ubuntu OS.
+  A Docker image supports AMD/ARM architectures, GitHub Codespaces, VS Code Dev Containers, and contaninerized execution in any Ubuntu OS.
 
 - **Separation of Concerns**  
   Modular design allows repo-specific logic without impacting the core framework.
