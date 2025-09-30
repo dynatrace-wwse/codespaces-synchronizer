@@ -16,7 +16,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/apps"
+export BRANCH="rfe/corewithjoshoriginal"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -27,22 +27,12 @@ printInfoSection "Running Codepaces-Synchronizer"
 custom(){  
     
     #TODO for this PR
-    # [] - delete    .github/workflows/github-test-cs.yaml.back
-    # [y] - Copy functions.sh file from Template repo - Done
-    # [y] - Migrate my_functions.sh from https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics
-    # [y] - Log analytics, verify repo, add ports, kind, etc...
-    # [y] - Copy test_functions.sh to all repos (no source)
-    # [y] - Copy integration.sh and add repo and remove loading
-    # [y] - Copy kind.yaml 
-    # [y] - Verify ports also on json devcontainer 
-    # [ ] - Add this to all repos with the file --8<-- "snippets/dt-enablement.md"
-    # [y] - change badge to all repos to point to the documentation of synchronizer
+    # [ ] - Update to all repos with the file --8<-- "snippets/dt-enablement.md"
+    # [ ] - change badge to all repos to point to the documentation of synchronizer
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
 
-    #git checkout -b $BRANCH
-    #git status
 
     #rm .github/workflows/github-test-cs.yaml.back
     #SOURCE="$ROOT_PATH$SYNCH_REPO/"
@@ -54,9 +44,12 @@ custom(){
     #cp "$SOURCE$FILE" "$DEST$FILE"
     #git add .
     #git status
-
-    git commit -s -m "adding enablement info for pointing to documentation"
-    git push origin $BRANCH 
+    git checkout main
+    git pull origin main
+    git status
+    #git commit -s -m "Fixing workflow of automatic deployment of GH pages when merging on main"
+    #doPushandPR
+    #git push origin $BRANCH 
 
     # Show last release
     #L=$(gh release list --limit 1)
@@ -71,9 +64,11 @@ custom(){
 
 #doInRepos refactor custom
 
-#doInRepos synch doPushandPR
-doInRepos synch verifyPrMerge
-#doInRepos synch custom
+doInRepos all custom
+
+#doInRepos fix tagAndCreateRelease
+#doInRepos fix copyFramework
+#doInRepos synch copyFramework 
 
 
 #doInRepos all generateMarkdowntable
