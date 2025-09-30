@@ -11,7 +11,9 @@
 
 ___
 
-This repository is the core repository for developing the framework and pushing changes to the enablement repositories.
+
+The Dynatrace Enablement Framework streamlines the delivery of demos and hands-on trainings for the Dynatrace Platform. It provides a unified set of tools, templates, and best practices to ensure trainings are easy to create, run anywhere, and maintain over time.
+
 
 
 <p align="center">
@@ -19,8 +21,8 @@ This repository is the core repository for developing the framework and pushing 
 </p>
 
 
-The Dynatrace Enablement Framework streamlines the delivery of demos and hands-on trainings for the Dynatrace Platform. It provides a unified set of tools, templates, and best practices to ensure trainings are easy to create, run anywhere, and maintain over time.
-
+This repository is the core repository for developing the framework and pushing changes to the enablement repositories.
+___
 
 ### 🚦 CI Status of the repositories
 
