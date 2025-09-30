@@ -340,6 +340,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4. Codespaces Template
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -349,6 +360,79 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-codespaces-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 What is the Codespaces Template?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Repository Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 How to Use the Template
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todos-in-the-codebase" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 TODOs in the Codebase
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-is-this-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧑‍🏫 Who is this for?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation &amp; Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -514,6 +598,68 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-codespaces-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 What is the Codespaces Template?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Repository Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 How to Use the Template
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todos-in-the-codebase" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 TODOs in the Codebase
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-is-this-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧑‍🏫 Who is this for?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation &amp; Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -530,17 +676,74 @@
   
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "4. Codespaces Template"});
-});
-</script>
-
 <h1 id="4-codespaces-template">4. Codespaces Template<a class="headerlink" href="#4-codespaces-template" title="Permanent link">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">This section is a WIP</p>
-<p>This section is a WIP</p>
-</div>
+<p>The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">Enablement Codespaces Template</a> is a ready-to-use GitHub repository designed to help you create, customize, and deliver hands-on enablements using GitHub Codespaces. It provides a robust starting point for professors, trainers, and solution architects to build interactive learning environments with minimal setup.</p>
+<hr />
+<h2 id="what-is-the-codespaces-template">🚀 What is the Codespaces Template?<a class="headerlink" href="#what-is-the-codespaces-template" title="Permanent link">#</a></h2>
+<p>This template repository provides:</p>
+<ul>
+<li>A pre-configured <code>.devcontainer</code> for instant Codespaces launches</li>
+<li>Example documentation and structure for enablement content</li>
+<li>GitHub Actions for CI/CD and documentation deployment</li>
+<li>Integration with Dynatrace and other cloud-native tools</li>
+<li>A clean starting point for your own enablement projects</li>
+</ul>
+<hr />
+<h2 id="repository-overview">📦 Repository Overview<a class="headerlink" href="#repository-overview" title="Permanent link">#</a></h2>
+<p><strong>Main features:</strong></p>
+<ul>
+<li><strong>.devcontainer/</strong>: All configuration for Codespaces and local dev containers</li>
+<li><strong>docs/</strong>: MkDocs-based documentation, ready to extend</li>
+<li><strong>.github/workflows/</strong>: CI/CD for integration tests and GitHub Pages deployment</li>
+<li><strong>README.md</strong>: Project overview and quickstart</li>
+<li><strong>mkdocs.yaml</strong>: Navigation and site configuration</li>
+</ul>
+<p>For a full file/folder breakdown, see the <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">repository on GitHub</a>.</p>
+<hr />
+<h2 id="how-to-use-the-template">📝 How to Use the Template<a class="headerlink" href="#how-to-use-the-template" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>Create your own enablement repository</strong><ul>
+<li>Click "Use this template" on <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">the GitHub repo</a></li>
+<li>Name your new repository and clone it locally</li>
+</ul>
+</li>
+<li><strong>Customize the content</strong><ul>
+<li>Edit the <code>docs/</code> folder to add your enablement instructions, labs, and resources</li>
+<li>Update <code>.devcontainer/devcontainer.json</code> to add dependencies or secrets as needed</li>
+</ul>
+</li>
+<li><strong>Launch in Codespaces</strong><ul>
+<li>Click the <strong>Code</strong> button in your repo and select "Open with Codespaces"</li>
+<li>Your environment will be ready in seconds, with all tools and docs pre-installed</li>
+</ul>
+</li>
+<li><strong>Publish documentation</strong><ul>
+<li>The <code>installMKdocs</code> function installs MkDocs inside the container and serves the documentation locally on port 8000, making it easy and enjoyable to write and preview your documentation without hassle.</li>
+<li>Push changes to <code>main</code> to trigger GitHub Pages deployment (see Actions tab)</li>
+<li>Your docs will be live at <code>https://&lt;your-org&gt;.github.io/&lt;your-repo&gt;/</code></li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="todos-in-the-codebase">📝 TODOs in the Codebase<a class="headerlink" href="#todos-in-the-codebase" title="Permanent link">#</a></h2>
+<p>Throughout the template repository, you will find <code>TODO</code> comments in various files. These are designed to guide you step-by-step as you create your own enablements—reminding you where to add content, configure secrets, or customize scripts.</p>
+<p><strong>Tip:</strong>
+To make working with TODOs easier, install a TODO highlighting extension in VS Code, such as <a href="https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight">TODO Highlight</a> or <a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">TODO Tree</a>. These extensions help you quickly find and manage all TODOs in your project.</p>
+<p>By following and resolving these TODOs, you can efficiently adapt the template to your specific enablement scenario.</p>
+<hr />
+<h2 id="who-is-this-for">🧑‍🏫 Who is this for?<a class="headerlink" href="#who-is-this-for" title="Permanent link">#</a></h2>
+<ul>
+<li>Professors and trainers creating hands-on labs</li>
+<li>Solution architects building demo environments</li>
+<li>Anyone who wants a fast, reproducible Codespaces-based enablement</li>
+</ul>
+<hr />
+<h2 id="documentation-resources">📚 Documentation &amp; Resources<a class="headerlink" href="#documentation-resources" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">Template Repository</a></li>
+<li><a href="https://dynatrace-wwse.github.io/enablement-codespaces-template/">How to use the codespaces template</a></li>
+</ul>
+<hr />
 <div class="grid cards">
 <ul>
 <li><a href="../framework/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

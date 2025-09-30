@@ -470,6 +470,54 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running locally
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running locally">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-multipass-for-local-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Multipass for Local Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Multipass for Local Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up your environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#local-container-details" class="md-nav__link">
     <span class="md-ellipsis">
       Local Container Details
@@ -788,6 +836,54 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running locally
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running locally">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-multipass-for-local-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Multipass for Local Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Multipass for Local Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up your environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#local-container-details" class="md-nav__link">
     <span class="md-ellipsis">
       Local Container Details
@@ -834,8 +930,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>No manual setup required—these are available as environment variables inside the container.</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Protip: Run in any cloud ☁️ provider</p>
-<p>For <strong>VS Code Dev Containers</strong> and <strong>Local Container</strong> you'll need to provide the infrastructure. You can run the enablements in any cloud provider of your choice.</p>
+<p class="admonition-title">Protip: Run in any ☁️ cloud provider of your choice</p>
+<p>For <strong>VS Code Dev Containers</strong> and <strong>Local Container</strong> you'll need to provide the infrastructure. You can run the enablements in any cloud provider of your choice. For best compatibility we recommend you to spin a VM with an Ubuntu Operating System. Then do a remote connection via VS Code for instantiating VS Code Dev Container or via SSH to run as a Local Container. </p>
 </div>
 <h3 id="vs-code-dev-containers">🖥️ VS Code Dev Containers<a class="headerlink" href="#vs-code-dev-containers" title="Permanent link">#</a></h3>
 <ul>
@@ -980,13 +1076,44 @@ DT_INGEST_TOKEN=dt0c01.YYYYYY
 # Add any other environment variables as needed
 </code></pre></div>
 <hr />
+<h2 id="running-locally">Running locally<a class="headerlink" href="#running-locally" title="Permanent link">#</a></h2>
+<h3 id="using-multipass-for-local-development">Using Multipass for Local Development<a class="headerlink" href="#using-multipass-for-local-development" title="Permanent link">#</a></h3>
+<p><a href="https://multipass.run/">Multipass</a> is a lightweight VM manager from Canonical that makes it easy to launch and manage Ubuntu virtual machines on macOS, Windows, and Linux. This is especially useful if you want to run the framework in a clean, reproducible Ubuntu environment without dual-booting or using a full desktop VM.</p>
+<p><strong>Why use Multipass?</strong></p>
+<ul>
+<li>Ensures compatibility with Ubuntu-based dev containers and scripts</li>
+<li>Isolates your development environment from your host OS</li>
+<li>Quick to launch, easy to reset or remove</li>
+</ul>
+<h4 id="basic-usage">Basic usage<a class="headerlink" href="#basic-usage" title="Permanent link">#</a></h4>
+<ul>
+<li><strong>Install Multipass</strong> (<a href="https://multipass.run/install">instructions</a>) </li>
+<li><strong>Launch an Ubuntu VM:</strong>
+    <div class="highlight"><pre><span></span><code>multipass<span class="w"> </span>launch<span class="w"> </span>--name<span class="w"> </span>dt-dev<span class="w"> </span>--disk<span class="w"> </span>20G<span class="w"> </span>--mem<span class="w"> </span>4G
+multipass<span class="w"> </span>shell<span class="w"> </span>dt-dev
+</code></pre></div></li>
+</ul>
+<h4 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">#</a></h4>
+<pre><code>- Inside the VM, install Docker and git:
+  ```sh
+  sudo apt update &amp;&amp; sudo apt install -y docker.io git
+  sudo usermod -aG docker $USER
+  ```
+- Clone your repository and proceed with the [Local Container](#local-container) or [VS Code Dev Containers](#vs-code-dev-containers) setup as described above.
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Mounting Volumes on Multipass</p>
+<p>You can mount folders from your host into the VM using <code>multipass mount</code> if you want to edit code locally but run containers in the VM. For example in the following example we are creating a VM mounting the folder <code>enablement</code> where you have all repositories of the enablement framework you want to use. 
+<div class="highlight"><pre><span></span><code>multipass<span class="w"> </span>launch<span class="w"> </span>--name<span class="w"> </span>enablement<span class="w"> </span>--disk<span class="w"> </span>30G<span class="w"> </span>--cpus<span class="w"> </span><span class="m">8</span><span class="w"> </span>--memory<span class="w"> </span>32G<span class="w"> </span>--mount<span class="w">  </span>/Users/sergio.hinojosa/repos/enablement:/home/ubuntu/enablement
+</code></pre></div></p>
+</div>
 <h2 id="local-container-details">Local Container Details<a class="headerlink" href="#local-container-details" title="Permanent link">#</a></h2>
 <p>The <code>make start</code> command is the recommended way to launch your local development container. Here’s what happens under the hood:</p>
 <ul>
 <li>The <code>Makefile</code> defines a <code>start</code> target, which sources <code>makefile.sh</code> and calls the <code>start</code> function.</li>
 <li>The <code>start</code> function:<ul>
 <li>Checks if the container (<code>dt-enablement</code>) is running:<ul>
-<li>If running, attaches a new shell to it.</li>
+<li>If running, attaches a new shell to it (like creating more Terminals on VS Code).</li>
 <li>If stopped, removes and recreates the container.</li>
 <li>If the image is missing, builds it and then runs the container.</li>
 </ul>
@@ -995,11 +1122,6 @@ DT_INGEST_TOKEN=dt0c01.YYYYYY
 <li>The container is started with the correct working directory and post-create/start scripts, just like in Codespaces or Dev Containers.</li>
 </ul>
 </li>
-</ul>
-<p>You can customize the image or container behavior by editing <code>.devcontainer/Makefile</code> and <code>.devcontainer/makefile.sh</code>.</p>
-<ul>
-<li>Secrets like <code>DT_TENANT</code>, <code>DT_OPERATOR_TOKEN</code>, and <code>DT_INGEST_TOKEN</code> are injected automatically in Codespaces and can be set via <code>.env</code> for local runs.</li>
-<li>See <code>.devcontainer/devcontainer.json</code> for details.</li>
 </ul>
 <div class="grid cards">
 <ul>
