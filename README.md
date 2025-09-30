@@ -15,7 +15,7 @@ This repository is the core repository for developing the framework and pushing 
 
 
 <p align="center">
-  <img src="docs/img/framework_banner.png" alt="DT Enablement Framework" width="500">
+  <img src="docs/img/framework_banner.png" alt="DT Enablement Framework">
 </p>
 
 
