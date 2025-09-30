@@ -11,7 +11,16 @@
 
 ___
 
-This repository is the core repository for developing the framework and push changes to the enablement repositories.
+This repository is the core repository for developing the framework and pushing changes to the enablement repositories.
+
+
+<p align="center">
+  <img src="docs/img/framework_banner.png" alt="DT Enablement Framework" width="500">
+</p>
+
+
+The Dynatrace Enablement Framework streamlines the delivery of demos and hands-on trainings for the Dynatrace Platform. It provides a unified set of tools, templates, and best practices to ensure trainings are easy to create, run anywhere, and maintain over time.
+
 
 ### 🚦 CI Status of the repositories
 
@@ -32,9 +41,6 @@ Repository ID | Description | 🚦 CI Status
 [workshop-dynatrace-log-analytics](https://https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics) |  Dynatrace automation engine workflow essentials hands on lab | [![Integration tests](https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics/actions/workflows/integration-tests.yaml/badge.svg)](https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics/actions) [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/workshop-dynatrace-log-analytics?color=blueviolet)](https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics/releases)  [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/workshop-dynatrace-log-analytics/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics/graphs/commit-activity) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/workshop-dynatrace-log-analytics/blob/main/LICENSE) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/workshop-dynatrace-log-analytics/) 
 [bug-busters](https://https://github.com/dynatrace-wwse/bug-busters) |  Dynatrace automation engine workflow essentials hands on lab | [![Integration tests](https://github.com/dynatrace-wwse/bug-busters/actions/workflows/integration-tests.yaml/badge.svg)](https://github.com/dynatrace-wwse/bug-busters/actions) [![Version](https://img.shields.io/github/v/release/dynatrace-wwse/bug-busters?color=blueviolet)](https://github.com/dynatrace-wwse/bug-busters/releases)  [![Commits](https://img.shields.io/github/commits-since/dynatrace-wwse/bug-busters/latest?color=ff69b4&include_prereleases)](https://github.com/dynatrace-wwse/bug-busters/graphs/commit-activity) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=green)](https://github.com/dynatrace-wwse/bug-busters/blob/main/LICENSE) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://dynatrace-wwse.github.io/bug-busters/) 
 
-<p align="center">
-  <img src="docs/img/framework_banner.png" alt="DT Enablement Framework" width="500">
-</p>
 
 
 ## [👨‍🏫 Architecture and how to the enablement architecture looks like!](https://dynatrace-wwse.github.io/codespaces-synchronizer)
