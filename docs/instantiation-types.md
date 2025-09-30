@@ -13,8 +13,8 @@
 
 
 
-!!! tip "Protip: Run in any cloud ☁️ provider"
-     For **VS Code Dev Containers** and **Local Container** you'll need to provide the infrastructure. You can run the enablements in any cloud provider of your choice.
+!!! tip "Protip: Run in any ☁️ cloud provider of your choice"
+     For **VS Code Dev Containers** and **Local Container** you'll need to provide the infrastructure. You can run the enablements in any cloud provider of your choice. For best compatibility we recommend you to spin a VM with an Ubuntu Operating System. Then do a remote connection via VS Code for instantiating VS Code Dev Container or via SSH to run as a Local Container. 
 
 ### 🖥️ VS Code Dev Containers
 - Clone the repository to your local machine (Ubuntu OS recommended for best compatibility).
@@ -112,6 +112,41 @@ DT_INGEST_TOKEN=dt0c01.YYYYYY
 
 ---
 
+## Running locally
+
+### Using Multipass for Local Development
+
+[Multipass](https://multipass.run/) is a lightweight VM manager from Canonical that makes it easy to launch and manage Ubuntu virtual machines on macOS, Windows, and Linux. This is especially useful if you want to run the framework in a clean, reproducible Ubuntu environment without dual-booting or using a full desktop VM.
+
+**Why use Multipass?**
+
+- Ensures compatibility with Ubuntu-based dev containers and scripts
+- Isolates your development environment from your host OS
+- Quick to launch, easy to reset or remove
+
+#### Basic usage
+
+  -  **Install Multipass** ([instructions](https://multipass.run/install)) 
+  -  **Launch an Ubuntu VM:**
+	```sh
+	multipass launch --name dt-dev --disk 20G --mem 4G
+	multipass shell dt-dev
+	```
+
+#### Set up your environment
+	- Inside the VM, install Docker and git:
+	  ```sh
+	  sudo apt update && sudo apt install -y docker.io git
+	  sudo usermod -aG docker $USER
+	  ```
+	- Clone your repository and proceed with the [Local Container](#local-container) or [VS Code Dev Containers](#vs-code-dev-containers) setup as described above.
+
+!!! tip "Mounting Volumes on Multipass"
+    You can mount folders from your host into the VM using `multipass mount` if you want to edit code locally but run containers in the VM. For example in the following example we are creating a VM mounting the folder `enablement` where you have all repositories of the enablement framework you want to use. 
+    ```bash
+    multipass launch --name enablement --disk 30G --cpus 8 --memory 32G --mount  /Users/sergio.hinojosa/repos/enablement:/home/ubuntu/enablement
+    ```
+
 ## Local Container Details
 
 The `make start` command is the recommended way to launch your local development container. Here’s what happens under the hood:
@@ -119,16 +154,11 @@ The `make start` command is the recommended way to launch your local development
 - The `Makefile` defines a `start` target, which sources `makefile.sh` and calls the `start` function.
 - The `start` function:
 	- Checks if the container (`dt-enablement`) is running:
-		- If running, attaches a new shell to it.
+		- If running, attaches a new shell to it (like creating more Terminals on VS Code).
 		- If stopped, removes and recreates the container.
 		- If the image is missing, builds it and then runs the container.
 	- All required ports, volumes, and environment variables are set up automatically.
 	- The container is started with the correct working directory and post-create/start scripts, just like in Codespaces or Dev Containers.
-
-You can customize the image or container behavior by editing `.devcontainer/Makefile` and `.devcontainer/makefile.sh`.
-
-- Secrets like `DT_TENANT`, `DT_OPERATOR_TOKEN`, and `DT_INGEST_TOKEN` are injected automatically in Codespaces and can be set via `.env` for local runs.
-- See `.devcontainer/devcontainer.json` for details.
 
 
 
