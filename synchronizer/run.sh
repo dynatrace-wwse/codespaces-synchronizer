@@ -2,13 +2,13 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Add applications repository, housekeeping, enhanced greeting after v1.0.1"
-export BODY="Add applications repository, housekeeping, enhanced greeting after v1.0.1
-- Adding applications repository
-- NodePort allocation is dynamic
-- helper function deployApp to deploy/undeploy apps 
-- enhanced greeting, dynamically show information
-- tests functions loaded in framework "
+export TITLE="Miscelaneus changes"
+export BODY="Miscelaneus changes 
+- security update langchain
+- dt-enablement banner
+- enhance gitignore
+- clean up variables
+- deploy gh pages when push on docs/*"
 
 export CHERRYPICK_ID="47b1d0f"
 
@@ -20,17 +20,17 @@ export BRANCH="rfe/misc"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
-export EXCLUDE_CUSTOMFILES=false
+export EXCLUDE_CUSTOMFILES=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){  
     
     #TODO for this PR
-    # [ ] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
-    # [ ] - change badge to all repos to point to the documentation of synchronizer
-    # [ ] - AI Repo, image? appsec issue fix to all
-    # [ ] - search for https://dynatrace-wwse.github.io/codespaces-synchronizer)
+    # [y] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
+    # [y] - change badge to all repos to point to the documentation of synchronizer
+    # [y] - AI Repo, image? appsec issue fix to all
+    # [y] - search for https://dynatrace-wwse.github.io/codespaces-framework)
     
 
     repo=$(basename $(pwd))
@@ -38,21 +38,26 @@ custom(){
 
 
     #rm .github/workflows/github-test-cs.yaml.back
-    #SOURCE="$ROOT_PATH$SYNCH_REPO/"
-    #DEST="$ROOT_PATH$repo/"
+    
     # For importing changes we invert
     #DEST="$ROOT_PATH$SYNCH_REPO/"
     #SOURCE="$ROOT_PATH$repo/"
+    
+    #SOURCE="$ROOT_PATH$SYNCH_REPO/"
+    #DEST="$ROOT_PATH$repo/"
     #FILE="docs/snippets/dt-enablement.md"
     #cp "$SOURCE$FILE" "$DEST$FILE"
+    #git status
+    git checkout main
+    git pull origin main
+    #git status
+    #git checkout -b $BRANCH
     #git add .
+    #git commit -s -m "$BODY"
     #git status
-    #git checkout main
-    #git pull origin main
-    #git status
-    git checkout -b $BRANCH
-    #git commit -s -m "Fixing workflow of automatic deployment of GH pages when merging on main"
     #doPushandPR
+    #
+    #gh issue list --state open
     #git push origin $BRANCH 
 
     # Show last release
@@ -69,6 +74,8 @@ custom(){
 #doInRepos refactor custom
 
 doInRepos synch custom
+#doInRepos synch listOpenIssues
+#doInRepos synch verifyPrMerge
 
 #doInRepos fix tagAndCreateRelease
 #doInRepos fix copyFramework

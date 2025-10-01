@@ -196,6 +196,17 @@ cherryPickMerge() {
 
 }
 
+
+
+listOpenIssues(){
+    repo=$(basename $(pwd))
+    issue=$(gh issue list --state open --json number,title,url \
+      --jq '.[] | "\(.number) | \(.title) | \(.url)"')
+    
+    printInfo "$issue"
+}
+
+
 doPushandPR(){
     repo=$(basename $(pwd))
 
