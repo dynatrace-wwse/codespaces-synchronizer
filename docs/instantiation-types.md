@@ -168,7 +168,7 @@ Secrets and environment variables are handled differently depending on the insta
   -  **Launch an Ubuntu VM:**
 	```sh
 	multipass launch --name enablement --disk 30G --cpus 8 --memory 32G
-	multipass shell dt-dev
+	multipass shell enablement
 	```
 
 !!! tip "Mounting Volumes on Multipass"

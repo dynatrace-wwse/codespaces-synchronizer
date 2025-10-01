@@ -65,7 +65,8 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos all custom
+doInRepos all verifyPrMerge
+#doInRepos all custom
 #doInRepos synch listOpenIssues
 #doInRepos synch verifyPrMerge
 
