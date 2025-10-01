@@ -128,18 +128,24 @@ Automation for CI/CD and integration testing:
 
 - **runIntegrationTests**: This function triggers the integration tests for the repository by running the `integration.sh` script. It is used both locally and by the CI pipeline to ensure the environment and applications work as expected before merging changes.
 
-### Asserting running pods & apps
-```bash
+```bash title="integration.sh" linenums="1"
+#!/bin/bash
+# Load framework
+source .devcontainer/util/source_framework.sh
+
+printInfoSection "Running integration Tests for $RepositoryName"
+
 assertRunningPod dynatrace operator
 
-assertRunningPod dynatrace oneagent
-
 assertRunningPod dynatrace activegate
+
+assertRunningPod dynatrace oneagent
 
 assertRunningPod todoapp todoapp
 
 assertRunningApp 30100
 ```
+
 
 These assertions check that the required pods (operator, activegate, oneagent, and todoapp) are running in their respective namespaces, and that the application is accessible on the expected port (30100). If any assertion fails, the integration test will fail and block the PR from being merged.
 

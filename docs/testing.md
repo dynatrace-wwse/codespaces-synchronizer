@@ -16,9 +16,34 @@
 - **On-Demand Testing:**  
   Integration tests can also be executed manually at any time using the `runIntegrationTests` function, providing flexibility for developers to validate changes before submitting a PR.
 
+### Integration Test example
+
+```bash title="integration.sh" linenums="1"
+#!/bin/bash
+# Load framework
+source .devcontainer/util/source_framework.sh
+
+printInfoSection "Running integration Tests for $RepositoryName"
+
+assertRunningPod dynatrace operator
+
+assertRunningPod dynatrace activegate
+
+assertRunningPod dynatrace oneagent
+
+assertRunningPod todoapp todoapp
+
+assertRunningApp 30100
+```
+## Git Strategy
+
+!!! example "Git Strategy & Github Actions Workflow"
+	![run codespace](img/git_strategy.png){ align=center ; width="800";} 
+
+
 ## 🔒 Branch Protection
 
-- **Main Branch Protection:**  
+**Main Branch Protection:**  
   The `main` branch is protected and will only accept PRs that pass all integration tests. This ensures that only thoroughly tested code is merged, maintaining the integrity of the repository.
 
 ---
@@ -29,7 +54,8 @@ All repositories in the enablement framework display an **integration test badge
 
 For example, the badge for this repository is:
 
-![Integration tests](https://github.com/dynatrace-wwse/codespaces-framework/actions/workflows/integration-tests.yaml/badge.svg)
+ ![Integration tests](https://github.com/dynatrace-wwse/codespaces-framework/actions/workflows/integration-tests.yaml/badge.svg){ align=center;  } 
+
 
 You can find a table with all enablement framework repositories and their current integration test status in the [README section of this repository](https://github.com/dynatrace-wwse/codespaces-framework).
 
