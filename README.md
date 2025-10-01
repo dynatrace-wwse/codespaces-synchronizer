@@ -45,4 +45,4 @@ Repository ID | Description | 🚦 CI Status
 
 
 
-## [👨‍🏫 Architecture and how to the enablement architecture looks like!](https://dynatrace-wwse.github.io/codespaces-framework)
+## [📖 Explore the full documentation and architecture of the Dynatrace Enablement Framework](https://dynatrace-wwse.github.io/codespaces-framework)
