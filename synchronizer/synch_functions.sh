@@ -10,13 +10,13 @@ printInfo "Using as ROOT_PATH: $ROOT_PATH"
 printInfo "This is synchronization repo: $SYNCH_REPO"
 
 
-this_repos=("codespaces-synchronizer")
-all_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics" "bug-busters" )
-synch_repos=("codespaces-synchronizer" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics" )
+this_repos=("codespaces-framework")
+all_repos=("codespaces-framework" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics" "bug-busters" )
+synch_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics" "bug-busters" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
 migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
-refactor_repos=("codespaces-synchronizer" "enablement-codespaces-template" "workshop-dynatrace-log-analytics")
+refactor_repos=("codespaces-framework" "enablement-codespaces-template" "workshop-dynatrace-log-analytics")
 import_repos=("workshop-dynatrace-log-analytics")
 
 # Function to compare files in arrays,
@@ -94,7 +94,7 @@ cherryPick() {
     printInfoSection "Merging commit $2 from $ROOT_PATH$SYNCH_REPO"
     for repo in "${array[@]}"; do
         cd $ROOT_PATH"$repo" >/dev/null
-        #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
+        #git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-framework
         git fetch synchronizer
         #git checkout -b synch
         git cherry-pick $2
@@ -177,7 +177,7 @@ cherryPickMerge() {
         # Synchronizer exists, pruning it to avoid conflicts
         git remote prune synchronizer
     else
-        git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-synchronizer
+        git remote add synchronizer https://github.com/dynatrace-wwse/codespaces-framework
     fi
     # fetch synchronizer
     git fetch synchronizer
@@ -195,6 +195,17 @@ cherryPickMerge() {
     fi
 
 }
+
+
+
+listOpenIssues(){
+    repo=$(basename $(pwd))
+    issue=$(gh issue list --state open --json number,title,url \
+      --jq '.[] | "\(.number) | \(.title) | \(.url)"')
+    
+    printInfo "$issue"
+}
+
 
 doPushandPR(){
     repo=$(basename $(pwd))

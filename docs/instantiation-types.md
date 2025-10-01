@@ -1,25 +1,85 @@
 --8<-- "snippets/instantiation-types.js"
 
 !!! success "Choose the option that best fits your needs! 🚀" 
-    The Dynatrace Enablement Framework supports multiple ways to instantiate your development environment, making it flexible for any workflow or platform.  
+    The Dynatrace Enablement Framework supports multiple ways to instantiate your development environment. You can run it in Github Codespaces, VS Code Dev Containers or local containers, in AMD or ARM architectures.  
 
 
-## 🏃🏻‍♂️ How to run in...
+## 🏃🏻‍♂️ Quick step by step guide on running in...
 
-### ☁️ GitHub Codespaces
-- ![run codespace](img/run_codespace.png){ align=right ; width="250"}  In the repository hosted in github, click on the **<> Code** button. Create a new codespace using the main branch or click + New with options to customize how and where to run the Codespace within Github Cloud. 
-- Secrets (`DT_TENANT`, `DT_OPERATOR_TOKEN`, `DT_INGEST_TOKEN`) are injected automatically using GitHub Codespaces secrets.
-- No manual setup required—these are available as environment variables inside the container.
+### 1. Running in ☁️ GitHub Codespaces ![run codespace](img/run_codespace.png){ align=right ; width="300"} 
+1. Go to the repository hosted in github
+2. Click on the **<> Code** button. 
+3. Create a new codespace using the main branch or click + New with options to customize how and where to run the Codespace within Github Cloud. 
 
 
+_Repository Secrets normally `DT_TENANT`, `DT_OPERATOR_TOKEN` and `DT_INGEST_TOKEN` (but not limited to) are injected automatically using GitHub Codespaces secrets. No manual setup required — these are available as environment variables inside the container._
 
-!!! tip "Protip: Run in any ☁️ cloud provider of your choice"
-     For **VS Code Dev Containers** and **Local Container** you'll need to provide the infrastructure. You can run the enablements in any cloud provider of your choice. For best compatibility we recommend you to spin a VM with an Ubuntu Operating System. Then do a remote connection via VS Code for instantiating VS Code Dev Container or via SSH to run as a Local Container. 
 
-### 🖥️ VS Code Dev Containers
-- Clone the repository to your local machine (Ubuntu OS recommended for best compatibility).
-- Add a .env file and and adapt the `devcontainer.json` to read the secrets from the environment and not from the secrets section.
-- In this framework, secrets are passed as environment variables using `runArgs` in `.devcontainer/devcontainer.json`:
+### 2. 📦 Running in VS Code Dev Containers or Local Container
+
+??? info "Key difference between instantiating a VS Code Dev Container or a local container"
+     The key difference between instantiating a VS Code Dev Container and a local container lies in how each environment is created and managed: a VS Code Dev Container is launched and orchestrated directly by VS Code using the configuration specified in the devcontainer.json file, while a local container is started independently using the Makefile and runlocal script, allowing you to build and manage the container from the terminal without relying on VS Code, which is ideal for headless or automated workflows.
+
+The following set of instructions are for the preparation of both scenarios.
+
+1. The first step is to provide the infrastructure. 
+	
+	??? info "🏗️ Setting up the infrastructure" 
+		You may provision your infrastructure on any major cloud provider or run locally using [Multipass](#using-multipass-for-local-development).
+
+		**Minimum requirements for a cloud or local machine:**
+    
+		1. **Operating System:** Ubuntu LTS (22.04 or 24.04 recommended)
+		2. **CPU & Memory:** The required resources depend on your workloads. As a general guideline, refer to the `hostRequirements` section in the `.devcontainer.json` file. A typical setup with 4 CPU cores and 16 GB RAM is sufficient for most use cases.
+		3. **Network Ports:** Ensure the following ports are open for inbound connections:
+			- `22` (SSH)
+			- `30100`, `30200`, `30300` (for application access; each deployed app is exposed via Kubernetes NodePort)
+
+2. SSH into the host
+
+3. Clone the git repository
+
+4. Setting up the secrets: 
+	Make sure the secrets are defined as environment variables. **VS Code** needs to read the secrets as an environment variable, and the **local container** approach does not need VS Code. Hence we create a file under `.devcontainer/runlocal/.env` that works for both approaches.
+
+	??? info "Sample `.env` file"
+		You can copy and paste the contents of the sample into `.devcontainer/runlocal/.env`. Verify that you have entered all needed secrets for the training. These are defined in the `secrets` section of the .devcontainer.json` file. If the repository does not need secrets, just create an empty `.env` file.
+
+		```bash title=".devcontainer/runlocal/.env" linenums="1"
+		# Environment variables
+
+		# Mapping of the Secrets defined in the .devcontainer.json file
+		# Dynatrace Tenant
+		DT_TENANT=https://abc123.apps.dynatrace.com
+
+		# Dynatrace Operator Token
+		DT_OPERATOR_TOKEN=dt0c01.XXXXXX
+		#it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Create ActiveGate tokens' 'Read entities' 'Read settings' 'Write settings' 'Access probrem and event feed, metrics and topology' 'PaaS Integration - installer download
+
+		#Dynatrace Ingest Token
+		DT_INGEST_TOKEN=dt0c01.YYYYYY
+		# it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Ingest logs' 'Ingest metrics' 'Ingest OpenTelemetry traces'
+
+		# Add any other environment variables as needed
+		```
+
+5. Prerequisites: `make` and `docker` is installed on the host and the user has access to it.
+	
+	??? info "Verify prerequisites with `checkHost`"
+		There is a sample function that helps you verify the requirements are met and if not it offers to install them for you if needed. 
+		```bash
+		source .devcontainer/util/source_framework.sh && checkHost
+		```
+		![checkhost](img/checkhost.png){ align=center ; width="800";} 
+
+
+!!! success "Le't's launch the enablement"
+	You are all set, we can launch the enablement either with `VS Code` as a dev container or with `make` as a plain docker container.
+
+
+#### 2. a. 📦 🖥️ Running as dev container with VS Code 
+
+1. Let's tell VS Code to read the secrets as environment variables from an `.env`file. Modify the `runArgs` in `.devcontainer/devcontainer.json` and add `"--env-file", ".devcontainer/runlocal/.env"`like the following:
 	```json
 	"runArgs": ["--init", "--privileged", "--network=host", "--env-file", ".devcontainer/runlocal/.env"]
 	```
@@ -27,22 +87,22 @@
 - ![run codespace](img/vscode_container.png){ align=right ; width="400"}Open the folder in VS Code and use the Dev Containers extension to "Reopen in Container". VS Code will use the `.devcontainer/devcontainer.json` definition to build and start the environment for you.
 - You can rebuild the container at any time by typing ```[CTRL] + Shift P > Dev Containers: Rebuild and reopen in container```
 
-### 🐳 Local Container
-- Clone the repository to your local machine (Ubuntu OS recommended for best compatibility).
-- Open a terminal in the `.devcontainer` folder and run:
+#### 2. b. 📦 🐳 Running as local container with make
+1. Navigate to `.devcontainer` folder and run:
 	```sh
 	make start
 	```
-- This will build and launch the container, or attach to it if already running. All ports, volumes, and environment variables are set up automatically.
-- Secrets and environment variables are loaded from `.devcontainer/runlocal/.env`. 
-- The devcontainer.json file is not used with this set-up. Arguments, volume mounts, port-forwarding is handled in the `makefile.sh`
-- The `makefile.sh` script passes the variables to Docker at runtime.
-- For more details, see the [Local Container Details](#local-container-details) section below.
+- This will build and launch the container. All ports, volumes, and environment variables are set up automatically.
+	
+	!!! info "Protip: create a new Terminal"
+		For attaching a new Terminal to the container, just type `make start`.
 
+- Secrets and environment variables are loaded from `.devcontainer/runlocal/.env`. 
+- The `makefile.sh` script passes the variables to Docker at runtime such as arguments, volume mounts and port-forwarding. The devcontainer.json file is not used with this set-up.
 
 
 ## Instantiation Types 
-### ☁️ GitHub Codespaces
+### 1. ☁️ GitHub Codespaces
 
 - **One-click cloud dev environments**  
 - No local setup required—just click  
@@ -50,21 +110,19 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?template_repository=dynatrace-wwse/codespaces-framework)
 
-### 🖥️ VS Code Dev Containers
+### 2. 🖥️ VS Code Dev Containers
 
 - Use the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for a seamless local experience in VS Code
 - All configuration is in `.devcontainer/devcontainer.json`
 - Supports secrets, port forwarding, and post-create hooks
 
 
-### 🐳 Local Container
+### 3. 🐳 Local Container
 
 - Run the same environment on your machine using Docker.
 - Easiest way: just run `make start` in the `.devcontainer` folder.
 - This will build and launch the container if needed, or attach to it if already running.
 - All ports, volumes, and environment variables are set up for you automatically.
-
-See [Local Container Details](#local-container-details) below for a full explanation of how this works.
 
 
 
@@ -77,7 +135,7 @@ See [Local Container Details](#local-container-details) below for a full explana
 | 🐳 Local Container    | Provided Infrastructure | ❌             | ✅         | ✅           | Manual/`.env`   | Manual/Makefile | Reproducible local dev    |
 
 
-## 🔐 Secrets & Environment variables
+## 🔐 Secrets & Environment
 
 Secrets and environment variables are handled differently depending on the instantiation type:
 
@@ -88,31 +146,11 @@ Secrets and environment variables are handled differently depending on the insta
 | 🐳 Local Container        | Loaded from `.devcontainer/runlocal/.env` file and passed to Docker at runtime by `makefile.sh`                | `.devcontainer/runlocal/.env`, `makefile.sh`   | Run `make start` in `.devcontainer`; secrets loaded at container start                |
 
 
-### Example: `runlocal/.env` file
-
-```env
-# Environment variables
-
-# Mapping of the Secrets defined in the .devcontainer.json file
-# Dynatrace Tenant
-DT_TENANT=https://abc123.live.dynatrace.com
-#Description: eg. abc123 for live -> https://abc123.live.dynatrace.com or sprint -> https://abc123.sprint.dynatracelabs.com no apps in the URL
-
-# Dynatrace Operator Token
-DT_OPERATOR_TOKEN=dt0c01.XXXXXX
-#it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Create ActiveGate tokens' 'Read entities' 'Read settings' 'Write settings' 'Access probrem and event feed, metrics and topology' 'PaaS Integration - installer download
-
-#Dynatrace Ingest Token
-DT_INGEST_TOKEN=dt0c01.YYYYYY
-# it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Ingest logs' 'Ingest metrics' 'Ingest OpenTelemetry traces'
-
-# Add any other environment variables as needed
-```
 
 
 ---
 
-## Running locally
+## 🏠 Running locally
 
 ### Using Multipass for Local Development
 
@@ -129,39 +167,15 @@ DT_INGEST_TOKEN=dt0c01.YYYYYY
   -  **Install Multipass** ([instructions](https://multipass.run/install)) 
   -  **Launch an Ubuntu VM:**
 	```sh
-	multipass launch --name dt-dev --disk 20G --mem 4G
+	multipass launch --name enablement --disk 30G --cpus 8 --memory 32G
 	multipass shell dt-dev
 	```
-
-#### Set up your environment
-
-  - Inside the VM, install Docker and git:
-	  ```sh
-	  sudo apt update && sudo apt install -y docker.io git
-	  sudo usermod -aG docker $USER
-	  ```
-  - Clone your repository and proceed with the [Local Container](#local-container) or [VS Code Dev Containers](#vs-code-dev-containers) setup as described above.
 
 !!! tip "Mounting Volumes on Multipass"
     You can mount folders from your host into the VM using `multipass mount` if you want to edit code locally but run containers in the VM. For example in the following example we are creating a VM mounting the folder `enablement` where you have all repositories of the enablement framework you want to use. 
     ```bash
     multipass launch --name enablement --disk 30G --cpus 8 --memory 32G --mount  /Users/sergio.hinojosa/repos/enablement:/home/ubuntu/enablement
     ```
-
-## Local Container Details
-
-The `make start` command is the recommended way to launch your local development container. Here’s what happens under the hood:
-
-- The `Makefile` defines a `start` target, which sources `makefile.sh` and calls the `start` function.
-- The `start` function:
-	- Checks if the container (`dt-enablement`) is running:
-		- If running, attaches a new shell to it (like creating more Terminals on VS Code).
-		- If stopped, removes and recreates the container.
-		- If the image is missing, builds it and then runs the container.
-	- All required ports, volumes, and environment variables are set up automatically.
-	- The container is started with the correct working directory and post-create/start scripts, just like in Codespaces or Dev Containers.
-
-
 
 <div class="grid cards" markdown>
 - [Let's continue:octicons-arrow-right-24:](template.md)
