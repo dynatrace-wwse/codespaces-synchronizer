@@ -16,7 +16,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/corewithjoshoriginal"
+export BRANCH="rfe/misc"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -29,6 +29,7 @@ custom(){
     #TODO for this PR
     # [ ] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
     # [ ] - change badge to all repos to point to the documentation of synchronizer
+    # [ ] - AI Repo, image? appsec issue fix to all
     # [ ] - search for https://dynatrace-wwse.github.io/codespaces-synchronizer)
     
 
@@ -46,9 +47,10 @@ custom(){
     #cp "$SOURCE$FILE" "$DEST$FILE"
     #git add .
     #git status
-    git checkout main
-    git pull origin main
-    git status
+    #git checkout main
+    #git pull origin main
+    #git status
+    git checkout -b $BRANCH
     #git commit -s -m "Fixing workflow of automatic deployment of GH pages when merging on main"
     #doPushandPR
     #git push origin $BRANCH 
@@ -66,7 +68,7 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos all custom
+doInRepos synch custom
 
 #doInRepos fix tagAndCreateRelease
 #doInRepos fix copyFramework
