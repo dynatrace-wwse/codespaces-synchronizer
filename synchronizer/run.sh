@@ -27,8 +27,10 @@ printInfoSection "Running Codepaces-Synchronizer"
 custom(){  
     
     #TODO for this PR
-    # [ ] - Update to all repos with the file --8<-- "snippets/dt-enablement.md"
+    # [ ] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
     # [ ] - change badge to all repos to point to the documentation of synchronizer
+    # [ ] - search for https://dynatrace-wwse.github.io/codespaces-synchronizer)
+    
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "

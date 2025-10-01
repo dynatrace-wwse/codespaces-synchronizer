@@ -77,7 +77,7 @@ See [Local Container Details](#local-container-details) below for a full explana
 | 🐳 Local Container    | Provided Infrastructure | ❌             | ✅         | ✅           | Manual/`.env`   | Manual/Makefile | Reproducible local dev    |
 
 
-## 🔐 Secrets & Environment
+## 🔐 Secrets & Environment variables
 
 Secrets and environment variables are handled differently depending on the instantiation type:
 
@@ -134,12 +134,13 @@ DT_INGEST_TOKEN=dt0c01.YYYYYY
 	```
 
 #### Set up your environment
-	- Inside the VM, install Docker and git:
+
+  - Inside the VM, install Docker and git:
 	  ```sh
 	  sudo apt update && sudo apt install -y docker.io git
 	  sudo usermod -aG docker $USER
 	  ```
-	- Clone your repository and proceed with the [Local Container](#local-container) or [VS Code Dev Containers](#vs-code-dev-containers) setup as described above.
+  - Clone your repository and proceed with the [Local Container](#local-container) or [VS Code Dev Containers](#vs-code-dev-containers) setup as described above.
 
 !!! tip "Mounting Volumes on Multipass"
     You can mount folders from your host into the VM using `multipass mount` if you want to edit code locally but run containers in the VM. For example in the following example we are creating a VM mounting the folder `enablement` where you have all repositories of the enablement framework you want to use. 

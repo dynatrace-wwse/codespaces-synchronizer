@@ -112,11 +112,12 @@ To use cross-compilation:
 
 Example usage:
 
-``` sh
+```bash title="CrossCompiling target" linenums="0"
 
 make buildx
 
 ```
+
 ---
 
 
