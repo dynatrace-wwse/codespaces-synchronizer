@@ -446,13 +446,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#secrets-environment" class="md-nav__link">
+  <a href="#secrets-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
-      🔐 Secrets &amp; Environment
+      🔐 Secrets &amp; Environment variables
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔐 Secrets & Environment">
+    <nav class="md-nav" aria-label="🔐 Secrets & Environment variables">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -812,13 +812,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#secrets-environment" class="md-nav__link">
+  <a href="#secrets-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
-      🔐 Secrets &amp; Environment
+      🔐 Secrets &amp; Environment variables
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔐 Secrets & Environment">
+    <nav class="md-nav" aria-label="🔐 Secrets & Environment variables">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1025,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody>
 </table>
-<h2 id="secrets-environment">🔐 Secrets &amp; Environment<a class="headerlink" href="#secrets-environment" title="Permanent link">#</a></h2>
+<h2 id="secrets-environment-variables">🔐 Secrets &amp; Environment variables<a class="headerlink" href="#secrets-environment-variables" title="Permanent link">#</a></h2>
 <p>Secrets and environment variables are handled differently depending on the instantiation type:</p>
 <table>
 <thead>
@@ -1094,13 +1094,13 @@ multipass<span class="w"> </span>shell<span class="w"> </span>dt-dev
 </code></pre></div></li>
 </ul>
 <h4 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">#</a></h4>
-<pre><code>- Inside the VM, install Docker and git:
-  ```sh
-  sudo apt update &amp;&amp; sudo apt install -y docker.io git
-  sudo usermod -aG docker $USER
-  ```
-- Clone your repository and proceed with the [Local Container](#local-container) or [VS Code Dev Containers](#vs-code-dev-containers) setup as described above.
-</code></pre>
+<ul>
+<li>Inside the VM, install Docker and git:
+      <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker.io<span class="w"> </span>git
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div></li>
+<li>Clone your repository and proceed with the <a href="#local-container">Local Container</a> or <a href="#vs-code-dev-containers">VS Code Dev Containers</a> setup as described above.</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">Mounting Volumes on Multipass</p>
 <p>You can mount folders from your host into the VM using <code>multipass mount</code> if you want to edit code locally but run containers in the VM. For example in the following example we are creating a VM mounting the folder <code>enablement</code> where you have all repositories of the enablement framework you want to use. 

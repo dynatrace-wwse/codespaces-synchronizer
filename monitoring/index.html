@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#9-monitoring" class="md-skip">
+        <a href="#why-monitoring-matters" class="md-skip">
           Skip to content
         </a>
       
@@ -437,8 +437,17 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    9. Monitoring
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -449,6 +458,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-monitoring-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      📡 Why Monitoring Matters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring Approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codespaces-instantiations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌎 Codespaces Instantiations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 GitHub Pages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learn More
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -511,8 +606,83 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-monitoring-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      📡 Why Monitoring Matters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring Approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codespaces-instantiations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌎 Codespaces Instantiations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 GitHub Pages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learn More
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -530,17 +700,80 @@
   
 
 
+  <h1>9. Monitoring</h1>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   dynatrace.sendBizEvent('page_load', {"page": "9. Monitoring"});
 });
 </script>
 
-<h1 id="9-monitoring">9. Monitoring<a class="headerlink" href="#9-monitoring" title="Permanent link">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">This section is a WIP</p>
-<p>This section is a WIP</p>
+<div class="admonition example">
+<p>Monitoring is a critical aspect of maintaining quality, reliability, and visibility across all repositories and their instantiations in the enablement framework. By tracking usage and interactions, we ensure that every codespace and its associated resources are operating as expected and delivering value.</p>
 </div>
+<h2 id="why-monitoring-matters">📡 Why Monitoring Matters<a class="headerlink" href="#why-monitoring-matters" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Visibility:</strong> Gain insights into how repositories and codespaces are being used and adopted.</li>
+<li><strong>Quality Assurance:</strong> Detect issues early and ensure that all deployments meet expected standards.</li>
+<li><strong>Business Insights:</strong> Understand usage patterns and derive business value from operational data.</li>
+<li><strong>Showcase Best Practices:</strong> Demonstrate the power of Dynatrace by monitoring our own codespaces (“Drink your own Champagne” principle).</li>
+</ul>
+<div class="admonition example">
+<p><img _=";" align="center" alt="monitoring" src="../img/monitoring.png" width="800" /> </p>
+</div>
+<h2 id="monitoring-approach">Monitoring Approach<a class="headerlink" href="#monitoring-approach" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p><strong>GitHub Pages &amp; Agentless RUM:</strong><br />
+  Every codespace is associated with a GitHub Page. For each GitHub Page, an agentless Real User Monitoring (RUM) application is created, enabling end-to-end visibility into user interactions and performance.</p>
+</li>
+<li>
+<p><strong>Automated Tracking on Creation:</strong><br />
+  When a new codespace is instantiated, the <code>finalizePostCreation</code> function sends a JSON payload to<br />
+<a href="https://codespaces-tracker.whydevslovedynatrace.com/api/receive">codespaces-tracker.whydevslovedynatrace.com/api/receive</a>.  </p>
+</li>
+<li>Only requests with the correct authentication header are accepted.</li>
+<li>
+<p>This payload contains metadata about the codespace, its repository, and its usage context.</p>
+</li>
+<li>
+<p><strong>Codespaces-Tracker Service:</strong><br />
+  The Codespaces-Tracker is a Spring Boot application deployed on a GKE (Google Kubernetes Engine) cluster with three replicas for high availability.</p>
+</li>
+<li>It processes incoming payloads, enriches them with geo-information, and logs the json payload.</li>
+<li>The monitoring OneAgent generates BizEvents from the pods logs, enabling advanced business-related log use cases and analytics.</li>
+</ul>
+<h2 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Comprehensive Monitoring:</strong><br />
+  All codespaces and their GitHub Pages are monitored for activity, performance, and adoption.</li>
+<li><strong>Enhanced Observability:</strong><br />
+  Real-time data collection and enrichment provide actionable insights for both technical and business stakeholders.</li>
+<li><strong>Demonstration of Dynatrace Capabilities:</strong><br />
+  By monitoring our own codespaces, we showcase Dynatrace’s observability features in real-world scenarios.</li>
+</ul>
+<hr />
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">#</a></h2>
+<h3 id="codespaces-instantiations">🌎 Codespaces Instantiations<a class="headerlink" href="#codespaces-instantiations" title="Permanent link">#</a></h3>
+<p>All codespace instantiations are monitored by sending a signal to the Codespaces-Tracker service running in the GKE cluster. This is achieved through the <code>verifyCodespaceCreation</code> function, which is responsible for validating the successful creation of a codespace. </p>
+<ul>
+<li><strong>verifyCodespaceCreation:</strong><br />
+  This function checks that the codespace environment has been set up correctly and all required components are running. Once verification is complete, it calls the <code>postCodespaceTracker</code> function.</li>
+<li><strong>postCodespaceTracker:</strong><br />
+  This function sends a JSON payload containing metadata about the codespace (such as repository name, user, and environment details) to the Codespaces-Tracker API endpoint. The payload is authenticated and enriched with geo-information, and BizEvents are generated from the logs for further analysis.</li>
+</ul>
+<h3 id="github-pages">📊 GitHub Pages<a class="headerlink" href="#github-pages" title="Permanent link">#</a></h3>
+<p>GitHub Pages are monitored using Dynatrace Agentless Real User Monitoring (RUM):</p>
+<ul>
+<li>An agentless RUM snippet is injected into the <code>main.html</code> template located in the <code>overrides</code> folder. This ensures that every page load is tracked for user interactions and performance metrics.</li>
+<li>Additionally, each markdown page includes a JavaScript snippet at the top that sends a BizEvent with the name of the page to Dynatrace. This allows for detailed tracking of user navigation and engagement across the documentation.</li>
+</ul>
+<hr />
+<h2 id="learn-more">Learn More<a class="headerlink" href="#learn-more" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://www.dynatrace.com/support/help/shortlink/agentless-rum">Dynatrace Agentless RUM Documentation</a></li>
+<li><a href="https://www.dynatrace.com/support/help/shortlink/bizevents">Business Events with Dynatrace</a></li>
+</ul>
 <div class="grid cards">
 <ul>
 <li><a href="../resources/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

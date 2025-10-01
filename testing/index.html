@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#8-testing" class="md-skip">
+        <a href="#integration-testing-on-pull-requests" class="md-skip">
           Skip to content
         </a>
       
@@ -417,8 +417,17 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    8. Testing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -429,6 +438,74 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#integration-testing-on-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Integration Testing on Pull Requests
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Integration Testing on Pull Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-test-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Test example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git Strategy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔒 Branch Protection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-test-badges" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Integration Test Badges
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -511,8 +588,65 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#integration-testing-on-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Integration Testing on Pull Requests
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Integration Testing on Pull Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-test-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Test example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git Strategy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔒 Branch Protection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-test-badges" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Integration Test Badges
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -530,17 +664,84 @@
   
 
 
+  <h1>8. Testing</h1>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   dynatrace.sendBizEvent('page_load', {"page": "8. Testing"});
 });
 </script>
 
-<h1 id="8-testing">8. Testing<a class="headerlink" href="#8-testing" title="Permanent link">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">This section is a WIP</p>
-<p>This section is a WIP</p>
+<div class="admonition example">
+<p class="admonition-title">Quality Assurance</p>
+<p>To maintain high standards across all repositories using the enablement framework, a robust testing strategy is enforced. This ensures that every repository remains reliable, consistent, and production-ready.</p>
 </div>
+<h2 id="integration-testing-on-pull-requests">🧪 Integration Testing on Pull Requests<a class="headerlink" href="#integration-testing-on-pull-requests" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p><strong>Automated Integration Tests:</strong><br />
+  Every repository must have integration tests that run automatically on every Pull Request (PR). This guarantees that new changes do not break existing functionality.</p>
+</li>
+<li>
+<p><strong>integration.sh:</strong><br />
+  The core of the testing process is the <code>integration.sh</code> script. This script is adapted for each repository and is triggered by a GitHub Actions workflow on every PR.  </p>
+</li>
+<li>The workflow provisions a full Codespace environment, deploying all required applications and dependencies.</li>
+<li>
+<p>Once the environment is ready, <code>integration.sh</code> runs a series of assertions to verify that applications and pods are running as expected in their respective namespaces.</p>
+</li>
+<li>
+<p><strong>On-Demand Testing:</strong><br />
+  Integration tests can also be executed manually at any time using the <code>runIntegrationTests</code> function, providing flexibility for developers to validate changes before submitting a PR.</p>
+</li>
+</ul>
+<h3 id="integration-test-example">Integration Test example<a class="headerlink" href="#integration-test-example" title="Permanent link">#</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">integration.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Load framework</span>
+<span class="nb">source</span><span class="w"> </span>.devcontainer/util/source_framework.sh
+
+printInfoSection<span class="w"> </span><span class="s2">&quot;Running integration Tests for </span><span class="nv">$RepositoryName</span><span class="s2">&quot;</span>
+
+assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>operator
+
+assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>activegate
+
+assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>oneagent
+
+assertRunningPod<span class="w"> </span>todoapp<span class="w"> </span>todoapp
+
+assertRunningApp<span class="w"> </span><span class="m">30100</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="git-strategy">Git Strategy<a class="headerlink" href="#git-strategy" title="Permanent link">#</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Git Strategy &amp; Github Actions Workflow</p>
+<p><img _=";" align="center" alt="run codespace" src="../img/git_strategy.png" width="800" /> </p>
+</div>
+<h2 id="branch-protection">🔒 Branch Protection<a class="headerlink" href="#branch-protection" title="Permanent link">#</a></h2>
+<p><strong>Main Branch Protection:</strong><br />
+  The <code>main</code> branch is protected and will only accept PRs that pass all integration tests. This ensures that only thoroughly tested code is merged, maintaining the integrity of the repository.</p>
+<hr />
+<h2 id="integration-test-badges">🛡️ Integration Test Badges<a class="headerlink" href="#integration-test-badges" title="Permanent link">#</a></h2>
+<p>All repositories in the enablement framework display an <strong>integration test badge</strong> to show the current status of their automated tests. This badge provides immediate visibility into the health of each repository.</p>
+<p>For example, the badge for this repository is:</p>
+<p><img align="center;" alt="Integration tests" src="https://github.com/dynatrace-wwse/codespaces-framework/actions/workflows/integration-tests.yaml/badge.svg" /> </p>
+<p>You can find a table with all enablement framework repositories and their current integration test status in the <a href="https://github.com/dynatrace-wwse/codespaces-framework">README section of this repository</a>.</p>
+<hr />
+<p>By following these standards, the enablement framework enforces continuous quality assurance and reliability across all managed repositories.</p>
 <div class="grid cards">
 <ul>
 <li><a href="../monitoring/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

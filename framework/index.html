@@ -547,15 +547,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#asserting-running-pods-apps" class="md-nav__link">
-    <span class="md-ellipsis">
-      Asserting running pods &amp; apps
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -935,15 +926,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#asserting-running-pods-apps" class="md-nav__link">
-    <span class="md-ellipsis">
-      Asserting running pods &amp; apps
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1145,17 +1127,36 @@ This separation allows you to keep complex logic in Bash, while the Makefile pro
 <ul>
 <li><strong>runIntegrationTests</strong>: This function triggers the integration tests for the repository by running the <code>integration.sh</code> script. It is used both locally and by the CI pipeline to ensure the environment and applications work as expected before merging changes.</li>
 </ul>
-<h3 id="asserting-running-pods-apps">Asserting running pods &amp; apps<a class="headerlink" href="#asserting-running-pods-apps" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><code>assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>operator
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">integration.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Load framework</span>
+<span class="nb">source</span><span class="w"> </span>.devcontainer/util/source_framework.sh
 
-assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>oneagent
+printInfoSection<span class="w"> </span><span class="s2">&quot;Running integration Tests for </span><span class="nv">$RepositoryName</span><span class="s2">&quot;</span>
+
+assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>operator
 
 assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>activegate
+
+assertRunningPod<span class="w"> </span>dynatrace<span class="w"> </span>oneagent
 
 assertRunningPod<span class="w"> </span>todoapp<span class="w"> </span>todoapp
 
 assertRunningApp<span class="w"> </span><span class="m">30100</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
 <p>These assertions check that the required pods (operator, activegate, oneagent, and todoapp) are running in their respective namespaces, and that the application is accessible on the expected port (30100). If any assertion fails, the integration test will fail and block the PR from being merged.</p>
 <hr />
 <h2 id="kubernetes-cluster">🟫 Kubernetes Cluster<a class="headerlink" href="#kubernetes-cluster" title="Permanent link">#</a></h2>
