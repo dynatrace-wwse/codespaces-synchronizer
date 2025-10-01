@@ -3,12 +3,10 @@
 source synchronizer/synch_functions.sh
 
 export TITLE="Miscelaneus changes"
-export BODY="Miscelaneus changes 
-- security update langchain
-- dt-enablement banner
-- enhance gitignore
-- clean up variables
-- deploy gh pages when push on docs/*"
+export BODY="Miscelaneus changes, adding functions for ease of use 
+- calculateReadingTime
+- checkHost 
+"
 
 export CHERRYPICK_ID="47b1d0f"
 
@@ -48,32 +46,26 @@ custom(){
     #FILE="docs/snippets/dt-enablement.md"
     #cp "$SOURCE$FILE" "$DEST$FILE"
     #git status
-    git checkout main
-    git pull origin main
+    #git checkout main
+    #git pull origin main
     #git status
     #git checkout -b $BRANCH
-    #git add .
-    #git commit -s -m "$BODY"
+    git add .
+    git commit -s -m "$BODY"
     #git status
     #doPushandPR
-    #
     #gh issue list --state open
     #git push origin $BRANCH 
 
     # Show last release
     #L=$(gh release list --limit 1)
     #printInfo "$L"
-
-    #rm .devcontainer/runlocal/README
-    #rm .devcontainer/runlocal/power10k.sh
-    #rm -rf .devcontainer/astroshop
-
     #git reset --hard HEAD
 }
 
 #doInRepos refactor custom
 
-doInRepos synch custom
+doInRepos all custom
 #doInRepos synch listOpenIssues
 #doInRepos synch verifyPrMerge
 
