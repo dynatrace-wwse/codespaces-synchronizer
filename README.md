@@ -45,4 +45,4 @@ Repository ID | Description | 🚦 CI Status
 
 
 
-## [👨‍🏫 Architecture and how to the enablement architecture looks like!](https://dynatrace-wwse.github.io/codespaces-synchronizer)
+## [👨‍🏫 Architecture and how to the enablement architecture looks like!](https://dynatrace-wwse.github.io/codespaces-framework)
