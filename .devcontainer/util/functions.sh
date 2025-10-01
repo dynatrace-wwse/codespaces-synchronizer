@@ -1387,5 +1387,31 @@ runIntegrationTests(){
   bash "$REPO_PATH/.devcontainer/test/integration.sh"
 }
 
+calculateReadingTime(){
+  
+  printInfoSection "Calculating the reading time of the Documentation"
+  DOCS_DIR="/docs"
+  WORDS_PER_MIN=200
+  total_words=0
+  total_mins=0
+
+  printInfo "Section \t\t| Words \t| Estimated Reading Time (min)"
+  printInfo "--------\t\t|-------\t|-----------------------------"
+  find "$REPO_PATH/$DOCS_DIR" -type f -name "*.md" | while read -r file; do
+      section=$(basename "$file")
+      words=$(wc -w < "$file")
+      # Calculate reading time, rounding up
+      mins=$(( (words + WORDS_PER_MIN - 1) / WORDS_PER_MIN ))
+      total_words=$((total_words + words))
+      total_mins=$((total_mins + mins))
+
+      printInfo "$section \t\t| $words \t| $mins min"
+  done
+  
+  printInfo "---------------------------------------------"
+  printInfo "TOTAL     | $total_words | $total_mins min"
+
+}
+
 # Custom functions for each repo can be added in my_functions.sh
 source $REPO_PATH/.devcontainer/util/my_functions.sh
