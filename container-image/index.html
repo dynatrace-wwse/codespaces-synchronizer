@@ -386,7 +386,7 @@
         <li class="md-nav__item">
   <a href="#dynatrace-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      Dynatrace Integration:
+      Dynatrace Integration
     </span>
   </a>
   
@@ -769,7 +769,7 @@
         <li class="md-nav__item">
   <a href="#dynatrace-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      Dynatrace Integration:
+      Dynatrace Integration
     </span>
   </a>
   
@@ -913,20 +913,20 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>The Dynatrace Enablement Framework uses a custom Docker image as the foundation for all training and demo environments. This image is designed for maximum compatibility, flexibility, and ease of use across different platforms and deployment scenarios.</p>
+<p>The Dynatrace Enablement Framework leverages a custom Docker image as the foundation for all training and demo environments. This image is engineered for maximum compatibility, flexibility, and ease of use across a variety of platforms and deployment scenarios.</p>
 <hr />
 <h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">#</a></h2>
 <h3 id="base-image">🖼️ Base Image:<a class="headerlink" href="#base-image" title="Permanent link">#</a></h3>
 <p>The framework uses <code>mcr.microsoft.com/devcontainers/base:ubuntu</code> as its base image, ensuring seamless compatibility with GitHub Codespaces and Visual Studio Code Dev Containers.</p>
 <h3 id="cross-platform-support">💻 Cross-Platform Support:<a class="headerlink" href="#cross-platform-support" title="Permanent link">#</a></h3>
-<p>The image is built to run on both AMD and ARM architectures, eliminating vendor lock-in and enabling use on a wide range of hardware.</p>
+<p>The image is built to run on both AMD and ARM architectures, eliminating vendor lock-in and supporting a wide range of hardware.</p>
 <h3 id="local-and-cloud-execution">☁️ Local and Cloud Execution:<a class="headerlink" href="#local-and-cloud-execution" title="Permanent link">#</a></h3>
 <ul>
-<li>Can be run in GitHub Codespaces for cloud-based development.</li>
-<li>Supports local execution on Windows, Linux, and macOS via Multipass, providing a consistent development environment regardless of the host OS.</li>
+<li>Supports GitHub Codespaces for cloud-based development.</li>
+<li>Enables local execution on Windows, Linux, and macOS via Multipass, ensuring a consistent development environment regardless of host OS.</li>
 </ul>
-<h2 id="dynatrace-integration"><img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Integration:<a class="headerlink" href="#dynatrace-integration" title="Permanent link">#</a></h2>
-<p>Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments work seamlessly with this deployment. All necessary components such as the CSI Driver, Webhook, ActiveGate, and OneAgents can be deployed in this image ensuring seamless monitoring and observability of the running applications.</p>
+<h2 id="dynatrace-integration"><img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Integration<a class="headerlink" href="#dynatrace-integration" title="Permanent link">#</a></h2>
+<p>Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments are fully supported. All required components—including the CSI Driver, Webhook, ActiveGate, and OneAgents—can be deployed within this image, ensuring comprehensive monitoring and observability for running applications.</p>
 <h2 id="tooling">Tooling<a class="headerlink" href="#tooling" title="Permanent link">#</a></h2>
 <div class="admonition tip">
 <p class="admonition-title">🛠️ Included tooling </p>
@@ -942,37 +942,37 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 </div>
 <h2 id="docker-in-socket-strategy">Docker-in-Socket Strategy<a class="headerlink" href="#docker-in-socket-strategy" title="Permanent link">#</a></h2>
-<p>The Dynatrace Enablement Framework uses a <strong>Docker-in-Socket</strong> strategy to enable container management from within the development container. This approach allows the container to communicate directly with the Docker daemon running on the host machine by mounting the Docker socket (<code>/var/run/docker.sock</code>) into the container.</p>
+<p>The Dynatrace Enablement Framework uses a <strong>Docker-in-socket</strong> strategy to enable container management from within the development container. By mounting the Docker socket (<code>/var/run/docker.sock</code>) from the host into the container, the development environment can communicate directly with the host's Docker daemon.</p>
 <h3 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">#</a></h3>
 <ul>
-<li>The <code>entrypoint.sh</code> script inside the container handles the logic for interacting with the Docker daemon.</li>
-<li>By sharing the Docker socket, the container can run Docker commands as if it were running directly on the host.</li>
+<li>The <code>entrypoint.sh</code> script inside the container manages interactions with the Docker daemon.</li>
+<li>By sharing the Docker socket, the container can execute Docker commands as if running directly on the host.</li>
 <li>This enables workflows such as building, running, and managing additional containers from within your Codespace or Dev Container.</li>
 </ul>
 <h3 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">#</a></h3>
 <ul>
-<li><strong>Consistency:</strong> Ensures that Docker commands behave the same way inside the container as they do on the host.</li>
-<li><strong>Flexibility:</strong> Supports advanced scenarios like running nested containers or orchestrating multi-container setups.</li>
-<li><strong>Simplicity:</strong> No need to install Docker separately inside the container; it leverages the host’s Docker installation.</li>
+<li><strong>Consistency:</strong> Docker commands behave identically inside the container and on the host.</li>
+<li><strong>Flexibility:</strong> Supports advanced scenarios such as running nested containers or orchestrating multi-container setups.</li>
+<li><strong>Simplicity:</strong> No need to install Docker inside the container; it leverages the host’s Docker installation.</li>
 </ul>
 <h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">#</a></h3>
-<p>In the <code>devcontainer.json</code>, the Docker socket is typically mounted like this:</p>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;mounts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind&quot;</span><span class="p">],</span>
+<p>In the <code>devcontainer.json</code>, mount the Docker socket as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;mounts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind&quot;</span><span class="p">]</span>
 </code></pre></div>
 <h2 id="special-container-runtime-arguments">Special Container Runtime Arguments<a class="headerlink" href="#special-container-runtime-arguments" title="Permanent link">#</a></h2>
-<p>The following <code>runArgs</code> configuration is used in the <code>devcontainer.json</code> file to enhance the capabilities of the development container:</p>
+<p>The following <code>runArgs</code> configuration in <code>devcontainer.json</code> enhances the capabilities of the development container:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;runArgs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;--init&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--privileged&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--network=host&quot;</span><span class="p">]</span>
 </code></pre></div>
 <ul>
-<li><strong>--init:</strong> Runs an init process inside the container to handle reaping zombie processes and signal forwarding, improving container stability.</li>
-<li><strong>--privileged:</strong> Grants the container extended privileges, allowing it to access all devices on the host and perform operations typically restricted in standard containers. This is useful for scenarios that require low-level system access (e.g., running Docker inside Docker or accessing host resources).</li>
-<li><strong>--network=host:</strong> Shares the host’s networking stack with the container, enabling the container to use the host’s network interfaces directly. This is helpful for networking tests or when services inside the container need to be accessible on the host network.</li>
+<li><strong>--init:</strong> Runs an init process inside the container to handle zombie processes and signal forwarding, improving container stability.</li>
+<li><strong>--privileged:</strong> Grants the container extended privileges, allowing access to all host devices and enabling operations typically restricted in standard containers. This is useful for scenarios requiring low-level system access (e.g., running Docker inside Docker or accessing host resources).</li>
+<li><strong>--network=host:</strong> Shares the host’s networking stack with the container, enabling direct use of the host’s network interfaces. This is helpful for networking tests or when services inside the container need to be accessible on the host network.</li>
 </ul>
 <h2 id="image-distribution">Image Distribution<a class="headerlink" href="#image-distribution" title="Permanent link">#</a></h2>
-<p>The image is hosted on Docker Hub and is crosscompiled for ARM and AMD architectures.
+<p>The image is hosted on Docker Hub and is cross-compiled for ARM and AMD architectures.
 <a href="https://hub.docker.com/r/shinojosa/dt-enablement"><img alt="Downloads" src="https://img.shields.io/docker/pulls/shinojosa/dt-enablement?logo=docker" /></a></p>
 <h2 id="using-the-image-in-devcontainerjson">Using the Image in devcontainer.json<a class="headerlink" href="#using-the-image-in-devcontainerjson" title="Permanent link">#</a></h2>
-<p>The way you configure your development container depends on whether you want to use the pre-built image or build it yourself from a Dockerfile.</p>
+<p>You can configure your development container to use the pre-built image or build it yourself from a Dockerfile, depending on your requirements.</p>
 <h3 id="using-the-pre-built-image">Using the Pre-built Image<a class="headerlink" href="#using-the-pre-built-image" title="Permanent link">#</a></h3>
 <p>To use the pre-built image, specify the "image" property in your devcontainer.json file:</p>
 <p><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">// Pulling the image from the Dockerhub, runs on AMD64 and ARM64. Pulling is normally faster.</span>

@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#6-user-experience" class="md-skip">
+        <a href="#tips-and-tricks" class="md-skip">
           Skip to content
         </a>
       
@@ -377,8 +377,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -407,8 +405,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -427,9 +423,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#navigating-the-kubernetes-cluster-like-butter" class="md-nav__link">
+  <a href="#navigating-the-kubernetes-cluster-with-k9s" class="md-nav__link">
     <span class="md-ellipsis">
-      🧈 Navigating the Kubernetes Cluster Like Butter
+      🧈 Navigating the Kubernetes Cluster with k9s
     </span>
   </a>
   
@@ -565,8 +561,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -585,9 +579,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#navigating-the-kubernetes-cluster-like-butter" class="md-nav__link">
+  <a href="#navigating-the-kubernetes-cluster-with-k9s" class="md-nav__link">
     <span class="md-ellipsis">
-      🧈 Navigating the Kubernetes Cluster Like Butter
+      🧈 Navigating the Kubernetes Cluster with k9s
     </span>
   </a>
   
@@ -616,42 +610,49 @@
   
 
 
-<h1 id="6-user-experience">6. User Experience<a class="headerlink" href="#6-user-experience" title="Permanent link">#</a></h1>
+  <h1>6. User Experience</h1>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  dynatrace.sendBizEvent('page_load', {"page": "6. User Experience"});
+});
+</script>
+
 <div class="admonition tip">
-<p class="admonition-title">Maximizing User Experience with ease of use, best practices, readable code, devops tooling and more...</p>
-<p><img _=";" align="center" alt="greeting" src="../img/greeting.png" width="800" /> </p>
+<p class="admonition-title">Maximizing User Experience with ease of use, best practices, readable code, DevOps tooling, and more...</p>
+<p><img _=";" align="center" alt="greeting" src="../img/greeting.png" width="800" /></p>
 </div>
-<p>To maximize adoption and maintain the Dynatrace public image—particularly among DevOps stakeholders—repositories leveraging the enablement framework should adhere to the following best practices.</p>
+<p>To maximize adoption and uphold the Dynatrace public image—especially among DevOps stakeholders—repositories using the enablement framework should follow these best practices:</p>
 <ul>
-<li>Present all materials and interfaces in a professional and consistent manner.</li>
-<li>Ensure the project is governed by a clear and recognized open source license.</li>
+<li>Present all materials and interfaces professionally and consistently.</li>
+<li>Govern the project with a clear, recognized open source license.</li>
 <li>Tag stable releases to provide clear versioning and facilitate reliable adoption.</li>
-<li>Maintain comprehensive and up-to-date changelogs to document project evolution.</li>
-<li>Structure code for readability and scalability, supporting both maintainability and future growth.</li>
+<li>Maintain comprehensive, up-to-date changelogs to document project evolution.</li>
+<li>Structure code for readability and scalability, supporting maintainability and future growth.</li>
 <li>Provide clean, well-organized, and accessible documentation for all users.</li>
 <li>Respond promptly and constructively to issues and community feedback.</li>
 <li>Use inclusive language throughout documentation and communications.</li>
-<li>Display relevant badges, such as build status, license, and coverage, to communicate project health and transparency.</li>
+<li>Display relevant badges (build status, license, coverage) to communicate project health and transparency.</li>
 <li>Incorporate recognizable logos to reinforce project identity.</li>
 <li>Offer interactive, hands-on training resources to accelerate onboarding and skill development.</li>
 <li>Recommend tools such as p10k, k9s, and zsh to further enhance the DevOps experience.</li>
 </ul>
 <p>By following these guidelines, the framework remains accessible, professional, and appealing to the broader DevOps and open source communities.</p>
 <h2 id="tips-and-tricks">Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permanent link">#</a></h2>
-<h3 id="navigating-the-kubernetes-cluster-like-butter">🧈 Navigating the Kubernetes Cluster Like Butter<a class="headerlink" href="#navigating-the-kubernetes-cluster-like-butter" title="Permanent link">#</a></h3>
+<h3 id="navigating-the-kubernetes-cluster-with-k9s">🧈 Navigating the Kubernetes Cluster with k9s<a class="headerlink" href="#navigating-the-kubernetes-cluster-with-k9s" title="Permanent link">#</a></h3>
 <p>One of the most efficient ways to interact with your Kubernetes cluster is by using <code>k9s</code>, a terminal-based UI that streamlines cluster management and troubleshooting.</p>
 <div class="admonition tip">
 <p class="admonition-title">K9s in action</p>
-<p><img _=";" align="center" alt="k9s" src="../img/k9s.png" width="800" /> </p>
+<p><img _=";" align="center" alt="k9s" src="../img/k9s.png" width="800" /></p>
 </div>
 <p><strong>Getting Started with k9s:</strong></p>
 <ul>
-<li>Launch <code>k9s</code> by simply running <code>k9s</code> in your terminal (it comes pre-installed in the Codespaces Enablement Framework).</li>
+<li>Launch <code>k9s</code> by running <code>k9s</code> in your terminal (pre-installed in the Codespaces Enablement Framework).</li>
 <li>The interface provides a real-time, interactive view of all your Kubernetes resources—pods, deployments, services, and more.</li>
-<li>Use the arrow keys to navigate, <code>/</code> to filter resources, and <code>:</code> to enter commands (e.g., <code>:ctx</code> to switch contexts, <code>:ns</code> to change namespaces, <code>:pod</code>to list pods, <code>:svc</code> to list services, <code>:dynakube</code> to list dynakubes)</li>
+<li>Use the arrow keys to navigate, <code>/</code> to filter resources, and <code>:</code> to enter commands (e.g., <code>:ctx</code> to switch contexts, <code>:ns</code> to change namespaces, <code>:pod</code> to list pods, <code>:svc</code> to list services, <code>:dynakube</code> to list dynakubes).</li>
 <li>Press <code>d</code> to describe a resource, <code>l</code> to view logs, and <code>s</code> to open a shell into a pod.</li>
-<li>Press <code>0</code> Zero to list all resources, namespaces, services</li>
-<li>All actions are keyboard-driven, making it fast and intuitive for power users and beginners alike.</li>
+<li>Press <code>0</code> (zero) to list all resources, namespaces, and services.</li>
+<li>All actions are keyboard-driven, making it fast and intuitive for both power users and beginners.</li>
 </ul>
 <p><strong>Why use k9s?</strong></p>
 <ul>
@@ -662,7 +663,7 @@
 <p>For more details, see the <a href="https://k9scli.io/">k9s documentation</a> or try it out in your Codespace now.</p>
 <div class="grid cards">
 <ul>
-<li><a href="../synchronizer/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../synchronizer/">Continue to Synchronizer →</a></li>
 </ul>
 </div>
 

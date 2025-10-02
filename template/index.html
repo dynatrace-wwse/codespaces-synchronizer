@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#4-codespaces-template" class="md-skip">
+        <a href="#what-is-the-codespaces-template" class="md-skip">
           Skip to content
         </a>
       
@@ -337,8 +337,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -366,8 +364,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -595,8 +591,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -676,15 +670,22 @@
   
 
 
-<h1 id="4-codespaces-template">4. Codespaces Template<a class="headerlink" href="#4-codespaces-template" title="Permanent link">#</a></h1>
+  <h1>4. Codespaces Template</h1>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  dynatrace.sendBizEvent('page_load', {"page": "4. Codespaces Template"});
+});
+</script>
+
 <div class="admonition abstract">
 <p class="admonition-title">The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">Enablement Codespaces Template</a></p>
-<p><img _=";" align="right" alt="professors" src="../img/dt_professors.png" width="150" /><br />
-The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">Enablement Codespaces Template</a> is a ready-to-use GitHub repository designed to help you create, customize, and deliver hands-on enablements using GitHub Codespaces. It provides a robust starting point for professors, trainers, and solution architects to build interactive learning environments with minimal setup.</p>
+<p><img _=";" align="right" alt="professors" src="../img/dt_professors.png" width="150" />
+The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">Enablement Codespaces Template</a> is a ready-to-use GitHub repository designed to help you create, customize, and deliver hands-on enablements using GitHub Codespaces. It provides a robust starting point for trainers, solution architects, and educators to build interactive learning environments with minimal setup.</p>
 </div>
 <hr />
 <h2 id="what-is-the-codespaces-template">🚀 What is the Codespaces Template?<a class="headerlink" href="#what-is-the-codespaces-template" title="Permanent link">#</a></h2>
-<p>This template repository provides:</p>
+<p>This template repository offers:</p>
 <ul>
 <li>A pre-configured <code>.devcontainer</code> for instant Codespaces launches</li>
 <li>Example documentation and structure for enablement content</li>
@@ -702,7 +703,7 @@ The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">E
 <li><strong>README.md</strong>: Project overview and quickstart</li>
 <li><strong>mkdocs.yaml</strong>: Navigation and site configuration</li>
 </ul>
-<p>For a full file/folder breakdown, see the <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">repository on GitHub</a>.</p>
+<p>For a complete file and folder breakdown, see the <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">repository on GitHub</a>.</p>
 <hr />
 <h2 id="how-to-use-the-template">📝 How to Use the Template<a class="headerlink" href="#how-to-use-the-template" title="Permanent link">#</a></h2>
 <ol>
@@ -722,7 +723,7 @@ The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">E
 </ul>
 </li>
 <li><strong>Publish documentation</strong><ul>
-<li>The <code>installMKdocs</code> function installs MkDocs inside the container and serves the documentation locally on port 8000, making it easy and enjoyable to write and preview your documentation without hassle.</li>
+<li>Use the <code>installMKdocs</code> function to install MkDocs inside the container and serve the documentation locally on port 8000, making it easy to write and preview your documentation.</li>
 <li>Push changes to <code>main</code> to trigger GitHub Pages deployment (see Actions tab)</li>
 <li>Your docs will be live at <code>https://&lt;your-org&gt;.github.io/&lt;your-repo&gt;/</code></li>
 </ul>
@@ -730,22 +731,22 @@ The <a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">E
 </ol>
 <hr />
 <h2 id="todos-in-the-codebase">📝 TODOs in the Codebase<a class="headerlink" href="#todos-in-the-codebase" title="Permanent link">#</a></h2>
-<p>Throughout the template repository, you will find <code>TODO</code> comments in various files. These are designed to guide you step-by-step as you create your own enablements—reminding you where to add content, configure secrets, or customize scripts.</p>
+<p>Throughout the template repository, you will find <code>TODO</code> comments in various files. These guide you step-by-step as you create your own enablements—reminding you where to add content, configure secrets, or customize scripts.</p>
 <p><strong>Tip:</strong>
 To make working with TODOs easier, install a TODO highlighting extension in VS Code, such as <a href="https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight">TODO Highlight</a> or <a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">TODO Tree</a>. These extensions help you quickly find and manage all TODOs in your project.</p>
 <p>By following and resolving these TODOs, you can efficiently adapt the template to your specific enablement scenario.</p>
 <hr />
 <h2 id="who-is-this-for">🧑‍🏫 Who is this for?<a class="headerlink" href="#who-is-this-for" title="Permanent link">#</a></h2>
 <ul>
-<li>Professors and trainers creating hands-on labs</li>
+<li>Trainers and educators creating hands-on labs</li>
 <li>Solution architects building demo environments</li>
-<li>Anyone who wants a fast, reproducible Codespaces-based enablement</li>
+<li>Anyone seeking a fast, reproducible Codespaces-based enablement</li>
 </ul>
 <hr />
 <h2 id="documentation-resources">📚 Documentation &amp; Resources<a class="headerlink" href="#documentation-resources" title="Permanent link">#</a></h2>
 <ul>
 <li><a href="https://github.com/dynatrace-wwse/enablement-codespaces-template">Template Repository</a></li>
-<li><a href="https://dynatrace-wwse.github.io/enablement-codespaces-template/">How to use the codespaces template</a></li>
+<li><a href="https://dynatrace-wwse.github.io/enablement-codespaces-template/">How to use the Codespaces Template</a></li>
 </ul>
 <hr />
 <div class="grid cards">

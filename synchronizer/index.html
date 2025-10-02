@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#7-synchronizer" class="md-skip">
+        <a href="#overview" class="md-skip">
           Skip to content
         </a>
       
@@ -397,8 +397,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -426,8 +424,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -464,9 +460,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#strategies-for-updating-and-migrating-repos" class="md-nav__link">
+  <a href="#strategies-for-updating-and-migrating-repositories" class="md-nav__link">
     <span class="md-ellipsis">
-      Strategies for Updating and Migrating Repos
+      Strategies for Updating and Migrating Repositories
     </span>
   </a>
   
@@ -586,8 +582,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -623,9 +617,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#strategies-for-updating-and-migrating-repos" class="md-nav__link">
+  <a href="#strategies-for-updating-and-migrating-repositories" class="md-nav__link">
     <span class="md-ellipsis">
-      Strategies for Updating and Migrating Repos
+      Strategies for Updating and Migrating Repositories
     </span>
   </a>
   
@@ -658,20 +652,21 @@
   
 
 
+  <h1>7. Synchronizer</h1>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   dynatrace.sendBizEvent('page_load', {"page": "7. Synchronizer"});
 });
 </script>
 
-<h1 id="7-synchronizer">7. Synchronizer<a class="headerlink" href="#7-synchronizer" title="Permanent link">#</a></h1>
 <div class="admonition example">
-<p class="admonition-title">Codespaces Synchronizer 🔁 </p>
-<p>Maintaining and updating multiple repositories can be complex and time-consuming. To address this, we developed the <strong>codespaces-synchronizer</strong>, a tool designed to keep all repositories using the framework up-to-date with minimal manual intervention.
-<img _=";" align="center" alt="run codespace" src="../img/synchronizer.png" width="800" /> </p>
+<p class="admonition-title">Codespaces Synchronizer 🔁</p>
+<p>Maintaining and updating multiple repositories can be complex and time-consuming. The <strong>codespaces-synchronizer</strong> is designed to keep all repositories using the framework up to date with minimal manual intervention.
+<img _=";" align="center" alt="run codespace" src="../img/synchronizer.png" width="800" /></p>
 </div>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>The synchronizer operates from a host machine where all target repositories are cloned. It leverages bash scripting and <code>rsync</code> to automate repository management tasks, including updates, migrations, tagging, and branch protection. The synchronizer is composed of two main files:</p>
+<p>The synchronizer runs from a host machine where all target repositories are cloned. It uses Bash scripting and <code>rsync</code> to automate repository management tasks, including updates, migrations, tagging, and branch protection. The synchronizer consists of two main files:</p>
 <ul>
 <li><strong><code>synch_functions.sh</code></strong>: Contains all core logic and reusable functions for repository operations.</li>
 <li><strong><code>run.sh</code></strong>: Entry point script that loads the framework and orchestrates the synchronization process by invoking functions from <code>synch_functions.sh</code>.</li>
@@ -680,34 +675,34 @@ document.addEventListener('DOMContentLoaded', function() {
 <ul>
 <li><strong>Update repositories</strong>: Propagate framework or configuration changes across multiple repositories.</li>
 <li><strong>Migrate repositories</strong>: Move or refactor repositories while preserving history and structure.</li>
-<li><strong>Create Tags, Versions, and Releases</strong>: Automate versioning and release management.</li>
+<li><strong>Create tags, versions, and releases</strong>: Automate versioning and release management.</li>
 <li><strong>Protect branches and test workflows</strong>: Enforce branch protection rules and validate workflows.</li>
 </ul>
 <hr />
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">#</a></h2>
-<p><img _=";" align="right" alt="synch" src="../img/synch_functions.png" width="180" /> </p>
+<p><img _=";" align="right" alt="synch" src="../img/synch_functions.png" width="180" /></p>
 <ul>
-<li>A host machine with all target repositories cloned locally.</li>
-<li>GitHub permissions to create branches and pull requests.</li>
-<li>Bash terminal access.</li>
-<li><code>rsync</code> installed on the host.</li>
+<li>A host machine with all target repositories cloned locally</li>
+<li>GitHub permissions to create branches and pull requests</li>
+<li>Bash terminal access</li>
+<li><code>rsync</code> installed on the host</li>
 </ul>
-<h2 id="strategies-for-updating-and-migrating-repos">Strategies for Updating and Migrating Repos<a class="headerlink" href="#strategies-for-updating-and-migrating-repos" title="Permanent link">#</a></h2>
+<h2 id="strategies-for-updating-and-migrating-repositories">Strategies for Updating and Migrating Repositories<a class="headerlink" href="#strategies-for-updating-and-migrating-repositories" title="Permanent link">#</a></h2>
 <ul>
 <li><strong>Cherry-pick</strong>: Selectively apply commits from the synchronizer remote repository.</li>
-<li><strong>Rsync</strong>: Efficiently synchronize files and directories between repositories (prefered approach).</li>
+<li><strong>Rsync</strong>: Efficiently synchronize files and directories between repositories (preferred approach).</li>
 </ul>
 <h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">#</a></h2>
 <ol>
 <li><strong>Initialization</strong>: <code>run.sh</code> sets up environment variables and loads <code>synch_functions.sh</code>.</li>
-<li><strong>Repository Selection</strong>: The synchronizer can operate on all repositories or a specified subset.</li>
-<li><strong>Function Execution</strong>: Core functions (such as updating files, creating tags, or migrating content) are executed in batch across repositories.</li>
+<li><strong>Repository selection</strong>: The synchronizer can operate on all repositories or a specified subset.</li>
+<li><strong>Function execution</strong>: Core functions (such as updating files, creating tags, or migrating content) are executed in batch across repositories.</li>
 <li><strong>Automation</strong>: Common git operations (checkout, pull, commit, push, PR creation, verify PR, merge PR) are automated, reducing manual effort and risk of errors.</li>
 </ol>
 <hr />
 <div class="grid cards">
 <ul>
-<li><a href="../testing/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../testing/">Continue to Testing →</a></li>
 </ul>
 </div>
 

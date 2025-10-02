@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quick-step-by-step-guide-on-running-in" class="md-skip">
+        <a href="#quick-step-by-step-guide-instantiating-your-environment" class="md-skip">
           Skip to content
         </a>
       
@@ -353,19 +353,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-step-by-step-guide-on-running-in" class="md-nav__link">
+  <a href="#quick-step-by-step-guide-instantiating-your-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      🏃🏻‍♂️ Quick step by step guide on running in...
+      🏃🏻‍♂️ Quick Step by Step guide: Instantiating Your Environment
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🏃🏻‍♂️ Quick step by step guide on running in...">
+    <nav class="md-nav" aria-label="🏃🏻‍♂️ Quick Step by Step guide: Instantiating Your Environment">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#1-running-in-github-codespaces" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Running in ☁️ GitHub Codespaces
+      1. Running in GitHub Codespaces
     </span>
   </a>
   
@@ -701,19 +701,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-step-by-step-guide-on-running-in" class="md-nav__link">
+  <a href="#quick-step-by-step-guide-instantiating-your-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      🏃🏻‍♂️ Quick step by step guide on running in...
+      🏃🏻‍♂️ Quick Step by Step guide: Instantiating Your Environment
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🏃🏻‍♂️ Quick step by step guide on running in...">
+    <nav class="md-nav" aria-label="🏃🏻‍♂️ Quick Step by Step guide: Instantiating Your Environment">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#1-running-in-github-codespaces" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Running in ☁️ GitHub Codespaces
+      1. Running in GitHub Codespaces
     </span>
   </a>
   
@@ -886,50 +886,49 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="admonition-title">Choose the option that best fits your needs! 🚀</p>
 <p>The Dynatrace Enablement Framework supports multiple ways to instantiate your development environment. You can run it in Github Codespaces, VS Code Dev Containers or local containers, in AMD or ARM architectures.  </p>
 </div>
-<h2 id="quick-step-by-step-guide-on-running-in">🏃🏻‍♂️ Quick step by step guide on running in...<a class="headerlink" href="#quick-step-by-step-guide-on-running-in" title="Permanent link">#</a></h2>
-<h3 id="1-running-in-github-codespaces">1. Running in ☁️ GitHub Codespaces <img _=";" align="right" alt="run codespace" src="../img/run_codespace.png" width="300" /><a class="headerlink" href="#1-running-in-github-codespaces" title="Permanent link">#</a></h3>
+<h2 id="quick-step-by-step-guide-instantiating-your-environment">🏃🏻‍♂️ Quick Step by Step guide: Instantiating Your Environment<a class="headerlink" href="#quick-step-by-step-guide-instantiating-your-environment" title="Permanent link">#</a></h2>
+<h3 id="1-running-in-github-codespaces">1. Running in GitHub Codespaces <img _=";" align="right" alt="run codespace" src="../img/run_codespace.png" width="300" /><a class="headerlink" href="#1-running-in-github-codespaces" title="Permanent link">#</a></h3>
 <ol>
-<li>Go to the repository hosted in github</li>
-<li>Click on the <strong>&lt;&gt; Code</strong> button. </li>
-<li>Create a new codespace using the main branch or click + New with options to customize how and where to run the Codespace within Github Cloud. </li>
+<li>Go to the repository hosted on GitHub.</li>
+<li>Click the <strong>&lt;&gt; Code</strong> button.</li>
+<li>Create a new Codespace using the main branch, or click <strong>+ New</strong> to customize how and where to run the Codespace within GitHub Cloud.</li>
 </ol>
-<p><em>Repository Secrets normally <code>DT_TENANT</code>, <code>DT_OPERATOR_TOKEN</code> and <code>DT_INGEST_TOKEN</code> (but not limited to) are injected automatically using GitHub Codespaces secrets. No manual setup required — these are available as environment variables inside the container.</em></p>
-<h3 id="2-running-in-vs-code-dev-containers-or-local-container">2. 📦 Running in VS Code Dev Containers or Local Container<a class="headerlink" href="#2-running-in-vs-code-dev-containers-or-local-container" title="Permanent link">#</a></h3>
+<p><em>Repository secrets such as <code>DT_TENANT</code>, <code>DT_OPERATOR_TOKEN</code>, and <code>DT_INGEST_TOKEN</code> (among others) are injected automatically using GitHub Codespaces secrets. No manual setup is required—these are available as environment variables inside the container.</em></p>
+<h3 id="2-running-in-vs-code-dev-containers-or-local-container">2.  📦 Running in VS Code Dev Containers or Local Container<a class="headerlink" href="#2-running-in-vs-code-dev-containers-or-local-container" title="Permanent link">#</a></h3>
 <details class="info">
-<summary>Key difference between instantiating a VS Code Dev Container or a local container</summary>
-<p>The key difference between instantiating a VS Code Dev Container and a local container lies in how each environment is created and managed: a VS Code Dev Container is launched and orchestrated directly by VS Code using the configuration specified in the devcontainer.json file, while a local container is started independently using the Makefile and runlocal script, allowing you to build and manage the container from the terminal without relying on VS Code, which is ideal for headless or automated workflows.</p>
+<summary>Key Difference: VS Code Dev Container vs Local Container</summary>
+<p>The main difference between a VS Code Dev Container and a local container is how each environment is created and managed. A VS Code Dev Container is launched and orchestrated by VS Code using the configuration in <code>devcontainer.json</code>. A local container is started independently using the Makefile and <code>runlocal</code> script, allowing you to build and manage the container from the terminal without relying on VS Code. This is ideal for headless or automated workflows.</p>
 </details>
-<p>The following set of instructions are for the preparation of both scenarios.</p>
+<p>The following steps apply to both scenarios:</p>
 <ol>
 <li>
-<p>The first step is to provide the infrastructure. </p>
+<p><strong>Provision Infrastructure</strong></p>
 <details class="info">
-<summary>🏗️ Setting up the infrastructure</summary>
+<summary>🏗️ Setting up the Infrastructure</summary>
 <p>You may provision your infrastructure on any major cloud provider or run locally using <a href="#using-multipass-for-local-development">Multipass</a>.</p>
-<p><strong>Minimum requirements for a cloud or local machine:</strong></p>
-<ol>
-<li><strong>Operating System:</strong> Ubuntu LTS (22.04 or 24.04 recommended)</li>
-<li><strong>CPU &amp; Memory:</strong> The required resources depend on your workloads. As a general guideline, refer to the <code>hostRequirements</code> section in the <code>.devcontainer.json</code> file. A typical setup with 4 CPU cores and 16 GB RAM is sufficient for most use cases.</li>
-<li><strong>Network Ports:</strong> Ensure the following ports are open for inbound connections:<ul>
-<li><code>22</code> (SSH)</li>
-<li><code>30100</code>, <code>30200</code>, <code>30300</code> (for application access; each deployed app is exposed via Kubernetes NodePort)</li>
-</ul>
-</li>
-</ol>
+<p><strong>Minimum requirements for a cloud or local machine:</strong>
+1. <strong>Operating System:</strong> Ubuntu LTS (22.04 or 24.04 recommended)
+2. <strong>CPU &amp; Memory:</strong> Requirements depend on your workloads. As a guideline, refer to the <code>hostRequirements</code> section in <code>.devcontainer.json</code>. A typical setup with 4 CPU cores and 16 GB RAM is sufficient for most use cases.
+3. <strong>Network Ports:</strong> Ensure the following ports are open for inbound connections:
+    - <code>22</code> (SSH)
+    - <code>30100</code>, <code>30200</code>, <code>30300</code> (for application access; each deployed app is exposed via Kubernetes NodePort)</p>
 </details>
 </li>
 <li>
-<p>SSH into the host</p>
+<p><strong>SSH into the host</strong></p>
 </li>
 <li>
-<p>Clone the git repository</p>
+<p><strong>Clone the repository</strong></p>
 </li>
 <li>
-<p>Setting up the secrets: 
-    Make sure the secrets are defined as environment variables. <strong>VS Code</strong> needs to read the secrets as an environment variable, and the <strong>local container</strong> approach does not need VS Code. Hence we create a file under <code>.devcontainer/runlocal/.env</code> that works for both approaches.</p>
+<p><strong>Set up secrets and environment variables</strong></p>
+<ul>
+<li>Define all required secrets as environment variables. For both VS Code Dev Containers and local containers, create a <code>.env</code> file under <code>.devcontainer/runlocal/.env</code>.</li>
+<li>The secrets required are defined in the <code>secrets</code> section of <code>.devcontainer.json</code>. If no secrets are needed, create an empty <code>.env</code> file.</li>
+</ul>
 <details class="info">
 <summary>Sample <code>.env</code> file</summary>
-<p>You can copy and paste the contents of the sample into <code>.devcontainer/runlocal/.env</code>. Verify that you have entered all needed secrets for the training. These are defined in the <code>secrets</code> section of the .devcontainer.json<code>file. If the repository does not need secrets, just create an empty</code>.env` file.</p>
+<p>You can copy and paste the following sample into <code>.devcontainer/runlocal/.env</code>. Ensure all required secrets for the training are included.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.devcontainer/runlocal/.env</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -940,42 +939,37 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Environment variables</span>
-
-<span class="c1"># Mapping of the Secrets defined in the .devcontainer.json file</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Environment variables as defined as secrets in the devcontainer.json file</span>
 <span class="c1"># Dynatrace Tenant</span>
-<span class="nv">DT_TENANT</span><span class="o">=</span>https://abc123.apps.dynatrace.com
+<span class="na">DT_TENANT</span><span class="o">=</span><span class="s">https://abc123.apps.dynatrace.com</span>
 
 <span class="c1"># Dynatrace Operator Token</span>
-<span class="nv">DT_OPERATOR_TOKEN</span><span class="o">=</span>dt0c01.XXXXXX
-<span class="c1">#it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: &#39;Create ActiveGate tokens&#39; &#39;Read entities&#39; &#39;Read settings&#39; &#39;Write settings&#39; &#39;Access probrem and event feed, metrics and topology&#39; &#39;PaaS Integration - installer download</span>
+<span class="na">DT_OPERATOR_TOKEN</span><span class="o">=</span><span class="s">dt0c01.XXXXXX</span>
 
-<span class="c1">#Dynatrace Ingest Token</span>
-<span class="nv">DT_INGEST_TOKEN</span><span class="o">=</span>dt0c01.YYYYYY
-<span class="c1"># it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: &#39;Ingest logs&#39; &#39;Ingest metrics&#39; &#39;Ingest OpenTelemetry traces&#39;</span>
+<span class="c1"># Dynatrace Ingest Token</span>
+<span class="na">DT_INGEST_TOKEN</span><span class="o">=</span><span class="s">dt0c01.YYYYYY</span>
 
 <span class="c1"># Add any other environment variables as needed</span>
 </code></pre></div></td></tr></table></div>
 </details>
 </li>
 <li>
-<p>Prerequisites: <code>make</code> and <code>docker</code> is installed on the host and the user has access to it.</p>
+<p><strong>Verify prerequisites</strong></p>
+<ul>
+<li>Ensure <code>make</code> and <code>docker</code> are installed on the host and the user has access to Docker.</li>
+</ul>
 <details class="info">
 <summary>Verify prerequisites with <code>checkHost</code></summary>
-<p>There is a sample function that helps you verify the requirements are met and if not it offers to install them for you if needed. 
+<p>Use the provided function to verify requirements. If any are missing, the function offers to install them for you.
 <div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>.devcontainer/util/source_framework.sh<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>checkHost
 </code></pre></div>
-<img _=";" align="center" alt="checkhost" src="../img/checkhost.png" width="800" /> </p>
+<img _=";" align="center" alt="checkhost" src="../img/checkhost.png" width="800" /></p>
 </details>
 </li>
 </ol>
 <div class="admonition success">
-<p class="admonition-title">Le't's launch the enablement</p>
-<p>You are all set, we can launch the enablement either with <code>VS Code</code> as a dev container or with <code>make</code> as a plain docker container.</p>
+<p class="admonition-title">Ready to Launch</p>
+<p>You are all set! Launch the enablement with VS Code as a dev container or with <code>make</code> as a plain Docker container.</p>
 </div>
 <h4 id="2-a-running-as-dev-container-with-vs-code">2. a. 📦 🖥️ Running as dev container with VS Code<a class="headerlink" href="#2-a-running-as-dev-container-with-vs-code" title="Permanent link">#</a></h4>
 <ol>
