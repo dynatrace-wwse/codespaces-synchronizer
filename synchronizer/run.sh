@@ -14,7 +14,7 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/misc"
+export BRANCH="docs/rfe"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -65,8 +65,7 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos all verifyPrMerge
-#doInRepos all custom
+doInRepos this doPushandPR
 #doInRepos synch listOpenIssues
 #doInRepos synch verifyPrMerge
 
