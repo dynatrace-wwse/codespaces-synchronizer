@@ -1,4 +1,5 @@
-# 11. What's Next?
+--8<-- "snippets/whats-next.js"
+
 
 Now that you've explored the framework and best practices, you can:
 

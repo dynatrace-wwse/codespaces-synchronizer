@@ -2,7 +2,8 @@
 
 ## Overview
 
-The Dynatrace Enablement Framework uses a custom Docker image as the foundation for all training and demo environments. This image is designed for maximum compatibility, flexibility, and ease of use across different platforms and deployment scenarios.
+
+The Dynatrace Enablement Framework leverages a custom Docker image as the foundation for all training and demo environments. This image is engineered for maximum compatibility, flexibility, and ease of use across a variety of platforms and deployment scenarios.
 
 ---
 
@@ -11,15 +12,18 @@ The Dynatrace Enablement Framework uses a custom Docker image as the foundation 
 ### 🖼️ Base Image:
   The framework uses `mcr.microsoft.com/devcontainers/base:ubuntu` as its base image, ensuring seamless compatibility with GitHub Codespaces and Visual Studio Code Dev Containers.
 
+
 ### 💻 Cross-Platform Support:
-  The image is built to run on both AMD and ARM architectures, eliminating vendor lock-in and enabling use on a wide range of hardware.
+  The image is built to run on both AMD and ARM architectures, eliminating vendor lock-in and supporting a wide range of hardware.
 
-### ☁️ Local and Cloud Execution:  
-  - Can be run in GitHub Codespaces for cloud-based development.
-  - Supports local execution on Windows, Linux, and macOS via Multipass, providing a consistent development environment regardless of the host OS.
 
-## <img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Integration:
-  Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments work seamlessly with this deployment. All necessary components such as the CSI Driver, Webhook, ActiveGate, and OneAgents can be deployed in this image ensuring seamless monitoring and observability of the running applications.
+### ☁️ Local and Cloud Execution:
+  - Supports GitHub Codespaces for cloud-based development.
+  - Enables local execution on Windows, Linux, and macOS via Multipass, ensuring a consistent development environment regardless of host OS.
+
+
+## <img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Integration
+Dynatrace OneAgent FullStack and Kubernetes CloudNativeFullstack deployments are fully supported. All required components—including the CSI Driver, Webhook, ActiveGate, and OneAgents—can be deployed within this image, ensuring comprehensive monitoring and observability for running applications.
 
 ## Tooling
 
@@ -36,48 +40,55 @@ The Dynatrace Enablement Framework uses a custom Docker image as the foundation 
 
 
 
+
 ## Docker-in-Socket Strategy
 
-The Dynatrace Enablement Framework uses a **Docker-in-Socket** strategy to enable container management from within the development container. This approach allows the container to communicate directly with the Docker daemon running on the host machine by mounting the Docker socket (`/var/run/docker.sock`) into the container.
+The Dynatrace Enablement Framework uses a **Docker-in-socket** strategy to enable container management from within the development container. By mounting the Docker socket (`/var/run/docker.sock`) from the host into the container, the development environment can communicate directly with the host's Docker daemon.
+
 
 ### How It Works
 
-- The `entrypoint.sh` script inside the container handles the logic for interacting with the Docker daemon.
-- By sharing the Docker socket, the container can run Docker commands as if it were running directly on the host.
+- The `entrypoint.sh` script inside the container manages interactions with the Docker daemon.
+- By sharing the Docker socket, the container can execute Docker commands as if running directly on the host.
 - This enables workflows such as building, running, and managing additional containers from within your Codespace or Dev Container.
+
 
 ### Benefits
 
-- **Consistency:** Ensures that Docker commands behave the same way inside the container as they do on the host.
-- **Flexibility:** Supports advanced scenarios like running nested containers or orchestrating multi-container setups.
-- **Simplicity:** No need to install Docker separately inside the container; it leverages the host’s Docker installation.
+- **Consistency:** Docker commands behave identically inside the container and on the host.
+- **Flexibility:** Supports advanced scenarios such as running nested containers or orchestrating multi-container setups.
+- **Simplicity:** No need to install Docker inside the container; it leverages the host’s Docker installation.
+
 
 ### Example
 
-In the `devcontainer.json`, the Docker socket is typically mounted like this:
+In the `devcontainer.json`, mount the Docker socket as follows:
 
-``` json
-  "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
+```json
+"mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"]
 ```
+
 ## Special Container Runtime Arguments
 
-The following `runArgs` configuration is used in the `devcontainer.json` file to enhance the capabilities of the development container:
+The following `runArgs` configuration in `devcontainer.json` enhances the capabilities of the development container:
 
 ```json
 "runArgs": ["--init", "--privileged", "--network=host"]
 ```
 
-  - **--init:** Runs an init process inside the container to handle reaping zombie processes and signal forwarding, improving container stability.
-  - **--privileged:** Grants the container extended privileges, allowing it to access all devices on the host and perform operations typically restricted in standard containers. This is useful for scenarios that require low-level system access (e.g., running Docker inside Docker or accessing host resources).
-  - **--network=host:** Shares the host’s networking stack with the container, enabling the container to use the host’s network interfaces directly. This is helpful for networking tests or when services inside the container need to be accessible on the host network.
+- **--init:** Runs an init process inside the container to handle zombie processes and signal forwarding, improving container stability.
+- **--privileged:** Grants the container extended privileges, allowing access to all host devices and enabling operations typically restricted in standard containers. This is useful for scenarios requiring low-level system access (e.g., running Docker inside Docker or accessing host resources).
+- **--network=host:** Shares the host’s networking stack with the container, enabling direct use of the host’s network interfaces. This is helpful for networking tests or when services inside the container need to be accessible on the host network.
+
 
 
 ## Image Distribution
-  The image is hosted on Docker Hub and is crosscompiled for ARM and AMD architectures.
+The image is hosted on Docker Hub and is cross-compiled for ARM and AMD architectures.
 [![Downloads](https://img.shields.io/docker/pulls/shinojosa/dt-enablement?logo=docker)](https://hub.docker.com/r/shinojosa/dt-enablement)
 
+
 ## Using the Image in devcontainer.json
-The way you configure your development container depends on whether you want to use the pre-built image or build it yourself from a Dockerfile.
+You can configure your development container to use the pre-built image or build it yourself from a Dockerfile, depending on your requirements.
 ### Using the Pre-built Image
 To use the pre-built image, specify the "image" property in your devcontainer.json file:
 
