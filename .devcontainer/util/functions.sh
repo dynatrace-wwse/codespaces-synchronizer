@@ -1183,13 +1183,15 @@ deployUnguard(){
   --set image.repository=bitnamilegacy/mariadb \
   --namespace unguard --create-namespace
 
+  printInfo "waiting for mariadb to come online..."
+
+  waitForAllReadyPods unguard
+
   printInfo "Installing Unguard"
   helm install unguard  oci://ghcr.io/dynatrace-oss/unguard/chart/unguard --version 0.12.0 --namespace unguard 
 
   kubectl patch service unguard-envoy-proxy --namespace=unguard --patch="{\"spec\": {\"type\": \"NodePort\", \"ports\": [{\"port\": 8080, \"nodePort\": $PORT }]}}"
-
-  #PORT2=30200
-  #kubectl patch service unguard-frontend --namespace=unguard --patch="{\"spec\": {\"type\": \"NodePort\", \"ports\": [{\"port\": 80, \"nodePort\": $PORT2 }]}}"
+  
 
 }
 
