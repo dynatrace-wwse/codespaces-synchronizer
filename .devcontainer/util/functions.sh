@@ -304,8 +304,108 @@ setUpTerminal(){
   bindFunctionsInShell
 
   setupAliases
+
+  setupMCPServer
 }
 
+setupMCPServer(){
+
+  printInfoSection "Setting up the Dynatrace 🧠 MCP Server for VS Code"
+
+  local environment=false
+  local platform=false
+  local grail_budget=false
+  local telemetry=false
+  
+  # Check if .devcontainer/runlocal/.env file exists, if not then create it
+  if [ ! -f "$ENV_FILE" ]; then
+    printInfo ".env file not found. Creating it..."
+
+    touch "$ENV_FILE"
+    
+    # Add properties
+    setEnvironmentInEnv
+    setGrailBudget
+    setTelemetry
+  else
+    printInfo ".env file already exists."
+    while IFS= read -r line || [ -n "$line" ]; do
+      # Skip empty lines and comments
+      if [[ -z "$line" || "$line" =~ ^# ]]; then
+        continue
+      fi
+
+      # Split the line into key and value
+      IFS='=' read -r key value <<< "$line"
+      # Print or process the key-value pair
+      
+      if [ "$key" = "DT_ENVIRONMENT" ]; then
+          printInfo "DT_ENVIRONMENT is set to $value"
+          environment=true
+      fi
+      if [ "$key" = "DT_PLATFORM_TOKEN" ]; then
+          printInfo "DT_PLATFORM_TOKEN set"
+          platform=true
+      fi
+      if [ "$key" = "DT_GRAIL_QUERY_BUDGET_GB" ]; then
+          printInfo "DT_GRAIL_QUERY_BUDGET_GB set to $value"
+          grail_budget=true
+      fi
+      if [ "$key" = "DT_MCP_DISABLE_TELEMETRY" ]; then
+          printInfo "DT_MCP_DISABLE_TELEMETRY set to $value"
+          telemetry=true
+      fi
+
+    done < "$ENV_FILE"
+
+    if [ $environment = false ]; then
+      setEnvironmentInEnv
+    fi
+    if [ $platform = false ]; then
+      setPlatformToken
+    fi
+    if [ $grail_budget = false ]; then
+      setGrailBudget
+    fi
+    if [ $telemetry = false ]; then
+      setTelemetry
+    fi
+  fi
+  printInfo "Settings location: $ENV_FILE"
+}
+
+setGrailBudget(){
+  printInfo "Setting DT_GRAIL_QUERY_BUDGET_GB to $DT_GRAIL_QUERY_BUDGET_GB"
+  echo -e "DT_GRAIL_QUERY_BUDGET_GB=$DT_GRAIL_QUERY_BUDGET_GB" >> "$ENV_FILE"
+}
+setTelemetry(){
+  printInfo "Setting DT_MCP_DISABLE_TELEMETRY to $DT_MCP_DISABLE_TELEMETRY"
+  echo -e "DT_MCP_DISABLE_TELEMETRY=$DT_MCP_DISABLE_TELEMETRY" >> "$ENV_FILE"
+}
+
+setPlatformToken(){
+  if [ "$#" -eq 1 ]; then
+    printInfo "Setting DT_PLATFORM_TOKEN"
+    echo -e "DT_PLATFORM_TOKEN=$1" >> "$ENV_FILE"
+  else
+    if [ -z "${DT_PLATFORM_TOKEN}" ]; then
+      printWarn "DT_PLATFORM_TOKEN is missing as environment variable"
+      printInfo "you can set it by typing in the Terminal 'setPlatformToken <token value as argument>'"
+    else
+      printInfo "DT_PLATFORM_TOKEN found as environment variable and writing to file"
+      echo -e "DT_PLATFORM_TOKEN=$DT_PLATFORM_TOKEN" >> "$ENV_FILE"
+    fi
+  fi
+}
+
+setEnvironmentInEnv(){
+  if [ -z "${DT_ENVIRONMENT}" ]; then
+    printWarn "DT_ENVIRONMENT is missing as environment variable"
+  else
+    printInfo "DT_ENVIRONMENT found as environment variable and writing to file"
+    echo -e "DT_ENVIRONMENT=$DT_ENVIRONMENT" >> "$ENV_FILE"
+  fi
+}
 
 bindFunctionsInShell() {
   printInfo "Binding functions.sh and adding a Greeting in the .zshrc for user $USER "
@@ -1394,8 +1494,8 @@ verifyCodespaceCreation(){
 
 calculateTime(){
   # Read from file
-  if [ -e "$ENV_FILE" ]; then
-    source $ENV_FILE
+  if [ -e "$COUNT_FILE" ]; then
+    source $COUNT_FILE
   fi
   # if equal 0 then set duration and update file
   if [ "$DURATION" -eq 0 ]; then 
@@ -1413,14 +1513,14 @@ updateEnvVariable(){
     #printInfo "update [$variable:${(P)variable}]"
     # indirect variable expansion in ZSH
     # shellcheck disable=SC2296
-    sed "s|^$variable=.*|$variable=${(P)variable}|" $ENV_FILE > $ENV_FILE.tmp
-    mv $ENV_FILE.tmp $ENV_FILE
+    sed "s|^$variable=.*|$variable=${(P)variable}|" $COUNT_FILE > $COUNT_FILE.tmp
+    mv $COUNT_FILE.tmp $COUNT_FILE
   else
     #printInfo "BASH"
     #printInfo "update [$variable:${!variable}]"
     # indirect variable expansion in BASH
-    sed "s|^$variable=.*|$variable=${!variable}|" $ENV_FILE  > $ENV_FILE.tmp
-    mv $ENV_FILE.tmp $ENV_FILE
+    sed "s|^$variable=.*|$variable=${!variable}|" $COUNT_FILE  > $COUNT_FILE.tmp
+    mv $COUNT_FILE.tmp $COUNT_FILE
   fi
   
   export $variable

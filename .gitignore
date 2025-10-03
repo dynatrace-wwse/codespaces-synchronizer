@@ -167,6 +167,7 @@ site/*
 
 # no env files
 .devcontainer/util/.env*
+.devcontainer/util/.count*
 .devcontainer/.env*
 .devcontainer/runlocal/.env*
 
