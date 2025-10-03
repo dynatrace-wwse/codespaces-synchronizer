@@ -1675,12 +1675,13 @@ checkHost(){
       # Install node if missing
       if [ "$node_available" = false ]; then
         printInfo "Installing nodejs..."
-        sudo apt-get update && sudo apt-get install -y nodejs
+        curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+          && apt-get install -y nodejs 
       fi
       # Install npm if missing
       if [ "$npm_available" = false ]; then
         printInfo "Installing npm..."
-        sudo apt-get update && sudo apt-get install -y npm
+        npm install -g npm@latest  && rm -rf /var/lib/apt/lists/*
       fi
       printInfo "Auto-fix attempted. Please re-run this function or open a new shell."
     else
