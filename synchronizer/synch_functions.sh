@@ -18,6 +18,8 @@ fix_repos=("bug-busters")
 migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
 refactor_repos=("codespaces-framework" "enablement-codespaces-template" "workshop-dynatrace-log-analytics")
 import_repos=("workshop-dynatrace-log-analytics")
+unguard_repos=("demo-mcp-unguard")
+
 
 # Function to compare files in arrays,
 # $1[cs or all for iterating in only CS or ALL repos]
@@ -44,7 +46,7 @@ compareFile() {
 copyFramework(){
     repo=$(basename $(pwd))
 
-    printInfoSection "Copying core files to repository $repo into branch $BRANCH"
+    printInfoSection "Copying core files to repository $repo into actual branch"
     printInfoSection "Copying core files from $ROOT_PATH$SYNCH_REPO to $ROOT_PATH$repo"
     
     # Exclude core files from the synchronizer
@@ -65,11 +67,14 @@ copyFramework(){
     fi
 
     # For copying
-    SOURCE="$ROOT_PATH$SYNCH_REPO/"
-    DEST="$ROOT_PATH$repo/"
-    # For importing changes we invert
-    #DEST="$ROOT_PATH$SYNCH_REPO/"
-    #SOURCE="$ROOT_PATH$repo/"
+    if [ "$IMPORT" = true ]; then
+        # For importing changes we invert
+        DEST="$ROOT_PATH$SYNCH_REPO/"
+        SOURCE="$ROOT_PATH$repo/"
+    else
+        SOURCE="$ROOT_PATH$SYNCH_REPO/"
+        DEST="$ROOT_PATH$repo/"
+    fi
 
     rsync -av "${EXCLUDES[@]}" "$SOURCE" "$DEST"
 

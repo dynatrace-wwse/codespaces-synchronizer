@@ -1419,6 +1419,8 @@ checkHost(){
   make_available=false
   docker_available=false
   docker_accessible=false
+  node_available=false
+  npm_available=false
 
   # Check if host is Ubuntu
   if grep -qi ubuntu /etc/os-release; then
@@ -1429,7 +1431,7 @@ checkHost(){
 
   # Check if make is installed
   if command -v make >/dev/null; then
-    printInfo "✅ make is installed"
+    printInfo "✅ make is installed (version: $(make --version))"
     make_available=true
   else
     printWarn "❌ make is NOT installed"
@@ -1438,7 +1440,7 @@ checkHost(){
 
   # Check if docker is installed
   if command -v docker >/dev/null; then
-    printInfo "✅ docker is installed"
+    printInfo "✅ docker is installed (version: $(docker --version))"
     docker_available=true
   else
     printWarn "❌ docker is NOT installed"
@@ -1454,8 +1456,26 @@ checkHost(){
     docker_accessible=false
   fi
 
+  # Check if node is installed
+  if command -v node >/dev/null; then
+    printInfo "✅ node is installed (version: $(node --version))"
+    node_available=true
+  else
+    printWarn "❌ node is NOT installed (needed for Dynatrace MCP Server)"
+    node_available=false
+  fi
+
+  # Check if npm is installed
+  if command -v npm >/dev/null; then
+    printInfo "✅ npm is installed (version: $(npm --version)) "
+    npm_available=true
+  else
+    printWarn "❌ npm is NOT installed (needed for MCP Server)"
+    npm_available=false
+  fi
+
   # Prompt if any requirement is missing
-  if [ "$make_available" = false ] || [ "$docker_available" = false ] || [ "$docker_accessible" = false ]; then
+  if [ "$make_available" = false ] || [ "$docker_available" = false ] || [ "$docker_accessible" = false ] || [ "$node_available" = false ] || [ "$npm_available" = false ]; then
     printWarn "One or more requirements are missing or not accessible"
     printWarn "Would you like to attempt to correct them now? (y/n) 'yes' to run the commands for you, 'n' we only print how to resolve the issue"
     read -r answer
@@ -1478,6 +1498,16 @@ checkHost(){
         sudo systemctl restart docker
         printWarn "You may need to log out and log back in for group changes to take effect."
       fi
+      # Install node if missing
+      if [ "$node_available" = false ]; then
+        printInfo "Installing nodejs..."
+        sudo apt-get update && sudo apt-get install -y nodejs
+      fi
+      # Install npm if missing
+      if [ "$npm_available" = false ]; then
+        printInfo "Installing npm..."
+        sudo apt-get update && sudo apt-get install -y npm
+      fi
       printInfo "Auto-fix attempted. Please re-run this function or open a new shell."
     else
       printWarn "Host setup not corrected. Some features may not work as expected."
@@ -1489,6 +1519,12 @@ checkHost(){
       fi
       if [ "$docker_accessible" = false ]; then
         printInfo "To enable Docker access: sudo usermod -aG docker $USER && sudo systemctl restart docker (then log out and back in)"
+      fi
+      if [ "$node_available" = false ]; then
+        printInfo "To install nodejs: sudo apt-get update && sudo apt-get install -y nodejs"
+      fi
+      if [ "$npm_available" = false ]; then
+        printInfo "To install npm: sudo apt-get update && sudo apt-get install -y npm"
       fi
     fi
   else
