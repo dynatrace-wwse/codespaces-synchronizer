@@ -12,7 +12,7 @@
 2. Click the **<> Code** button.
 3. Create a new Codespace using the main branch, or click **+ New** to customize how and where to run the Codespace within GitHub Cloud.
 
-_Repository secrets such as `DT_TENANT`, `DT_OPERATOR_TOKEN`, and `DT_INGEST_TOKEN` (among others) are injected automatically using GitHub Codespaces secrets. No manual setup is required—these are available as environment variables inside the container._
+_Repository secrets such as `DT_ENVIRONMENT`, `DT_OPERATOR_TOKEN`, and `DT_INGEST_TOKEN` (among others) are injected automatically using GitHub Codespaces secrets. No manual setup is required—these are available as environment variables inside the container._
 
 ### 2.  📦 Running in VS Code Dev Containers or Local Container
 
@@ -49,7 +49,7 @@ The following steps apply to both scenarios:
 		```properties title=".devcontainer/runlocal/.env" linenums="1"
 		# Environment variables as defined as secrets in the devcontainer.json file
 		# Dynatrace Tenant
-		DT_TENANT=https://abc123.apps.dynatrace.com
+		DT_ENVIRONMENT=https://abc123.apps.dynatrace.com
 
 		# Dynatrace Operator Token
 		DT_OPERATOR_TOKEN=dt0c01.XXXXXX

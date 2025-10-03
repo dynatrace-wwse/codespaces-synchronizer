@@ -44,10 +44,10 @@ printCodespacesInformation(){
     echo -e " ${LILA}GitHub Pages: ${RESET}https://dynatrace-wwse.github.io/${RepositoryName}    "
     echo -e " ${LILA}GitHub Repository: ${RESET}${GITHUB_REPOSITORY}     "
     
-    if [[ -z $DT_TENANT ]]; then
-        echo -e " ${YELLOW}${WARNING}${ORANGE} No Dynatrace Tenant information provided."
+    if [[ -z $DT_ENVIRONMENT ]]; then
+        echo -e " ${YELLOW}${WARNING}${ORANGE} No Dynatrace information provided."
     else
-        echo -e " ${LILA}Dynatrace Tenant: ${RESET}${DT_TENANT}"
+        echo -e " ${LILA}Dynatrace Environment: ${RESET}${DT_ENVIRONMENT}"
     fi
     
     echo -e "                                                                                                             "

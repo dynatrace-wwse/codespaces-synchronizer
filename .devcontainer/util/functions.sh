@@ -76,6 +76,7 @@ postCodespaceTracker(){
   \"codespace.type\": \"$INSTANTIATION_TYPE\",
   \"codespace.arch\": \"$ARCH\",
   \"codespace.name\": \"$CODESPACE_NAME\",
+  \"environment\": \"$DT_ENVIRONMENT\",
   \"tenant\": \"$DT_TENANT\"
   }"
 }
@@ -490,10 +491,12 @@ validateSaveCredentials() {
     kubectl delete configmap -n default dtcredentials 2>/dev/null
 
     kubectl create configmap -n default dtcredentials \
+      --from-literal=environment=${DT_ENVIRONMENT} \
       --from-literal=tenant=${DT_TENANT} \
       --from-literal=apiToken=${DT_OPERATOR_TOKEN} \
       --from-literal=dataIngestToken=${DT_INGEST_TOKEN}
     # Exporting clean values
+    export DT_ENVIRONMENT=$DT_ENVIRONMENT
     export DT_TENANT=$DT_TENANT
     export DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
     export DT_INGEST_TOKEN=$DT_INGEST_TOKEN
@@ -501,7 +504,7 @@ validateSaveCredentials() {
     export DT_OTEL_ENDPOINT=$DT_OTEL_ENDPOINT
     return 0
   else
-    printError "validateSaveCredentials function should be used like saveCredentials DT_TENANT DT_OPERATOR_TOKEN DT_INGEST_TOKEN"
+    printError "validateSaveCredentials function should be used like saveCredentials DT_ENVIRONMENT DT_OPERATOR_TOKEN DT_INGEST_TOKEN"
     return 1
   fi
 }
@@ -534,13 +537,13 @@ verifyParseSecret(){
       
       # Parse Production tenants
       if echo "$secret" | grep -q "\.apps\.dynatrace\.com"; then
-        printWarn "Production tenant invalid for API requests: changing apps for live" $print_log
+        printInfo "Production environment changing apps for live for API request" $print_log
         secret=$(echo "$secret" | sed 's/\.apps\.dynatrace\.com.*$/\.live.dynatrace\.com/g')
       fi
       
       # Parse for Sprint & DEV tenants
       if echo "$secret" | grep -q "\.apps\.dynatracelabs\.com"; then
-        printWarn "Sprint tenant invalid for API requests: removing apps" $print_log
+        printWarn "Sprint environment removing apps for API requests" $print_log
         secret=$(echo "$secret" | sed 's/\.apps\.dynatracelabs\.com.*$/\.dynatracelabs\.com/g')
       fi
       # remove anything after .com
@@ -578,44 +581,55 @@ dynatraceEvalReadSaveCredentials() {
   local found=1
 
   if [[ $# -eq 3 ]]; then
-    DT_TENANT=$1
+    DT_ENVIRONMENT=$1
     DT_OPERATOR_TOKEN=$2
     DT_INGEST_TOKEN=$3
     # Passed as argument
+    # We shuffle environment to tenant to modify tenant for API usage
+    DT_TENANT=$DT_ENVIRONMENT
     printInfo "Secrets passed as arguments"
     validateSaveCredentials $DT_TENANT $DT_OPERATOR_TOKEN $DT_INGEST_TOKEN
     found=0
 
-  elif [[ -n "${DT_TENANT}" && -n "${DT_OPERATOR_TOKEN}" && -n "${DT_INGEST_TOKEN}" ]]; then
+  elif [[ -n "${DT_ENVIRONMENT}" && -n "${DT_OPERATOR_TOKEN}" && -n "${DT_INGEST_TOKEN}" ]]; then
     # Found in env 
     printInfo "Secrets found in environment variables"
+
+    # We shuffle environment to tenant to modify tenant for API usage
+    DT_TENANT=$DT_ENVIRONMENT
     validateSaveCredentials $DT_TENANT $DT_OPERATOR_TOKEN $DT_INGEST_TOKEN
     found=0
-  elif [[ -n "${DT_TENANT}" && -z "${DT_OPERATOR_TOKEN}" && -z "${DT_INGEST_TOKEN}" ]]; then
-    printWarn "Dynatrace Tenant defined but tokens are missing"
+  elif [[ -n "${DT_ENVIRONMENT}" && -z "${DT_OPERATOR_TOKEN}" && -z "${DT_INGEST_TOKEN}" ]]; then
+    printWarn "Dynatrace Environment defined but tokens are missing"
+    
+    # We shuffle environment to tenant to modify tenant for API usage
+    DT_TENANT=$DT_ENVIRONMENT
     validateSaveCredentials $DT_TENANT $DT_OPERATOR_TOKEN $DT_INGEST_TOKEN
     found=0
   else
     printWarn "Dynatrace secrets not found as arguments nor env vars, reading from config map"
     kubectl get configmap -n default dtcredentials 2>/dev/null
-    # Getting the data size
-    data=$(kubectl get configmap -n default dtcredentials | awk '{print $2}')
-    # parsing to number
-    size=$(echo $data | grep -o '[0-9]*')
-    printInfo "The Configmap has $size variables stored"
     if [[ $? -eq 0 ]]; then
+      printInfo "ConfigMap found, reading from it"
+      # Getting the data size
+      data=$(kubectl get configmap -n default dtcredentials | awk '{print $2}')
+      # parsing to number
+      size=$(echo $data | grep -o '[0-9]*')
+      printInfo "The Configmap has $size variables stored"
+      DT_ENVIRONMENT=$(kubectl get configmap -n default dtcredentials -ojsonpath={.data.environment})
       DT_TENANT=$(kubectl get configmap -n default dtcredentials -ojsonpath={.data.tenant})
       DT_OPERATOR_TOKEN=$(kubectl get configmap -n default dtcredentials -ojsonpath={.data.apiToken})
       DT_INGEST_TOKEN=$(kubectl get configmap -n default dtcredentials -ojsonpath={.data.dataIngestToken})
       found=0
     else
         printInfo "ConfigMap not found, resetting variables"
-        unset DT_TENANT DT_OPERATOR_TOKEN DT_INGEST_TOKEN
+        unset DT_ENVIRONMENT DT_TENANT DT_OPERATOR_TOKEN DT_INGEST_TOKEN
     fi
   fi
 
   if [[ $found -eq 0 ]]; then
 
+    export DT_ENVIRONMENT=$DT_ENVIRONMENT
     export DT_TENANT=$DT_TENANT
     export DT_OPERATOR_TOKEN=$DT_OPERATOR_TOKEN
     export DT_INGEST_TOKEN=$DT_INGEST_TOKEN
@@ -634,7 +648,8 @@ dynatraceEvalReadSaveCredentials() {
 
 printSecrets(){
     # Print all known vars
-    printInfo "Dynatrace Tenant: $DT_TENANT"
+    printInfo "Dynatrace Environment: $DT_ENVIRONMENT"
+    printInfo "Dynatrace Tenant (for API): $DT_TENANT"
     printInfo "Dynatrace API & PaaS Token: ${DT_OPERATOR_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Ingest Token: ${DT_INGEST_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Otel API Token: ${DT_INGEST_TOKEN:0:14}xxx..."
@@ -644,7 +659,7 @@ printSecrets(){
 deployCloudNative() {
   dynatraceEvalReadSaveCredentials "$@"
 
-  printInfoSection "Deploying Dynatrace in CloudNativeFullStack mode for $DT_TENANT"
+  printInfoSection "Deploying Dynatrace in CloudNativeFullStack mode for $DT_ENVIRONMENT"
   if [ -n "${DT_TENANT}" ]; then
     # Check if the Webhook has been created and is ready
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
@@ -666,7 +681,7 @@ deployApplicationMonitoring() {
 
   dynatraceEvalReadSaveCredentials "$@"
 
-  printInfoSection "Deploying Dynatrace in ApplicationMonitoring mode for $DT_TENANT"
+  printInfoSection "Deploying Dynatrace in ApplicationMonitoring mode for $DT_ENVIRONMENT"
   if [ -n "${DT_TENANT}" ]; then
     # Check if the Webhook has been created and is ready
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
@@ -742,7 +757,7 @@ generateDynakube(){
     ARM=false
 
     if [[ "$ARCH" == "x86_64" ]]; then
-      printInfo "Codespace is running in AMD (x86_64), Dynakube image is set as default to pull the latest from the tenant $DT_TENANT"
+      printInfo "Codespace is running in AMD (x86_64), Dynakube image is set as default to pull the latest from the environment $DT_ENVIRONMENT"
     elif [[ "$ARCH" == *"arm"* || "$ARCH" == *"aarch64"* ]]; then
       printWarn "Codespace is running in ARM architecture ($ARCH), Dynakube image will be set in Dynakube for AG and OneAgent."
       printWarn "ActiveGate image: $AG_IMAGE"
