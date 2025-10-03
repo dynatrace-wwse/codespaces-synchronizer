@@ -1154,6 +1154,54 @@ deployHipsterShop() {
   
 }
 
+deployUnguard(){
+
+  printInfoSection "Deploying Unguard"
+  getNextFreeAppPort true
+  PORT=$(getNextFreeAppPort)
+  if [[ $? -ne 0 ]]; then
+    printWarn "Application can't be deployed, all NodePorts are busy"
+    return 1
+  fi
+
+  if [[ "$ARCH" != "x86_64" ]]; then
+    printWarn "This version of the Unguard only supports AMD/x86 architectures and not ARM, exiting deployment..."
+    return 1
+  fi
+
+  printInfo "Unguard repository https://github.com/dynatrace-oss/unguard/"
+
+  printInfo "Adding bitnami chart ..."
+  helm repo add bitnami https://charts.bitnami.com/bitnami
+
+  printInfo "Installing unguard-mariadb ..."
+  #helm install unguard-mariadb bitnami/mariadb --version 12.0.2 --set primary.persistence.enabled=false --wait --namespace unguard --create-namespace
+
+  helm install unguard-mariadb bitnami/mariadb \
+  --version 11.5.7 \
+  --set primary.persistence.enabled=false \
+  --set image.repository=bitnamilegacy/mariadb \
+  --namespace unguard --create-namespace
+
+  printInfo "Installing Unguard"
+  helm install unguard  oci://ghcr.io/dynatrace-oss/unguard/chart/unguard --version 0.12.0 --namespace unguard 
+
+  kubectl patch service unguard-envoy-proxy --namespace=unguard --patch="{\"spec\": {\"type\": \"NodePort\", \"ports\": [{\"port\": 8080, \"nodePort\": $PORT }]}}"
+
+  #PORT2=30200
+  #kubectl patch service unguard-frontend --namespace=unguard --patch="{\"spec\": {\"type\": \"NodePort\", \"ports\": [{\"port\": 80, \"nodePort\": $PORT2 }]}}"
+
+}
+
+undeployUnguard() {
+
+  printInfoSection "Undeploying Unguard"
+  helm uninstall unguard -n unguard
+  helm uninstall unguard-mariadb -n unguard
+  kubectl delete ns unguard --force
+}
+
+
 deployApp(){
   
   if [ "$#" -eq 0 ]; then
@@ -1232,6 +1280,15 @@ deployApp(){
       fi
       ;;
 
+    7 | g | unguard)
+       if [[ $delete ]]; then
+        printInfo "Undeploying unguard..."
+        undeployUnguard
+      else
+        deployUnguard
+      fi
+      ;;
+
     *)
       printWarn "Invalid selection: '$input'. Please choose a valid app identifier."
       showDeployAppUsage
@@ -1257,6 +1314,7 @@ showDeployAppUsage(){
   printInfo "[4]   d   easytrade             +       -                                   "
   printInfo "[5]   e   hipstershop           +       -                                   "
   printInfo "[6]   f   todoapp               +       +                                   "
+  printInfo "[7]   g   unguard               +       -                                   "
   printInfo "----------------------------------------------------------------------------"
 }
 
