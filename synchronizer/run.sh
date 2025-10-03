@@ -14,22 +14,25 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="docs/rfe"
+export BRANCH="rfe/mcp-server"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
-export EXCLUDE_CUSTOMFILES=true
+export EXCLUDE_CUSTOMFILES=false
+export IMPORT=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){  
     
     #TODO for this PR
-    # [y] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
-    # [y] - change badge to all repos to point to the documentation of synchronizer
-    # [y] - AI Repo, image? appsec issue fix to all
-    # [y] - search for https://dynatrace-wwse.github.io/codespaces-framework)
-    
+    # [y] - npm and node to the image
+    # [y] - bump image
+    # [ ] - devcontainer.json description of env
+    # [ ] - dt-banner (all) -> MCP server
+    # [ ] - tenant -> environment
+    # [ ] - add MCP Server func.
+
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
@@ -65,7 +68,7 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos this doPushandPR
+doInRepos unguard copyFramework
 #doInRepos synch listOpenIssues
 #doInRepos synch verifyPrMerge
 
