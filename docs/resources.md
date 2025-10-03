@@ -1,7 +1,5 @@
 --8<-- "snippets/resources.js"
 
-# 10. Resources
-
 Below is a curated list of resources to help you get the most out of Dynatrace, Codespaces, and modern development best practices. These links will deepen your understanding, improve your workflow, and keep you up to date with the latest trends.
 
 ---

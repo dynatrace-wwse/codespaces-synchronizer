@@ -14,22 +14,27 @@ export TAG="v1.0.1"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/misc"
+export BRANCH="rfe/mcp-server"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
-export EXCLUDE_CUSTOMFILES=true
+export EXCLUDE_CUSTOMFILES=false
+export IMPORT=true
 
 printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){  
     
     #TODO for this PR
-    # [y] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
-    # [y] - change badge to all repos to point to the documentation of synchronizer
-    # [y] - AI Repo, image? appsec issue fix to all
-    # [y] - search for https://dynatrace-wwse.github.io/codespaces-framework)
-    
+    # [y] - npm and node to the image
+    # [y] - bump image
+    # [ ] - devcontainer.json description of env
+    # [ ] - dt-banner (all) -> MCP server
+    # [ ] - tenant -> environment
+    # [ ] - add MCP Server func.
+
+    # [ ] - AI Repo, image? appsec issue fix to all
+    # [ ] - AI Repo, image? appsec issue fix to all
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
@@ -53,6 +58,11 @@ custom(){
     git add .
     git commit -s -m "$BODY"
     #git status
+    #git checkout main
+    #git pull origin main
+    #git status
+    git checkout -b $BRANCH
+    #git commit -s -m "Fixing workflow of automatic deployment of GH pages when merging on main"
     #doPushandPR
     #gh issue list --state open
     #git push origin $BRANCH 
@@ -65,7 +75,7 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos all custom
+doInRepos unguard copyFramework
 #doInRepos synch listOpenIssues
 #doInRepos synch verifyPrMerge
 
