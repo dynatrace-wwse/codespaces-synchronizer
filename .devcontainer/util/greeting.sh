@@ -57,6 +57,7 @@ printCodespacesInformation(){
     if [[ $CODESPACES == true ]]; then
         echo -e "Codespaces name ${RESET}${CODESPACE_NAME}${NORMAL} running for gh-user ${RESET}${PRINT_USER}    "
     fi
+    echo -e " 🧠 Dynatrace MCP Server: ${RESET}installed"
 }
 
 
