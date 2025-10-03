@@ -33,6 +33,7 @@ custom(){
     # [ ] - tenant -> environment
     # [ ] - add MCP Server func.
 
+    # [ ] - AI Repo, image? appsec issue fix to all
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
@@ -56,6 +57,11 @@ custom(){
     git add .
     git commit -s -m "$BODY"
     #git status
+    #git checkout main
+    #git pull origin main
+    #git status
+    git checkout -b $BRANCH
+    #git commit -s -m "Fixing workflow of automatic deployment of GH pages when merging on main"
     #doPushandPR
     #gh issue list --state open
     #git push origin $BRANCH 
