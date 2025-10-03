@@ -1,5 +1,5 @@
 name: integration-tests
-run-name: ${{ github.event.head_commit.message }} - integration test
+run-name: ${{ github.event.head_commit.message }} - PR integration test
 permissions:
   contents: write
 on:
