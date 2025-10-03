@@ -1054,7 +1054,6 @@ deployBugZapperApp(){
     return 1
   fi
 
-
   kubectl create ns bugzapper
 
   # Create deployment of todoApp
@@ -1191,7 +1190,7 @@ deployUnguard(){
   helm install unguard  oci://ghcr.io/dynatrace-oss/unguard/chart/unguard --version 0.12.0 --namespace unguard 
 
   kubectl patch service unguard-envoy-proxy --namespace=unguard --patch="{\"spec\": {\"type\": \"NodePort\", \"ports\": [{\"port\": 8080, \"nodePort\": $PORT }]}}"
-  
+
 
 }
 
