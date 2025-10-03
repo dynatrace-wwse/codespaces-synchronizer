@@ -34,6 +34,7 @@ custom(){
     # [ ] - add MCP Server func.
 
     # [ ] - AI Repo, image? appsec issue fix to all
+    # [ ] - AI Repo, image? appsec issue fix to all
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
