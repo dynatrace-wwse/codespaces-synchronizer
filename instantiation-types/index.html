@@ -12,7 +12,7 @@
         <link rel="prev" href="../container-image/">
       
       
-        <link rel="next" href="../template/">
+        <link rel="next" href="../dynatrace-integration/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -523,11 +523,31 @@
   
   
     <li class="md-nav__item">
+      <a href="../dynatrace-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Dynatrace integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../template/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4. Codespaces Template
+    5. Codespaces Template
   </span>
   
 
@@ -547,7 +567,7 @@
         
   
   <span class="md-ellipsis">
-    5. The Framework
+    6. The Framework
   </span>
   
 
@@ -567,7 +587,7 @@
         
   
   <span class="md-ellipsis">
-    6. User Experience
+    7. User Experience
   </span>
   
 
@@ -587,7 +607,7 @@
         
   
   <span class="md-ellipsis">
-    7. Synchronizer
+    8. Synchronizer
   </span>
   
 
@@ -607,7 +627,7 @@
         
   
   <span class="md-ellipsis">
-    8. Testing
+    9. Testing
   </span>
   
 
@@ -627,7 +647,7 @@
         
   
   <span class="md-ellipsis">
-    9. Monitoring
+    10. Monitoring
   </span>
   
 
@@ -647,7 +667,27 @@
         
   
   <span class="md-ellipsis">
-    10. Resources
+    11. Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enablements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. Enablements
   </span>
   
 
@@ -667,7 +707,7 @@
         
   
   <span class="md-ellipsis">
-    11. What's next?
+    13. What's next?
   </span>
   
 
@@ -893,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>Click the <strong>&lt;&gt; Code</strong> button.</li>
 <li>Create a new Codespace using the main branch, or click <strong>+ New</strong> to customize how and where to run the Codespace within GitHub Cloud.</li>
 </ol>
-<p><em>Repository secrets such as <code>DT_TENANT</code>, <code>DT_OPERATOR_TOKEN</code>, and <code>DT_INGEST_TOKEN</code> (among others) are injected automatically using GitHub Codespaces secrets. No manual setup is required—these are available as environment variables inside the container.</em></p>
+<p><em>Repository secrets such as <code>DT_ENVIRONMENT</code>, <code>DT_OPERATOR_TOKEN</code>, and <code>DT_INGEST_TOKEN</code> (among others) are injected automatically using GitHub Codespaces secrets. No manual setup is required—these are available as environment variables inside the container.</em></p>
 <h3 id="2-running-in-vs-code-dev-containers-or-local-container">2.  📦 Running in VS Code Dev Containers or Local Container<a class="headerlink" href="#2-running-in-vs-code-dev-containers-or-local-container" title="Permanent link">#</a></h3>
 <details class="info">
 <summary>Key Difference: VS Code Dev Container vs Local Container</summary>
@@ -941,7 +981,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="normal">10</span>
 <span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Environment variables as defined as secrets in the devcontainer.json file</span>
 <span class="c1"># Dynatrace Tenant</span>
-<span class="na">DT_TENANT</span><span class="o">=</span><span class="s">https://abc123.apps.dynatrace.com</span>
+<span class="na">DT_ENVIRONMENT</span><span class="o">=</span><span class="s">https://abc123.apps.dynatrace.com</span>
 
 <span class="c1"># Dynatrace Operator Token</span>
 <span class="na">DT_OPERATOR_TOKEN</span><span class="o">=</span><span class="s">dt0c01.XXXXXX</span>
@@ -1112,7 +1152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><strong>Install Multipass</strong> (<a href="https://multipass.run/install">instructions</a>) </li>
 <li><strong>Launch an Ubuntu VM:</strong>
     <div class="highlight"><pre><span></span><code>multipass<span class="w"> </span>launch<span class="w"> </span>--name<span class="w"> </span>enablement<span class="w"> </span>--disk<span class="w"> </span>30G<span class="w"> </span>--cpus<span class="w"> </span><span class="m">8</span><span class="w"> </span>--memory<span class="w"> </span>32G
-multipass<span class="w"> </span>shell<span class="w"> </span>dt-dev
+multipass<span class="w"> </span>shell<span class="w"> </span>enablement
 </code></pre></div></li>
 </ul>
 <div class="admonition tip">
@@ -1123,7 +1163,7 @@ multipass<span class="w"> </span>shell<span class="w"> </span>dt-dev
 </div>
 <div class="grid cards">
 <ul>
-<li><a href="../template/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../dynatrace-integration/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 

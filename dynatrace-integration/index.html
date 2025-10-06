@@ -9,23 +9,25 @@
       
       
       
+        <link rel="prev" href="../instantiation-types/">
       
-        <link rel="next" href="container-image/">
+      
+        <link rel="next" href="../template/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
-        <title>Dynatrace Enablement Framework</title>
+        <title>4. Dynatrace integration - Dynatrace Enablement Framework</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -54,7 +56,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#project-goals" class="md-skip">
+        <a href="#mcp-server-integration" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Dynatrace Enablement Framework" class="md-header__button md-logo" aria-label="Dynatrace Enablement Framework" data-md-component="logo">
+    <a href=".." title="Dynatrace Enablement Framework" class="md-header__button md-logo" aria-label="Dynatrace Enablement Framework" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Introduction
+              4. Dynatrace integration
             
           </span>
         </div>
@@ -239,7 +241,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Dynatrace Enablement Framework" class="md-nav__button md-logo" aria-label="Dynatrace Enablement Framework" data-md-component="logo">
+    <a href=".." title="Dynatrace Enablement Framework" class="md-nav__button md-logo" aria-label="Dynatrace Enablement Framework" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -266,28 +268,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    1. Introduction
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -296,75 +280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#project-goals" class="md-nav__link">
-    <span class="md-ellipsis">
-      📊 Project Goals
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dynatrace-enablement-framework-in-a-nutshell" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dynatrace Enablement Framework in a Nutshell
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Dynatrace Enablement Framework in a Nutshell">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#key-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Key Features
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#benefits" class="md-nav__link">
-    <span class="md-ellipsis">
-      🤲 Benefits
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#support-policy" class="md-nav__link">
-    <span class="md-ellipsis">
-      📞 Support Policy
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -376,7 +291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="container-image/" class="md-nav__link">
+      <a href="../container-image/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -396,7 +311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="instantiation-types/" class="md-nav__link">
+      <a href="../instantiation-types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -413,10 +328,28 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="dynatrace-integration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4. Dynatrace integration
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -425,6 +358,42 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-server-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP Server Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Monitoring
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -436,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="template/" class="md-nav__link">
+      <a href="../template/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -456,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="framework/" class="md-nav__link">
+      <a href="../framework/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -476,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="user-experience/" class="md-nav__link">
+      <a href="../user-experience/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -496,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="synchronizer/" class="md-nav__link">
+      <a href="../synchronizer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -516,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="testing/" class="md-nav__link">
+      <a href="../testing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -536,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="monitoring/" class="md-nav__link">
+      <a href="../monitoring/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -556,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="resources/" class="md-nav__link">
+      <a href="../resources/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -576,7 +545,7 @@
   
   
     <li class="md-nav__item">
-      <a href="enablements/" class="md-nav__link">
+      <a href="../enablements/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -596,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="whats-next/" class="md-nav__link">
+      <a href="../whats-next/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -634,53 +603,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-goals" class="md-nav__link">
+  <a href="#mcp-server-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      📊 Project Goals
+      MCP Server Integration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#dynatrace-enablement-framework-in-a-nutshell" class="md-nav__link">
+  <a href="#application-monitoring" class="md-nav__link">
     <span class="md-ellipsis">
-      Dynatrace Enablement Framework in a Nutshell
+      Application Monitoring
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Dynatrace Enablement Framework in a Nutshell">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#key-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Key Features
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#benefits" class="md-nav__link">
-    <span class="md-ellipsis">
-      🤲 Benefits
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#support-policy" class="md-nav__link">
-    <span class="md-ellipsis">
-      📞 Support Policy
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -702,89 +638,26 @@
   
 
 
-  <h1>1. Introduction</h1>
+  <h1>4. Dynatrace integration</h1>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "1. Introduction"});
+  dynatrace.sendBizEvent('page_load', {"page": "4. Dynatrace integration"});
 });
 </script>
 
-<details class="example">
-<summary><a href="https://dynatrace-wwse.github.io/codespaces-framework"><img alt="dt-badge" src="https://img.shields.io/badge/powered_by-DT_enablement-8A2BE2?logo=dynatrace" /></a></summary>
-<p>This Codespace leverages the Dynatrace Enablement Framework, providing a robust and flexible development environment. Key features include:</p>
-<ul>
-<li>Seamless operation within GitHub Codespaces, as a remote container, or locally via Docker.</li>
-<li>Cross-compilation support for both AMD and ARM architectures, ensuring broad compatibility.</li>
-<li>Adherence to industry standards and best practices to optimize the developer experience.</li>
-<li>Real-time observability of Kubernetes clusters using <a href="https://dynatrace-wwse.github.io/codespaces-framework/dynatrace-integration/">Dynatrace Full-Stack monitoring</a>.</li>
-<li>Integrated <a href="https://dynatrace-wwse.github.io/codespaces-framework/dynatrace-integration/">Dynatrace MCP Server</a> to deliver deep, actionable insights across distributed systems.</li>
-</ul>
-<p>To learn more about the Dynatrace Enablement Framework and how it can enhance your development workflow, please refer to the <a href="https://dynatrace-wwse.github.io/codespaces-framework">official documentation</a>      </p>
-</details>
-<div class="admonition example">
-<p><img _=";" align="center" alt="run codespace" src="img/framework_banner.png" /> </p>
-</div>
-<h2 id="project-goals">📊 Project Goals<a class="headerlink" href="#project-goals" title="Permanent link">#</a></h2>
-<details class="tip">
-<summary>Framework Objective</summary>
-</details>
-<p><strong>Reduce complexity, remove friction, and increase adoption of the Dynatrace Platform.</strong></p>
-<p>The Dynatrace Enablement Framework is a structured set of tools and best practices designed to streamline the delivery, maintenance, and scaling of solutions across the Dynatrace Platform. The primary goal is to drive platform adoption by ensuring consistent training, comprehensive solution coverage, and operational efficiency.</p>
-<p>Trainings are delivered as GitHub Codespaces—publicly accessible, environment-agnostic, and built to a defined set of standards for quality, repeatability, and team alignment.</p>
-<h2 id="dynatrace-enablement-framework-in-a-nutshell"><img src="https://cdn.bfldr.com/B686QPH3/at/w5hnjzb32k5wcrcxnwcx4ckg/Dynatrace_signet_RGB_HTML.svg?auto=webp&format=pngg" alt="DT logo" width="22"> Dynatrace Enablement Framework in a Nutshell<a class="headerlink" href="#dynatrace-enablement-framework-in-a-nutshell" title="Permanent link">#</a></h2>
-<p>The Dynatrace Enablement Framework simplifies the delivery of demos and hands-on trainings for the Dynatrace Platform. It provides a unified set of tools, templates, and best practices to ensure enablements are easy to create, run anywhere, and maintain over time.</p>
-<h3 id="key-features">✅ Key Features<a class="headerlink" href="#key-features" title="Permanent link">#</a></h3>
-<ul>
-<li>
-<p><strong>GitHub-Hosted &amp; Versioned</strong><br />
-  All trainings are managed in GitHub repositories, ensuring traceability and collaboration.</p>
-</li>
-<li>
-<p><strong>Self-Service Documentation</strong><br />
-  Each repo includes its own MkDocs-powered documentation, published via GitHub Pages.</p>
-</li>
-<li>
-<p><strong>Universal Base Image</strong><br />
-  A Docker image supports AMD/ARM architectures, GitHub Codespaces, VS Code Dev Containers, and containerized execution in any Ubuntu OS.</p>
-</li>
-<li>
-<p><strong>Separation of Concerns</strong><br />
-  Modular design allows repo-specific logic without impacting the core framework.</p>
-</li>
-<li>
-<p><strong>Automated Testing</strong><br />
-  GitHub Actions enable end-to-end integration tests for all trainings.</p>
-</li>
-<li>
-<p><strong>Monitoring &amp; Analytics</strong><br />
-  Usage and adoption are tracked with Dynatrace for continuous improvement.</p>
-</li>
-<li>
-<p><strong>Rapid Training Creation</strong><br />
-  Templates and automation help trainers launch new enablement content quickly.</p>
-</li>
-<li>
-<p><strong>Centralized Maintenance</strong><br />
-  The Codespaces Synchronizer tool keeps all repositories up to date with the latest framework changes.</p>
-</li>
-</ul>
-<hr />
-<h3 id="benefits">🤲 Benefits<a class="headerlink" href="#benefits" title="Permanent link">#</a></h3>
-<ul>
-<li>Reduces complexity and friction for trainers and learners</li>
-<li>Increases adoption and consistency</li>
-<li>Scales across internal, partner, and customer enablement a Kubernetes cluster.</li>
-</ul>
-<h3 id="support-policy">📞 Support Policy<a class="headerlink" href="#support-policy" title="Permanent link">#</a></h3>
+<p>This section explains how Dynatrace monitors applications and integrates with the Dynatrace MCP Server.</p>
 <div class="admonition warning">
-<p class="admonition-title">Support Policy</p>
-<p>This is an enablement project created by the Center of Excellence - Enablement Team at Dynatrace.</p>
-<p><strong>Support is provided via GitHub issues only</strong>. The materials provided in this repository are offered "as-is" without any warranties, express or implied. Use them at your own risk.</p>
+<p class="admonition-title">🚧 Section is under construction</p>
+<p>This section is a work in progress and will be updated shortly with the instructions on how to enable the MCP Server in any enablement... </p>
 </div>
+<h2 id="mcp-server-integration">MCP Server Integration<a class="headerlink" href="#mcp-server-integration" title="Permanent link">#</a></h2>
+<p>The Dynatrace MCP Server acts as a central hub for managing and analyzing monitoring data, enabling seamless integration with your applications.</p>
+<h2 id="application-monitoring">Application Monitoring<a class="headerlink" href="#application-monitoring" title="Permanent link">#</a></h2>
+<p>Dynatrace provides real-time monitoring of your applications, offering insights into performance, errors, and user behavior.</p>
 <div class="grid cards">
 <ul>
-<li><a href="container-image/">Yes! let's begin <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../template/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 
@@ -833,10 +706,10 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
