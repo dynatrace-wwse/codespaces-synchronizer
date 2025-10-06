@@ -170,6 +170,9 @@ site/*
 .devcontainer/.env*
 .devcontainer/runlocal/.env*
 
+#no count
+.devcontainer/util/.count*
+
 # no logs
 logs
 *.log
