@@ -33,7 +33,8 @@ custom(){
     # [ ] - tenant -> environment
     # [ ] - add MCP Server func.
 
-    # [ ] - AI Repo, image? appsec issue fix to all
+    # [ ] - verify functionality of checkHost (print when no all commands)
+    # [ ] - test checkHost again
     # [ ] - AI Repo, image? appsec issue fix to all
 
     repo=$(basename $(pwd))
