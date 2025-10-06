@@ -105,7 +105,7 @@ printApplications(){
 
 printCodespacesVerification(){
     echo -e "${CYAN}This container has the following tools installed and configured for your best experience:${RESET} "
-    echo -e "  ${RESET}k9s kubectl helm node jq python3 gh zsh kind p10k ${RESET} "
+    echo -e "  ${RESET}k9s kubectl helm node npm jq python3 gh zsh kind p10k ${RESET} "
     echo -e "                                                                                                             "
     echo -e "${CYAN}If you want to make the endpoints public accesible, just go to the ports section in VsCode, right click on them and change the visibility to public ${NORMAL}"
     echo -e "${CYAN}When you are finished with your codespace, you can comfortably delete it by typing in the Terminal${RESET} deleteCodespace"

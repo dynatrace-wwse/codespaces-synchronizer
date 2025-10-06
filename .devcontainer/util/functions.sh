@@ -446,6 +446,7 @@ alias pg='ps -aux | grep'
 }
 
 installRunme() {
+  printInfoSection "Installing Runme"
   mkdir runme_binary
   if [[ "$ARCH" == "x86_64" ]]; then
     printInfoSection "Installing Runme Version $RUNME_CLI_VERSION for AMD/x86"
@@ -955,9 +956,9 @@ undeployOperatorViaHelm(){
 
 
 installMkdocs(){
-  printInfoSection "Installing Mkdocs"
+  
   installRunme
-  printInfo "Installing MKdocs requirements"
+  printInfo "Installing MKdocs"
   pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
   exposeMkdocs
 }
@@ -1688,13 +1689,13 @@ checkHost(){
       # Install node if missing
       if [ "$node_available" = false ]; then
         printInfo "Installing nodejs..."
-        curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-          && apt-get install -y nodejs 
+        curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash - \
+          && sudo apt-get install -y nodejs 
       fi
       # Install npm if missing
       if [ "$npm_available" = false ]; then
         printInfo "Installing npm..."
-        npm install -g npm@latest  && rm -rf /var/lib/apt/lists/*
+        sudo npm install -g npm@latest  && sudo rm -rf /var/lib/apt/lists/*
       fi
       printInfo "Auto-fix attempted. Please re-run this function or open a new shell."
     else
