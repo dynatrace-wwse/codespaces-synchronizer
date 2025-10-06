@@ -1609,6 +1609,7 @@ checkHost(){
   docker_accessible=false
   node_available=false
   npm_available=false
+  #TODO: Check that the files can be modified, needed for the docker user to write in the volume mount, test @ignacio.goldman setup.
 
   # Check if host is Ubuntu
   if grep -qi ubuntu /etc/os-release; then

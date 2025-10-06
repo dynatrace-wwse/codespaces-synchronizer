@@ -13,6 +13,7 @@ printInfo "This is synchronization repo: $SYNCH_REPO"
 this_repos=("codespaces-framework")
 all_repos=("codespaces-framework" "enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics" "bug-busters" )
 synch_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "workshop-dynatrace-log-analytics" "bug-busters" )
+synch2_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dql-301" "enablement-dynatrace-log-ingest-101" "enablement-kubernetes-opentelemetry" "enablement-browser-dem-biz-observability" "enablement-workflow-essentials" "bug-busters" )
 cs_repos=("enablement-codespaces-template" "enablement-live-debugger-bug-hunting" "enablement-gen-ai-llm-observability" "enablement-business-observability" "enablement-dynatrace-log-ingest-101" "enablement-browser-dem-biz-observability")
 fix_repos=("bug-busters")
 migrate_repos=("enablement-dql-301" "enablement-workflow-essentials" "enablement-kubernetes-opentelemetry")
@@ -232,14 +233,17 @@ verifyPrMerge(){
     printInfoSection "verifying PR for branch $BRANCH, merging and deleting branch if ok for repo $repo"
 
     PR=$(GH_PAGER=cat gh pr list | grep $BRANCH)
-    printInfo "$PR"
+    if [[ "$PR" == *"no pull requests"* ]]; then
+        printWarn "No PRs found!"
+    fi
+    printInfo " thjis $PR"
     
     PR_ID=$(echo $PR | awk '{print $1}') 
     CHECKS_PASS=$(gh pr checks $PR_ID --json state | jq 'all(.[]; .state == "SUCCESS")')
     printInfo "Checks: $CHECKS_PASS"
     if [[ $CHECKS_PASS == true ]]; then
         printInfo " ✅ All checks have passed: $CHECKS_PASS"
-        gh pr merge $PR_ID --merge --delete-branch
+        #gh pr merge $PR_ID --merge --delete-branch
     else
         printError "❌ Checks failed $CHECKS_PASS"
     fi
