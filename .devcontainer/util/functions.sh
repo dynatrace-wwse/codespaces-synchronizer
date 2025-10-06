@@ -709,6 +709,7 @@ dynatraceDeployOperator() {
   printInfoSection "Deploying Dynatrace Operator"
   # posssibility to load functions.sh and call dynatraceDeployOperator A B C to save credentials and override
   # or just run in normal deployment
+  #TODO: Evaluate also Tokens and not deploy if not found.
   dynatraceEvalReadSaveCredentials "$@"
   # new lines, needed for workflow-k8s-playground, cluster in dt needs to have the name k8s-playground-{requestuser} to be able to spin up multiple instances per tenant
 
@@ -1492,7 +1493,7 @@ checkHost(){
       fi
     fi
   else
-    printInfo "✅ All requirements are met, navigate to the .devcontainer/ folder then 'make start' to start your enablement jouney 🚀"
+    printInfo "✅ All requirements are met for running the enablement-framework. Navigate to the .devcontainer/ folder then 'make start' to start your enablement jouney 🚀"
   fi
 
 }
