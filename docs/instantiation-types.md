@@ -175,5 +175,5 @@ Secrets and environment variables are handled differently depending on the insta
     ```
 
 <div class="grid cards" markdown>
-- [Let's continue:octicons-arrow-right-24:](template.md)
+- [Let's continue:octicons-arrow-right-24:](dynatrace-integration.md)
 </div>
