@@ -578,11 +578,13 @@ certmanagerEnable() {
 }
 
 validateSaveCredentials() {
+  #TODO: Refactor to evaluate variables with an indirect expansion (var name and value)
   if [[ $# -eq 3 ]]; then
     printInfo "Validating and saving Secrets DT_TENANT DT_OPERATOR_TOKEN DT_INGEST_TOKEN"
     DT_TENANT=$1
     DT_OPERATOR_TOKEN=$2
     DT_INGEST_TOKEN=$3
+    #TODO: Fix this when refactoring, only printing out when return == 0 but not 1.
     verifyParseSecret $DT_TENANT true; [ $? -eq 1 ] && verifyParseSecret $DT_TENANT false || DT_TENANT=$(verifyParseSecret $DT_TENANT false)
     verifyParseSecret $DT_OPERATOR_TOKEN true; [ $? -eq 1 ] && verifyParseSecret $DT_OPERATOR_TOKEN false || DT_OPERATOR_TOKEN=$(verifyParseSecret $DT_OPERATOR_TOKEN false)
     verifyParseSecret $DT_INGEST_TOKEN true; [ $? -eq 1 ] && verifyParseSecret $DT_INGEST_TOKEN false || DT_INGEST_TOKEN=$(verifyParseSecret $DT_INGEST_TOKEN false)
@@ -664,7 +666,7 @@ verifyParseSecret(){
       return 0
     else
       printError "Invalid secret, this is not a valid dynatrace tenant nor dynatrace token, please verify this: $secret" $print_log
-    return 1
+      return 1
     fi
   fi
 
@@ -688,7 +690,7 @@ dynatraceEvalReadSaveCredentials() {
     # We shuffle environment to tenant to modify tenant for API usage
     DT_TENANT=$DT_ENVIRONMENT
     printInfo "Secrets passed as arguments"
-    validateSaveCredentials $DT_TENANT $DT_OPERATOR_TOKEN $DT_INGEST_TOKEN
+    validateSaveCredentials "$DT_TENANT" "$DT_OPERATOR_TOKEN" "$DT_INGEST_TOKEN"
     found=0
 
   elif [[ -n "${DT_ENVIRONMENT}" && -n "${DT_OPERATOR_TOKEN}" && -n "${DT_INGEST_TOKEN}" ]]; then
@@ -697,17 +699,25 @@ dynatraceEvalReadSaveCredentials() {
 
     # We shuffle environment to tenant to modify tenant for API usage
     DT_TENANT=$DT_ENVIRONMENT
-    validateSaveCredentials $DT_TENANT $DT_OPERATOR_TOKEN $DT_INGEST_TOKEN
+    validateSaveCredentials "$DT_TENANT" "$DT_OPERATOR_TOKEN" "$DT_INGEST_TOKEN"
     found=0
-  elif [[ -n "${DT_ENVIRONMENT}" && -z "${DT_OPERATOR_TOKEN}" && -z "${DT_INGEST_TOKEN}" ]]; then
+  elif [[ -n "${DT_ENVIRONMENT}" ]]; then
     printWarn "Dynatrace Environment defined but tokens are missing"
+
+    if [ -z "$DT_OPERATOR_TOKEN" ]; then
+      printWarn "DT_OPERATOR_TOKEN is missing"
+    fi
+    
+    if [ -z "$DT_INGEST_TOKEN" ]; then
+      printWarn "DT_INGEST_TOKEN is missing"
+    fi
     
     # We shuffle environment to tenant to modify tenant for API usage
     DT_TENANT=$DT_ENVIRONMENT
-    validateSaveCredentials $DT_TENANT $DT_OPERATOR_TOKEN $DT_INGEST_TOKEN
+    validateSaveCredentials "$DT_TENANT" "$DT_OPERATOR_TOKEN" "$DT_INGEST_TOKEN"
     found=0
   else
-    printWarn "Dynatrace secrets not found as arguments nor env vars, reading from config map"
+    printWarn "Dynatrace secrets not found as arguments nor env vars, trying to fetch from config map"
     kubectl get configmap -n default dtcredentials 2>/dev/null
     if [[ $? -eq 0 ]]; then
       printInfo "ConfigMap found, reading from it"
@@ -740,7 +750,7 @@ dynatraceEvalReadSaveCredentials() {
   else 
     printError "No Dynatrace secrets have been found in the environment and are needed for Dynatrace components."
     unset DT_EVAL_SECRETS
-    exit 1
+    return 1
   fi
 
   return $found
@@ -754,6 +764,8 @@ printSecrets(){
     printInfo "Dynatrace Ingest Token: ${DT_INGEST_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Otel API Token: ${DT_INGEST_TOKEN:0:14}xxx..."
     printInfo "Dynatrace Otel Endpoint: $DT_OTEL_ENDPOINT"
+    printInfo "Secrets stored as configmap, type 'kubectl get configmap -n default dtcredentials -o json' to see them."
+
 }
 
 deployCloudNative() {
@@ -784,7 +796,7 @@ deployApplicationMonitoring() {
   printInfoSection "Deploying Dynatrace in ApplicationMonitoring mode for $DT_ENVIRONMENT"
   if [ -n "${DT_TENANT}" ]; then
     # Check if the Webhook has been created and is ready
-    kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
+    kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatra@ce-operator,app.kubernetes.io/component=webhook --timeout=300s
 
     kubectl -n dynatrace apply -f $REPO_PATH/.devcontainer/yaml/gen/dynakube-apponly.yaml
     
