@@ -946,12 +946,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <details class="info">
 <summary>🏗️ Setting up the Infrastructure</summary>
 <p>You may provision your infrastructure on any major cloud provider or run locally using <a href="#using-multipass-for-local-development">Multipass</a>.</p>
-<p><strong>Minimum requirements for a cloud or local machine:</strong>
-1. <strong>Operating System:</strong> Ubuntu LTS (22.04 or 24.04 recommended)
-2. <strong>CPU &amp; Memory:</strong> Requirements depend on your workloads. As a guideline, refer to the <code>hostRequirements</code> section in <code>.devcontainer.json</code>. A typical setup with 4 CPU cores and 16 GB RAM is sufficient for most use cases.
-3. <strong>Network Ports:</strong> Ensure the following ports are open for inbound connections:
-    - <code>22</code> (SSH)
-    - <code>30100</code>, <code>30200</code>, <code>30300</code> (for application access; each deployed app is exposed via Kubernetes NodePort)</p>
+<p><strong>Minimum requirements for a cloud or local machine:</strong></p>
+<ol>
+<li><strong>Operating System:</strong> Ubuntu LTS (22.04 or 24.04 recommended)</li>
+<li><strong>CPU &amp; Memory:</strong> Requirements depend on your workloads. As a guideline, refer to the <code>hostRequirements</code> section in <code>.devcontainer.json</code>. A typical setup with 4 CPU cores and 16 GB RAM is sufficient for most use cases.</li>
+<li><strong>Network Ports:</strong> Ensure the following ports are open for inbound connections:<ol>
+<li><code>22</code> (SSH)</li>
+<li><code>30100</code>, <code>30200</code>, <code>30300</code> (for application access; each deployed app is exposed via Kubernetes NodePort)</li>
+</ol>
+</li>
+</ol>
 </details>
 </li>
 <li>
@@ -1137,6 +1141,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </tr>
 </tbody>
 </table>
+<!--TODO How to show logs of container  -->
+<!--TODO Add Troubleshooting guide with docker ps -->
+
 <hr />
 <h2 id="running-locally">🏠 Running locally<a class="headerlink" href="#running-locally" title="Permanent link">#</a></h2>
 <h3 id="using-multipass-for-local-development">Using Multipass for Local Development<a class="headerlink" href="#using-multipass-for-local-development" title="Permanent link">#</a></h3>
