@@ -1,5 +1,7 @@
 --8<-- "snippets/whats-next.js"
 
+--8<-- "snippets/feedback.md"
+
 
 Now that you've explored the framework and best practices, you can:
 
@@ -9,7 +11,6 @@ Now that you've explored the framework and best practices, you can:
 
 Explore these repositories to deepen your knowledge or use them as a foundation for your own projects.  
 Find the full list and latest updates in the [codespaces-framework repository](https://github.com/dynatrace-wwse/codespaces-framework).
-
 !!! tip "More to come"
     - Stay tuned, more enablements are coming with more advanced use cases...
 
