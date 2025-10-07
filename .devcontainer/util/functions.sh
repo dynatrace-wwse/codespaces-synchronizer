@@ -736,6 +736,7 @@ dynatraceEvalReadSaveCredentials() {
         printInfo "ConfigMap not found, resetting variables"
         unset DT_ENVIRONMENT DT_TENANT DT_OPERATOR_TOKEN DT_INGEST_TOKEN
     fi
+
   fi
 
   if [[ $found -eq 0 ]]; then
@@ -1475,6 +1476,7 @@ getRunningDockerContainernameByImagePattern(){
 
 verifyCodespaceCreation(){
   printInfoSection "Verify Codespace creation"
+  #TODO Enhance this function and send (part) of the error to the monitoring service
   calculateTime
   if [[ $INSTANTIATION_TYPE == "github-codespaces" ]]; then
     CODESPACE_ERRORS=$(cat $CODESPACE_PSHARE_FOLDER/creation.log | grep -i -E 'error|failed')

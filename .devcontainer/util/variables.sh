@@ -51,7 +51,6 @@ export COUNT_FILE=$COUNT_FILE
 ENV_FILE="$REPO_PATH/.devcontainer/runlocal/.env"
 export ENV_FILE=$ENV_FILE
 
-
 # Calculating GH Repository
 if [ -z "$GITHUB_REPOSITORY" ]; then
   GITHUB_REPOSITORY=$(git remote get-url origin)

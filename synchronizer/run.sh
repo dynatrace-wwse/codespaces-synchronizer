@@ -37,7 +37,6 @@ custom(){
     # [y] - dt-banner (all) -> MCP server
     # [y] - tenant -> environment
     # [y] - add MCP Server func.
-
     # [y] - verify functionality of checkHost (print when no all commands)
     # [y] - test checkHost again
     # [y] - AI Repo, image? appsec issue fix to all
