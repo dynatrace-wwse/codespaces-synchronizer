@@ -2,77 +2,106 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Miscelaneus changes"
-export BODY="Miscelaneus changes, adding functions for ease of use 
-- calculateReadingTime
-- checkHost 
-"
+export TITLE="Dynatrace Enablement Feedback Form"
+export BODY="Adding Enablment feedback form
+- adding feedback.md as a snippet for capturing feedback.
+- "
 
 export CHERRYPICK_ID="47b1d0f"
 
-export TAG="v1.0.1"
+export TAG="v1.0.2"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/misc"
+export BRANCH="docs/feedback"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
 export EXCLUDE_CUSTOMFILES=true
+export IMPORT=false
 
 printInfoSection "Running Codepaces-Synchronizer"
 
 custom(){  
     
     #TODO for this PR
-    # [y] - Update to all repos with the file --8<-- "snippets/dt-enablement.md" pointing to framework (synch gives 404)
-    # [y] - change badge to all repos to point to the documentation of synchronizer
+    # [y] - npm and node to the image
+    # [y] - bump image
+    # [y] - devcontainer.json description of env
+    # [y] - dt-banner (all) -> MCP server
+    # [y] - tenant -> environment
+    # [y] - add MCP Server func.
+    # [y] - verify functionality of checkHost (print when no all commands)
+    # [y] - test checkHost again
     # [y] - AI Repo, image? appsec issue fix to all
-    # [y] - search for https://dynatrace-wwse.github.io/codespaces-framework)
-    
 
     repo=$(basename $(pwd))
     printInfo "Custom function for repository $repo "
 
 
     #rm .github/workflows/github-test-cs.yaml.back
+    #git pull origin main
+    #git checkout main
+    #git checkout -b $BRANCH
+
+    #code docs/whats-next.md
     
     # For importing changes we invert
     #DEST="$ROOT_PATH$SYNCH_REPO/"
     #SOURCE="$ROOT_PATH$repo/"
     
+    # For copying files
     #SOURCE="$ROOT_PATH$SYNCH_REPO/"
     #DEST="$ROOT_PATH$repo/"
-    #FILE="docs/snippets/dt-enablement.md"
+    #FILE="docs/snippets/feedback.md"
     #cp "$SOURCE$FILE" "$DEST$FILE"
+
+
+    #git add -f "$DEST".vscode/mcp.json
+    
+    #git add .
     #git status
     #git checkout main
     #git pull origin main
     #git status
     #git checkout -b $BRANCH
-    git add .
-    git commit -s -m "$BODY"
+    #git add .
+    #git commit -s -m "$BODY"
     #git status
+    #git checkout main
+    #git pull origin main
+    #git status
+    #git checkout -b $BRANCH
+    #git status
+    
+    #git add .
+    git commit -s -m "Adding feedback form"
+    #git push origin $BRANCH 
+    
     #doPushandPR
     #gh issue list --state open
-    #git push origin $BRANCH 
 
     # Show last release
     #L=$(gh release list --limit 1)
     #printInfo "$L"
     #git reset --hard HEAD
+
+    #git restore .
+    #git clean -f
+    #git status 
 }
 
 #doInRepos refactor custom
 
-doInRepos all custom
-#doInRepos synch listOpenIssues
-#doInRepos synch verifyPrMerge
+#doInRepos synch custom
+#doInRepos synch doPushandPR
+doInRepos synch verifyPrMerge
 
+
+#doInRepos synch listOpenIssues
 #doInRepos fix tagAndCreateRelease
 #doInRepos fix copyFramework
 #doInRepos synch copyFramework 
-
 
 #doInRepos all generateMarkdowntable
 #doInRepos all custom
