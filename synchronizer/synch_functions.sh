@@ -235,8 +235,8 @@ verifyPrMerge(){
     PR=$(GH_PAGER=cat gh pr list | grep $BRANCH)
     if [[ -z "$PR" ]]; then
         printWarn "No PR found for branch $BRANCH"
-        PRS=$(GH_PAGER=cat gh pr list)
-        printInfo "Other PR (if any)... \n$PRS"
+        #PRS=$(GH_PAGER=cat gh pr list)
+        #printInfo "Other PR (if any)... \n$PRS"
     else 
         
         printInfo "$PR"
@@ -246,7 +246,7 @@ verifyPrMerge(){
         printInfo "Checks: $CHECKS_PASS"
         if [[ $CHECKS_PASS == true ]]; then
             printInfo " ✅ All checks have passed: $CHECKS_PASS"
-            #gh pr merge $PR_ID --merge --delete-branch
+            gh pr merge $PR_ID --merge --delete-branch
         else
             printError "❌ Checks failed $CHECKS_PASS"
         fi

@@ -371,7 +371,8 @@ setupMCPServer(){
       setTelemetry
     fi
   fi
-  printInfo "Settings location: $ENV_FILE"
+  printInfo "Settings location: .vscode/mcp.json"
+  printInfo "Environment variables location: $ENV_FILE"
 }
 
 setGrailBudget(){
@@ -798,7 +799,7 @@ deployApplicationMonitoring() {
   printInfoSection "Deploying Dynatrace in ApplicationMonitoring mode for $DT_ENVIRONMENT"
   if [ -n "${DT_TENANT}" ]; then
     # Check if the Webhook has been created and is ready
-    kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatra@ce-operator,app.kubernetes.io/component=webhook --timeout=300s
+    kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
 
     kubectl -n dynatrace apply -f $REPO_PATH/.devcontainer/yaml/gen/dynakube-apponly.yaml
     

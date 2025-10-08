@@ -2,16 +2,10 @@
 # This file contains the functions synchronizing multiple repos and their files, specially the important function files.
 source synchronizer/synch_functions.sh
 
-export TITLE="Dynatrace MCP Server functionality"
-export BODY="Adding Dynatrace MCP Server config
-- mcp.json server configuration
-- setUpMCPServer function to setup variables
-- DT_TENANT stays for classic usage but DT_ENVIRONMENT is what the enduser sets up as platform URL. No Live but apps. 3rd gen notation
-- refactor of variables
-- checkHost function enhanced for having npm and node (for setting up the HOST or container)
-- Dockerimage and tag is bumped and crosscompiled for ARM/AMD for supporting the MCP Server as VS Code extension
-- dt-enablement.md snipped updated to show changes of MCP Server functionality
-"
+export TITLE="Dynatrace Enablement Feedback Form"
+export BODY="Adding Enablment feedback form
+- adding feedback.md as a snippet for capturing feedback.
+- "
 
 export CHERRYPICK_ID="47b1d0f"
 
@@ -19,7 +13,7 @@ export TAG="v1.0.2"
 export RELEASE="$TAG"
 
 #export BRANCH=synch/$CHERRYPICK_ID
-export BRANCH="rfe/mcp-server"
+export BRANCH="docs/feedback"
 
 # Flags for copyFramework
 export EXCLUDE_MKDOC=true
@@ -46,16 +40,26 @@ custom(){
 
 
     #rm .github/workflows/github-test-cs.yaml.back
+    #git pull origin main
+    #git checkout main
+    #git checkout -b $BRANCH
+
+    #code docs/whats-next.md
     
     # For importing changes we invert
     #DEST="$ROOT_PATH$SYNCH_REPO/"
     #SOURCE="$ROOT_PATH$repo/"
     
+    # For copying files
     #SOURCE="$ROOT_PATH$SYNCH_REPO/"
     #DEST="$ROOT_PATH$repo/"
-    #FILE=".vscode/mcp.json"
-    #git add -f "$DEST".vscode/mcp.json
+    #FILE="docs/snippets/feedback.md"
     #cp "$SOURCE$FILE" "$DEST$FILE"
+
+
+    #git add -f "$DEST".vscode/mcp.json
+    
+    #git add .
     #git status
     #git checkout main
     #git pull origin main
@@ -69,9 +73,10 @@ custom(){
     #git status
     #git checkout -b $BRANCH
     #git status
-    git add .
-    git commit -s -m "double entry for environment on greeting"
-    git push origin $BRANCH 
+    
+    #git add .
+    git commit -s -m "Adding feedback form"
+    #git push origin $BRANCH 
     
     #doPushandPR
     #gh issue list --state open
@@ -88,17 +93,15 @@ custom(){
 
 #doInRepos refactor custom
 
-doInRepos this verifyPrMerge
-
-#doInRepos synch verifyPrMerge
+#doInRepos synch custom
 #doInRepos synch doPushandPR
+doInRepos synch verifyPrMerge
+
 
 #doInRepos synch listOpenIssues
-
 #doInRepos fix tagAndCreateRelease
 #doInRepos fix copyFramework
 #doInRepos synch copyFramework 
-
 
 #doInRepos all generateMarkdowntable
 #doInRepos all custom
