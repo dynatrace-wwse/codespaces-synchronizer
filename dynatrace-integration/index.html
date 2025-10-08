@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mcp-server-integration" class="md-skip">
+        <a href="#dynatrace-mcp-server-integration" class="md-skip">
           Skip to content
         </a>
       
@@ -373,18 +373,66 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mcp-server-integration" class="md-nav__link">
+  <a href="#dynatrace-mcp-server-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      MCP Server Integration
+      Dynatrace MCP Server Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dynatrace MCP Server Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifying-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting the MCP Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Prompts
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#application-monitoring" class="md-nav__link">
+  <a href="#dynatrace-observability" class="md-nav__link">
     <span class="md-ellipsis">
-      Application Monitoring
+      Dynatrace Observability
     </span>
   </a>
   
@@ -603,18 +651,66 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mcp-server-integration" class="md-nav__link">
+  <a href="#dynatrace-mcp-server-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      MCP Server Integration
+      Dynatrace MCP Server Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dynatrace MCP Server Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifying-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting the MCP Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Prompts
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#application-monitoring" class="md-nav__link">
+  <a href="#dynatrace-observability" class="md-nav__link">
     <span class="md-ellipsis">
-      Application Monitoring
+      Dynatrace Observability
     </span>
   </a>
   
@@ -646,15 +742,99 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<p>This section explains how Dynatrace monitors applications and integrates with the Dynatrace MCP Server.</p>
 <div class="admonition warning">
-<p class="admonition-title">🚧 Section is under construction</p>
-<p>This section is a work in progress and will be updated shortly with the instructions on how to enable the MCP Server in any enablement... </p>
+<p>⚠️ 🚧 This section is at the moment under construction and will be updated shortly.</p>
 </div>
-<h2 id="mcp-server-integration">MCP Server Integration<a class="headerlink" href="#mcp-server-integration" title="Permanent link">#</a></h2>
-<p>The Dynatrace MCP Server acts as a central hub for managing and analyzing monitoring data, enabling seamless integration with your applications.</p>
-<h2 id="application-monitoring">Application Monitoring<a class="headerlink" href="#application-monitoring" title="Permanent link">#</a></h2>
-<p>Dynatrace provides real-time monitoring of your applications, offering insights into performance, errors, and user behavior.</p>
+<div class="admonition info">
+<p class="admonition-title">Dynatrace MCP integration &amp; Observability</p>
+<p>This section explains how the <a href="#dynatrace-mcp-server-integration">MCP Server</a> operates within your environment and how <a href="#dynatrace-observability">Dynatrace Observability</a> is activated to monitor any application running in the enablement repositories.</p>
+</div>
+<h2 id="dynatrace-mcp-server-integration">Dynatrace MCP Server Integration<a class="headerlink" href="#dynatrace-mcp-server-integration" title="Permanent link">#</a></h2>
+<p>The Dynatrace MCP (Model Context Protocol) Server enables AI Assistants to seamlessly interact with the Dynatrace observability platform, delivering real-time data directly into your enablement workflows—no manual configuration required. It is automatically embedded in all repositories within the Framework for VS Code, ensuring consistent access to monitoring and automation capabilities across development environments.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h3>
+<ul>
+<li>The repository is opened in VS Code (Web and Desktop versions).</li>
+<li>You have defined the <code>DT_ENVIRONMENT</code> and <code>DT_PLATFORM_TOKEN</code> environment variables. </li>
+</ul>
+<details class="info">
+<summary>Authentication scopes for DT_PLATFORM_TOKEN </summary>
+<p>For a full list of <a href="https://github.com/dynatrace-oss/dynatrace-mcp?tab=readme-ov-file#scopes-for-authentication">supported scopes</a> and their use cases, refer to the Dynatrace MCP documentation.
+Once these variables are configured, your repository is ready to leverage Dynatrace’s observability and automation capabilities.</p>
+</details>
+<h4 id="verifying-prerequisites">Verifying Prerequisites<a class="headerlink" href="#verifying-prerequisites" title="Permanent link">#</a></h4>
+<p>To verify that the Dynatrace MCP Server has the environment variables needed in your codespace, type in the Terminal <code>setupMCPServer</code>
+You should be able to see the settings and the variables.
+<img _=";" alt="mcp server" src="../img/mcpserver_setup.png" width="800" />
+If the <code>DT_PLATFORM_TOKEN</code> is missing, then easily add it by typing:</p>
+<div class="highlight"><pre><span></span><code>setPlatformToken<span class="w"> </span>&lt;dt0s16.YOURTOKEN.XXXX&gt;
+</code></pre></div>
+<h3 id="starting-the-mcp-server">Starting the MCP Server  <img _=";" align="right" alt="mcp server" src="../img/mcpserver_ext.png" width="200" /><a class="headerlink" href="#starting-the-mcp-server" title="Permanent link">#</a></h3>
+<p>On VS Code, on the left pane, click on the Extensions tab <code>Shift + ⌘ + X</code>. You should be able at the bottom to see a <code>dynatrace-mcp-server</code> installed under MCP servers.</p>
+<ul>
+<li>Click on the wheel icon (settings) and click on Start Server</li>
+<li>The output should show automatically (if not then click on <code>show output</code>). You should be able to see a similar output:
+    <img _=";" alt="mcp server" src="../img/mcpserver_output.png" width="800" /></li>
+</ul>
+<h2 id="example-prompts">Example Prompts<a class="headerlink" href="#example-prompts" title="Permanent link">#</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Example Prompts </p>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Prompt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Find a monitored entity</td>
+<td><code>Get all details of the entity 'my-service'</code></td>
+</tr>
+<tr>
+<td>Find error logs</td>
+<td><code>Show me error logs</code></td>
+</tr>
+<tr>
+<td>Write a DQL query from natural language</td>
+<td><code>Show me error rates for the payment service in the last hour</code></td>
+</tr>
+<tr>
+<td>Explain a DQL query</td>
+<td>What does this DQL do? <br> <code>fetch logs | filter dt.source_entity == 'SERVICE-123' | summarize count(), by:{severity} | sort count() desc</code></td>
+</tr>
+<tr>
+<td>Chat with Davis CoPilot</td>
+<td><code>How can I investigate slow database queries in Dynatrace?</code></td>
+</tr>
+<tr>
+<td>Send email notifications</td>
+<td><code>Send an email notification about the incident to the responsible team at team@example.com with CC to manager@example.com</code></td>
+</tr>
+<tr>
+<td>Multi-phase incident response</td>
+<td>Our checkout service is experiencing high error rates. Start a systematic 4-phase incident investigation <br>1. Detect and triage the active problems <br>2. Assess user impact and affected services. <br>3. Perform cross-data source analysis (problems → spans → logs) <br>4. Identify root cause with file/line-level precision</td>
+</tr>
+</tbody>
+</table>
+<p>For more prompts <a href="https://github.com/dynatrace-oss/dynatrace-mcp?tab=readme-ov-file#-example-prompts-">read the full documentation</a></p>
+</div>
+<h2 id="dynatrace-observability">Dynatrace Observability<a class="headerlink" href="#dynatrace-observability" title="Permanent link">#</a></h2>
+<p>Dynatrace provides real-time monitoring of your applications, offering insights into performance, errors, and user behavior. Dynatrace Cloud Native monitoring and Application Monitoring</p>
+<div class="highlight"><pre><span></span><code>dynatraceDeployOperator
+
+will<span class="w"> </span>deploy<span class="w"> </span>the<span class="w"> </span>Dynatrace<span class="w"> </span>Operator<span class="w"> </span><span class="o">(</span>Operator,<span class="w"> </span>Webhook<span class="w"> </span>and<span class="w"> </span>CSI<span class="o">)</span>
+
+
+
+
+deployApplicationMonitoring
+will<span class="w"> </span>tell<span class="w"> </span>the<span class="w"> </span>operator<span class="w"> </span>to<span class="w"> </span>monitor<span class="w"> </span>
+
+
+deployCloudNative
+
+undeployDynakubes
+</code></pre></div>
 <div class="grid cards">
 <ul>
 <li><a href="../template/">Let's continue<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
