@@ -22,7 +22,9 @@ The Dynatrace MCP (Model Context Protocol) Server enables AI Assistants to seaml
 
 To verify that the Dynatrace MCP Server has the environment variables needed in your codespace, type in the Terminal `setupMCPServer`
 You should be able to see the settings and the variables.
+
 ![mcp server](img/mcpserver_setup.png){ width="800";}
+
 If the `DT_PLATFORM_TOKEN` is missing, then easily add it by typing:
 
 ```bash
